@@ -1,0 +1,40 @@
+{
+  "name": "gamestock",
+  "version": "1.0.0",
+  "description": "A web application that keeps track of the value of games over time.",
+  "main": "babel.config.js",
+  "scripts": {
+    "build": "webpack -d --watch",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/hratx-blue-ocean/Gamestock.git"
+  },
+  "keywords": [
+    "Videogames",
+    "games",
+    "stock",
+    "stocks"
+  ],
+  "author": "HRATX50",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/hratx-blue-ocean/Gamestock/issues"
+  },
+  "homepage": "https://github.com/hratx-blue-ocean/Gamestock#readme",
+  "devDependencies": {
+    "@babel/core": "^7.11.6",
+    "@babel/preset-env": "^7.11.5",
+    "@babel/preset-react": "^7.10.4",
+    "babel-loader": "^8.1.0",
+    "prettier": "2.1.1",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.12"
+  },
+  "dependencies": {
+    "@babel/cli": "^7.11.6",
+    "path": "^0.12.7",
+    "pg": "^8.3.3"
+  }
+}
