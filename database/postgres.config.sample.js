@@ -8,7 +8,7 @@ module.exports.pool = new Pool({
 });
 
 // mirror the pool. 
-module.exports.client = new Client({
+module.exports.client = new Client({ 
   user: '',
   host: '',
   database: '',
