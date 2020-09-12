@@ -15,11 +15,8 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/signup', (req, res) => {
-  let username = req.body.username;
-  let password = req.body.password;
-  let avatar = req.body.avatar;
-
-  Users.create({username, password, avatar})
+ //req.body should include username, avatar and password
+  Users.create(req.body)
     .then( (response) => res.send(response))
     .catch( (err) => {res.send(err)})
 });
