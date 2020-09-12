@@ -1,7 +1,7 @@
 import React from "react"
 
-const Print = () => {
+const Card = () => {
   return <div></div>
 }
 
-export default Print;
+export default Card;
