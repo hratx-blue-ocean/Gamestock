@@ -1,4 +1,4 @@
-const Crud = require('../database/dbQueryHelpers');
+const { Crud } = require('../database/dbQueryHelpers');
 const bcrypt = require('bcrypt');
 
 /**
