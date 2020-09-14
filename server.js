@@ -5,6 +5,7 @@ const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
 const { Users, Auth } = require('./models/index');
 const axios = require('axios');
+const { IGDBkey } = require('./database/postgres.config');
 
 const app = express();
 const port = 7711;
@@ -37,16 +38,54 @@ app.get(`/items`, (req, res) => {
     method: 'POST',
     headers: {
         'Accept': 'application/json',
-        'user-key': '541e9d80b705762700e39809d4d12ea8'
+        'user-key': IGDBkey
     }
   })
     .then(response => {
         res.status(200).send(response.data);
+        console.log(response.data)
     })
     .catch(err => {
         console.error(err);
     });
 })
+
+app.get(`/platform`, (req, res) => {
+  axios({
+    url: `https://api-v3.igdb.com/platforms`,
+    method: 'POST',
+    headers: {
+        'Accept': 'application/json',
+        'user-key': IGDBkey
+    },
+  })
+    .then(response => {
+        res.status(200).send(response.data);
+        console.log(response.data)
+    })
+    .catch(err => {
+        console.error(err);
+    });
+})
+
+// app.get(`/platforms`, (req, res) => {
+//   axios({
+//     url: `https://api-v3.igdb.com/platforms`,
+//     method: 'POST',
+//     headers: {
+//         'Accept': 'application/json',
+//         'user-key': IGDBkey
+//     },
+//     data: "fields generation,name,product_family,slug,summary;"
+//   })
+//     .then(response => {
+//         res.status(200).send(response.data);
+//         console.log(response.data)
+//     })
+//     .catch(err => {
+//         console.error(err);
+//     });
+// })
 
 app.listen(port, ()=> {
     console.log('listening in on port ', port);
