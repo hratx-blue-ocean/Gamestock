@@ -1,16 +1,16 @@
 //imports acces token for jwt from .env file
-require("dotenv").config();
+// require("dotenv").config();
 
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-const { Users } = require("./models/index");
 
 //need to put this secret key in a different file that is .gitignore-d
 const jwt = require("jsonwebtoken");
 const jwtExpirySeconds = 300;
+const { Users, Items, Prices } = require("./models/index");
 
 const app = express();
 const port = 7711;
@@ -84,6 +84,36 @@ app.get("/signup", (req, res) => {
     .catch((err) => {
       console.log("Error in server reading username: ", err);
       res.status(500).send(err);
+    });
+});
+
+// user profile route
+app.get("/userProfile/items", (req, res) => {
+  Items.getAll()
+    .then((response) => res.send(response))
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+});
+
+// user profile route
+app.get("/userProfile/prices", (req, res) => {
+  Prices.getAll()
+    .then((response) => res.send(response))
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+});
+
+// user profile route
+app.get("/userProfile/users", (req, res) => {
+  Users.getAll()
+    .then((response) => res.send(response))
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
     });
 });
 
