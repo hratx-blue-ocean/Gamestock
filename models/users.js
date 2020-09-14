@@ -34,6 +34,10 @@ class Users extends Crud {
       })
       .catch(err => console.log('Unable to hash password'))
   }
+
+  get() {
+    
+  }
 }
 
 module.exports = new Users();
