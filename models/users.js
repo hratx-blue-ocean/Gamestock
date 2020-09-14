@@ -34,6 +34,10 @@ class Users extends Crud {
       })
       .catch(err => console.log('Unable to hash password'))
   }
+
+  compare(attempt, password) {
+    return bcrypt.compare(attempt, password);
+  }	  
 }
 
 module.exports = new Users();
