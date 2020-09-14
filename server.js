@@ -3,7 +3,7 @@ const path = require('path');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-const { Users, Auth } = require('./database/index');
+const { Users, Auth } = require('./models/index');
 
 const app = express();
 const port = 7711;
