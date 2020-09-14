@@ -6,19 +6,9 @@ const path = require('path');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-<<<<<<< HEAD
 const { Users, Auth } = require('./models/index');
 const axios = require('axios');
 const { IGDBkey } = require('./database/postgres.config');
-||||||| 4795b68
-const { Users, Auth } = require('./models/index');
-=======
-const { Users } = require('./models/index');
-
-//need to put this secret key in a different file that is .gitignore-d
-const jwt = require('jsonwebtoken');
-const jwtExpirySeconds = 300;
->>>>>>> 90cfeff294264000a41c9bbfe11ce140bb84624d
 
 const app = express();
 const port = 7711;
@@ -55,7 +45,7 @@ app.get('/login', (req, res) => {
       } else {
         //user entered the correct password
         console.log('User can log in');
-        
+
         //create auth cookie
         console.log("token:", token);
         res.cookie('token', token, { maxAge: jwtExpirySeconds * 1000 });
@@ -65,13 +55,13 @@ app.get('/login', (req, res) => {
     .catch((err) => {
       console.log('Error. Could not log in user: ', err);
       res.status(500)
-    })  
+    })
 })
 
 app.get('/signup', (req, res) => {
   //req.body should include username, avatar and password
   let username = req.body.username;
-  
+
   //check if username exists
   Users.get({username})
     .then((user) => {
@@ -81,7 +71,7 @@ app.get('/signup', (req, res) => {
         //if user does not exist, create one
         Users.create(req.body)
         .then((response) => {
-          res.status(200).send(response)  
+          res.status(200).send(response)
         })
         .catch( (err) => {
           console.log('Error creating user', err);
