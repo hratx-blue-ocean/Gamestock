@@ -6,18 +6,11 @@ const path = require('path');
 const cors = require('cors');
 const bodyParser = require('body-parser');
 const cookieParser = require('cookie-parser');
-<<<<<<< HEAD
-const { Users, Auth } = require('./models/index');
-=======
 const { Users } = require('./models/index');
-<<<<<<< HEAD
-const { Crud } = require('./database/dbQueryHelpers');
->>>>>>> Modify /signup route.
-=======
+
 //need to put this secret key in a different file that is .gitignore-d
 const jwt = require('jsonwebtoken');
 const jwtExpirySeconds = 300;
->>>>>>> Implement a /login route
 
 const app = express();
 const port = 7711;
