@@ -1,3 +1,6 @@
+//imports acces token for jwt from .env file
+require('dotenv').config();
+
 const express = require('express');
 const path = require('path');
 const cors = require('cors');
@@ -13,7 +16,6 @@ const { Crud } = require('./database/dbQueryHelpers');
 =======
 //need to put this secret key in a different file that is .gitignore-d
 const jwt = require('jsonwebtoken');
-const jwtKey = 'secret_key';
 const jwtExpirySeconds = 300;
 >>>>>>> Implement a /login route
 
@@ -28,7 +30,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.get('/login', (req, res) => {
   let username = req.body.username;
-  const token = jwt.sign({ username }, jwtKey, {
+  const token = jwt.sign({ username }, process.env.ACCESS_TOKEN, {
     algorithm: 'HS256',
     expiresIn: jwtExpirySeconds,
   });
