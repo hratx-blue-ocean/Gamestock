@@ -14,6 +14,20 @@ app.use(cookieParser());
 app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 
+app.get('/signup', (req, res) => {
+ //req.body should include username, avatar and password
+  Users.create(req.body)
+    .then( (response) => res.send(response))
+    .catch( (err) => {res.send(err)})
+});
+
+app.get('/signup', (req, res) => {
+ //req.body should include username, avatar and password
+  Users.create(req.body)
+    .then( (response) => res.send(response))
+    .catch( (err) => {res.send(err)})
+});
+
 app.listen(port, ()=> {
     console.log('listening in on port ', port);
 })
