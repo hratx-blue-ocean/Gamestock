@@ -1,5 +1,5 @@
 import React from 'react';
-import Button from './styled-components/Button.jsx';
+import { Button } from './coreStyles.jsx';
 
 export default function Banner() {
   return (
@@ -16,7 +16,8 @@ export default function Banner() {
       <div>
         Collection Value
       </div>
-
+      <Button>Button</Button>
+      <Button primary >Button</Button>
     </div>
   )
 }

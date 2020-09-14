@@ -1,4 +1,4 @@
-import Crud from '../database/dbQueryHelpers';
+const {Crud} = require('../database/dbQueryHelpers');
 
 class Auth extends Crud {
     constructor(){
