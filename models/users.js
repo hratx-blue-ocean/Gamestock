@@ -12,17 +12,17 @@ class Users extends Crud {
     //this sets tablename to users
     super('users');
   }
-  
+
   /*
   creates a new user record in users table
-  and returns a promise that is fulfilled with 
+  and returns a promise that is fulfilled with
   the succesful creation of said record
   */
   create({username, avatar, password}) {
-    
+
     bcrypt.hash(password, 12)
     .then((hash) => {
-     
+
       let newUser = {
         username,
         avatar,

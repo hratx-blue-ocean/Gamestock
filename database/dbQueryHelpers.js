@@ -6,6 +6,14 @@ pool.on('error', (err, client) => {
 });
 // use pool for all queries. It will scale better than client.
 
+// delete an item from the items_in_collection table by item id
+const deleteItemFromCollection = (itemId) => {
+  const itemQuery = `DELETE FROM items_in_collection WHERE id = ($1)`;
+  const escapedItemId = [itemID]
+  return pool.query(itemQuery, escapedItemId)
+    .catch(err => console.log(`Error deleting item from collection: ${err}`))
+}
+
 // const getAllReviews = () => (
 //   pool.query('SELECT * FROM reviews')
 //     .catch(() => console.log('failed to connect to db'))
@@ -28,15 +36,15 @@ pool.on('error', (err, client) => {
 //     }
 //     return result;
 //   }
-  
+
 //   function justValues(obj) {
 //     return Object.values(obj);
 //   }
-  
+
 //   function justKeys(obj) {
 //     return Object.keys(obj);
 //   }
-  
+
   function parseParams(arr, starting = 0) {
     const result = [];
     for (let i = starting + 1; i < starting + arr.length + 1; i++) {
@@ -148,7 +156,7 @@ class Crud {
     let parsedValueKeys = parsedValues.string;
     let valuesParams = parseParams(parsedValueKeys);
     parsedValueKeys = parsedValueKeys.map((key, index) => `${key}${valuesParams[index]}`)
-    
+
     let parsedOptions = parseData(options);
     let parsedKeys = parsedOptions.string
     let params = parseParams(parsedKeys, valuesParams.length);
@@ -189,4 +197,4 @@ class Crud {
   }
 }
 
-module.exports = Crud;
+module.exports = { Crud };
