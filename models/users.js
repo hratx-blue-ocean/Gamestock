@@ -37,7 +37,7 @@ class Users extends Crud {
 
   compare(attempt, password) {
     return bcrypt.compare(attempt, password);
-  }
+  }	  
 }
 
 module.exports = new Users();
