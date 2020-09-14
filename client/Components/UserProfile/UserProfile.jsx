@@ -1,5 +1,6 @@
 // parent component for user profile
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Header from "./Header.jsx";
 import AddItem from "./AddItem.jsx"; //add item to modal form
 import Middle from "./Middle.jsx";
@@ -17,23 +18,32 @@ const UserProfile = () => {
   // total value and total number of items of the colleciton currently being displayed (displayItems and displayItemsValue)
   // game thumbnail, game title, game price, console
 
-  axios.get("/userProfile/items").then((data) => {
-    console.log("ITEMS: ", data);
-    setItems(data);
-  });
+  const getInfo = () => {
+    axios.get("/userProfile/items").then((data) => {
+      console.log("ITEMS: ", data);
+      setItems(data);
+    });
 
-  axios.get("/userProfile/prices").then((data) => {
-    console.log("PRICES: ", data);
-    setPrices(data);
-  });
+    axios.get("/userProfile/prices").then((data) => {
+      console.log("PRICES: ", data);
+      setPrices(data);
+    });
 
-  axios.get("/userProfile/users").then((data) => {
-    console.log("USERS: ", data);
-    setUsers(data);
+    axios.get("/userProfile/users").then((data) => {
+      console.log("USERS: ", data);
+      setUsers(data);
+    });
+  };
+
+  useEffect(() => {
+    if (items.length === 0) {
+      getInfo();
+    }
   });
 
   return (
     <div>
+      <h2>UserProfile!</h2>
       <Header />
       <AddItem />
       <Middle users={users} prices={prices} items={items} />
