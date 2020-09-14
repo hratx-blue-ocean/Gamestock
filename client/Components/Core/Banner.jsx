@@ -1,15 +1,33 @@
 import React from "react";
-import { Button } from "../Core/coreStyles.jsx";
+import { Button, BannerWrapper } from "../Core/coreStyles.jsx";
+import styled from "styled-components";
+
+const Avatar = styled.p`
+  margin-left: 50px;
+  margin: auto;
+  padding: 20px 0px;
+  &:hover {
+    cursor: pointer;
+  }
+`;
+
+const Text = styled.p`
+  padding: 0px;
+  margin: auto;
+  &:hover {
+    color: skyblue;
+    cursor: pointer;
+  }
+`;
 
 export default function Banner() {
   return (
-    <div>
-      <div className="avatar">Avatar goes here</div>
-      <div>Username</div>
-      <div>Collection Size</div>
-      <div>Collection Value</div>
-      <Button>Button</Button>
-      <Button primary>Primary Button</Button>
-    </div>
+    <BannerWrapper>
+      <Avatar>Avatar goes here</Avatar>
+      <Text>Username</Text>
+      <Text>Collection Size</Text>
+      <Text>Collection Value</Text>
+      <Button>See Collection</Button>
+    </BannerWrapper>
   );
 }
