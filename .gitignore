@@ -1,3 +1,4 @@
+.env
 node_modules/
 database/postgres.config.js
 package-lock.json
