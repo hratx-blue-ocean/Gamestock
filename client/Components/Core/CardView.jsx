@@ -36,7 +36,7 @@ export const CardWrapper = styled(Wrapper)`
 export default function CardView() {
   return (
     <CardWrapper>
-      <Thumbnail>Thumbnail goes here</Thumbnail>
+      <Thumbnail>{<img src={item.thumbnail} />}</Thumbnail>
       <Text>Game Title</Text>
       <Text>Game Console</Text>
       <Text>Condition</Text>
