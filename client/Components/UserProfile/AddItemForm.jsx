@@ -27,7 +27,7 @@ const AddItemForm = ({ submitInfo }) => {
         <h1>This is Add Item</h1>
         <NewItemSearchBar getSearchedItems={(items) => {setSearchedItems(items)}}/>
         <br></br>
-        <AddItemList items={searchedItems}/>
+        <AddItemList items={searchedItems} select={(item) => {setItemSelected(item)}}/>
 
         <div>
           <span>Item form</span>
