@@ -42,10 +42,10 @@ export const Wrapper = styled.div`
   margin: 0px auto;
   margin-top: 20px;
   padding: 10px;
-  background: #252668;
-  color: #54F3F7;
+  background: #1e1e1e;
+  color: #54f3f7;
   border-radius: 10px;
-  border: 2px solid #EB29FD;
+  border: 2px solid #eb29fd;
   box-sizing: border-box;
   max-width: 1200px;
 `;
