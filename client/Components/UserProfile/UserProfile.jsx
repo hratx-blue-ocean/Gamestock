@@ -11,8 +11,8 @@ const UserProfile = () => {
   const [items, setItems] = useState([]);
   // useState to store the array of returned data from items_value_by_date
   const [prices, setPrices] = useState([]);
-  // useState to store the array of returned data from users
-  const [users, setUsers] = useState([]);
+  // useState to store the array of returned data from items_in_collection
+  const [collections, setCollections] = useState([]);
 
   // data needed for these child components
   // total value and total number of items of the colleciton currently being displayed (displayItems and displayItemsValue)
@@ -47,19 +47,19 @@ const UserProfile = () => {
         setPrices(data);
       });
 
-      axios.get("/userProfile/users").then((data) => {
-        console.log("USERS: ", data);
-        setUsers(data);
+      axios.get("/userProfile/collectionItems").then((data) => {
+        console.log("COLLECTIONS: ", data);
+        setCollections(data);
       });
     }
-  }, [items, prices, users]);
+  }, [items, prices, collections]);
 
   return (
     <div>
       <h2>UserProfile!</h2>
       <Header />
       <AddItem />
-      <Middle users={users} prices={prices} items={items} />
+      <Middle collections={collections} prices={prices} items={items} />
       <Paginator />
     </div>
   );

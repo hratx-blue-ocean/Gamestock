@@ -10,12 +10,12 @@ import {
   Form,
 } from "../Core/coreStyles.jsx";
 
-const CollectionList = ({ items, prices }) => {
+const CollectionList = ({ collections, items, prices }) => {
   return (
     <div>
       <Wrapper>
         <Title>User Collection</Title>
-        <Card items={items} prices={prices} />
+        <Card collections={collections} items={items} prices={prices} />
       </Wrapper>
     </div>
   );
