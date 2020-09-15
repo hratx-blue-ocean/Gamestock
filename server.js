@@ -1,5 +1,5 @@
 //imports acces token for jwt from .env file
-require("dotenv").config();
+// require("dotenv").config();
 
 const express = require("express");
 const path = require("path");
@@ -21,29 +21,44 @@ app.use(cookieParser());
 app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
-<<<<<<< HEAD
-// app.get('/signup', (req, res) => {
-//  //req.body should include username, avatar and password
-//   Users.create(req.body)
-//     .then( (response) => res.send(response))
-//     .catch( (err) => {res.send(err)})
-// });
-||||||| 78e5f33
-app.get("/login", (req, res) => {
-  let username = req.body.username;
-  const token = jwt.sign({ username }, process.env.ACCESS_TOKEN, {
-    algorithm: "HS256",
-    expiresIn: jwtExpirySeconds,
-  });
-=======
-app.get("/login", (req, res) => {
-  let username = req.body.username;
-  const token = jwt.sign({ username }, process.env.ACCESS_TOKEN, {
-    algorithm: 'HS256'
-  });
->>>>>>> 28492688af93e815a24c1a4406d4539169de0832
+// app.get("/login", (req, res) => {
+//   let username = req.body.username;
+//   const token = jwt.sign({ username }, process.env.ACCESS_TOKEN, {
+//     algorithm: 'HS256'
+//   });
 
-<<<<<<< HEAD
+//   Users.get({ username })
+//     .then((user) => {
+//       if (!user) {
+//         //username not found
+//         console.log("Username at login not found");
+//         res.status(200).send("User not found. Sign up");
+//       } else {
+//         //user exists, verify password
+//         return Users.compare(req.body.password, user.hash);
+//       }
+//     })
+//     .then((verification) => {
+//       //user exists but entered incorrect password
+//       if (!verification) {
+//         console.log("Incorrect password entered");
+//         res.status(401).send("Incorrect password entered, try again");
+//       } else {
+//         //user entered the correct password
+//         console.log("User can log in");
+
+//         //create auth cookie
+//         console.log("token:", token);
+//         res.cookie('token', token);
+//         res.status(200).send('Successful login');
+//       }
+//     })
+//     .catch((err) => {
+//       console.log(`Error retrieving data from IGDB`);
+//       res.status(500);
+//     });
+// });
+
 // IGDB API Get top 10 items by request by keyword
 app.get(`IGDB/items`, (req, res) => {
   let query = req.body;
@@ -57,59 +72,6 @@ app.get(`IGDB/items`, (req, res) => {
     .then(response => {
         res.status(200).send(response.data);
         console.log(response.data)
-||||||| 78e5f33
-  Users.get({ username })
-    .then((user) => {
-      if (!user) {
-        //username not found
-        console.log("Username at login not found");
-        res.status(200).send("User not found. Sign up");
-      } else {
-        //user exists, verify password
-        return Users.compare(req.body.password, user.hash);
-      }
-    })
-    .then((verification) => {
-      //user exists but entered incorrect password
-      if (!verification) {
-        console.log("Incorrect password entered");
-        res.status(401).send("Incorrect password entered, try again");
-      } else {
-        //user entered the correct password
-        console.log("User can log in");
-
-        //create auth cookie
-        console.log("token:", token);
-        res.cookie("token", token, { maxAge: jwtExpirySeconds * 1000 });
-        res.status(200).send("Successful login");
-      }
-=======
-  Users.get({ username })
-    .then((user) => {
-      if (!user) {
-        //username not found
-        console.log("Username at login not found");
-        res.status(200).send("User not found. Sign up");
-      } else {
-        //user exists, verify password
-        return Users.compare(req.body.password, user.hash);
-      }
-    })
-    .then((verification) => {
-      //user exists but entered incorrect password
-      if (!verification) {
-        console.log("Incorrect password entered");
-        res.status(401).send("Incorrect password entered, try again");
-      } else {
-        //user entered the correct password
-        console.log("User can log in");
-
-        //create auth cookie
-        console.log("token:", token);
-        res.cookie('token', token);
-        res.status(200).send('Successful login');
-      }
->>>>>>> 28492688af93e815a24c1a4406d4539169de0832
     })
     .catch((err) => {
       console.log(`Error retrieving data from IGDB`);
@@ -134,6 +96,20 @@ app.get(`IGDB/items`, (req, res) => {
 //         console.error(err);
 //     });
 // })
+
+app.post(`/saveItems`, (req, res) => {
+  let itemData = {
+    user_id: req.body.user_id,
+    condition: req.body.condition,
+    comments: req.body.comments,
+    starting_price: req.body.starting_price,
+    date_of_purchase: req.body.date_of_purchase,
+    tradeable: req.body.tradeable,
+    title: req.body.title,
+    console: req.body.console,
+    is_console: req.body.is_console
+  }
+})
 
 app.listen(port, ()=> {
     console.log('listening in on port ', port);
