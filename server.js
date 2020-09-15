@@ -11,6 +11,7 @@ const axios = require("axios");
 //need to put this secret key in a different file that is .gitignore-d
 const jwt = require("jsonwebtoken");
 const jwtExpirySeconds = 300;
+const Promise = require('bluebird')
 const { Users, Items, Prices } = require("./models/index");
 
 const app = express();
@@ -23,21 +24,27 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.get("/login", (req, res) => {
-  let username = req.body.username;
-  const token = jwt.sign({ username }, process.env.ACCESS_TOKEN, {
+  let username = {
+    username: req.body.username
+  };
+  const token = jwt.sign(username.username , process.env.ACCESS_TOKEN_SECRET, {
     algorithm: 'HS256'
   });
 
-  Users.get({ username })
+  console.log('username', username)
+
+  Users.get( username )
     .then((user) => {
       if (!user) {
         //username not found
-        console.log("Username at login not found");
+        console.log("Username at login not found", user);
         res.status(200).send("User not found. Sign up");
       } else {
+        console.log('user: ', user)
         //user exists, verify password
-        return Users.compare(req.body.password, user.hash);
+        return Users.compare(req.body.password, user.hashed_pw);
       }
+      throw new Error;
     })
     .then((verification) => {
       //user exists but entered incorrect password
@@ -76,8 +83,6 @@ app.post("/signup", (req, res) => {
         //if user does not exist, create one
         Users.create(req.body)
           .then((response) => {
-            console.log('MADE IT!');
-            console.log(response);
             res.status(200).send(response);
           })
           .catch((err) => {
