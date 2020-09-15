@@ -2,13 +2,16 @@ import React, { useState, useEffect } from "react";
 import AddItemList from "./AddItemList.jsx";
 import NewItemSearchBar from "./NewItemSearchBar.jsx";
 
-const AddItemForm = ({ submitInfo }) => {
-  const [itemSelected, setItemSelected] = useState({});
+const AddItemForm = () => {
+  
   const [dateAcquired, setDateAcquired] = useState("");
   const [purchasedPrice, setPurchasedPrice] = useState(0);
   const [itemNotes, setItemNotes] = useState("");
   const [itemCondition, setItemCondition] = useState("New");
   const [isTradeable, setIsTradeable] = useState(false);
+
+  const [itemSelected, setItemSelected] = useState({});
+  const [searchedItems, setSearchedItems] = useState([])
 
   const submittedInfo = {
     dateAcquired: dateAcquired,
@@ -22,7 +25,7 @@ const AddItemForm = ({ submitInfo }) => {
     <div>
       <div>
         <h1>This is Add Item</h1>
-        <NewItemSearchBar />
+        <NewItemSearchBar getSearchedItems={(itemsArr) => setSearchedItems(itemsArr)}/>
         <br></br>
         <AddItemList />
 
