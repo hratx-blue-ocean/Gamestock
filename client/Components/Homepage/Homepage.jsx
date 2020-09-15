@@ -5,7 +5,6 @@ import Leaderboard from "./Leaderboard.jsx";
 const Homepage = () => {
   return (
     <div>
-      Homepage
       <Banner />
       <Leaderboard />
     </div>
