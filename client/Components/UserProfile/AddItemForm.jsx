@@ -5,7 +5,7 @@ import NewItemSearchBar from "./NewItemSearchBar.jsx";
 const AddItemForm = ({ submitInfo }) => {
   const [itemSelected, setItemSelected] = useState({});
 
-const AddItemForm = () => {
+const AddItemForm = ({ submitInfo }) => {
   const [dateAcquired, setDateAcquired] = useState("");
   const [purchasedPrice, setPurchasedPrice] = useState(0);
   const [itemNotes, setItemNotes] = useState("");
@@ -48,7 +48,7 @@ const AddItemForm = () => {
             {/* price at purchase of item */}
             <label htmlFor="purchasedPrice">PurchasedPrice:</label>
             <input
-              onChange={e => setPurchasedPrice(e.target.value)}
+              onChange={(e) => setPurchasedPrice(e.target.value)}
               id="purchasedPrice"
               type="number"
               min="0.01"
@@ -60,7 +60,7 @@ const AddItemForm = () => {
             {/* notes for user comments */}
             <label htmlFor="comment">Notes:</label>
             <textarea
-              onChange={e => setItemNotes(e.target.value)}
+              onChange={(e) => setItemNotes(e.target.value)}
               rows="4"
               cols="50"
               id="comment"
@@ -68,7 +68,11 @@ const AddItemForm = () => {
             ></textarea>
             <br></br>
             <label htmlFor="ItemCondition">Item Condition:</label>
-            <select id="ItemCondition" value={itemCondition} onChange={(e) => setItemCondition(e.target.value)} >
+            <select
+              id="ItemCondition"
+              value={itemCondition}
+              onChange={(e) => setItemCondition(e.target.value)}
+            >
               <option value="New">New</option>
               <option value="Used">Used</option>
               <option value="Good">Good</option>
@@ -77,14 +81,19 @@ const AddItemForm = () => {
 
             <div>
               <label htmlFor="forTrade">tradeable</label>
-              <input onChange={e => setIsTradeable(!isTradeable)} type="checkbox" id="forTrade" checked={isTradeable}></input>
+              <input
+                onChange={(e) => setIsTradeable(!isTradeable)}
+                type="checkbox"
+                id="forTrade"
+                checked={isTradeable}
+              ></input>
             </div>
+            <button onClick={() => submitInfo(submittedInfo)} type="button">
+              Submit
+            </button>
           </form>
-
-
         </div>
 
-        <button type="button">Submit</button>
         <button type="button">Cancel</button>
       </div>
     </div>
