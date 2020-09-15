@@ -6,11 +6,8 @@ const path = require("path");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-<<<<<<< HEAD
 const axios = require("axios");
-=======
 const { getCollectionsByValueOrSize } = require('./database/dbQueryHelpers');
->>>>>>> Sorts & populates leaderboard by collection value / size
 
 const jwt = require("jsonwebtoken");
 // const jwtExpirySeconds = 300;
