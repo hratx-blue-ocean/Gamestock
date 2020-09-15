@@ -82,7 +82,6 @@ const Leaderboard = () => {
         <Banner />
         <Banner />
       </Wrapper>
-      <GlobalStyles />
     </div>
   );
 };
