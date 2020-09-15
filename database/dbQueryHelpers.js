@@ -113,7 +113,7 @@ class Crud {
     let params = parseParams(parsedKeys);
     parsedKeys = parsedKeys.map((key, index) => `${key}${params[index]}`);
     let queryString = `SELECT * FROM ${this.tablename} WHERE ${parsedKeys.join(' AND ')} LIMIT 1`;
-    return executeQuery(queryString, parsedOptions.values).then(results => results[0]);
+    return executeQuery(queryString, parsedOptions.values).then(results => results.rows[0]);
   }
 
   /**
