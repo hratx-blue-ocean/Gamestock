@@ -37,10 +37,6 @@ const UserProfile = () => {
 
   useEffect(() => {
     if (items.length === 0) {
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> solve card issue
       axios.get("/userProfile/items").then((data) => {
         console.log("ITEMS: ", data);
         setItems(data);
@@ -51,35 +47,19 @@ const UserProfile = () => {
         setPrices(data);
       });
 
-<<<<<<< HEAD
       axios.get("/userProfile/collectionItems").then((data) => {
         console.log("COLLECTIONS: ", data);
         setCollections(data);
       });
-=======
-      getInfo();
->>>>>>> work on state sequence
     }
   }, [items, prices, collections]);
-=======
-      axios.get("/userProfile/users").then((data) => {
-        console.log("USERS: ", data);
-        setUsers(data);
-      });
-    }
-  }, [items, prices, users]);
->>>>>>> solve card issue
 
   return (
     <div>
       <h2>UserProfile!</h2>
       <Header />
       <AddItem />
-<<<<<<< HEAD
       <Middle collections={collections} prices={prices} items={items} />
-=======
-      <Middle users={users} prices={prices} items={items} />
->>>>>>> work on state sequence
       <Paginator />
     </div>
   );

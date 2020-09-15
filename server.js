@@ -97,7 +97,11 @@ app.post("/signup", (req, res) => {
     });
 });
 
+<<<<<<< HEAD
 // userProfile route - access items table
+=======
+// userProfile route - access items
+>>>>>>> working on accessing items in collection
 app.get("/userProfile/items", (req, res) => {
   Items.getAll()
     .then((response) => res.send(response))

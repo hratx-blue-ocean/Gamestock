@@ -38,7 +38,11 @@ export const CardWrapper = styled(Wrapper)`
 export default function CardView({ item }) {
   return (
     <CardWrapper>
+<<<<<<< HEAD
       <Thumbnail src={item.thumbnail}></Thumbnail>
+=======
+      <Thumbnail>{<img src={item.thumbnail} />}</Thumbnail>
+>>>>>>> working on accessing items in collection
       <Text>Game Title</Text>
       <Text>Game Console</Text>
       <Text>Condition</Text>
