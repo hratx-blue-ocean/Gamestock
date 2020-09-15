@@ -6,6 +6,7 @@ const path = require("path");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+const axios = require("axios");
 
 //need to put this secret key in a different file that is .gitignore-d
 const jwt = require("jsonwebtoken");
@@ -110,6 +111,24 @@ app.get("/userProfile/prices", (req, res) => {
 app.get("/userProfile/users", (req, res) => {
   Users.getAll()
     .then((response) => res.send(response))
+    .catch((err) => {
+      console.error(err);
+      res.sendStatus(500);
+    });
+});
+
+// API route to get item price
+app.get("/getItemPrice", (req, res) => {
+  // console.log(req.query.item);
+  const itemName = req.query.item;
+  axios
+    .get(
+      `https://www.pricecharting.com/api/products?t=36330d87343dc3b342b42a4f6c58b13e443061c8&q=${itemName}`
+    )
+    .then((response) => {
+      // console.log(response.data.products);
+      res.send(response.data);
+    })
     .catch((err) => {
       console.error(err);
       res.sendStatus(500);
