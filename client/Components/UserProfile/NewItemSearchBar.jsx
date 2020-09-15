@@ -16,7 +16,10 @@ const NewItemSearchBar = () => {
         items : item,
       }
     })
-    .then(res => console.log(res))
+    .then(res => {
+      console.log(res)
+      return res;
+    })
     .then((res) => {
       setItems(res.data);
     })
@@ -34,11 +37,11 @@ const NewItemSearchBar = () => {
       <input type="text" onChange={(e) => {setInput(e.target.value)}}/>
       <button onClick={() => getItems(input)}>Submit</button>
     </div>
-    {items.map((item, key) => {
+    {/* {items.map((item, key) => {
         <div>
           {item.id}
         </div>
-      })}
+      })} */}
   </div>
   );
 };
