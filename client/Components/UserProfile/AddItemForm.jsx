@@ -84,7 +84,7 @@ const AddItemForm = () => {
 
         </div>
 
-        <button onClick={() => window.print()}type="button">Submit</button>
+        <button type="button">Submit</button>
         <button type="button">Cancel</button>
       </div>
     </div>
