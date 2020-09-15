@@ -43,8 +43,9 @@ export const Wrapper = styled.div`
   margin-top: 20px;
   padding: 10px;
   background: #1e1e1e;
+  color: #54f3f7;
   border-radius: 10px;
-  border: 2px solid #54f3f7;
+  border: 2px solid #eb29fd;
   box-sizing: border-box;
   max-width: 1200px;
 `;

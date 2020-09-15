@@ -51,6 +51,7 @@
     "pg": "^8.3.3",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-paginate": "^6.5.0",
     "styled-components": "^5.2.0"
   }
 }
