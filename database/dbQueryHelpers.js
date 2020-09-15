@@ -124,10 +124,11 @@ class Crud {
    * @returns {Promise<Object>} A promise that is fulfilled with an object
    * containing the results of the query or is rejected with the the error that occurred
    * during the query.
+   * @returning string - a string starting with the word "returning" that will declare what to return on a successful create
    */
-  create(options) {
+  create(options, returning = 'RETURNING id') {
     let parsedOptions = parseKeyValues(options);
-    let queryString = `INSERT INTO (${parsedOptions.keys.join()}) VALUES (${parseParams(parsedOptions.values).join()})`
+    let queryString = `INSERT INTO ${this.tablename}(${parsedOptions.keys.join()}) VALUES (${parseParams(parsedOptions.values).join()}) ${returning}`
     return executeQuery(queryString, parsedOptions.values);
   }
 
@@ -142,7 +143,7 @@ class Crud {
    * containing the results of the query or is rejected with the the error that occurred
    * during the query.
    */
-  update(options, values) {
+  update(options, values, returning = 'RETURNING id') {
 
     let parsedValues = parseData(values);
     let parsedValueKeys = parsedValues.string;
@@ -154,7 +155,7 @@ class Crud {
     let params = parseParams(parsedKeys, valuesParams.length);
     parsedKeys = parsedKeys.map((key, index) => `${key}${params[index]}`);
 
-    let queryString = `UPDATE ${this.tablename} SET ${parsedValueKeys.join(', ')} WHERE ${parsedKeys.join(' AND ')}`;
+    let queryString = `UPDATE ${this.tablename} SET ${parsedValueKeys.join(', ')} WHERE ${parsedKeys.join(' AND ')} ${returning}`;
     return executeQuery(queryString, Array.prototype.concat(parsedValues.values, parsedOptions.values));
   }
 
@@ -167,13 +168,13 @@ class Crud {
    * containing the results of the query or is rejected with the the error that occurred
    * during the query.
    */
-  delete(options) {
+  delete(options, returning = 'RETURNING id') {
     let parsedOptions = parseData(options);
     let parsedKeys = parsedOptions.string
     let params = parseParams(parsedKeys);
     parsedKeys = parsedKeys.map((key, index) => `${key}${params[index]}`);
 
-    let queryString = `DELETE FROM ${this.tablename} WHERE ${parsedKeys.join(' AND ')}`;
+    let queryString = `DELETE FROM ${this.tablename} WHERE ${parsedKeys.join(' AND ')} ${returning}`;
     return executeQuery(queryString, parsedOptions.values);
   }
 
@@ -186,6 +187,10 @@ class Crud {
   deleteAll() {
     let queryString = `DELETE FROM ${this.tablename}`;
     return executeQuery(queryString);
+  }
+  /** To make this one work, be sure to clean the commands first. replace the values with  $1, $2, etc and make sure the array of values matches the order of those. */
+  superCustom(complexQuery, values) {
+    return executeQuery(complexQuery, values);
   }
 }
 
