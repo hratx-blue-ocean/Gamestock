@@ -9,7 +9,7 @@ pool.on('error', (err, client) => {
 // const getAllReviews = () => (
 //   pool.query('SELECT * FROM reviews')
 //     .catch(() => console.log('failed to connect to db'))
-// );
+// );t
 
 // const saveReviewToDB = (reviewData) => {
 //   const args = justValues(reviewData);
@@ -17,25 +17,34 @@ pool.on('error', (err, client) => {
 //     .catch((err) => console.log('failed to connect to db: ', err));
 // };
 
+// (id, item_id, user_id, condition, comments, starting_price, date_of_purchase, tradeable) FROM stdin;
+// 10026	73	10	bad	Vero eum nostrum.	$64.43	1970-01-18 19:03:37	t
+
+
+// public.items (id, title, console, thumbnail, front_view, back_view, is_console)
+
 const saveItemToDB = (itemData) => {
-    const queryString = `INSERT INTO items_in_collection
-      (user_id, condition, comments, starting_price, date_of_purchase, tradeable)
+    const queryString = `WITH item_id_var AS (
+      INSERT INTO items
+      (title, console, is_console)
+      VALUES
+      ('Even Cooler Game', 'XBox', 'true') ON CONFLICT (title, console) DO NOTHING
+    RETURNING id
+),
+    ins2 AS (
+		INSERT INTO items_in_collection
+      (item_id, user_id, condition, comments, starting_price, date_of_purchase, tradeable)
     VALUES
-      (user_id, condition, comments, starting_price, date_of_purchase, tradeable)
-    RETURNING item_id AS id,
+      ((SELECT id FROM item_id_var), 5, 'fair', 'this is a game', '$1.00', '1970-01-18', 'true')
+		RETURNING item_id
+		)
 
-    INSERT INTO items
-      (id, title, console, is_console)
-    VALUES
-      (id, title, console, is_console)
-    RETURNING id AS item_id,
-
-    INSERT INTO item_value_by_date
+    INSERT INTO items_value_by_date
       (item_id)
     VALUES
-      (item_id)`
+      ((SELECT id FROM item_id_var))`
 
-  return pool.query(queryString)
+  return pool.query(queryString, itemData)
 }
 
 //******************************* */
