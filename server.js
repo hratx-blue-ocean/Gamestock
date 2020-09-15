@@ -37,8 +37,8 @@ app.get("/login", (req, res) => {
     .then((user) => {
       if (!user) {
         //username not found
-        console.log("Username at login not found", user);
-        res.status(200).send("User not found. Sign up");
+        console.log("Username at login not found");
+        res.status(200).send("User not found. Sign up!");
       } else {
         console.log('user: ', user)
         //user exists, verify password
