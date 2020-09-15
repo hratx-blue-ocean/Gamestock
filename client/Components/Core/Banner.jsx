@@ -1,5 +1,5 @@
 import React from "react";
-import { Button, BannerWrapper } from "../Core/coreStyles.jsx";
+import { Button, Wrapper } from "../Core/coreStyles.jsx";
 import styled from "styled-components";
 
 const Avatar = styled.p`
@@ -18,6 +18,19 @@ const Text = styled.p`
     color: skyblue;
     cursor: pointer;
   }
+`;
+
+export const BannerWrapper = styled(Wrapper)`
+  margin-top: 10px;
+  display: flex;
+  background: #2d1c7b;
+  color: #54f3f7;
+  border-radius: 10px;
+  border: 2px solid #eb29fd;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-item: center;
+  box-sizing: border-box;
 `;
 
 export default function Banner() {
