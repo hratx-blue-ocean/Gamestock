@@ -1,5 +1,7 @@
 import React from "react";
 import styled from "styled-components";
+import CardView from "../Core/CardView.jsx";
+
 import {
   Input,
   Wrapper,
@@ -10,14 +12,14 @@ import {
   Form,
 } from "../Core/coreStyles.jsx";
 
-const Card = ({ users, items, prices }) => {
+const Card = ({ items, prices }) => {
   // edit and delete button
 
-  const CardGrid = styled(WrapGrid)`
-    grid-template-columns: 50px 100px 100px 100px 100px auto 75px 75px 75px 75px 75px;
-    margin-top: 30px;
-    margin-bottom: 20px;
-  `;
+  // const CardGrid = styled(WrapGrid)`
+  //   grid-template-columns: 50px 100px 100px 100px 100px auto 75px 75px 75px 75px 75px;
+  //   margin-top: 30px;
+  //   margin-bottom: 20px;
+  // `;
 
   // columns needed on each card: thumbnail, title, console, condition, price, edit button, delete button
   // items.data
@@ -30,9 +32,13 @@ const Card = ({ users, items, prices }) => {
       <div>
         {items.data.rows.map((item) => {
           return (
-            <Wrapper>
-              <CardGrid>{item.title}</CardGrid>
-            </Wrapper>
+            <div key={item.id}>
+              <CardView>
+                {/* <CardGrid>
+                  {item.id} {<img src={item.thumbnail} />}
+                </CardGrid> */}
+              </CardView>
+            </div>
           );
         })}
       </div>
