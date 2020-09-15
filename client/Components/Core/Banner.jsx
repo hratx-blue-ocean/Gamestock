@@ -2,13 +2,14 @@ import React from "react";
 import { Button, Wrapper } from "../Core/coreStyles.jsx";
 import styled from "styled-components";
 
-const Avatar = styled.p`
+const Avatar = styled.img`
   margin-left: 50px;
   margin: auto;
   padding: 20px 0px;
   &:hover {
     cursor: pointer;
   }
+  border-radius: 50%
 `;
 
 const Text = styled.p`
@@ -33,13 +34,13 @@ export const BannerWrapper = styled(Wrapper)`
   box-sizing: border-box;
 `;
 
-export default function Banner() {
+export default function Banner( {username, collectionSize, collectionValue, avatar}) {
   return (
     <BannerWrapper>
-      <Avatar>Avatar goes here</Avatar>
-      <Text>Username</Text>
-      <Text>Collection Size</Text>
-      <Text>Collection Value</Text>
+      <Avatar src={avatar}></Avatar>
+      <Text>{username}</Text>
+      <Text>{collectionSize}</Text>
+      <Text>{collectionValue}</Text>
       <Button>See Collection</Button>
     </BannerWrapper>
   );

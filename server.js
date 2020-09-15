@@ -7,6 +7,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const axios = require("axios");
+const { getCollectionsByValueOrSize } = require('./database/dbQueryHelpers');
 
 const jwt = require("jsonwebtoken");
 // const jwtExpirySeconds = 300;
@@ -148,6 +149,32 @@ app.get("/getItemPrice", (req, res) => {
       res.sendStatus(500);
     });
 });
+
+// Routes for leaderboard
+
+//get leaderboard by collection value
+app.get('/leaderboard/value', (req, res) => {
+  getCollectionsByValueOrSize('total_value DESC, total_count')
+    .then((records) => {
+      res.status(200).send(records);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send(err);
+    })
+})
+
+// get leaderboard by collection size
+app.get('/leaderboard/size', (req, res) => {
+  getCollectionsByValueOrSize('total_count DESC, total_value')
+    .then((records) => {
+      res.status(200).send(records);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send(err);
+    })
+})
 
 app.listen(port, () => {
   console.log("listening in on port ", port);
