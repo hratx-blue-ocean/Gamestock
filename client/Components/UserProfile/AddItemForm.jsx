@@ -17,6 +17,7 @@ const AddItemForm = ({ submitInfo }) => {
     itemCondition: itemCondition,
     isTradeable: isTradeable,
   };
+  
   return (
     <div>
       <div>
