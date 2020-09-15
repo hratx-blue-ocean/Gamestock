@@ -6,6 +6,7 @@ const path = require("path");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+const { getCollectionsByValueOrSize } = require('./database/dbQueryHelpers');
 
 //need to put this secret key in a different file that is .gitignore-d
 const jwt = require("jsonwebtoken");
@@ -115,6 +116,33 @@ app.get("/userProfile/users", (req, res) => {
       res.sendStatus(500);
     });
 });
+
+
+// Routes for leaderboard
+
+//get leaderboard by collection value
+app.get('/leaderboard/value', (req, res) => {
+  getCollectionsByValueOrSize('total_value DESC, total_count')
+    .then((records) => {
+      res.status(200).send(records);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send(err);
+    })
+})
+
+// get leaderboard by collection size
+app.get('/leaderboard/size', (req, res) => {
+  getCollectionsByValueOrSize('total_count DESC, total_value')
+    .then((records) => {
+      res.status(200).send(records);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send(err);
+    })
+})
 
 app.listen(port, () => {
   console.log("listening in on port ", port);
