@@ -59,12 +59,15 @@ app.get("/login", (req, res) => {
     });
 });
 
-app.get("/signup", (req, res) => {
+app.post("/signup", (req, res) => {
   //req.body should include username, avatar and password
-  let username = req.body.username;
+  let username = {
+    username: req.body.username
+  };
+   console.log(req.body);
 
   //check if username exists
-  Users.get({ username })
+  Users.get(username)
     .then((user) => {
       if (user) {
         res.status(200).send("Username already exists");
@@ -72,6 +75,8 @@ app.get("/signup", (req, res) => {
         //if user does not exist, create one
         Users.create(req.body)
           .then((response) => {
+            console.log('MADE IT!');
+            console.log(response);
             res.status(200).send(response);
           })
           .catch((err) => {

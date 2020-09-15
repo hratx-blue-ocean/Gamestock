@@ -20,19 +20,18 @@ class Users extends Crud {
   */
 
   create({ username, avatar, password }) {
-    bcrypt
+    return bcrypt
       .hash(password, 12)
-      .then((hash) => {
+      .then((hashed_pw) => {
         let newUser = {
           username,
           avatar,
-          hash,
-          cookie,
+          hashed_pw,
         };
 
         return super.create.call(this, newUser);
       })
-      .catch((err) => console.log("Unable to hash password"));
+      .catch((err) => console.log("Unable to hash password: ", err));
   }
 
   compare(attempt, password) {
