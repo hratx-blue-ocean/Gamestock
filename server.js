@@ -123,11 +123,11 @@ app.get("/getItemPrice", (req, res) => {
   const itemName = req.query.item;
   axios
     .get(
-      `https://www.pricecharting.com/api/products?t=36330d87343dc3b342b42a4f6c58b13e443061c8&q=${itemName}`
+      `https://www.pricecharting.com/api/products?t=36330d87343dc3b342b42a4f6c58b13e443061c8&q=mario_?limit=10`
     )
     .then((response) => {
       // console.log(response.data.products);
-      res.send(response.data);
+      res.send(response.data.products);
     })
     .catch((err) => {
       console.error(err);
