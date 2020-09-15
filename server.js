@@ -1,5 +1,5 @@
 //imports acces token for jwt from .env file
-// require("dotenv").config();
+require("dotenv").config();
 
 const express = require("express");
 const path = require("path");
@@ -24,8 +24,7 @@ app.use(express.static(path.join(__dirname, "public")));
 app.get("/login", (req, res) => {
   let username = req.body.username;
   const token = jwt.sign({ username }, process.env.ACCESS_TOKEN, {
-    algorithm: "HS256",
-    expiresIn: jwtExpirySeconds,
+    algorithm: 'HS256'
   });
 
   Users.get({ username })
@@ -50,8 +49,8 @@ app.get("/login", (req, res) => {
 
         //create auth cookie
         console.log("token:", token);
-        res.cookie("token", token, { maxAge: jwtExpirySeconds * 1000 });
-        res.status(200).send("Successful login");
+        res.cookie('token', token);
+        res.status(200).send('Successful login');
       }
     })
     .catch((err) => {
