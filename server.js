@@ -8,11 +8,10 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const axios = require("axios");
 
-//need to put this secret key in a different file that is .gitignore-d
 const jwt = require("jsonwebtoken");
-const jwtExpirySeconds = 300;
-const Promise = require('bluebird')
+// const jwtExpirySeconds = 300;
 const { Users, Items, Prices } = require("./models/index");
+const tokenAuthorizer = require('./authorization/authorize.js')
 
 const app = express();
 const port = 7711;
@@ -106,6 +105,13 @@ app.get("/userProfile/items", (req, res) => {
       res.sendStatus(500);
     });
 });
+
+// app.get('/test', tokenAuthorizer, (req, res) => {
+//   const token = req.cookies
+//   console.log('THIS IS THE TOKEN:',token);
+
+//   res.send(token);
+// })
 
 // user profile route
 app.get("/userProfile/prices", (req, res) => {
