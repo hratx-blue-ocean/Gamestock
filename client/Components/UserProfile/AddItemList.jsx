@@ -4,7 +4,7 @@ const AddItemList = (props) => {
   return (
     <div>
       {props.items.map((itemObj) => {
-        return <AddItemSingleItem item={itemObj} />;
+        return <AddItemSingleItem item={itemObj} select={(item) => {props.select(item)}}/>;
       })}
     </div>
     // <div>
