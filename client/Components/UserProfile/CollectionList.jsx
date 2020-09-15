@@ -1,11 +1,12 @@
 import React from "react";
-import Card from "Card.jsx";
+import Card from "./Card.jsx";
 
-const CollectionList = () => {
-    return (
-      <div>
-      </div>
-    )
-  };
+const CollectionList = (/* pass in props from Middle */) => {
+  return (
+    <div>
+      <Card />
+    </div>
+  );
+};
 
-  export default CollectionList;
+export default CollectionList;
