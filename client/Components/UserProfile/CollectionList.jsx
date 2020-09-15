@@ -1,10 +1,22 @@
 import React from "react";
 import Card from "./Card.jsx";
+import {
+  Input,
+  Wrapper,
+  GlobalStyles,
+  Title,
+  WrapGrid,
+  Button,
+  Form,
+} from "../Core/coreStyles.jsx";
 
-const CollectionList = (/* pass in props from Middle */) => {
+const CollectionList = ({ collections, items, prices }) => {
   return (
     <div>
-      <Card />
+      <Wrapper>
+        <Title>User Collection</Title>
+        <Card collections={collections} items={items} prices={prices} />
+      </Wrapper>
     </div>
   );
 };

@@ -14,7 +14,11 @@ const cookieParser = require("cookie-parser");
 =======
 =======
 const axios = require("axios");
+<<<<<<< HEAD
 >>>>>>> 9863a3fdd403541b4fd829af551e0b5143c754ec
+=======
+const { getCollectionsByValueOrSize } = require("./database/dbQueryHelpers");
+>>>>>>> c163eba31f093f7e1226f391ce4b6d2cd9f84d3e
 
 const jwt = require("jsonwebtoken");
 <<<<<<< HEAD
@@ -24,7 +28,7 @@ const jwtExpirySeconds = 300;
 // const jwtExpirySeconds = 300;
 >>>>>>> 9863a3fdd403541b4fd829af551e0b5143c754ec
 const { Users, Items, Prices } = require("./models/index");
-const tokenAuthorizer = require('./authorization/authorize.js')
+const tokenAuthorizer = require("./authorization/authorize.js");
 
 const app = express();
 const port = 7711;
@@ -46,26 +50,26 @@ app.get("/signup", (req, res) => {
 
 app.get("/login", (req, res) => {
   let username = {
-    username: req.body.username
+    username: req.body.username,
   };
-  const token = jwt.sign(username.username , process.env.ACCESS_TOKEN_SECRET, {
-    algorithm: 'HS256'
+  const token = jwt.sign(username.username, process.env.ACCESS_TOKEN_SECRET, {
+    algorithm: "HS256",
   });
 
-  console.log('username', username)
+  console.log("username", username);
 
-  Users.get( username )
+  Users.get(username)
     .then((user) => {
       if (!user) {
         //username not found
         console.log("Username at login not found");
         res.status(200).send("User not found. Sign up!");
       } else {
-        console.log('user: ', user)
+        console.log("user: ", user);
         //user exists, verify password
         return Users.compare(req.body.password, user.hashed_pw);
       }
-      throw new Error;
+      throw new Error();
     })
     .then((verification) => {
       //user exists but entered incorrect password
@@ -78,8 +82,8 @@ app.get("/login", (req, res) => {
 
         //create auth cookie
         console.log("token:", token);
-        res.cookie('token', token);
-        res.status(200).send('Successful login');
+        res.cookie("token", token);
+        res.status(200).send("Successful login");
       }
     })
     .catch((err) => {
@@ -91,9 +95,9 @@ app.get("/login", (req, res) => {
 app.post("/signup", (req, res) => {
   //req.body should include username, avatar and password
   let username = {
-    username: req.body.username
+    username: req.body.username,
   };
-   console.log(req.body);
+  console.log(req.body);
 
   //check if username exists
   Users.get(username)
@@ -119,7 +123,7 @@ app.post("/signup", (req, res) => {
     });
 });
 
-// user profile route
+// userProfile route - access items table
 app.get("/userProfile/items", (req, res) => {
   Items.getAll()
     .then((response) => res.send(response))
@@ -137,6 +141,7 @@ app.get("/userProfile/items", (req, res) => {
 // })
 
 // user profile route
+// userProfile route - access item_value_by_date
 app.get("/userProfile/prices", (req, res) => {
   Prices.getAll()
     .then((response) => res.send(response))
@@ -146,9 +151,9 @@ app.get("/userProfile/prices", (req, res) => {
     });
 });
 
-// user profile route
-app.get("/userProfile/users", (req, res) => {
-  Users.getAll()
+// userProfile route - access items_in_collection
+app.get("/userProfile/collectionItems", (req, res) => {
+  Collections.getAll()
     .then((response) => res.send(response))
     .catch((err) => {
       console.error(err);
@@ -169,6 +174,32 @@ app.get("/getItemPrice", (req, res) => {
     .catch((err) => {
       console.error(err);
       res.sendStatus(500);
+    });
+});
+
+// Routes for leaderboard
+
+//get leaderboard by collection value
+app.get("/leaderboard/value", (req, res) => {
+  getCollectionsByValueOrSize("total_value DESC, total_count")
+    .then((records) => {
+      res.status(200).send(records);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send(err);
+    });
+});
+
+// get leaderboard by collection size
+app.get("/leaderboard/size", (req, res) => {
+  getCollectionsByValueOrSize("total_count DESC, total_value")
+    .then((records) => {
+      res.status(200).send(records);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send(err);
     });
 });
 

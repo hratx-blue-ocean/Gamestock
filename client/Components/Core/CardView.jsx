@@ -2,26 +2,25 @@ import React from "react";
 import { Button, Wrapper } from "../Core/coreStyles.jsx";
 import styled from "styled-components";
 
-const Avatar = styled.img`
+export const Thumbnail = styled.p`
   margin-left: 50px;
   margin: auto;
   padding: 20px 0px;
   &:hover {
     cursor: pointer;
   }
-  border-radius: 50%
 `;
 
-const Text = styled.p`
+export const Text = styled.p`
   padding: 0px;
   margin: auto;
   &:hover {
-    color: skyblue;
+    color: #54f3f7;
     cursor: pointer;
   }
 `;
 
-export const BannerWrapper = styled(Wrapper)`
+export const CardWrapper = styled(Wrapper)`
   margin-top: 10px;
   display: flex;
   background: #2d1c7b;
@@ -34,14 +33,16 @@ export const BannerWrapper = styled(Wrapper)`
   box-sizing: border-box;
 `;
 
-export default function Banner( {username, collectionSize, collectionValue, avatar}) {
+export default function CardView() {
   return (
-    <BannerWrapper>
-      <Avatar src={avatar}></Avatar>
-      <Text>{username}</Text>
-      <Text>{collectionSize}</Text>
-      <Text>{collectionValue}</Text>
-      <Button>See Collection</Button>
-    </BannerWrapper>
+    <CardWrapper>
+      <Thumbnail>{<img src={item.thumbnail} />}</Thumbnail>
+      <Text>Game Title</Text>
+      <Text>Game Console</Text>
+      <Text>Condition</Text>
+      <Text>Price</Text>
+      <Button>Edit</Button>
+      <Button>Delete</Button>
+    </CardWrapper>
   );
 }

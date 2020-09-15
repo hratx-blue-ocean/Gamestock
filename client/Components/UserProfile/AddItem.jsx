@@ -4,9 +4,11 @@ import AddItemForm from "./AddItemForm.jsx";
 const AddItem = () => {
   const [newItemInfo, setNewItemInfo] = useState(null);
 
-  return <div>
+  return (
+  <div>
     < AddItemForm submitInfo={(info) => setNewItemInfo(info)} />
-  </div>;
+  </div>
+  )
 };
 
 export default AddItem;
