@@ -2,15 +2,19 @@ require('dotenv').config();
 const jwt = require('jsonwebtoken');
 
 module.exports = tokenAuthorizer = (req, res, next) => {
-    const authHeader = req.headers['authorization']
+    console.log('middleWARE!')
     let token;
-    authHeader ? token = authHeader.split(' ')[1] : token = null;
+    if (req.cookies) {
+        token = req.cookies.token;
+    } else {
+        return res.sendStatus(401);
+    }
     if (!token) return res.sendStatus(401);
 
 
     jwt.verify(token, process.env.ACCESS_TOKEN_SECRET, (err, user) => {
 
-        if (err) return res.sendStatus(403)
+        if (err) res.sendStatus(403);
         req.user = user;
         next();
     })
