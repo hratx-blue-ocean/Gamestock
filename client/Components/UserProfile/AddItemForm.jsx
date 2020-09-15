@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
-
+import AddItemList from "./AddItemList.jsx";
+import AddItemSingleItem from "./AddItemSingleItem.jsx";
 const AddItemForm = ({ submitInfo }) => {
+  const [itemSelected, setItemSelected] = useState({});
   const [dateAcquired, setDateAcquired] = useState("");
   const [purchasedPrice, setPurchasedPrice] = useState(0);
   const [itemNotes, setItemNotes] = useState("");
@@ -26,11 +28,10 @@ const AddItemForm = ({ submitInfo }) => {
           </button>
         </form>
 
-        <div>
-          <h3>list of rendered item thumbnails</h3>
-        </div>
+        
 
         <br></br> */}
+        < AddItemList />
 
         <div>
           <span>Item form</span>
