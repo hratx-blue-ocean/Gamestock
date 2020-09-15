@@ -1,39 +1,30 @@
 import React, { useState, useEffect } from "react";
 import AddItemList from "./AddItemList.jsx";
-import AddItemSingleItem from "./AddItemSingleItem.jsx";
+import NewItemSearchBar from "./NewItemSearchBar.jsx";
+
 const AddItemForm = ({ submitInfo }) => {
   const [itemSelected, setItemSelected] = useState({});
-
-const AddItemForm = () => {
   const [dateAcquired, setDateAcquired] = useState("");
   const [purchasedPrice, setPurchasedPrice] = useState(0);
   const [itemNotes, setItemNotes] = useState("");
   const [itemCondition, setItemCondition] = useState("New");
   const [isTradeable, setIsTradeable] = useState(false);
 
+  const submittedInfo = {
+    dateAcquired: dateAcquired,
+    purchasedPrice: purchasedPrice,
+    itemNotes: itemNotes,
+    itemCondition: itemCondition,
+    isTradeable: isTradeable,
+  };
+  
   return (
     <div>
       <div>
-        {/* <h1>This is Add Item</h1>
-
-        <form>
-          <input type="text" placeholder="Search.." name="search"></input>
-          <button type="submit">
-            <i className="searchIcon">a button</i>
-          </button>
-        </form>
-
-        <div>
-          <h3>list of rendered item thumbnails</h3>
-        </div>
-
-        <br></br> */}
-        < AddItemList />
-        <div>
-          <h3>list of rendered item thumbnails</h3>
-        </div>
-
+        <h1>This is Add Item</h1>
+        <NewItemSearchBar />
         <br></br>
+        <AddItemList />
 
         <div>
           <span>Item form</span>
@@ -46,12 +37,17 @@ const AddItemForm = () => {
               id="start"
               value={dateAcquired}
             ></input>
-            <input onChange={e => setDateAcquired(e.target.value)} type="date" id="start" value={dateAcquired}></input>
+            <input
+              onChange={(e) => setDateAcquired(e.target.value)}
+              type="date"
+              id="start"
+              value={dateAcquired}
+            ></input>
             <br></br>
             {/* price at purchase of item */}
             <label htmlFor="purchasedPrice">PurchasedPrice:</label>
             <input
-              onChange={e => setPurchasedPrice(e.target.value)}
+              onChange={(e) => setPurchasedPrice(e.target.value)}
               id="purchasedPrice"
               type="number"
               min="0.01"
@@ -63,7 +59,7 @@ const AddItemForm = () => {
             {/* notes for user comments */}
             <label htmlFor="comment">Notes:</label>
             <textarea
-              onChange={e => setItemNotes(e.target.value)}
+              onChange={(e) => setItemNotes(e.target.value)}
               rows="4"
               cols="50"
               id="comment"
@@ -71,7 +67,11 @@ const AddItemForm = () => {
             ></textarea>
             <br></br>
             <label htmlFor="ItemCondition">Item Condition:</label>
-            <select id="ItemCondition" value={itemCondition} onChange={(e) => setItemCondition(e.target.value)} >
+            <select
+              id="ItemCondition"
+              value={itemCondition}
+              onChange={(e) => setItemCondition(e.target.value)}
+            >
               <option value="New">New</option>
               <option value="Used">Used</option>
               <option value="Good">Good</option>
@@ -80,18 +80,23 @@ const AddItemForm = () => {
 
             <div>
               <label htmlFor="forTrade">tradeable</label>
-              <input onChange={e => setIsTradeable(!isTradeable)} type="checkbox" id="forTrade" checked={isTradeable}></input>
+              <input
+                onChange={(e) => setIsTradeable(!isTradeable)}
+                type="checkbox"
+                id="forTrade"
+                checked={isTradeable}
+              ></input>
             </div>
+            <button onClick={() => submitInfo(submittedInfo)} type="button">
+              Submit
+            </button>
           </form>
-
-
         </div>
 
-        <button onClick={() => window.print()}type="button">Submit</button>
         <button type="button">Cancel</button>
       </div>
     </div>
   );
 };
-}
-export default AddItemForm
+
+export default AddItemForm;
