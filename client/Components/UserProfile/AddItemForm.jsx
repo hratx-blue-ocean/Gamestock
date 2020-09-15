@@ -1,4 +1,8 @@
 import React, { useState, useEffect } from "react";
+import AddItemList from "./AddItemList.jsx";
+import AddItemSingleItem from "./AddItemSingleItem.jsx";
+const AddItemForm = ({ submitInfo }) => {
+  const [itemSelected, setItemSelected] = useState({});
 
 const AddItemForm = () => {
   const [dateAcquired, setDateAcquired] = useState("");
@@ -24,12 +28,24 @@ const AddItemForm = () => {
         </div>
 
         <br></br> */}
+        < AddItemList />
+        <div>
+          <h3>list of rendered item thumbnails</h3>
+        </div>
+
+        <br></br>
 
         <div>
           <span>Item form</span>
           <form>
             {/* date when item was bought */}
             <label htmlFor="dateAcquired">Date Acquired:</label>
+            <input
+              onChange={(e) => setDateAcquired(e.target.value)}
+              type="date"
+              id="start"
+              value={dateAcquired}
+            ></input>
             <input onChange={e => setDateAcquired(e.target.value)} type="date" id="start" value={dateAcquired}></input>
             <br></br>
             {/* price at purchase of item */}
@@ -77,5 +93,5 @@ const AddItemForm = () => {
     </div>
   );
 };
-
-export default AddItemForm;
+}
+export default AddItemForm
