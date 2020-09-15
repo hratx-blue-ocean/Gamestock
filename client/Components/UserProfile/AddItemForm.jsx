@@ -3,8 +3,6 @@ import AddItemList from "./AddItemList.jsx";
 import AddItemSingleItem from "./AddItemSingleItem.jsx";
 const AddItemForm = ({ submitInfo }) => {
   const [itemSelected, setItemSelected] = useState({});
-
-const AddItemForm = ({ submitInfo }) => {
   const [dateAcquired, setDateAcquired] = useState("");
   const [purchasedPrice, setPurchasedPrice] = useState(0);
   const [itemNotes, setItemNotes] = useState("");
@@ -34,11 +32,6 @@ const AddItemForm = ({ submitInfo }) => {
 
         <br></br> */}
         < AddItemList />
-        <div>
-          <h3>list of rendered item thumbnails</h3>
-        </div>
-
-        <br></br>
 
         <div>
           <span>Item form</span>
@@ -107,5 +100,5 @@ const AddItemForm = ({ submitInfo }) => {
     </div>
   );
 };
-}
-export default AddItemForm
+
+export default AddItemForm;
