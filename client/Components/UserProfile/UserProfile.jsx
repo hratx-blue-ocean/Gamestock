@@ -4,17 +4,7 @@ import axios from "axios";
 import Header from "./Header.jsx";
 import AddItem from "./AddItem.jsx"; //add item to modal form
 import Middle from "./Middle.jsx";
-import Pagination from "./Pagination.jsx";
-import styled from "styled-components";
-import {
-  Input,
-  Wrapper,
-  GlobalStyles,
-  Title,
-  WrapGrid,
-  Button,
-  Form,
-} from "../Core/coreStyles.jsx";
+import Paginator from "./Paginator.jsx";
 
 const UserProfile = () => {
   // useState to store the array of returned data from items table
@@ -47,6 +37,7 @@ const UserProfile = () => {
 
   useEffect(() => {
     if (items.length === 0) {
+<<<<<<< HEAD
       axios.get("/userProfile/items").then((data) => {
         console.log("ITEMS: ", data);
         setItems(data);
@@ -61,6 +52,9 @@ const UserProfile = () => {
         console.log("COLLECTIONS: ", data);
         setCollections(data);
       });
+=======
+      getInfo();
+>>>>>>> work on state sequence
     }
   }, [items, prices, collections]);
 
@@ -69,7 +63,11 @@ const UserProfile = () => {
       <h2>UserProfile!</h2>
       <Header />
       <AddItem />
+<<<<<<< HEAD
       <Middle collections={collections} prices={prices} items={items} />
+=======
+      <Middle users={users} prices={prices} items={items} />
+>>>>>>> work on state sequence
       <Paginator />
     </div>
   );
