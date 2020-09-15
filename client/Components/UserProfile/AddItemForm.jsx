@@ -17,17 +17,14 @@ const AddItemForm = ({ submitInfo }) => {
     itemCondition: itemCondition,
     isTradeable: isTradeable,
   };
+  
   return (
     <div>
       <div>
         <h1>This is Add Item</h1>
-
-        
-
-        < NewItemSearchBar />
-
+        <NewItemSearchBar />
         <br></br>
-        < AddItemList />
+        <AddItemList />
 
         <div>
           <span>Item form</span>
@@ -40,7 +37,12 @@ const AddItemForm = ({ submitInfo }) => {
               id="start"
               value={dateAcquired}
             ></input>
-            <input onChange={e => setDateAcquired(e.target.value)} type="date" id="start" value={dateAcquired}></input>
+            <input
+              onChange={(e) => setDateAcquired(e.target.value)}
+              type="date"
+              id="start"
+              value={dateAcquired}
+            ></input>
             <br></br>
             {/* price at purchase of item */}
             <label htmlFor="purchasedPrice">PurchasedPrice:</label>
