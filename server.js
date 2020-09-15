@@ -97,7 +97,7 @@ app.post("/signup", (req, res) => {
     });
 });
 
-// userProfile route - access items
+// userProfile route - access items table
 app.get("/userProfile/items", (req, res) => {
   Items.getAll()
     .then((response) => res.send(response))
