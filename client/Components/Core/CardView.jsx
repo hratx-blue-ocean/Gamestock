@@ -9,8 +9,12 @@ export const Thumbnail = styled.img`
   &:hover {
     cursor: pointer;
   }
+<<<<<<< HEAD
   max-height: 50px;
   max-width: 50px;
+=======
+  border-radius: 50%;
+>>>>>>> work on rendering correct data to cards
 `;
 
 export const Text = styled.p`
@@ -35,6 +39,7 @@ export const CardWrapper = styled(Wrapper)`
   box-sizing: border-box;
 `;
 
+<<<<<<< HEAD
 export default function CardView({ item }) {
   return (
     <CardWrapper>
@@ -49,6 +54,24 @@ export default function CardView({ item }) {
       <Text>Price</Text>
       <StyledButton>Edit</StyledButton>
       <StyledButton>Delete</StyledButton>
+=======
+export default function CardView({
+  Thumbnail,
+  gameTitle,
+  gameConsole,
+  gameCondition,
+  gamePrice,
+}) {
+  return (
+    <CardWrapper>
+      <Thumbnail src={Thumbnail}></Thumbnail>
+      <Text>{gameTitle}</Text>
+      <Text>{gameConsole}</Text>
+      <Text>gameCondition</Text>
+      <Text>gamePrice</Text>
+      <Button>Edit</Button>
+      <Button>Delete</Button>
+>>>>>>> work on rendering correct data to cards
     </CardWrapper>
   );
 }

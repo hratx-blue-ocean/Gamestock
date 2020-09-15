@@ -1,6 +1,6 @@
 import React from "react";
 import styled from "styled-components";
-import { CardWrapper, Text, Thumbnail } from "../Core/CardView.jsx";
+import { CardView, CardWrapper, Text, Thumbnail } from "../Core/CardView.jsx";
 
 import {
   StyledInput,
@@ -33,6 +33,7 @@ const Card = ({ collections, items, prices }) => {
         {items.data.rows.map((item) => {
           return (
             <div key={item.id}>
+<<<<<<< HEAD
               <CardWrapper>
                 <Thumbnail src={item.thumbnail} />
                 <Text>{item.title}</Text>
@@ -42,6 +43,15 @@ const Card = ({ collections, items, prices }) => {
                 <StyledButton>Edit</StyledButton>
                 <StyledButton>Delete</StyledButton>
               </CardWrapper>
+=======
+              <CardView
+                Thumbnail={item.thumbnail}
+                gameTitle={item.title}
+                gameConsole={item.console}
+                gameCondition="Condition goes here"
+                gamePrice="Price goes here"
+              ></CardView>
+>>>>>>> work on rendering correct data to cards
             </div>
           );
         })}
