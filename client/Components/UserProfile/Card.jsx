@@ -20,21 +20,26 @@ const Card = ({ users, items, prices }) => {
   `;
 
   // columns needed on each card: thumbnail, title, console, condition, price, edit button, delete button
-  items.data
-    ? console.log("ITEMS PROP: ", items.data.rows)
-    : console.log("Nothing yet");
+  // items.data
 
-  return (
-    <div>
-      {items.data.rows.map((item) => {
-        return (
-          <Wrapper>
-            <CardGrid>{item.title}</CardGrid>
-          </Wrapper>
-        );
-      })}
-    </div>
-  );
+  //   ? console.log("ITEMS PROP: ", items.data.rows)
+  //   : console.log("Nothing yet");
+
+  if (items.data) {
+    return (
+      <div>
+        {items.data.rows.map((item) => {
+          return (
+            <Wrapper>
+              <CardGrid>{item.title}</CardGrid>
+            </Wrapper>
+          );
+        })}
+      </div>
+    );
+  } else {
+    return <div></div>;
+  }
 };
 
 export default Card;
