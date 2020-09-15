@@ -1,5 +1,4 @@
 import React from "react";
-import CollectionList from "./CollectionList.jsx";
 import styled from "styled-components";
 import {
   Input,
@@ -21,20 +20,19 @@ const Card = ({ users, items, prices }) => {
   `;
 
   // columns needed on each card: thumbnail, title, console, condition, price, edit button, delete button
-  // items.data ? console.log("ITEMS PROP: ", items.data.rows) : console.log("[]");
+  items.data
+    ? console.log("ITEMS PROP: ", items.data.rows)
+    : console.log("Nothing yet");
 
   return (
     <div>
-      <Wrapper>
-        <CardGrid>
-          <ul>
-            {items.data.rows.map((item) => {
-              return <li key={item.id}>{item.id}</li>;
-            })}
-            ;
-          </ul>
-        </CardGrid>
-      </Wrapper>
+      {items.data.rows.map((item) => {
+        return (
+          <Wrapper>
+            <CardGrid>{item.title}</CardGrid>
+          </Wrapper>
+        );
+      })}
     </div>
   );
 };
