@@ -11,8 +11,6 @@ const Middle = ({ collections, prices, items }) => {
       {/* these first two things are displaying the number of items and their combined value */}
       <DisplayItems items={items} />
       <DisplayItemsValue prices={prices} />
-      {/* print will be the print button that converts the information displayed into a csv file... node fs and other libraries can assist with this */}
-      <Print />
       {/* child of collectionList will be card */}
       <CollectionList collections={collections} items={items} prices={prices} />
     </div>

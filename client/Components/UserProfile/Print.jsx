@@ -1,11 +1,12 @@
 import React from "react";
+import { Button } from "../Core/coreStyles.jsx";
 
 const Print = () => {
   return (
     <div>
-      <button onClick={() => window.print()} type="button">
-        Print
-      </button>
+      <Button onClick={() => window.print()} type="button">
+        Print Collection
+      </Button>
     </div>
   );
 };

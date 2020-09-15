@@ -1,5 +1,6 @@
 import React from "react";
 import Card from "./Card.jsx";
+import Print from "./Print.jsx";
 import {
   StyledInput,
   Wrapper,
@@ -15,6 +16,7 @@ const CollectionList = ({ collections, items, prices }) => {
     <div>
       <Wrapper>
         <Title>User Collection</Title>
+        <Print />
         <Card collections={collections} items={items} prices={prices} />
       </Wrapper>
     </div>

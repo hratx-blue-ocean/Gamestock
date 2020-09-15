@@ -1,7 +1,6 @@
 // parent component for user profile
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import Header from "./Header.jsx";
 import AddItem from "./AddItem.jsx"; //add item to modal form
 import Middle from "./Middle.jsx";
 import Paginator from "./Paginator.jsx";
@@ -62,7 +61,6 @@ const UserProfile = () => {
   return (
     <div>
       <h2>UserProfile!</h2>
-      <Header />
       <AddItem />
       <Middle collections={collections} prices={prices} items={items} />
       <Paginator />
