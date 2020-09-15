@@ -5,6 +5,16 @@ import Header from "./Header.jsx";
 import AddItem from "./AddItem.jsx"; //add item to modal form
 import Middle from "./Middle.jsx";
 import Pagination from "./Pagination.jsx";
+import styled from "styled-components";
+import {
+  Input,
+  Wrapper,
+  GlobalStyles,
+  Title,
+  WrapGrid,
+  Button,
+  Form,
+} from "../Core/coreStyles.jsx";
 
 const UserProfile = () => {
   // useState to store the array of returned data from items table
@@ -36,7 +46,7 @@ const UserProfile = () => {
   };
 
   useEffect(() => {
-    if (items.length === 0) {
+    if (!items.length || !prices.length || !users.length) {
       getInfo();
     }
   });

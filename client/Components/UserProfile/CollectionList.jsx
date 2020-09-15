@@ -1,10 +1,14 @@
 import React from "react";
 import Card from "./Card.jsx";
 
-const CollectionList = (/* pass in props from Middle */) => {
+const CollectionList = ({ users, items, prices }) => {
   return (
     <div>
-      <Card />
+      <ul>
+        <li>
+          <Card users={users} items={items} prices={prices} />
+        </li>
+      </ul>
     </div>
   );
 };
