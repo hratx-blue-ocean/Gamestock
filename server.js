@@ -1,32 +1,23 @@
-<<<<<<< HEAD
-=======
 //imports acces token for jwt from .env file
 require("dotenv").config();
 
->>>>>>> eb01c7e497d0f28c53b775f10f52675b6cc9ca0b
 const express = require("express");
 const path = require("path");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
-=======
+
 const axios = require("axios");
-<<<<<<< HEAD
->>>>>>> 9863a3fdd403541b4fd829af551e0b5143c754ec
-=======
+
 const { getCollectionsByValueOrSize } = require("./database/dbQueryHelpers");
->>>>>>> c163eba31f093f7e1226f391ce4b6d2cd9f84d3e
+
 
 const jwt = require("jsonwebtoken");
-<<<<<<< HEAD
+
 const jwtExpirySeconds = 300;
->>>>>>> eb01c7e497d0f28c53b775f10f52675b6cc9ca0b
-=======
+
 // const jwtExpirySeconds = 300;
->>>>>>> 9863a3fdd403541b4fd829af551e0b5143c754ec
+
 const { Users, Items, Prices } = require("./models/index");
 const tokenAuthorizer = require("./authorization/authorize.js");
 
@@ -38,15 +29,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
-<<<<<<< HEAD
-
-app.get("/signup", (req, res) => {
-  //req.body should include username, avatar and password
-  Users.create(req.body)
-    .then((response) => res.send(response))
-    .catch((err) => {
-      res.send(err);
-=======
 
 app.get("/login", (req, res) => {
   let username = {
@@ -119,7 +101,6 @@ app.post("/signup", (req, res) => {
     .catch((err) => {
       console.log("Error in server reading username: ", err);
       res.status(500).send(err);
->>>>>>> eb01c7e497d0f28c53b775f10f52675b6cc9ca0b
     });
 });
 
