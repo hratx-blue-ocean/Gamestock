@@ -1,11 +1,16 @@
-const express = require('express');
-const path = require('path');
-const cors = require('cors');
-const bodyParser = require('body-parser');
-const cookieParser = require('cookie-parser');
-const { Users, Auth } = require('./models/index');
-const axios = require('axios');
-const { IGDBkey } = require('./database/postgres.config');
+//imports acces token for jwt from .env file
+// require("dotenv").config();
+
+const express = require("express");
+const path = require("path");
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const cookieParser = require("cookie-parser");
+
+//need to put this secret key in a different file that is .gitignore-d
+const jwt = require("jsonwebtoken");
+const jwtExpirySeconds = 300;
+const { Users, Items, Prices } = require("./models/index");
 
 const app = express();
 const port = 7711;
@@ -14,14 +19,7 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(cors());
-app.use(express.static(path.join(__dirname, 'public')));
-
-app.get('/signup', (req, res) => {
- //req.body should include username, avatar and password
-  Users.create(req.body)
-    .then( (response) => res.send(response))
-    .catch( (err) => {res.send(err)})
-});
+app.use(express.static(path.join(__dirname, "public")));
 
 app.get('/signup', (req, res) => {
  //req.body should include username, avatar and password
@@ -44,10 +42,11 @@ app.get(`/items`, (req, res) => {
         res.status(200).send(response.data);
         console.log(response.data)
     })
-    .catch(err => {
-        console.error(err);
+    .catch((err) => {
+      console.log(`Error retrieving data from IGDB`);
+      res.status(500);
     });
-})
+});
 
 // app.get(`/itemImage`, (req, res) => {
 //   axios({

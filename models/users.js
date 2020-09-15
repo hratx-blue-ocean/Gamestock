@@ -1,5 +1,5 @@
-const { Crud } = require('../database/dbQueryHelpers');
-const bcrypt = require('bcrypt');
+const { Crud } = require("../database/dbQueryHelpers");
+const bcrypt = require("bcrypt");
 
 /**
  * Users is a class with methods to interact with the users table, which
@@ -10,7 +10,7 @@ const bcrypt = require('bcrypt');
 class Users extends Crud {
   constructor() {
     //this sets tablename to users
-    super('users');
+    super("users");
   }
 
   /*
@@ -18,26 +18,26 @@ class Users extends Crud {
   and returns a promise that is fulfilled with
   the succesful creation of said record
   */
-  create({username, avatar, password}) {
 
-    bcrypt.hash(password, 12)
-    .then((hash) => {
-
-      let newUser = {
-        username,
-        avatar,
-        hash,
-        cookie
+  create({ username, avatar, password }) {
+    bcrypt
+      .hash(password, 12)
+      .then((hash) => {
+        let newUser = {
+          username,
+          avatar,
+          hash,
+          cookie,
         };
 
         return super.create.call(this, newUser);
       })
-      .catch(err => console.log('Unable to hash password'))
+      .catch((err) => console.log("Unable to hash password"));
   }
 
   compare(attempt, password) {
     return bcrypt.compare(attempt, password);
-  }	  
+  }
 }
 
 module.exports = new Users();

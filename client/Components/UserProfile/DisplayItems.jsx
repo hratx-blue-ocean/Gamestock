@@ -1,7 +1,8 @@
-import React from "react"
+import React from "react";
+import Middle from "./Middle.jsx";
 
-const DisplayItems = () => {
-  return <div></div>
-}
+const DisplayItems = ({ items }) => {
+  return <div></div>;
+};
 
 export default DisplayItems;
