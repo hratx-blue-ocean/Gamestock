@@ -1,8 +1,8 @@
-const { pool, client } = require('./postgres.config.js');
+const { pool, client } = require("./postgres.config.js");
 
-pool.on('error', (err, client) => {
-    console.error('Unexpected error on idle client', err);
-    process.exit(-1);
+pool.on("error", (err, client) => {
+  console.error("Unexpected error on idle client", err);
+  process.exit(-1);
 });
 // use pool for all queries. It will scale better than client.
 
@@ -37,35 +37,43 @@ pool.on('error', (err, client) => {
 //     return Object.keys(obj);
 //   }
 
-  function parseParams(arr, starting = 0) {
-    const result = [];
-    for (let i = starting + 1; i < starting + arr.length + 1; i++) {
-      result.push(`$${i}`);
-    }
-    return result;
+function parseParams(arr, starting = 0) {
+  const result = [];
+  for (let i = starting + 1; i < starting + arr.length + 1; i++) {
+    result.push(`$${i}`);
   }
+  return result;
+}
 
-const _ = require('lodash');
+const _ = require("lodash");
 
 const executeQuery = (query, values) => {
-  return pool.query(query, values)
+  return pool.query(query, values);
 };
 
-const parseData = options => {
-  return _.reduce(options, (parsed, value, key) => {
-    parsed.string.push(`${key} = `);
-    parsed.values.push(value);
-    return parsed;
-  }, { string: [], values: [] });
+const parseData = (options) => {
+  return _.reduce(
+    options,
+    (parsed, value, key) => {
+      parsed.string.push(`${key} = `);
+      parsed.values.push(value);
+      return parsed;
+    },
+    { string: [], values: [] }
+  );
 };
 
-const parseKeyValues = options => {
-    return _.reduce(options, (parsed, value, key) => {
-        parsed.keys.push(key);
-        parsed.values.push(value);
-        return parsed;
-      }, { keys: [], values: [] });
-}
+const parseKeyValues = (options) => {
+  return _.reduce(
+    options,
+    (parsed, value, key) => {
+      parsed.keys.push(key);
+      parsed.values.push(value);
+      return parsed;
+    },
+    { keys: [], values: [] }
+  );
+};
 
 /**
  * Base class for all database models, written in ES6 class format. You should NOT refer
@@ -91,10 +99,12 @@ class Crud {
       return executeQuery(queryString);
     }
     let parsedOptions = parseData(options);
-    let parsedKeys = parsedOptions.string
+    let parsedKeys = parsedOptions.string;
     let params = parseParams(parsedKeys);
     parsedKeys = parsedKeys.map((key, index) => `${key}${params[index]}`);
-    let queryString = `SELECT * FROM ${this.tablename} WHERE ${parsedKeys.join(' AND ')}`;
+    let queryString = `SELECT * FROM ${this.tablename} WHERE ${parsedKeys.join(
+      " AND "
+    )}`;
     return executeQuery(queryString, parsedOptions.values);
   }
 
@@ -109,11 +119,15 @@ class Crud {
    */
   get(options) {
     let parsedOptions = parseData(options);
-    let parsedKeys = parsedOptions.string
+    let parsedKeys = parsedOptions.string;
     let params = parseParams(parsedKeys);
     parsedKeys = parsedKeys.map((key, index) => `${key}${params[index]}`);
-    let queryString = `SELECT * FROM ${this.tablename} WHERE ${parsedKeys.join(' AND ')} LIMIT 1`;
-    return executeQuery(queryString, parsedOptions.values).then(results => results[0]);
+    let queryString = `SELECT * FROM ${this.tablename} WHERE ${parsedKeys.join(
+      " AND "
+    )} LIMIT 1`;
+    return executeQuery(queryString, parsedOptions.values).then(
+      (results) => results[0]
+    );
   }
 
   /**
@@ -127,7 +141,9 @@ class Crud {
    */
   create(options) {
     let parsedOptions = parseKeyValues(options);
-    let queryString = `INSERT INTO (${parsedOptions.keys.join()}) VALUES (${parseParams(parsedOptions.values).join()})`
+    let queryString = `INSERT INTO (${parsedOptions.keys.join()}) VALUES (${parseParams(
+      parsedOptions.values
+    ).join()})`;
     return executeQuery(queryString, parsedOptions.values);
   }
 
@@ -143,19 +159,25 @@ class Crud {
    * during the query.
    */
   update(options, values) {
-
     let parsedValues = parseData(values);
     let parsedValueKeys = parsedValues.string;
     let valuesParams = parseParams(parsedValueKeys);
-    parsedValueKeys = parsedValueKeys.map((key, index) => `${key}${valuesParams[index]}`)
+    parsedValueKeys = parsedValueKeys.map(
+      (key, index) => `${key}${valuesParams[index]}`
+    );
 
     let parsedOptions = parseData(options);
-    let parsedKeys = parsedOptions.string
+    let parsedKeys = parsedOptions.string;
     let params = parseParams(parsedKeys, valuesParams.length);
     parsedKeys = parsedKeys.map((key, index) => `${key}${params[index]}`);
 
-    let queryString = `UPDATE ${this.tablename} SET ${parsedValueKeys.join(', ')} WHERE ${parsedKeys.join(' AND ')}`;
-    return executeQuery(queryString, Array.prototype.concat(parsedValues.values, parsedOptions.values));
+    let queryString = `UPDATE ${this.tablename} SET ${parsedValueKeys.join(
+      ", "
+    )} WHERE ${parsedKeys.join(" AND ")}`;
+    return executeQuery(
+      queryString,
+      Array.prototype.concat(parsedValues.values, parsedOptions.values)
+    );
   }
 
   /**
@@ -169,11 +191,13 @@ class Crud {
    */
   delete(options) {
     let parsedOptions = parseData(options);
-    let parsedKeys = parsedOptions.string
+    let parsedKeys = parsedOptions.string;
     let params = parseParams(parsedKeys);
     parsedKeys = parsedKeys.map((key, index) => `${key}${params[index]}`);
 
-    let queryString = `DELETE FROM ${this.tablename} WHERE ${parsedKeys.join(' AND ')}`;
+    let queryString = `DELETE FROM ${this.tablename} WHERE ${parsedKeys.join(
+      " AND "
+    )}`;
     return executeQuery(queryString, parsedOptions.values);
   }
 

@@ -1,3 +1,7 @@
 node_modules/
 database/postgres.config.js
+<<<<<<< HEAD
 query.js
+=======
+package-lock.json
+>>>>>>> 6a8825f6b3796f35744a96e78d69dad0bafc5b4e
