@@ -4,8 +4,6 @@ import NewItemSearchBar from "./NewItemSearchBar.jsx";
 
 const AddItemForm = ({ submitInfo }) => {
   const [itemSelected, setItemSelected] = useState({});
-
-const AddItemForm = ({ submitInfo }) => {
   const [dateAcquired, setDateAcquired] = useState("");
   const [purchasedPrice, setPurchasedPrice] = useState(0);
   const [itemNotes, setItemNotes] = useState("");
@@ -99,5 +97,5 @@ const AddItemForm = ({ submitInfo }) => {
     </div>
   );
 };
-}
-export default AddItemForm
+
+export default AddItemForm;
