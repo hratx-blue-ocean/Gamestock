@@ -1,15 +1,15 @@
 import React from "react";
-import { Button, Wrapper } from "../Core/coreStyles.jsx";
+import { StyledButton, Wrapper } from "../Core/coreStyles.jsx";
 import styled from "styled-components";
 
-const Avatar = styled.img`
+const AvatarWrapper = styled.img`
   margin-left: 50px;
   margin: auto;
   padding: 20px 0px;
   &:hover {
     cursor: pointer;
   }
-  border-radius: 50%
+  border-radius: 50%;
 `;
 
 const Text = styled.p`
@@ -34,14 +34,19 @@ export const BannerWrapper = styled(Wrapper)`
   box-sizing: border-box;
 `;
 
-export default function Banner( {username, collectionSize, collectionValue, avatar}) {
+export default function Banner({
+  username,
+  collectionSize,
+  collectionValue,
+  avatar,
+}) {
   return (
     <BannerWrapper>
-      <Avatar src={avatar}></Avatar>
+      <AvatarWrapper src={avatar}></AvatarWrapper>
       <Text>{username}</Text>
       <Text>{collectionSize}</Text>
       <Text>{collectionValue}</Text>
-      <Button>See Collection</Button>
+      <StyledButton>See Collection</StyledButton>
     </BannerWrapper>
   );
 }
