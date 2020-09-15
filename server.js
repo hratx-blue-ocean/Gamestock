@@ -7,6 +7,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const axios = require("axios");
+const { saveItemToDB } = require('./database/dbQueryHelpers');
 
 //need to put this secret key in a different file that is .gitignore-d
 // const jwt = require("jsonwebtoken");
@@ -101,16 +102,26 @@ app.get(`IGDB/items`, (req, res) => {
 
 app.post(`/saveItems`, (req, res) => {
   let itemData = {
+    title: req.body.title,
+    console: req.body.console,
+    is_console: req.body.is_console,
     user_id: req.body.user_id,
     condition: req.body.condition,
     comments: req.body.comments,
     starting_price: req.body.starting_price,
     date_of_purchase: req.body.date_of_purchase,
     tradeable: req.body.tradeable,
-    title: req.body.title,
-    console: req.body.console,
-    is_console: req.body.is_console
+    current_value: req.body.current_value
   }
+  saveItemToDB(itemData)
+  .then(response => {
+        res.status(200).send(response);
+        console.log(`Success saving item to database`)
+    })
+    .catch(err => {
+        res.status(500).send(err);
+        console.log(`Error saving item to database`)
+    });
 })
 
 app.listen(port, ()=> {

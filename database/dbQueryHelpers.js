@@ -23,28 +23,50 @@ pool.on('error', (err, client) => {
 
 // public.items (id, title, console, thumbnail, front_view, back_view, is_console)
 
-const saveItemToDB = (itemData) => {
-    const queryString = `WITH item_id_var AS (
+// const saveItemToDB = (itemData) => {
+//     const queryString = `WITH item_id_var AS (
+//       INSERT INTO items
+//       (title, console, is_console)
+//       VALUES
+//       ('Even Cooler Game', 'XBox', 'true') ON CONFLICT (title, console) DO NOTHING
+//     RETURNING id
+// ),
+//     ins2 AS (
+// 		INSERT INTO items_in_collection
+//       (item_id, user_id, condition, comments, starting_price, date_of_purchase, tradeable)
+//     VALUES
+//       ((SELECT id FROM item_id_var), 5, 'fair', 'this is a game', '$1.00', '1970-01-18', 'true')
+// 		RETURNING item_id
+// 		)
+
+//     INSERT INTO items_value_by_date
+//       (item_id, current_value)
+//     VALUES
+//       ((SELECT id FROM item_id_var), '$20')`
+
+//   return pool.query(queryString, Object.keys(itemData))
+// }
+
+const saveItemToDB = ({title, console, is_console, user_id, condition, comments, starting_price, date_of_purchase, tradeable, current_value}) => {
+  return pool.query(`WITH item_id_var AS (
       INSERT INTO items
       (title, console, is_console)
       VALUES
-      ('Even Cooler Game', 'XBox', 'true') ON CONFLICT (title, console) DO NOTHING
+      ('${title}', '${console}', '${is_console}') ON CONFLICT (title, console) DO NOTHING
     RETURNING id
 ),
     ins2 AS (
 		INSERT INTO items_in_collection
       (item_id, user_id, condition, comments, starting_price, date_of_purchase, tradeable)
     VALUES
-      ((SELECT id FROM item_id_var), 5, 'fair', 'this is a game', '$1.00', '1970-01-18', 'true')
+      ((SELECT id FROM item_id_var), ${user_id}, '${condition}', '${comments}', '${starting_price}', '${date_of_purchase}', '${tradeable}')
 		RETURNING item_id
 		)
 
     INSERT INTO items_value_by_date
-      (item_id)
+      (item_id, current_value)
     VALUES
-      ((SELECT id FROM item_id_var))`
-
-  return pool.query(queryString, itemData)
+      ((SELECT id FROM item_id_var), '${current_value}')`)
 }
 
 //******************************* */
