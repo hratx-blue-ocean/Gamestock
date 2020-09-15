@@ -6,10 +6,12 @@ const path = require("path");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
+const axios = require("axios");
 
 //need to put this secret key in a different file that is .gitignore-d
 // const jwt = require("jsonwebtoken");
 // const jwtExpirySeconds = 300;
+const Promise = require('bluebird')
 const { Users, Items, Prices } = require("./models/index");
 
 const app = express();
