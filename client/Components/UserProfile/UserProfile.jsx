@@ -4,7 +4,17 @@ import axios from "axios";
 import Header from "./Header.jsx";
 import AddItem from "./AddItem.jsx"; //add item to modal form
 import Middle from "./Middle.jsx";
-import Paginator from "./Paginator.jsx";
+import Pagination from "./Pagination.jsx";
+import styled from "styled-components";
+import {
+  Input,
+  Wrapper,
+  GlobalStyles,
+  Title,
+  WrapGrid,
+  Button,
+  Form,
+} from "../Core/coreStyles.jsx";
 
 const UserProfile = () => {
   // useState to store the array of returned data from items table
