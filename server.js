@@ -32,7 +32,7 @@ app.get('/signup', (req, res) => {
 
 // IGDB API Get top 10 items by request by keyword
 app.get(`/items`, (req, res) => {
-  let query = 'The Witcher 3';
+  let query = req.body;
   axios({
     url: `https://api-v3.igdb.com/games/?search=${query}&fields=name,platforms,cover,summary`,
     method: 'POST',
