@@ -1,5 +1,5 @@
-import React from "react";
-import { Button } from "./coreStyles.jsx";
+import React from 'react';
+import { Button } from '../coreStyles.jsx';
 
 export default function Banner() {
   return (

@@ -3,3 +3,4 @@ node_modules/
 database/postgres.config.js
 package-lock.json
 public/bundle.js
+prettier.config.js
