@@ -119,14 +119,12 @@ app.get("/userProfile/users", (req, res) => {
 
 // API route to get item price
 app.get("/getItemPrice", (req, res) => {
-  // console.log(req.query.item);
-  const itemName = req.query.item;
+  const itemName = req.query.items;
   axios
     .get(
-      `https://www.pricecharting.com/api/products?t=36330d87343dc3b342b42a4f6c58b13e443061c8&q=mario_?limit=10`
+      `https://www.pricecharting.com/api/products?t=36330d87343dc3b342b42a4f6c58b13e443061c8&q=${itemName}_?limit=10`
     )
     .then((response) => {
-      // console.log(response.data.products);
       res.send(response.data.products);
     })
     .catch((err) => {

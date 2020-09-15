@@ -5,6 +5,7 @@ import Header from "./Header.jsx";
 import AddItem from "./AddItem.jsx"; //add item to modal form
 import Middle from "./Middle.jsx";
 import Pagination from "./Pagination.jsx";
+import SearchBar from "./NewItemSearchBar.jsx";
 
 const UserProfile = () => {
   // useState to store the array of returned data from items table
