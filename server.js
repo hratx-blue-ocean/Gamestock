@@ -8,8 +8,8 @@ const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 
 //need to put this secret key in a different file that is .gitignore-d
-const jwt = require("jsonwebtoken");
-const jwtExpirySeconds = 300;
+// const jwt = require("jsonwebtoken");
+// const jwtExpirySeconds = 300;
 const { Users, Items, Prices } = require("./models/index");
 
 const app = express();
@@ -21,15 +21,15 @@ app.use(cookieParser());
 app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get('/signup', (req, res) => {
- //req.body should include username, avatar and password
-  Users.create(req.body)
-    .then( (response) => res.send(response))
-    .catch( (err) => {res.send(err)})
-});
+// app.get('/signup', (req, res) => {
+//  //req.body should include username, avatar and password
+//   Users.create(req.body)
+//     .then( (response) => res.send(response))
+//     .catch( (err) => {res.send(err)})
+// });
 
 // IGDB API Get top 10 items by request by keyword
-app.get(`/items`, (req, res) => {
+app.get(`IGDB/items`, (req, res) => {
   let query = req.body;
   axios({
     url: `https://api-v3.igdb.com/games/?search=${query}&fields=name,platforms,cover,summary`,

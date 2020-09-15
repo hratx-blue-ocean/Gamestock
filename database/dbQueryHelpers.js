@@ -17,6 +17,27 @@ pool.on('error', (err, client) => {
 //     .catch((err) => console.log('failed to connect to db: ', err));
 // };
 
+const saveItemToDB = (itemData) => {
+    const queryString = `INSERT INTO items_in_collection
+      (user_id, condition, comments, starting_price, date_of_purchase, tradeable)
+    VALUES
+      (user_id, condition, comments, starting_price, date_of_purchase, tradeable)
+    RETURNING item_id AS id,
+
+    INSERT INTO items
+      (id, title, console, is_console)
+    VALUES
+      (id, title, console, is_console)
+    RETURNING id AS item_id,
+
+    INSERT INTO item_value_by_date
+      (item_id)
+    VALUES
+      (item_id)`
+
+  return pool.query(queryString)
+}
+
 //******************************* */
 
 // function argumentSplitter(obj) {
@@ -189,4 +210,4 @@ class Crud {
   }
 }
 
-module.exports = { Crud };
+module.exports = { Crud, saveItemToDB };
