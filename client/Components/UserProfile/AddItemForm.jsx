@@ -3,7 +3,6 @@ import AddItemList from "./AddItemList.jsx";
 import NewItemSearchBar from "./NewItemSearchBar.jsx";
 
 const AddItemForm = ({ submitInfo }) => {
-
   const [dateAcquired, setDateAcquired] = useState("");
   const [purchasedPrice, setPurchasedPrice] = useState(0);
   const [itemNotes, setItemNotes] = useState("");
@@ -20,21 +19,30 @@ const AddItemForm = ({ submitInfo }) => {
     itemCondition: itemCondition,
     isTradeable: isTradeable,
   };
-  
+
   return (
     <div>
       <div>
         <h1>This is Add Item</h1>
-        <NewItemSearchBar getSearchedItems={(items) => {setSearchedItems(items)}}/>
+        <NewItemSearchBar
+          getSearchedItems={(items) => {
+            setSearchedItems(items);
+          }}
+        />
         <br></br>
-        <AddItemList items={searchedItems} select={(item) => {setItemSelected(item)}}/>
+        <AddItemList
+          items={searchedItems}
+          select={(item) => {
+            setItemSelected(item);
+          }}
+        />
 
         <div>
           <span>Item form</span>
           <form>
             {/* date when item was bought */}
             <label htmlFor="dateAcquired">Date Acquired:</label>
-           
+
             <input
               onChange={(e) => setDateAcquired(e.target.value)}
               type="date"
