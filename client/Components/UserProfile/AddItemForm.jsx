@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AddItemList from "./AddItemList.jsx";
-import AddItemSingleItem from "./AddItemSingleItem.jsx";
+import NewItemSearchBar from "./NewItemSearchBar.jsx";
+
 const AddItemForm = ({ submitInfo }) => {
   const [itemSelected, setItemSelected] = useState({});
   const [dateAcquired, setDateAcquired] = useState("");
@@ -19,18 +20,13 @@ const AddItemForm = ({ submitInfo }) => {
   return (
     <div>
       <div>
-        {/* <h1>This is Add Item</h1>
-
-        <form>
-          <input type="text" placeholder="Search.." name="search"></input>
-          <button type="submit">
-            <i className="searchIcon">a button</i>
-          </button>
-        </form>
+        <h1>This is Add Item</h1>
 
         
 
-        <br></br> */}
+        < NewItemSearchBar />
+
+        <br></br>
         < AddItemList />
 
         <div>
