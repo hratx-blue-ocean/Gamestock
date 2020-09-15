@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { css } from "styled-components";
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
@@ -8,6 +8,34 @@ export const GlobalStyles = createGlobalStyle`
     font-size: 12px;
     color: #54f3f7;
   }
+`;
+
+export const Modal = styled.div`
+  opacity: ${({ modalState }) => (modalState ? 1 : 0)};
+  pointer-events: ${({ modalState }) => (modalState ? "auto" : "none")};
+  transition: ${({ modalState }) =>
+    modalState ? "opacity 0.4s ease-in-out" : "none"};
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.65);
+  disply: flex;
+`;
+
+export const ModalInner = styled.div`
+  width: 600px;
+  opacity: 1;
+  margin: auto;
+  margin-top: 30%;
+`;
+
+export const Freeze = styled.body`
+  width: ${({ modalState }) => (modalState ? "100%" : "auto")};
+  position: ${({ modalState }) => (modalState ? "fixed" : "auto")};
+  max-height: ${({ modalState }) => (modalState ? "100%" : "auto")};
+  overflow: ${({ modalState }) => (modalState ? "hidden" : "auto")};
 `;
 
 export const Wrapper = styled.div`
