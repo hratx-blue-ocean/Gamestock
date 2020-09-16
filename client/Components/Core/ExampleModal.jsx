@@ -38,7 +38,7 @@ export default function ExampleModal() {
 
   return (
     <div>
-      <Modal modalState={modalState} onClick={() => toggleModalState()}>
+      <Modal modalState={modalState} onClick={() => freeze(modalState)}>
         <ModalInner onClick={(e) => e.stopPropagation()}>
           <ModalWrapper>
             <Title>Modal Title</Title>
@@ -51,7 +51,7 @@ export default function ExampleModal() {
           </ModalWrapper>
         </ModalInner>
       </Modal>
-      <StyledButton onClick={() => toggleModalState()}>Open Modal</StyledButton>
+      <Button onClick={() => freeze(modalState)}>Open Modal</Button>
     </div>
   );
 }
