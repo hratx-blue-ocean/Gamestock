@@ -9,7 +9,7 @@ import { GlobalStyles } from "./Components/Core/coreStyles.jsx";
 // drop this eventually
 import ExampleModal from "./Components/Core/ExampleModal.jsx";
 
-export default function App() {
+function App() {
   return (
     <>
       <Header />
@@ -27,3 +27,5 @@ export default function App() {
     </>
   );
 }
+
+ReactDOM.render(<App />, document.getElementById("root"));
