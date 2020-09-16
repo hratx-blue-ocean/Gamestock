@@ -24,6 +24,11 @@ const Text = styled.p`
   }
 `;
 
+const StyledLink = styled(Link)`
+  display: flex;
+  text-decoration: none;
+`;
+
 export const BannerWrapper = styled(Wrapper)`
   margin-top: 10px;
   display: flex;
@@ -49,9 +54,9 @@ export default function Banner({
       <Text>{username}</Text>
       <Text>{collectionSize}</Text>
       <Text>{collectionValue}</Text>
-      <Link to={`/user/${username}`}>
+      <StyledLink to={`/user/${username}`}>
         <StyledButton>See Collection</StyledButton>
-      </Link>
+      </StyledLink>
     </BannerWrapper>
   );
 }
