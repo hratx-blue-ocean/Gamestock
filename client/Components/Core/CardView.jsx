@@ -24,13 +24,12 @@ export const Text = styled.p`
 
 export const CardWrapper = styled(Wrapper)`
   margin-top: 10px;
-  display: flex;
+  display: grid;
+  grid-template-columns: 120px 400px repeat(auto-fill, 150px);
   background: #2d1c7b;
   color: #54f3f7;
   border-radius: 10px;
   border: 2px solid #eb29fd;
-  flex-wrap: wrap;
-  justify-content: space-between;
   align-item: center;
   box-sizing: border-box;
 `;
