@@ -206,7 +206,7 @@ let ebay = new eBay({
     marketplaceId: "EBAY_US"
 })
 
-// ebay api call to get item details by keyword search
+// ebay api call to get item details based on item name selected by client
 app.get(`/itemDetails/:item`, (req, res) => {
   let keywords = req.params.item;
   ebay.findItemsByKeywords({
@@ -218,7 +218,7 @@ app.get(`/itemDetails/:item`, (req, res) => {
     })
   .then((data) => {
       // send thumbnail image
-      res.status(200).send(data[0].searchResult[0].item[0].galleryURL);
+      res.status(200).send(data[0].searchResult[0].item[0]);
   })
   .catch(err => console.log(err))
 })
@@ -236,6 +236,8 @@ app.post(`/saveItems`, (req, res) => {
     date_of_purchase: req.body.date_of_purchase,
     tradeable: req.body.tradeable,
     current_value: req.body.current_value,
+    thumbnail: req.body.thumbnail,
+    front_view: req.body.front_view
   };
   saveItemToDB(itemData)
     .then((response) => {
