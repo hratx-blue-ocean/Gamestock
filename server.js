@@ -11,7 +11,7 @@ const { getCollectionsByValueOrSize, saveItemToDB } = require("./database/dbQuer
 
 const jwt = require("jsonwebtoken");
 // const jwtExpirySeconds = 300;
-const { Users, Items, Prices } = require("./models/index");
+const { Users, Items, Prices, Collections } = require("./models/index");
 const tokenAuthorizer = require("./authorization/authorize.js");
 
 const app = express();
@@ -177,6 +177,7 @@ app.get("/leaderboard/size", (req, res) => {
     });
 });
 
+<<<<<<< HEAD
 // IGDB API Get top 10 items by request by keyword
 // app.get(`/getItemDetails`, (req, res) => {
 //   let query = req.query.items;
@@ -221,6 +222,11 @@ app.post(`/saveItems`, (req, res) => {
         console.log(`Error saving item to database`)
     });
 })
+=======
+// handles refresh requests from the userProfile page or any other endpoint *** BROKEN ***
+
+app.use("/*", express.static(path.join(__dirname, "public")));
+>>>>>>> afa6600... installs and implements react-router and react-router-dom with user routing
 
 app.listen(port, () => {
   console.log("listening in on port ", port);

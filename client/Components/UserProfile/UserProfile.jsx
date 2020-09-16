@@ -5,8 +5,13 @@ import Header from "./Header.jsx";
 import AddItem from "./AddItem.jsx"; //add item to modal form
 import Middle from "./Middle.jsx";
 import Paginator from "./Paginator.jsx";
+import { useParams } from "react-router-dom";
 
 const UserProfile = () => {
+  // uses route parameter
+  let { name } = useParams();
+  console.log(name);
+
   // useState to store the array of returned data from items table
   const [items, setItems] = useState([]);
   // useState to store the array of returned data from items_value_by_date

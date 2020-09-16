@@ -1,6 +1,7 @@
 import React from "react";
 import { StyledButton, Wrapper } from "../Core/coreStyles.jsx";
 import styled from "styled-components";
+import { Link } from "react-router-dom";
 
 const AvatarWrapper = styled.img`
   margin-left: 50px;
@@ -33,6 +34,7 @@ export const BannerWrapper = styled(Wrapper)`
   flex-wrap: wrap;
   justify-content: space-between;
   align-item: center;
+  text-align: center;
   box-sizing: border-box;
 `;
 
@@ -48,7 +50,9 @@ export default function Banner({
       <Text>{username}</Text>
       <Text>{collectionSize}</Text>
       <Text>{collectionValue}</Text>
-      <StyledButton>See Collection</StyledButton>
+      <Link to={`/user/${username}`}>
+        <StyledButton>See Collection</StyledButton>
+      </Link>
     </BannerWrapper>
   );
 }

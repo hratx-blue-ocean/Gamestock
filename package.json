@@ -52,6 +52,8 @@
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
     "react-paginate": "^6.5.0",
+    "react-router": "^5.2.0",
+    "react-router-dom": "^5.2.0",
     "styled-components": "^5.2.0"
   }
 }
