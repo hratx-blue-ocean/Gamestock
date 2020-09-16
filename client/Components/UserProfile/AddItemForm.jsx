@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AddItemList from "./AddItemList.jsx";
 import NewItemSearchBar from "./NewItemSearchBar.jsx";
+import axios from "axios";
 
 const AddItemForm = ({ submitInfo }) => {
   const [dateAcquired, setDateAcquired] = useState("");
@@ -25,10 +26,22 @@ const AddItemForm = ({ submitInfo }) => {
     current_value: itemSelected["retail-cib-sell"],
   };
 
+  function submitInfo(submittedInfo) {
+    axios
+      .post("/saveItems", submittedInfo)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   return (
     <div>
       <div>
-        <h1>This is Add Item</h1>
+        <h2>Add an item to your collection</h2>
+        
         <NewItemSearchBar
           getSearchedItems={(items) => {
             setSearchedItems(items);
