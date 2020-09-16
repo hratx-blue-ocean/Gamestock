@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { StyledButton, Wrapper } from "../Core/coreStyles.jsx";
+import { StyledButton, Wrapper, Title } from "../Core/coreStyles.jsx";
 import styled from "styled-components";
 import SignupLogin from "../SignupLogin/SignupLogin.jsx";
 
@@ -28,9 +28,9 @@ const AvatarWrapper = styled.img`
   max-width: 50px;
 `;
 
-const Logo = styled.img`
+const Logo = styled.p`
   height: 200px;
-  weight: 550px;
+  font-size: 40px;
 `;
 
 const Thumbnail = styled.img`
@@ -41,10 +41,10 @@ const Thumbnail = styled.img`
 const Header = ({ loggedIn, setLoggedIn }) => {
   return (
     <>
-      {loggedIn ? (
+      {loggedIn.loggedIn ? (
         <>
           <BannerWrapper>
-            <Logo src="https://i.imgur.com/XYg49nh.jpg"></Logo>
+            <Logo>Gamestock</Logo>
             <AvatarWrapper src="https://s3.amazonaws.com/uifaces/faces/twitter/timmillwood/128.jpg"></AvatarWrapper>
             <StyledButton>Username</StyledButton>
           </BannerWrapper>
