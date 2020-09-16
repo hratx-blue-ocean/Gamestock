@@ -44,13 +44,12 @@ export default function AddItem() {
       <Modal modalState={modalState} onClick={() => toggleModalState()}>
         <ModalInner onClick={(e) => e.stopPropagation()}>
           <ModalWrapper>
-            <Title>Modal Title</Title>
-            <p>This is example Moadal Text</p>
-            < AddItemForm />
+            <Title>Add Item</Title>
+            < AddItemForm exitModal={() => toggleModalState()}/>
           </ModalWrapper>
         </ModalInner>
       </Modal>
-      <StyledButton onClick={() => toggleModalState()}>Open Modal</StyledButton>
+      <StyledButton onClick={() => toggleModalState()}>Add Item To Your Collection</StyledButton>
     </div>
   );
 }
