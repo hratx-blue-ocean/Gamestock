@@ -10,6 +10,8 @@ const axios = require("axios");
 const {
   getCollectionsByValueOrSize,
   saveItemToDB,
+  getCollectionsByConsole,
+  getAllConsoles,
 } = require("./database/dbQueryHelpers");
 
 const jwt = require("jsonwebtoken");
@@ -223,8 +225,32 @@ app.post(`/saveItems`, (req, res) => {
       console.log(`Error saving item to database`);
     });
 });
-// handles refresh requests from the userProfile page or any other endpoint *** BROKEN ***
 
+// get leaderboard by consoles
+app.get("/leaderboard/console", (req, res) => {
+  getCollectionsByConsole(req.query.console)
+    .then((records) => {
+      res.status(200).send(records);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send(err);
+    });
+});
+
+// get all consoles to filter leaderboard on
+app.get("/consoles", (req, res) => {
+  getAllConsoles()
+    .then((consoles) => {
+      res.status(200).send(consoles);
+    })
+    .catch((err) => {
+      console.log(err);
+      res.status(500).send(err);
+    });
+});
+
+// handles refresh requests from the userProfile page or any other endpoint *** BROKEN ***
 app.use("/*", express.static(path.join(__dirname, "public")));
 
 app.listen(port, () => {

@@ -41,10 +41,13 @@ const RightButton = styled(StyledButton)`
 const Leaderboard = () => {
   const [userSearch, setUserSearch] = useState("");
   const [collectionsByValueOrSize, setCollectionsByValueOrSize] = useState([]);
+  // const [collectionsByConsole, setCollectionsByConsole] = useState([]);
+  const [consoles, setConsoles] = useState([]);
 
   useEffect(() => {
     // sort by value on page load
     getCollectionsByValueOrSize("sortByValue");
+    getAllConsoles();
   }, []);
 
   // form handlers
@@ -86,6 +89,33 @@ const Leaderboard = () => {
     }
   };
 
+  const getCollectionsByConsole = (e) => {
+    console.log("SELECT CHANGE: ", e.target.value);
+    axios
+      .get("/leaderboard/console", {
+        params: {
+          console: e.target.value,
+        },
+      })
+      .then((recordsByConsole) => {
+        setCollectionsByValueOrSize(() => recordsByConsole.data.rows);
+      })
+      .catch((err) => {
+        console.log("Error getting top collections by console :", err);
+      });
+  };
+
+  const getAllConsoles = () => {
+    axios
+      .get("/consoles")
+      .then((consoles) => {
+        setConsoles(() => consoles.data.rows);
+      })
+      .catch((err) => {
+        console.log("Error getting consoles: ", err);
+      });
+  };
+
   return (
     <div>
       <Wrapper>
@@ -110,6 +140,13 @@ const Leaderboard = () => {
           <MiddleButton id="sortBySony">Sony</MiddleButton>
           <MiddleButton id="sortByXbox">Xbox</MiddleButton>
           <RightButton id="sortByNintendo">Nintendo</RightButton>
+          <select onChange={getCollectionsByConsole}>
+            {consoles.map((console, idx) => (
+              <option key={idx} id={console.console}>
+                {console.console}
+              </option>
+            ))}
+          </select>
         </LeaderboardGrid>
         {collectionsByValueOrSize.map((collection, idx) => (
           <Banner
