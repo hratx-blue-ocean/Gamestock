@@ -113,6 +113,7 @@ app.post("/signup", (req, res) => {
 //   res.send(token);
 // })
 
+// MAIN USER PROFILE ROUTE
 app.get("/userProfile/:username", (req, res) => {
   // console.log("WRECK DAT PARAMS: ", req.params.username);
   getUserCollectionByName(req.params.username)
