@@ -37,18 +37,20 @@ const SignupForm = styled(StyledForm)`
   text-align: center;
 `;
 const LinkButton = styled(StyledButton)`
-  background: #23143e;
+  background: #2d1c7b;
   color: #54f3f7;
   border: 0px solid #23143e;
   padding: 0px;
   box-shaddow: none;
+  line-height: 224px;
   &:hover {
     background: none;
     color: #df77fd;
   }
 `;
 
-function SignupLogin() {
+function SignupLogin(props) {
+  const { setLogIn } = props;
   const [modalState, setModalState] = useState(false);
 
   const toggleModalState = () => {
@@ -67,6 +69,8 @@ function SignupLogin() {
   };
   function alertMessage(nodeID) {
     let message = document.getElementById(nodeID);
+    let placeHolder = document.getElementById("ErrorMessage");
+    placeHolder.classList.add("hidden");
     message.classList.remove("hidden");
     let opacity = 1;
     let fade = setInterval(() => {
@@ -75,6 +79,7 @@ function SignupLogin() {
         message.style.opacity = opacity;
       } else {
         message.classList.add("hidden");
+        placeHolder.classList.remove("hidden");
         message.style.opacity = 1;
         clearInterval(fade);
       }
@@ -92,6 +97,7 @@ function SignupLogin() {
         password: pass1,
       };
     if (pass1 === pass2) {
+      console.log(pass1, pass2);
       if (body) {
         axios
           .post("/signup", body, {
@@ -100,6 +106,17 @@ function SignupLogin() {
           .then((result) => {
             //probably push this state back to app.jsx
             console.log(result);
+            if (typeof result.data === "string") {
+              alertMessage("usernameTakenError");
+            } else {
+              let id = result.data.rows[0].id;
+              let username = result.data.rows[0].username;
+              setLogIn({
+                loggedIn: true,
+                userName: username,
+                userId: id,
+              });
+            }
           })
           .catch((err) => {
             alertMessage("usernameTakenError");
@@ -128,9 +145,19 @@ function SignupLogin() {
           "Content-Type": "application/json",
         })
         .then((result) => {
-          if (typeof result.data === "string")
+          if (typeof result.data === "string") {
             alertMessage("usernameOrPassError");
-          console.log(result);
+            console.log(result);
+          } else {
+            console.log(result);
+            let id = result.data.id;
+            let username = result.data.username;
+            setLogIn({
+              loggedIn: true,
+              userName: username,
+              userId: id,
+            });
+          }
         })
         .catch((err) => {
           console.log(err);
@@ -224,6 +251,7 @@ function SignupLogin() {
               </SignupForm>
             </SplitFormItem>
             <div style={{ flexBasis: "100%", height: "0" }} />
+            <span id="ErrorMessage">&nbsp;</span>
             <span
               id="usernameOrPassError"
               className="hidden"

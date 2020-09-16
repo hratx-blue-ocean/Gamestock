@@ -38,14 +38,7 @@ const Thumbnail = styled.img`
   weight: 550px;
 `;
 
-const Header = ({
-  loggedIn,
-  setLogIn,
-  userName,
-  setUserName,
-  userId,
-  setUserId,
-}) => {
+const Header = ({ loggedIn, setLoggedIn }) => {
   return (
     <>
       {loggedIn ? (
@@ -60,11 +53,7 @@ const Header = ({
         <>
           <BannerWrapper>
             <Logo src="https://i.imgur.com/xlbOHDd.jpg"></Logo>
-            <SignupLogin
-              setLogIn={setLogIn}
-              setUserId={setUserId}
-              setUserName={setUserName}
-            />
+            <SignupLogin setLogIn={setLoggedIn} />
           </BannerWrapper>
         </>
       )}
