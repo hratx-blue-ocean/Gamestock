@@ -22,8 +22,8 @@ const AddItemForm = ({ submitInfo }) => {
     comments: itemNotes,
     starting_price: purchasedPrice,
     date_of_purchase: dateAcquired,
-    tradeable: `"${isTradeable}"`,
-    current_value: `"${itemSelected["retail-cib-sell"]}"`,
+    tradeable: `${isTradeable}`,
+    current_value: `${itemSelected["retail-cib-sell"]}`,
   };
 
   function submitInfo(submittedInfo) {
@@ -41,7 +41,7 @@ const AddItemForm = ({ submitInfo }) => {
     <div>
       <div>
         <h2>Add an item to your collection</h2>
-        
+
         <NewItemSearchBar
           getSearchedItems={(items) => {
             setSearchedItems(items);
