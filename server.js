@@ -264,5 +264,3 @@ app.get("/collection/user", (req, res) => {
 
 // handles refresh requests from the userProfile page or any other endpoint *** BROKEN ***
 app.use("/*", express.static(path.join(__dirname, "public")));
-
-});
