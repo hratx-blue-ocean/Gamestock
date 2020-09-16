@@ -225,9 +225,7 @@ app.post(`/saveItems`, (req, res) => {
       console.log(`Error saving item to database`);
     });
 });
-// handles refresh requests from the userProfile page or any other endpoint *** BROKEN ***
 
-app.use("/*", express.static(path.join(__dirname, "public")));
 // get leaderboard by consoles
 app.get("/leaderboard/console", (req, res) => {
   getCollectionsByConsole(req.query.console)
@@ -251,6 +249,9 @@ app.get("/consoles", (req, res) => {
       res.status(500).send(err);
     });
 });
+
+// handles refresh requests from the userProfile page or any other endpoint *** BROKEN ***
+app.use("/*", express.static(path.join(__dirname, "public")));
 
 app.listen(port, () => {
   console.log("listening in on port ", port);

@@ -109,40 +109,12 @@ const Leaderboard = () => {
     axios
       .get("/consoles")
       .then((consoles) => {
-        console.log("CONSOLES: ", consoles.data.rows);
         setConsoles(() => consoles.data.rows);
       })
       .catch((err) => {
         console.log("Error getting consoles: ", err);
       });
   };
-
-  //style extensions
-  const LeaderboardGrid = styled(WrapGrid)`
-    grid-template-columns: 100px 100px 100px 100px 100px auto 75px 75px 75px 75px 75px 100px;
-    margin-top: 30px;
-    margin-bottom: 20px;
-  `;
-  const UserSearchForm = styled(Form)`
-    grid-column-start: 1;
-    display: flex;
-  `;
-  const LeftButton = styled(Button)`
-    grid-column-start: 7;
-    border-radius: 10px 0px 0px 10px;
-    margin: 0;
-    border: 1px solid;
-  `;
-  const MiddleButton = styled(Button)`
-    border-radius: 0px;
-    margin: 0;
-    border: 1px solid;
-  `;
-  const RightButton = styled(Button)`
-    border-radius: 0px 10px 10px 0px;
-    margin: 0;
-    border: 1px solid;
-  `;
 
   return (
     <div>
@@ -169,8 +141,10 @@ const Leaderboard = () => {
           <MiddleButton id="sortByXbox">Xbox</MiddleButton>
           <RightButton id="sortByNintendo">Nintendo</RightButton>
           <select onChange={getCollectionsByConsole}>
-            {consoles.map((console) => (
-              <option id={console.console}>{console.console}</option>
+            {consoles.map((console, idx) => (
+              <option key={idx} id={console.console}>
+                {console.console}
+              </option>
             ))}
           </select>
         </LeaderboardGrid>
