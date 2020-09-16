@@ -11,6 +11,23 @@ import {
   SplitFormItem,
 } from "../Core/coreStyles.jsx";
 import styled from "styled-components";
+const ModalWrapper = styled(Wrapper)`
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-item: center;
+  padding: 20px;
+`;
+const SignupModalInner = styled(ModalInner)`
+  width: 1200px;
+`;
+const SignupForm = styled(Form)`
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-item: center;
+  text-align: center;
+`;
 
 function SignupLogin() {
   const [modalState, setModalState] = useState(false);
@@ -29,23 +46,6 @@ function SignupLogin() {
       toggleModalState();
     }
   };
-  const ModalWrapper = styled(Wrapper)`
-    display: flex;
-    flex-direction: row;
-    justify-content: space-around;
-    align-item: center;
-    padding: 20px;
-  `;
-  const SignupModalInner = styled(ModalInner)`
-    width: 1200px;
-  `;
-  const SignupForm = styled(Form)`
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-item: center;
-    text-align: center;
-  `;
   function alertMessage(nodeID) {
     let message = document.getElementById(nodeID);
     message.classList.remove("hidden");

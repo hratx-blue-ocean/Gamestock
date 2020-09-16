@@ -19,6 +19,19 @@ export const GlobalStyles = createGlobalStyle`
   }
 `;
 
+// to use the freeze effect on the background, you can use a function like this:
+
+// const freeze = (modalState) => {
+//   const page = document.getElementsByTagName("body")[0];
+//   if (!modalState) {
+//     page.classList.add("freeze");
+//     toggleModalState();
+//   } else {
+//     page.classList.remove("freeze");
+//     toggleModalState();
+//   }
+// };
+
 export const Modal = styled.div`
   opacity: ${({ modalState }) => (modalState ? 1 : 0)};
   pointer-events: ${({ modalState }) => (modalState ? "auto" : "none")};
