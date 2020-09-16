@@ -34,7 +34,6 @@ export const BannerWrapper = styled(Wrapper)`
   flex-wrap: wrap;
   justify-content: space-between;
   align-item: center;
-  text-align: center;
   box-sizing: border-box;
 `;
 

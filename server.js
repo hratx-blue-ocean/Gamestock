@@ -7,7 +7,10 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const axios = require("axios");
-const { getCollectionsByValueOrSize, saveItemToDB } = require("./database/dbQueryHelpers");
+const {
+  getCollectionsByValueOrSize,
+  saveItemToDB,
+} = require("./database/dbQueryHelpers");
 
 const jwt = require("jsonwebtoken");
 // const jwtExpirySeconds = 300;
@@ -177,7 +180,6 @@ app.get("/leaderboard/size", (req, res) => {
     });
 });
 
-<<<<<<< HEAD
 // IGDB API Get top 10 items by request by keyword
 // app.get(`/getItemDetails`, (req, res) => {
 //   let query = req.query.items;
@@ -210,23 +212,21 @@ app.post(`/saveItems`, (req, res) => {
     starting_price: req.body.starting_price,
     date_of_purchase: req.body.date_of_purchase,
     tradeable: req.body.tradeable,
-    current_value: req.body.current_value
-  }
+    current_value: req.body.current_value,
+  };
   saveItemToDB(itemData)
-  .then(response => {
-        res.status(200).send(response);
-        console.log(`Success saving item to database`)
+    .then((response) => {
+      res.status(200).send(response);
+      console.log(`Success saving item to database`);
     })
-    .catch(err => {
-        res.status(500).send(err);
-        console.log(`Error saving item to database`)
+    .catch((err) => {
+      res.status(500).send(err);
+      console.log(`Error saving item to database`);
     });
-})
-=======
+});
 // handles refresh requests from the userProfile page or any other endpoint *** BROKEN ***
 
 app.use("/*", express.static(path.join(__dirname, "public")));
->>>>>>> afa6600... installs and implements react-router and react-router-dom with user routing
 
 app.listen(port, () => {
   console.log("listening in on port ", port);
