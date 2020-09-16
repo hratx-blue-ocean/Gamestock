@@ -1,32 +1,51 @@
 import React, { useState } from "react";
 import axios from "axios";
 import {
-  Button,
+  StyledButton,
   Modal,
   ModalInner,
   Wrapper,
   Title,
-  Form,
-  Input,
+  StyledForm,
+  StyledInput,
   SplitFormItem,
 } from "../Core/coreStyles.jsx";
 import styled from "styled-components";
 const ModalWrapper = styled(Wrapper)`
   display: flex;
+  width: 100%;
   flex-direction: row;
   justify-content: space-around;
   align-item: center;
   padding: 20px;
+  line-height: 1.2;
+  flex-wrap: wrap;
 `;
 const SignupModalInner = styled(ModalInner)`
   width: 1200px;
+  display: flex;
+  flex-direction: column;
+  justifiy-content: flex-start;
+  padding: 20px;
+  box-sizing: border-box;
 `;
-const SignupForm = styled(Form)`
+const SignupForm = styled(StyledForm)`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   align-item: center;
   text-align: center;
+`;
+const LinkButton = styled(StyledButton)`
+  background: #23143e;
+  color: #54f3f7;
+  border: 0px solid #23143e;
+  padding: 0px;
+  box-shaddow: none;
+  &:hover {
+    background: none;
+    color: #df77fd;
+  }
 `;
 
 function SignupLogin() {
@@ -131,7 +150,7 @@ function SignupLogin() {
             <SplitFormItem>
               <Title>Sign Up</Title>
               <SignupForm onSubmit={signUp} id="signupForm">
-                <Input
+                <StyledInput
                   id="signupUsername"
                   name="username"
                   placeholder="Choose a username"
@@ -141,16 +160,9 @@ function SignupLogin() {
                     marginRight: "auto",
                     textAlign: "center",
                   }}
-                ></Input>
-                <span
-                  id="usernameTakenError"
-                  className="hidden"
-                  style={{ color: "red" }}
-                >
-                  Username is taken
-                </span>
+                ></StyledInput>
                 <p style={{ textAlign: "center" }}>Choose a Username</p>
-                <Input
+                <StyledInput
                   id="signupPass1"
                   type="password"
                   placeholder="Choose a password"
@@ -160,9 +172,9 @@ function SignupLogin() {
                     marginRight: "auto",
                     textAlign: "center",
                   }}
-                ></Input>
+                ></StyledInput>
                 <p style={{ textAlign: "center" }}>Choose a password</p>
-                <Input
+                <StyledInput
                   id="signupPass2"
                   name="password"
                   type="password"
@@ -173,23 +185,16 @@ function SignupLogin() {
                     marginRight: "auto",
                     textAlign: "center",
                   }}
-                ></Input>
-                <span
-                  id="passwordMatchError"
-                  className="hidden"
-                  style={{ color: "red" }}
-                >
-                  Your passwords do not match
-                </span>
+                ></StyledInput>
                 <p style={{ textAlign: "center" }}>Re-Enter your password</p>
-                <Button type="submit">Submit</Button>
+                <StyledButton type="submit">Submit</StyledButton>
               </SignupForm>
             </SplitFormItem>
-            <div>OR</div>
+            <div style={{ lineHeight: "300px" }}>OR</div>
             <SplitFormItem>
               <Title>Sign In</Title>
               <SignupForm onSubmit={logIn}>
-                <Input
+                <StyledInput
                   id="loginUsername"
                   name="username"
                   placeholder="Login with your username"
@@ -199,9 +204,9 @@ function SignupLogin() {
                     marginRight: "auto",
                     textAlign: "center",
                   }}
-                ></Input>
+                ></StyledInput>
                 <p style={{ textAlign: "center" }}>Username</p>
-                <Input
+                <StyledInput
                   id="loginPass"
                   name="password"
                   type="password"
@@ -212,23 +217,38 @@ function SignupLogin() {
                     marginRight: "auto",
                     textAlign: "center",
                   }}
-                ></Input>
+                ></StyledInput>
                 <p style={{ textAlign: "center" }}>Password</p>
-                <span
-                  id="usernameOrPassError"
-                  className="hidden"
-                  style={{ color: "red" }}
-                >
-                  incorrect username/password
-                </span>
 
-                <Button type="submit">Submit</Button>
+                <StyledButton type="submit">Submit</StyledButton>
               </SignupForm>
             </SplitFormItem>
+            <div style={{ flexBasis: "100%", height: "0" }} />
+            <span
+              id="usernameOrPassError"
+              className="hidden"
+              style={{ color: "red" }}
+            >
+              incorrect username/password
+            </span>
+            <span
+              id="passwordMatchError"
+              className="hidden"
+              style={{ color: "red" }}
+            >
+              Your passwords do not match
+            </span>
+            <span
+              id="usernameTakenError"
+              className="hidden"
+              style={{ color: "red" }}
+            >
+              Username is taken
+            </span>
           </ModalWrapper>
         </SignupModalInner>
       </Modal>
-      <Button onClick={() => freeze(modalState)}>Open Modal</Button>
+      <LinkButton onClick={() => freeze(modalState)}>Signup/Login</LinkButton>
     </div>
   );
 }
