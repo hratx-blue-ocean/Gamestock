@@ -15,17 +15,22 @@ function App() {
   });
   useEffect(() => {
     if (!loggedIn.loggedIn) {
-      axios.get("/checkLoginStatus").then((result) => {
-        console.log(result.data);
-        if (result.data.username && result.data.id) {
-          console.log("about to change stuffs!");
-          setLoggedIn({
-            loggedIn: true,
-            userName: result.data.username,
-            userId: result.data.id,
-          });
-        }
-      });
+      axios
+        .get("/checkLoginStatus")
+        .then((result) => {
+          console.log(result.data);
+          if (result.data.username && result.data.id) {
+            console.log("about to change stuffs!");
+            setLoggedIn({
+              loggedIn: true,
+              userName: result.data.username,
+              userId: result.data.id,
+            });
+          }
+        })
+        .catch((err) => {
+          console.log(err);
+        });
     }
   });
 
