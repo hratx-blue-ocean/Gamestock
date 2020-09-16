@@ -286,6 +286,7 @@ app.get("/collection/user", (req, res) => {
     });
 });
 
+<<<<<<< HEAD
 app.get("/checkLoginStatus", tokenAuthorizer, (req, res) => {
   console.log("checking worked!");
   Users.get({ username: req.user })
@@ -339,6 +340,10 @@ var updateDaily = schedule.scheduleJob("* * */11  * * *", function () {
 
 // handles refresh requests from the userProfile page or any other endpoint *** BROKEN ***
 app.get("/*", (req, res) => {
+=======
+// handles refresh requests from the userProfile page or any other endpoint
+app.get("/*", function (req, res) {
+>>>>>>> Creates default route to redirect on refresh.
   res.redirect("/");
 });
 
