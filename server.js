@@ -12,6 +12,7 @@ const {
   saveItemToDB,
   getCollectionsByConsole,
   getAllConsoles,
+  getCollectionByUser,
 } = require("./database/dbQueryHelpers");
 
 const jwt = require("jsonwebtoken");
@@ -246,6 +247,17 @@ app.get("/consoles", (req, res) => {
     })
     .catch((err) => {
       console.log(err);
+      res.status(500).send(err);
+    });
+});
+
+// get collection by user ID
+app.get("/collection/user", (req, res) => {
+  getCollectionByUser(req.query.userID)
+    .then((collection) => {
+      res.status(200).send(collection);
+    })
+    .catch((err) => {
       res.status(500).send(err);
     });
 });
