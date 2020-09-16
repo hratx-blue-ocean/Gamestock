@@ -19,7 +19,7 @@ const jwt = require("jsonwebtoken");
 // const jwtExpirySeconds = 300;
 const { Collections, Users, Items, Prices } = require("./models/index");
 const tokenAuthorizer = require("./authorization/authorize.js");
-
+const { runInContext } = require("vm");
 const app = express();
 const port = 7711;
 
@@ -29,7 +29,8 @@ app.use(cookieParser());
 app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.get("/login", (req, res) => {
+app.post("/login", (req, res) => {
+  console.log(req.body);
   let username = {
     username: req.body.username,
   };
@@ -181,7 +182,6 @@ app.get("/leaderboard/size", (req, res) => {
       res.status(500).send(err);
     });
 });
-
 // IGDB API Get top 10 items by request by keyword
 // app.get(`/getItemDetails`, (req, res) => {
 //   let query = req.query.items;
@@ -265,6 +265,4 @@ app.get("/collection/user", (req, res) => {
 // handles refresh requests from the userProfile page or any other endpoint *** BROKEN ***
 app.use("/*", express.static(path.join(__dirname, "public")));
 
-app.listen(port, () => {
-  console.log("listening in on port ", port);
 });

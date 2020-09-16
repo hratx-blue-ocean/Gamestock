@@ -6,7 +6,6 @@ import Header from "./Components/Header/header.jsx";
 import Homepage from "./Components/Homepage/Homepage.jsx";
 import UserProfile from "./Components/UserProfile/UserProfile.jsx";
 import { GlobalStyles } from "./Components/Core/coreStyles.jsx";
-
 // drop this eventually
 import ExampleModal from "./Components/Core/ExampleModal.jsx";
 
@@ -28,5 +27,3 @@ export default function App() {
     </>
   );
 }
-
-ReactDOM.render(<App />, document.getElementById("root"));

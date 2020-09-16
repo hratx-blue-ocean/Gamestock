@@ -8,6 +8,15 @@ export const GlobalStyles = createGlobalStyle`
     font-size: 12px;
     color: #54f3f7;
   }
+  body.freeze {
+    width: 100%;
+    max-height: 100%;
+    position: fixed;
+    overflow: hidden;
+  }
+  span.hidden {
+    display: none;
+  }
 `;
 
 export const Modal = styled.div`
@@ -28,7 +37,7 @@ export const ModalInner = styled.div`
   width: 600px;
   opacity: 1;
   margin: auto;
-  margin-top: 30%;
+  margin-top: 100px;
 `;
 
 export const Wrapper = styled.div`
@@ -99,6 +108,14 @@ export const Title = styled.h2`
   display: flex;
   justify-content: center;
   align-item: center;
+`;
+
+export const SplitFormItem = styled.span`
+  flex-grow: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  align-item: flex-start;
 `;
 
 export const WrapGrid = styled.div`
