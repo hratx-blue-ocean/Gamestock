@@ -106,6 +106,17 @@ const getAllConsoles = () => {
   return pool.query(selectQueryConsoles);
 };
 
+const getUserCollectionByName = (username) => {
+  return pool.query(
+    `SELECT items_in_collection.user_id, items.title, items.id, items.console, items_in_collection.condition, items_in_collection.starting_price, items_in_collection.tradeable
+FROM items_in_collection
+INNER JOIN items
+ON items_in_collection.item_id = items.id
+INNER JOIN users
+ON items_in_collection.user_id = users.id AND users.username='${username}'`
+  );
+};
+
 // get user collection for banner
 const getCollectionByUser = (userID) => {
   const selectQueryCollection = `SELECT distinct on (total_value, total_count, users.username, users.avatar, date.date ) users.username, users.avatar, COUNT(items_in_collection.item_id) as total_count, date.date, SUM(date.current_value)  as total_value
@@ -337,4 +348,5 @@ module.exports = {
   getCollectionsByConsole,
   getAllConsoles,
   getCollectionByUser,
+  getUserCollectionByName,
 };

@@ -11,37 +11,47 @@ const UserProfile = () => {
   let { name } = useParams();
   console.log(name);
 
-  // useState to store the array of returned data from items table
-  const [items, setItems] = useState([]);
-  // useState to store the array of returned data from items_value_by_date
-  const [prices, setPrices] = useState([]);
-  // useState to store the array of returned data from items_in_collection
-  const [collections, setCollections] = useState([]);
+  const [collection, setCollection] = useState([]);
+  // // useState to store the array of returned data from items table
+  // const [items, setItems] = useState([]);
+  // // useState to store the array of returned data from items_value_by_date
+  // const [prices, setPrices] = useState([]);
+  // // useState to store the array of returned data from items_in_collection
+  // const [collections, setCollections] = useState([]);
 
   useEffect(() => {
     if (items.length === 0) {
-      axios.get("/userProfile/items").then((data) => {
-        console.log("ITEMS: ", data);
-        setItems(data);
-      });
+      axios
+        .get(`userName/${username}`)
+        .then((data) => {
+          setCollection(data);
+        })
+        .catch((err) => {
+          console.log("Failure to get colleciton info on front end");
+          console.error(err);
+          // axios.get("/userProfile/items").then((data) => {
+          //   console.log("ITEMS: ", data);
+          //   setItems(data);
+          // });
 
-      axios.get("/userProfile/prices").then((data) => {
-        console.log("PRICES: ", data);
-        setPrices(data);
-      });
+          // axios.get("/userProfile/prices").then((data) => {
+          //   console.log("PRICES: ", data);
+          //   setPrices(data);
+          // });
 
-      axios.get("/userProfile/collectionItems").then((data) => {
-        console.log("COLLECTIONS: ", data);
-        setCollections(data);
-      });
+          // axios.get("/userProfile/collectionItems").then((data) => {
+          //   console.log("COLLECTIONS: ", data);
+          //   setCollections(data);
+          // });
+        });
     }
-  }, [items, prices, collections]);
+  }, []);
 
   return (
     <div>
       <h2>UserProfile!</h2>
       <AddItem />
-      <Middle collections={collections} prices={prices} items={items} />
+      <Middle collection={collection} />
       <Paginator />
     </div>
   );

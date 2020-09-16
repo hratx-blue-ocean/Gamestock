@@ -1,6 +1,7 @@
 import React from "react";
 import Card from "./Card.jsx";
 import Print from "./Print.jsx";
+import DisplayItems from "./DisplayItems.jsx";
 import styled from "styled-components";
 import {
   StyledInput,
@@ -44,6 +45,8 @@ const CollectionList = ({ collections, items, prices }) => {
     <div>
       <Wrapper>
         <Title>User Collection</Title>
+        {/* these first two things are displaying the number of items and their combined value */}
+        <DisplayItems items={items} prices={prices} />
         <UserProfGrid>
           <GameSearchForm onSubmit={() => {}}>
             <StyledInput
