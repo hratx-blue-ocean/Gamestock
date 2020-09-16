@@ -207,20 +207,18 @@ let ebay = new eBay({
 })
 
 // ebay api call to get item details by keyword search
-app.get(`/itemDetails`, (req, res) => {
-  let keywords = req.query.items;
+app.get(`/itemDetails/:item`, (req, res) => {
+  let keywords = req.params.item;
   ebay.findItemsByKeywords({
       keywords: keywords,
-      limit: 10,
+      limit: 1,
       categoryId: '1249',
+      pageNumber: 1,
+      entriesPerPage: 1
     })
-  // ebay.findCompletedItems({
-  //   keywords: 'Playstation console',
-  //   categoryId: '1249'
-  // })
   .then((data) => {
-      console.log(data[0].searchResult[0].item);
-      res.status(200).send(data[0].searchResult[0].item);
+      // send thumbnail image
+      res.status(200).send(data[0].searchResult[0].item[0].galleryURL);
   })
   .catch(err => console.log(err))
 })

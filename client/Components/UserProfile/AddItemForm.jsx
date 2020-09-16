@@ -13,6 +13,7 @@ const AddItemForm = (props) => {
 
   const [itemSelected, setItemSelected] = useState({});
   const [searchedItems, setSearchedItems] = useState([]);
+  const [itemSelectedImage, setSelectedImage] = useState("");
 
   const submittedInfo = {
     title: itemSelected["product-name"],
@@ -36,6 +37,17 @@ const AddItemForm = (props) => {
       .catch(function (error) {
         console.log(error);
       });
+  }
+
+  function getImage() {
+    axios.get(`/itemDetails/${itemSelected["product-name"]}`)
+    .then(function (response) {
+      setSelectedImage(response); //check response
+      console.log("image response", response.data[0]);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
 
   return (
@@ -122,7 +134,7 @@ const AddItemForm = (props) => {
             </button>
           </form>
         </div>
-
+        {/* <button type="button" onClick={() => {getImage()}}>Cancel</button> */}
         <button type="button" onClick={() => {props.exitModal()}}>Cancel</button>
       </div>
     </div>
