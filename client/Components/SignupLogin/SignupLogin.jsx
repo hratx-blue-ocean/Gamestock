@@ -1,13 +1,13 @@
 import React, { useState } from "react";
 import axios from "axios";
 import {
-  Button,
+  StyledButton,
   Modal,
   ModalInner,
   Wrapper,
   Title,
-  Form,
-  Input,
+  StyledForm,
+  StyledInput,
   SplitFormItem,
 } from "../Core/coreStyles.jsx";
 import styled from "styled-components";
@@ -21,7 +21,7 @@ const ModalWrapper = styled(Wrapper)`
 const SignupModalInner = styled(ModalInner)`
   width: 1200px;
 `;
-const SignupForm = styled(Form)`
+const SignupForm = styled(StyledForm)`
   display: flex;
   flex-direction: column;
   justify-content: space-around;
@@ -131,7 +131,7 @@ function SignupLogin() {
             <SplitFormItem>
               <Title>Sign Up</Title>
               <SignupForm onSubmit={signUp} id="signupForm">
-                <Input
+                <StyledInput
                   id="signupUsername"
                   name="username"
                   placeholder="Choose a username"
@@ -141,7 +141,7 @@ function SignupLogin() {
                     marginRight: "auto",
                     textAlign: "center",
                   }}
-                ></Input>
+                ></StyledInput>
                 <span
                   id="usernameTakenError"
                   className="hidden"
@@ -150,7 +150,7 @@ function SignupLogin() {
                   Username is taken
                 </span>
                 <p style={{ textAlign: "center" }}>Choose a Username</p>
-                <Input
+                <StyledInput
                   id="signupPass1"
                   type="password"
                   placeholder="Choose a password"
@@ -160,9 +160,9 @@ function SignupLogin() {
                     marginRight: "auto",
                     textAlign: "center",
                   }}
-                ></Input>
+                ></StyledInput>
                 <p style={{ textAlign: "center" }}>Choose a password</p>
-                <Input
+                <StyledInput
                   id="signupPass2"
                   name="password"
                   type="password"
@@ -173,7 +173,7 @@ function SignupLogin() {
                     marginRight: "auto",
                     textAlign: "center",
                   }}
-                ></Input>
+                ></StyledInput>
                 <span
                   id="passwordMatchError"
                   className="hidden"
@@ -182,14 +182,14 @@ function SignupLogin() {
                   Your passwords do not match
                 </span>
                 <p style={{ textAlign: "center" }}>Re-Enter your password</p>
-                <Button type="submit">Submit</Button>
+                <StyledButton type="submit">Submit</StyledButton>
               </SignupForm>
             </SplitFormItem>
             <div>OR</div>
             <SplitFormItem>
               <Title>Sign In</Title>
               <SignupForm onSubmit={logIn}>
-                <Input
+                <StyledInput
                   id="loginUsername"
                   name="username"
                   placeholder="Login with your username"
@@ -199,9 +199,9 @@ function SignupLogin() {
                     marginRight: "auto",
                     textAlign: "center",
                   }}
-                ></Input>
+                ></StyledInput>
                 <p style={{ textAlign: "center" }}>Username</p>
-                <Input
+                <StyledInput
                   id="loginPass"
                   name="password"
                   type="password"
@@ -212,7 +212,7 @@ function SignupLogin() {
                     marginRight: "auto",
                     textAlign: "center",
                   }}
-                ></Input>
+                ></StyledInput>
                 <p style={{ textAlign: "center" }}>Password</p>
                 <span
                   id="usernameOrPassError"
@@ -222,13 +222,13 @@ function SignupLogin() {
                   incorrect username/password
                 </span>
 
-                <Button type="submit">Submit</Button>
+                <StyledButton type="submit">Submit</StyledButton>
               </SignupForm>
             </SplitFormItem>
           </ModalWrapper>
         </SignupModalInner>
       </Modal>
-      <Button onClick={() => freeze(modalState)}>Open Modal</Button>
+      <StyledButton onClick={() => freeze(modalState)}>Open Modal</StyledButton>
     </div>
   );
 }
