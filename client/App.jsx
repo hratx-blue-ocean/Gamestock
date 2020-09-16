@@ -16,15 +16,15 @@ function App() {
     userId: 0,
   });
   useEffect(() => {
-    if (!loggedIn) {
+    if (!loggedIn.loggedIn) {
       axios.get("/checkLoginStatus").then((result) => {
         console.log(result.data);
         if (result.data.username && result.data.id) {
           console.log("about to change stuffs!");
-          setLogIn({
+          setLoggedIn({
             loggedIn: true,
-            userName: username,
-            userId: id,
+            userName: result.data.username,
+            userId: result.data.id,
           });
         }
       });

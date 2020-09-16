@@ -50,7 +50,7 @@ const LinkButton = styled(StyledButton)`
 `;
 
 function SignupLogin(props) {
-  const { setLogIn } = props;
+  const { setLoggedIn } = props;
   const [modalState, setModalState] = useState(false);
 
   const toggleModalState = () => {
@@ -111,7 +111,7 @@ function SignupLogin(props) {
             } else {
               let id = result.data.rows[0].id;
               let username = result.data.rows[0].username;
-              setLogIn({
+              setLoggedIn({
                 loggedIn: true,
                 userName: username,
                 userId: id,
@@ -152,7 +152,7 @@ function SignupLogin(props) {
             console.log(result);
             let id = result.data.id;
             let username = result.data.username;
-            setLogIn({
+            setLoggedIn({
               loggedIn: true,
               userName: username,
               userId: id,
