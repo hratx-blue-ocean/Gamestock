@@ -143,10 +143,11 @@ const Leaderboard = () => {
             Size
           </RightButton>
 
-          <LeaderboardSelect onChange={getCollectionsByConsole}>
-            <option value="" disabled selected>
-              select console
-            </option>
+          <LeaderboardSelect
+            onChange={getCollectionsByConsole}
+            defaultValue="select console"
+          >
+            <option disabled>select console</option>
             {consoles.map((console, idx) => (
               <option key={idx} id={console.console}>
                 {console.console}

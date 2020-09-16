@@ -49,7 +49,6 @@ const StyledLink = styled(Link)`
 const BannerWrapper = styled(Wrapper)`
   margin-top: 10px;
   display: grid;
-  ${"" /* grid-template-columns: 50px 70px 400px 50px 50px 400px 400px; */}
   grid-template-columns: repeat(auto-fill, 230px);
   background: #2d1c7b;
   color: #54f3f7;
