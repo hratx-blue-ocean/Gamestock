@@ -1,5 +1,5 @@
 //test comment made by MA
-import React from "react";
+import React, { useState, useEffect } from "react";
 import ReactDOM from "react-dom";
 import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./Components/Header/header.jsx";
@@ -10,9 +10,10 @@ import { GlobalStyles } from "./Components/Core/coreStyles.jsx";
 import ExampleModal from "./Components/Core/ExampleModal.jsx";
 
 function App() {
+  const [loggedIn, setLoggedIn] = useState(false);
   return (
     <>
-      <Header />
+      <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
       <Router>
         <Switch>
           <Route exact path="/">
