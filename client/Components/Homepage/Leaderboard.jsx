@@ -4,6 +4,7 @@ import Banner from "../Core/Banner.jsx";
 import styled from "styled-components";
 import {
   StyledInput,
+  StyledSelect,
   Wrapper,
   Title,
   WrapGrid,
@@ -13,29 +14,33 @@ import {
 
 //style extensions
 const LeaderboardGrid = styled(WrapGrid)`
-  grid-template-columns: 100px 100px 100px 100px 100px auto 75px 75px 75px 75px 75px 100px;
+  grid-template-columns: 100px 100px 100px 100px 100px auto 120px 20px 75px 75px 20px 200px;
   margin-top: 30px;
   margin-bottom: 20px;
+  align-items: center;
 `;
 const UserSearchForm = styled(StyledForm)`
   grid-column-start: 1;
   display: flex;
 `;
 const LeftButton = styled(StyledButton)`
-  grid-column-start: 7;
+  grid-column-start: 9;
   border-radius: 10px 0px 0px 10px;
   margin: 0;
   border: 1px solid;
 `;
-const MiddleButton = styled(StyledButton)`
-  border-radius: 0px;
-  margin: 0;
-  border: 1px solid;
+const LeaderboardSelect = styled(StyledSelect)`
+  grid-column-start: 12;
 `;
 const RightButton = styled(StyledButton)`
   border-radius: 0px 10px 10px 0px;
   margin: 0;
   border: 1px solid;
+`;
+const SearchBy = styled.p`
+  grid-column-start: 7;
+  margin: 0;
+  text-align: center;
 `;
 
 const Leaderboard = () => {
@@ -130,23 +135,24 @@ const Leaderboard = () => {
             ></StyledInput>
             <StyledButton>Search</StyledButton>
           </UserSearchForm>
+          <SearchBy>Sort By: </SearchBy>
           <LeftButton id="sortByValue" onClick={getCollectionsByValueOrSize}>
             Value
           </LeftButton>
-          <MiddleButton id="sortBySize" onClick={getCollectionsByValueOrSize}>
+          <RightButton id="sortBySize" onClick={getCollectionsByValueOrSize}>
             Size
-          </MiddleButton>
-          <MiddleButton id="sortByPC">PC</MiddleButton>
-          <MiddleButton id="sortBySony">Sony</MiddleButton>
-          <MiddleButton id="sortByXbox">Xbox</MiddleButton>
-          <RightButton id="sortByNintendo">Nintendo</RightButton>
-          <select onChange={getCollectionsByConsole}>
+          </RightButton>
+
+          <LeaderboardSelect onChange={getCollectionsByConsole}>
+            <option value="" disabled selected>
+              select console
+            </option>
             {consoles.map((console, idx) => (
               <option key={idx} id={console.console}>
                 {console.console}
               </option>
             ))}
-          </select>
+          </LeaderboardSelect>
         </LeaderboardGrid>
         {collectionsByValueOrSize.map((collection, idx) => (
           <Banner

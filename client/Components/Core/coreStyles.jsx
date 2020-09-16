@@ -117,6 +117,19 @@ export const StyledInput = styled.input`
   }
 `;
 
+export const StyledSelect = styled.select`
+  min-width: 200px;
+  padding: 3px 10px;
+  color: #2d1c7b;
+  border-color: #2d1c7b;
+  border-radius: 10px;
+  background-color: lightgray;
+  &:focus {
+    outline: none;
+    border-color: #eb29fd;
+  }
+`;
+
 export const Title = styled.h2`
   display: flex;
   justify-content: center;
