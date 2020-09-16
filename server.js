@@ -198,7 +198,7 @@ app.get("/leaderboard/size", (req, res) => {
 // });
 
 // save item to the database
-app.post(`/saveItem`, (req, res) => {
+app.post(`/saveItems`, (req, res) => {
   let itemData = {
     title: req.body.title,
     console: req.body.console,
