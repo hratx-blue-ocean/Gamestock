@@ -29,8 +29,16 @@ app.use(cookieParser());
 app.use(cors());
 app.use(express.static(path.join(__dirname, "public")));
 
+<<<<<<< HEAD
 app.post("/login", (req, res) => {
   console.log(req.body);
+=======
+app.get('/test', (req, res) => {
+  res.send('hello from server');
+})
+
+app.get("/login", (req, res) => {
+>>>>>>> Implement a header
   let username = {
     username: req.body.username,
   };
