@@ -19,26 +19,6 @@ const AvatarWrapper = styled.img`
 const Text = styled.p`
   padding: 0px;
   margin: auto;
-  &:hover {
-    color: skyblue;
-    cursor: pointer;
-  }
-`;
-
-const Username = styled.p`
-  ${"" /* grid-column-start: 3; */}
-  padding: 0px;
-  margin: auto;
-`;
-const Size = styled.p`
-  ${"" /* grid-column-start: 5; */}
-  padding: 0px;
-  margin: auto;
-`;
-const Value = styled.p`
-  ${"" /* grid-column-start: 8; */}
-  padding: 0px;
-  margin: auto;
 `;
 
 const StyledLink = styled(Link)`
@@ -67,9 +47,9 @@ export default function Banner({
   return (
     <BannerWrapper>
       <AvatarWrapper src={avatar}></AvatarWrapper>
-      <Username>{username}</Username>
-      <Size>{collectionSize}</Size>
-      <Value>{collectionValue}</Value>
+      <Text>{username}</Text>
+      <Text>{collectionSize}</Text>
+      <Text>{collectionValue}</Text>
       <StyledLink to={`/user/${username}`}>
         <StyledButton>See Collection</StyledButton>
       </StyledLink>
