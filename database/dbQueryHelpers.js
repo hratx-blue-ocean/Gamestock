@@ -44,6 +44,7 @@ const getCollectionsByValueOrSize = (sortBy) => {
 
   return pool.query(SelectQuery);
 };
+<<<<<<< HEAD
 
 // should save new items to the database
 const saveItemToDB = ({
@@ -105,6 +106,8 @@ const getAllConsoles = () => {
 
   return pool.query(selectQueryConsoles);
 };
+=======
+>>>>>>> Have Working login and signup models
 
 // get user collection for banner
 const getCollectionByUser = (userID) => {
@@ -333,8 +336,11 @@ class Crud {
 module.exports = {
   Crud,
   getCollectionsByValueOrSize,
+<<<<<<< HEAD
   saveItemToDB,
   getCollectionsByConsole,
   getAllConsoles,
   getCollectionByUser,
+=======
+>>>>>>> Have Working login and signup models
 };
