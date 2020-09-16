@@ -1,8 +1,15 @@
 import React from "react";
-import Middle from "./Middle.jsx";
+import { Text } from "../Core/CardView.jsx";
 
-const DisplayItems = ({ items }) => {
-  return <div></div>;
+const DisplayItems = ({ items, prices }) => {
+  return (
+    <div>
+      <Text>Items in collection: Coming soon to a Blue Ocean Near You!</Text>
+      <Text>
+        Total value of collection: Coming soon to a Blue Ocean Near You!
+      </Text>
+    </div>
+  );
 };
 
 export default DisplayItems;
