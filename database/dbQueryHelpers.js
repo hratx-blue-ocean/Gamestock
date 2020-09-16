@@ -105,6 +105,28 @@ const getAllConsoles = () => {
 
   return pool.query(selectQueryConsoles);
 };
+
+// get user collection for banner
+const getCollectionByUser = (userID) => {
+  const selectQueryCollection = `SELECT distinct on (total_value, total_count, users.username, users.avatar, date.date ) users.username, users.avatar, COUNT(items_in_collection.item_id) as total_count, date.date, SUM(date.current_value)  as total_value
+  FROM items_in_collection
+  INNER JOIN users
+  ON items_in_collection.user_id = users.id AND users.id=${userID}
+  INNER JOIN items
+  ON items_in_collection.item_id = items.id
+  INNER JOIN
+	(SELECT distinct on (DATE(items_value_by_date.date), items_value_by_date.item_id) DATE(items_value_by_date.date), items_value_by_date.item_id, items_value_by_date.current_value
+  FROM items_value_by_date
+  WHERE DATE(items_value_by_date.date) = (SELECT MAX(DATE(items_value_by_date.date)) from items_value_by_date)
+  ORDER BY items_value_by_date.item_id, DATE(items_value_by_date.date) DESC
+	) as date
+  ON items.id = date.item_id
+  GROUP BY users.username, users.avatar, date.date
+  ORDER BY total_value DESC, total_count, date.date, users.username, users.avatar
+  LIMIT 10`;
+
+  return pool.query(selectQueryCollection);
+};
 //******************************* */
 
 // function argumentSplitter(obj) {
@@ -314,4 +336,5 @@ module.exports = {
   saveItemToDB,
   getCollectionsByConsole,
   getAllConsoles,
+  getCollectionByUser,
 };
