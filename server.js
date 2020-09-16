@@ -14,7 +14,7 @@ const {
 
 const jwt = require("jsonwebtoken");
 // const jwtExpirySeconds = 300;
-const { Users, Items, Prices, Collections } = require("./models/index");
+const { Collections, Users, Items, Prices } = require("./models/index");
 const tokenAuthorizer = require("./authorization/authorize.js");
 
 const app = express();
@@ -100,7 +100,7 @@ app.post("/signup", (req, res) => {
     });
 });
 
-// userProfile route - access items table
+// user profile route
 app.get("/userProfile/items", (req, res) => {
   Items.getAll()
     .then((response) => res.send(response))
@@ -118,7 +118,6 @@ app.get("/userProfile/items", (req, res) => {
 // })
 
 // user profile route
-// userProfile route - access item_value_by_date
 app.get("/userProfile/prices", (req, res) => {
   Prices.getAll()
     .then((response) => res.send(response))
@@ -128,7 +127,7 @@ app.get("/userProfile/prices", (req, res) => {
     });
 });
 
-// userProfile route - access items_in_collection
+// user profile route
 app.get("/userProfile/collectionItems", (req, res) => {
   Collections.getAll()
     .then((response) => res.send(response))
