@@ -1,11 +1,14 @@
 import React from "react";
+import { StyledButton } from "../Core/coreStyles.jsx";
+
+// TODO - print a csv of the user's collection
 
 const Print = () => {
   return (
     <div>
-      <button onClick={() => window.print()} type="button">
-        Print
-      </button>
+      <StyledButton onClick={() => window.print()} type="button">
+        Print Collection
+      </StyledButton>
     </div>
   );
 };
