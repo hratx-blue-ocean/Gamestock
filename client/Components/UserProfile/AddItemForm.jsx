@@ -2,7 +2,22 @@ import React, { useState, useEffect } from "react";
 import AddItemList from "./AddItemList.jsx";
 import NewItemSearchBar from "./NewItemSearchBar.jsx";
 import axios from "axios";
+import styled from "styled-components";
+import {
+  StyledInput,
+  Wrapper,
+  Title,
+  WrapGrid,
+  StyledButton,
+  StyledForm,
+} from "../Core/coreStyles.jsx";
 
+const Textarea = styled(StyledInput)`
+  background-color: lightgray;
+  width: 400px;
+  heigth: 100px;
+  padding: 25px;
+`;
 
 const AddItemForm = (props) => {
   const [dateAcquired, setDateAcquired] = useState("");
@@ -80,41 +95,41 @@ const AddItemForm = (props) => {
           <p>Item in Inventory: </p> {itemSelected["console-name"] || ""}{" "}
           {itemSelected["product-name"] || ""}
           <p>Item Stats:</p>
-          <form>
+          <StyledForm>
             {/* date when item was bought */}
             <label htmlFor="dateAcquired">Date Acquired:</label>
 
-            <input
+            <StyledInput
               onChange={(e) => setDateAcquired(e.target.value)}
               type="date"
               id="start"
               value={dateAcquired}
-            ></input>
+            ></StyledInput>
 
             <br></br>
 
             {/* price at purchase of item */}
 
             <label htmlFor="purchasedPrice">PurchasedPrice:</label>
-            <input
+            <StyledInput
               onChange={(e) => setPurchasedPrice(e.target.value)}
               id="purchasedPrice"
               type="number"
               min="0.01"
               step="0.01"
               value={purchasedPrice}
-            />
+            ></StyledInput>
             <br></br>
 
             {/* notes for user comments */}
             <label htmlFor="comment">Item description:</label>
-            <textarea
+            <Textarea
               onChange={(e) => setItemNotes(e.target.value)}
               rows="4"
               cols="50"
               id="comment"
               value={itemNotes}
-            ></textarea>
+            ></Textarea>
             <br></br>
             <label htmlFor="ItemCondition">Item Condition:</label>
             <select
@@ -137,13 +152,23 @@ const AddItemForm = (props) => {
                 checked={isTradeable}
               ></input>
             </div>
-            <button onClick={() => submitInfo(submittedInfo)} type="button">
+            <StyledButton
+              onClick={() => submitInfo(submittedInfo)}
+              type="button"
+            >
               Submit
-            </button>
-          </form>
+            </StyledButton>
+          </StyledForm>
         </div>
-        <button type="button" onClick={() => {getImage()}}>Cancel</button>
-        {/* <button type="button" onClick={() => {props.exitModal()}}>Cancel</button> */}
+
+        <StyledButton
+          type="button"
+          onClick={() => {
+            props.exitModal();
+          }}
+        >
+          Cancel
+        </StyledButton>
       </div>
     </div>
   );
