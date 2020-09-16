@@ -208,11 +208,16 @@ let ebay = new eBay({
 
 // ebay api call to get item details by keyword search
 app.get(`/itemDetails`, (req, res) => {
-  let keywords = 'Atari Console';
+  let keywords = req.query.items;
   ebay.findItemsByKeywords({
       keywords: keywords,
-      limit: 10
+      limit: 10,
+      categoryId: '1249',
     })
+  // ebay.findCompletedItems({
+  //   keywords: 'Playstation console',
+  //   categoryId: '1249'
+  // })
   .then((data) => {
       console.log(data[0].searchResult[0].item);
       res.status(200).send(data[0].searchResult[0].item);
