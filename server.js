@@ -7,7 +7,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const axios = require("axios");
-const { getCollectionsByValueOrSize } = require("./database/dbQueryHelpers");
+const { getCollectionsByValueOrSize, saveItemToDB } = require("./database/dbQueryHelpers");
 
 const jwt = require("jsonwebtoken");
 // const jwtExpirySeconds = 300;
@@ -176,6 +176,51 @@ app.get("/leaderboard/size", (req, res) => {
       res.status(500).send(err);
     });
 });
+
+// IGDB API Get top 10 items by request by keyword
+// app.get(`/getItemDetails`, (req, res) => {
+//   let query = req.query.items;
+//   axios({
+//     url: `https://api-v3.igdb.com/games/?search=${query}&fields=name,platforms,cover,summary`,
+//     method: 'POST',
+//     headers: {
+//         'user-key': IGDBkey
+//     }
+//   })
+//     .then(response => {
+//         res.status(200).send(response.data);
+//         console.log(response.data)
+//     })
+//     .catch((err) => {
+//       console.log(`Error retrieving data from IGDB`);
+//       res.status(500);
+//     });
+// });
+
+// save item to the database
+app.post(`/saveItems`, (req, res) => {
+  let itemData = {
+    title: req.body.title,
+    console: req.body.console,
+    is_console: req.body.is_console,
+    user_id: req.body.user_id,
+    condition: req.body.condition,
+    comments: req.body.comments,
+    starting_price: req.body.starting_price,
+    date_of_purchase: req.body.date_of_purchase,
+    tradeable: req.body.tradeable,
+    current_value: req.body.current_value
+  }
+  saveItemToDB(itemData)
+  .then(response => {
+        res.status(200).send(response);
+        console.log(`Success saving item to database`)
+    })
+    .catch(err => {
+        res.status(500).send(err);
+        console.log(`Error saving item to database`)
+    });
+})
 
 app.listen(port, () => {
   console.log("listening in on port ", port);

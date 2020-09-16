@@ -45,6 +45,28 @@ const getCollectionsByValueOrSize = (sortBy) => {
   return pool.query(SelectQuery)
 }
 
+// should save new items to the database
+const saveItemToDB = ({title, console, is_console, user_id, condition, comments, starting_price, date_of_purchase, tradeable, current_value}) => {
+  return pool.query(`WITH item_id_var AS (
+      INSERT INTO items
+      (title, console, is_console)
+      VALUES
+      ('${title}', '${console}', '${is_console}') ON CONFLICT (title, console) DO NOTHING
+    RETURNING id
+),
+    ins2 AS (
+		INSERT INTO items_in_collection
+      (item_id, user_id, condition, comments, starting_price, date_of_purchase, tradeable)
+    VALUES
+      ((SELECT id FROM item_id_var), ${user_id}, '${condition}', '${comments}', '${starting_price}', '${date_of_purchase}', '${tradeable}')
+		RETURNING item_id
+		)
+    INSERT INTO items_value_by_date
+      (item_id, current_value)
+    VALUES
+      ((SELECT id FROM item_id_var), '${current_value}')`)
+}
+
 //******************************* */
 
 // function argumentSplitter(obj) {
@@ -225,4 +247,5 @@ class Crud {
 module.exports = {
   Crud,
   getCollectionsByValueOrSize,
+  saveItemToDB
 }
