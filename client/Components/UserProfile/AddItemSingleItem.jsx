@@ -1,10 +1,9 @@
 import React from "react";
 
 
-const AddItemSingleItem = () => {
-  // edit and delete button
+const AddItemSingleItem = (props) => {
   return <div>
-      <p onClick={() => {console.log({item: 'item from Single Item'})}}>This is Single Item</p>
+      <p onClick={() => {props.select(props.item)}}>{props.item["console-name"]} {props.item["product-name"]}</p>
   </div>;
 };
 

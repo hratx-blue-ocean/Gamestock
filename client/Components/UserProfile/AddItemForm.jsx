@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AddItemList from "./AddItemList.jsx";
 import NewItemSearchBar from "./NewItemSearchBar.jsx";
+import axios from "axios";
 
 const AddItemForm = ({ submitInfo }) => {
   const [dateAcquired, setDateAcquired] = useState("");
@@ -10,43 +11,73 @@ const AddItemForm = ({ submitInfo }) => {
   const [isTradeable, setIsTradeable] = useState(false);
 
   const [itemSelected, setItemSelected] = useState({});
+<<<<<<< HEAD
   const [searchedItems, setSearchedItems] = useState({});
+=======
+  const [searchedItems, setSearchedItems] = useState([]);
+>>>>>>> 8fc1c0cb13da3e56eb03f4f937e9f3640a2a5995
 
   const submittedInfo = {
-    dateAcquired: dateAcquired,
-    purchasedPrice: purchasedPrice,
-    itemNotes: itemNotes,
-    itemCondition: itemCondition,
-    isTradeable: isTradeable,
+    title: itemSelected["product-name"],
+    console: itemSelected["console-name"],
+    is_console: false, //currently hardcoded as false
+    user_id: 4000, //Need to ask auth team
+    condition: itemCondition,
+    comments: itemNotes,
+    starting_price: purchasedPrice,
+    date_of_purchase: dateAcquired,
+    tradeable: isTradeable,
+    current_value: itemSelected["retail-cib-sell"],
   };
-  
+
+  function submitInfo(submittedInfo) {
+    axios
+      .post("/saveItems", submittedInfo)
+      .then(function (response) {
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
+
   return (
     <div>
       <div>
-        <h1>This is Add Item</h1>
-        <NewItemSearchBar />
+        <h2>Add an item to your collection</h2>
+        
+        <NewItemSearchBar
+          getSearchedItems={(items) => {
+            setSearchedItems(items);
+          }}
+        />
         <br></br>
-        <AddItemList />
+        <AddItemList
+          items={searchedItems}
+          select={(item) => {
+            setItemSelected(item);
+          }}
+        />
 
         <div>
-          <span>Item form</span>
+          <p>Item in Inventory: </p> {itemSelected["console-name"] || ""}{" "}
+          {itemSelected["product-name"] || ""}
+          <p>Item Stats:</p>
           <form>
             {/* date when item was bought */}
             <label htmlFor="dateAcquired">Date Acquired:</label>
+
             <input
               onChange={(e) => setDateAcquired(e.target.value)}
               type="date"
               id="start"
               value={dateAcquired}
             ></input>
-            <input
-              onChange={(e) => setDateAcquired(e.target.value)}
-              type="date"
-              id="start"
-              value={dateAcquired}
-            ></input>
+
             <br></br>
+
             {/* price at purchase of item */}
+
             <label htmlFor="purchasedPrice">PurchasedPrice:</label>
             <input
               onChange={(e) => setPurchasedPrice(e.target.value)}
@@ -59,7 +90,7 @@ const AddItemForm = ({ submitInfo }) => {
             <br></br>
 
             {/* notes for user comments */}
-            <label htmlFor="comment">Notes:</label>
+            <label htmlFor="comment">Item description:</label>
             <textarea
               onChange={(e) => setItemNotes(e.target.value)}
               rows="4"
