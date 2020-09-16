@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { Link } from "react-router-dom";
 
 const AvatarWrapper = styled.img`
+  ${"" /* grid-column-start: 2; */}
   margin-left: 50px;
   margin: auto;
   padding: 5px 0px;
@@ -24,21 +25,37 @@ const Text = styled.p`
   }
 `;
 
+const Username = styled.p`
+  ${"" /* grid-column-start: 3; */}
+  padding: 0px;
+  margin: auto;
+`;
+const Size = styled.p`
+  ${"" /* grid-column-start: 5; */}
+  padding: 0px;
+  margin: auto;
+`;
+const Value = styled.p`
+  ${"" /* grid-column-start: 8; */}
+  padding: 0px;
+  margin: auto;
+`;
+
 const StyledLink = styled(Link)`
   display: flex;
   text-decoration: none;
 `;
 
-export const BannerWrapper = styled(Wrapper)`
+const BannerWrapper = styled(Wrapper)`
   margin-top: 10px;
-  display: flex;
+  display: grid;
+  ${"" /* grid-template-columns: 50px 70px 400px 50px 50px 400px 400px; */}
+  grid-template-columns: repeat(auto-fill, 230px);
   background: #2d1c7b;
   color: #54f3f7;
   border-radius: 10px;
   border: 2px solid #eb29fd;
-  flex-wrap: wrap;
-  justify-content: space-between;
-  align-item: center;
+  align-items: center;
   box-sizing: border-box;
 `;
 
@@ -51,9 +68,9 @@ export default function Banner({
   return (
     <BannerWrapper>
       <AvatarWrapper src={avatar}></AvatarWrapper>
-      <Text>{username}</Text>
-      <Text>{collectionSize}</Text>
-      <Text>{collectionValue}</Text>
+      <Username>{username}</Username>
+      <Size>{collectionSize}</Size>
+      <Value>{collectionValue}</Value>
       <StyledLink to={`/user/${username}`}>
         <StyledButton>See Collection</StyledButton>
       </StyledLink>

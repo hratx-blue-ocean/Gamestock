@@ -5,8 +5,6 @@ import Header from "./Components/Header/Header.jsx";
 import Homepage from "./Components/Homepage/Homepage.jsx";
 import UserProfile from "./Components/UserProfile/UserProfile.jsx";
 import { GlobalStyles } from "./Components/Core/coreStyles.jsx";
-// drop this eventually
-import ExampleModal from "./Components/Core/ExampleModal.jsx";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
