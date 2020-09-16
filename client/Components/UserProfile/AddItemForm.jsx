@@ -13,11 +13,16 @@ const AddItemForm = ({ submitInfo }) => {
   const [searchedItems, setSearchedItems] = useState([]);
 
   const submittedInfo = {
-    dateAcquired: dateAcquired,
-    purchasedPrice: purchasedPrice,
-    itemNotes: itemNotes,
-    itemCondition: itemCondition,
-    isTradeable: isTradeable,
+    title: itemSelected["product-name"],
+    console: itemSelected["console-name"],
+    is_console: false, //currently hardcoded as false
+    user_id: 4000, //Need to ask auth team
+    condition: itemCondition,
+    comments: itemNotes,
+    starting_price: purchasedPrice,
+    date_of_purchase: dateAcquired,
+    tradeable: isTradeable,
+    current_value: itemSelected["retail-cib-sell"],
   };
 
   return (
@@ -38,7 +43,9 @@ const AddItemForm = ({ submitInfo }) => {
         />
 
         <div>
-          <span>Item form</span>
+          <p>Item in Inventory: </p> {itemSelected["console-name"] || ""}{" "}
+          {itemSelected["product-name"] || ""}
+          <p>Item Stats:</p>
           <form>
             {/* date when item was bought */}
             <label htmlFor="dateAcquired">Date Acquired:</label>
@@ -66,7 +73,7 @@ const AddItemForm = ({ submitInfo }) => {
             <br></br>
 
             {/* notes for user comments */}
-            <label htmlFor="comment">Notes:</label>
+            <label htmlFor="comment">Item description:</label>
             <textarea
               onChange={(e) => setItemNotes(e.target.value)}
               rows="4"
