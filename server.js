@@ -37,7 +37,7 @@ app.post("/login", (req, res) => {
   const token = jwt.sign(username.username, process.env.ACCESS_TOKEN_SECRET, {
     algorithm: "HS256",
   });
-
+  let userInfo;
   console.log("username", username);
 
   Users.get(username)
@@ -48,6 +48,7 @@ app.post("/login", (req, res) => {
         res.status(200).send("User not found. Sign up!");
       } else {
         console.log("user: ", user);
+        userInfo = user;
         //user exists, verify password
         return Users.compare(req.body.password, user.hashed_pw);
       }
@@ -65,7 +66,7 @@ app.post("/login", (req, res) => {
         //create auth cookie
         console.log("token:", token);
         res.cookie("token", token);
-        res.status(200).send("Successful login");
+        res.status(200).send(userInfo);
       }
     })
     .catch((err) => {
@@ -256,6 +257,22 @@ app.get("/collection/user", (req, res) => {
   getCollectionByUser(req.query.userID)
     .then((collection) => {
       res.status(200).send(collection);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
+});
+
+app.get("/checkLoginStatus", tokenAuthorizer, (req, res) => {
+  console.log("checking worked!");
+  Users.get({ username: req.user })
+    .then((results) => {
+      console.log("got results, ", results);
+      const user = {
+        username: results.username,
+        id: results.id,
+      };
+      res.status(200).send(user);
     })
     .catch((err) => {
       res.status(500).send(err);

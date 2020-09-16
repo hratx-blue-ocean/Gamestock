@@ -29,14 +29,14 @@ class Users extends Crud {
           hashed_pw,
         };
 
-        return super.create.call(this, newUser);
+        return super.create.call(this, newUser, "RETURNING id, username");
       })
       .catch((err) => console.log("Unable to hash password: ", err));
   }
 
   compare(attempt, password) {
     return bcrypt.compare(attempt, password);
-  }	  
+  }
 }
 
 module.exports = new Users();
