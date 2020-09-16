@@ -13,6 +13,7 @@ const {
   getCollectionsByConsole,
   getAllConsoles,
   getCollectionByUser,
+  getUserCollectionByName,
 } = require("./database/dbQueryHelpers");
 
 const jwt = require("jsonwebtoken");
@@ -105,16 +106,6 @@ app.post("/signup", (req, res) => {
     });
 });
 
-// user profile route
-app.get("/userProfile/items", (req, res) => {
-  Items.getAll()
-    .then((response) => res.send(response))
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
-});
-
 // app.get('/test', tokenAuthorizer, (req, res) => {
 //   const token = req.cookies
 //   console.log('THIS IS THE TOKEN:',token);
@@ -122,25 +113,45 @@ app.get("/userProfile/items", (req, res) => {
 //   res.send(token);
 // })
 
-// user profile route
-app.get("/userProfile/prices", (req, res) => {
-  Prices.getAll()
+app.get("/userProfile/:username", (req, res) => {
+  // console.log("WRECK DAT PARAMS: ", req.params.username);
+  getUserCollectionByName(req.params.username)
     .then((response) => res.send(response))
     .catch((err) => {
       console.error(err);
-      res.sendStatus(500);
+      res.status(500).send(err);
     });
 });
 
 // user profile route
-app.get("/userProfile/collectionItems", (req, res) => {
-  Collections.getAll()
-    .then((response) => res.send(response))
-    .catch((err) => {
-      console.error(err);
-      res.sendStatus(500);
-    });
-});
+// app.get("/userProfile/items", (req, res) => {
+//   Items.getAll()
+//     .then((response) => res.send(response))
+//     .catch((err) => {
+//       console.error(err);
+//       res.sendStatus(500);
+//     });
+// });
+
+// user profile route
+// app.get("/userProfile/prices", (req, res) => {
+//   Prices.getAll()
+//     .then((response) => res.send(response))
+//     .catch((err) => {
+//       console.error(err);
+//       res.sendStatus(500);
+//     });
+// });
+
+// user profile route
+// app.get("/userProfile/collectionItems", (req, res) => {
+//   Collections.getAll()
+//     .then((response) => res.send(response))
+//     .catch((err) => {
+//       console.error(err);
+//       res.sendStatus(500);
+//     });
+// });
 
 // API route to get item price
 app.get("/getItemPrice", (req, res) => {
