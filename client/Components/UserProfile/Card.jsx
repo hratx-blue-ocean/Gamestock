@@ -3,13 +3,13 @@ import styled from "styled-components";
 import { CardWrapper, Text, Thumbnail } from "../Core/CardView.jsx";
 
 import {
-  Input,
+  StyledInput,
   Wrapper,
   GlobalStyles,
   Title,
   WrapGrid,
-  Button,
-  Form,
+  StyledButton,
+  StyledForm,
 } from "../Core/coreStyles.jsx";
 
 const Card = ({ collections, items, prices }) => {
@@ -34,13 +34,13 @@ const Card = ({ collections, items, prices }) => {
           return (
             <div key={item.id}>
               <CardWrapper>
-                <Thumbnail>{<img src={item.thumbnail} />}</Thumbnail>
+                <Thumbnail src={item.thumbnail} />
                 <Text>{item.title}</Text>
                 <Text>{item.console}</Text>
                 <Text>Condition</Text>
                 <Text>Price</Text>
-                <Button>Edit</Button>
-                <Button>Delete</Button>
+                <StyledButton>Edit</StyledButton>
+                <StyledButton>Delete</StyledButton>
               </CardWrapper>
             </div>
           );

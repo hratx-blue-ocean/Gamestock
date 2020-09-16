@@ -5,11 +5,13 @@ import styled from "styled-components";
 const AvatarWrapper = styled.img`
   margin-left: 50px;
   margin: auto;
-  padding: 20px 0px;
+  padding: 5px 0px;
   &:hover {
     cursor: pointer;
   }
   border-radius: 50%;
+  max-height: 50px;
+  max-width: 50px;
 `;
 
 const Text = styled.p`
