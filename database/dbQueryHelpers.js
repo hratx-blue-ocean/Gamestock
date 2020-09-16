@@ -1,8 +1,8 @@
-const { pool, client } = require('./postgres.config.js');
+const { pool, client } = require("./postgres.config.js");
 
-pool.on('error', (err, client) => {
-    console.error('Unexpected error on idle client', err);
-    process.exit(-1);
+pool.on("error", (err, client) => {
+  console.error("Unexpected error on idle client", err);
+  process.exit(-1);
 });
 // use pool for all queries. It will scale better than client.
 
@@ -19,10 +19,10 @@ pool.on('error', (err, client) => {
 //******************************* */
 
 // query for getting leaderboard by value / size
-  // if sorting by value
-    // sortBy will be 'total_value DESC, total_count'
-  // if sorting by size
-    //sortBy will be 'total_count DESC, total_value'
+// if sorting by value
+// sortBy will be 'total_value DESC, total_count'
+// if sorting by size
+//sortBy will be 'total_count DESC, total_value'
 
 const getCollectionsByValueOrSize = (sortBy) => {
   const SelectQuery = `SELECT distinct on (total_value, total_count, users.username, users.avatar, date.date ) users.username, users.avatar, COUNT(items_in_collection.item_id) as total_count, date.date, SUM(date.current_value)  as total_value
@@ -42,11 +42,22 @@ const getCollectionsByValueOrSize = (sortBy) => {
   ORDER BY ${sortBy}, date.date, users.username, users.avatar
   LIMIT 10`;
 
-  return pool.query(SelectQuery)
-}
+  return pool.query(SelectQuery);
+};
 
 // should save new items to the database
-const saveItemToDB = ({title, console, is_console, user_id, condition, comments, starting_price, date_of_purchase, tradeable, current_value}) => {
+const saveItemToDB = ({
+  title,
+  console,
+  is_console,
+  user_id,
+  condition,
+  comments,
+  starting_price,
+  date_of_purchase,
+  tradeable,
+  current_value,
+}) => {
   return pool.query(`WITH item_id_var AS (
       INSERT INTO items
       (title, console, is_console)
@@ -64,9 +75,36 @@ const saveItemToDB = ({title, console, is_console, user_id, condition, comments,
     INSERT INTO items_value_by_date
       (item_id, current_value)
     VALUES
-      ((SELECT id FROM item_id_var), '${current_value}')`)
-}
+      ((SELECT id FROM item_id_var), '${current_value}')`);
+};
 
+// query for getting leaderboard sorted by console
+const getCollectionsByConsole = (console) => {
+  const selectQueryConsoles = `SELECT distinct on (total_value, total_count, users.username, users.avatar, date.date ) users.username, users.avatar, COUNT(items_in_collection.item_id) as total_count, date.date, SUM(date.current_value)  as total_value
+  FROM items_in_collection
+  INNER JOIN users
+  ON items_in_collection.user_id = users.id
+  INNER JOIN items
+  ON items_in_collection.item_id = items.id AND items.console=\'${console}\'
+  INNER JOIN
+	(SELECT distinct on (DATE(items_value_by_date.date), items_value_by_date.item_id) DATE(items_value_by_date.date), items_value_by_date.item_id, items_value_by_date.current_value
+  FROM items_value_by_date
+  WHERE DATE(items_value_by_date.date) = (SELECT MAX(DATE(items_value_by_date.date)) from items_value_by_date)
+  ORDER BY items_value_by_date.item_id, DATE(items_value_by_date.date) DESC
+	) as date
+  ON items.id = date.item_id
+  GROUP BY users.username, users.avatar, date.date
+  ORDER BY total_value DESC, total_count, date.date, users.username, users.avatar
+  LIMIT 10`;
+
+  return pool.query(selectQueryConsoles);
+};
+
+const getAllConsoles = () => {
+  selectQueryConsoles = "SELECT DISTINCT console FROM items";
+
+  return pool.query(selectQueryConsoles);
+};
 //******************************* */
 
 // function argumentSplitter(obj) {
@@ -87,35 +125,43 @@ const saveItemToDB = ({title, console, is_console, user_id, condition, comments,
 //     return Object.keys(obj);
 //   }
 
-  function parseParams(arr, starting = 0) {
-    const result = [];
-    for (let i = starting + 1; i < starting + arr.length + 1; i++) {
-      result.push(`$${i}`);
-    }
-    return result;
+function parseParams(arr, starting = 0) {
+  const result = [];
+  for (let i = starting + 1; i < starting + arr.length + 1; i++) {
+    result.push(`$${i}`);
   }
+  return result;
+}
 
-const _ = require('lodash');
+const _ = require("lodash");
 
 const executeQuery = (query, values) => {
-  return pool.query(query, values)
+  return pool.query(query, values);
 };
 
-const parseData = options => {
-  return _.reduce(options, (parsed, value, key) => {
-    parsed.string.push(`${key} = `);
-    parsed.values.push(value);
-    return parsed;
-  }, { string: [], values: [] });
+const parseData = (options) => {
+  return _.reduce(
+    options,
+    (parsed, value, key) => {
+      parsed.string.push(`${key} = `);
+      parsed.values.push(value);
+      return parsed;
+    },
+    { string: [], values: [] }
+  );
 };
 
-const parseKeyValues = options => {
-    return _.reduce(options, (parsed, value, key) => {
-        parsed.keys.push(key);
-        parsed.values.push(value);
-        return parsed;
-      }, { keys: [], values: [] });
-}
+const parseKeyValues = (options) => {
+  return _.reduce(
+    options,
+    (parsed, value, key) => {
+      parsed.keys.push(key);
+      parsed.values.push(value);
+      return parsed;
+    },
+    { keys: [], values: [] }
+  );
+};
 
 /**
  * Base class for all database models, written in ES6 class format. You should NOT refer
@@ -141,10 +187,12 @@ class Crud {
       return executeQuery(queryString);
     }
     let parsedOptions = parseData(options);
-    let parsedKeys = parsedOptions.string
+    let parsedKeys = parsedOptions.string;
     let params = parseParams(parsedKeys);
     parsedKeys = parsedKeys.map((key, index) => `${key}${params[index]}`);
-    let queryString = `SELECT * FROM ${this.tablename} WHERE ${parsedKeys.join(' AND ')}`;
+    let queryString = `SELECT * FROM ${this.tablename} WHERE ${parsedKeys.join(
+      " AND "
+    )}`;
     return executeQuery(queryString, parsedOptions.values);
   }
 
@@ -159,11 +207,15 @@ class Crud {
    */
   get(options) {
     let parsedOptions = parseData(options);
-    let parsedKeys = parsedOptions.string
+    let parsedKeys = parsedOptions.string;
     let params = parseParams(parsedKeys);
     parsedKeys = parsedKeys.map((key, index) => `${key}${params[index]}`);
-    let queryString = `SELECT * FROM ${this.tablename} WHERE ${parsedKeys.join(' AND ')} LIMIT 1`;
-    return executeQuery(queryString, parsedOptions.values).then(results => results.rows[0]);
+    let queryString = `SELECT * FROM ${this.tablename} WHERE ${parsedKeys.join(
+      " AND "
+    )} LIMIT 1`;
+    return executeQuery(queryString, parsedOptions.values).then(
+      (results) => results.rows[0]
+    );
   }
 
   /**
@@ -176,9 +228,13 @@ class Crud {
    * during the query.
    * @returning string - a string starting with the word "returning" that will declare what to return on a successful create
    */
-  create(options, returning = 'RETURNING id') {
+  create(options, returning = "RETURNING id") {
     let parsedOptions = parseKeyValues(options);
-    let queryString = `INSERT INTO ${this.tablename}(${parsedOptions.keys.join()}) VALUES (${parseParams(parsedOptions.values).join()}) ${returning}`
+    let queryString = `INSERT INTO ${
+      this.tablename
+    }(${parsedOptions.keys.join()}) VALUES (${parseParams(
+      parsedOptions.values
+    ).join()}) ${returning}`;
     return executeQuery(queryString, parsedOptions.values);
   }
 
@@ -193,20 +249,26 @@ class Crud {
    * containing the results of the query or is rejected with the the error that occurred
    * during the query.
    */
-  update(options, values, returning = 'RETURNING id') {
-
+  update(options, values, returning = "RETURNING id") {
     let parsedValues = parseData(values);
     let parsedValueKeys = parsedValues.string;
     let valuesParams = parseParams(parsedValueKeys);
-    parsedValueKeys = parsedValueKeys.map((key, index) => `${key}${valuesParams[index]}`)
+    parsedValueKeys = parsedValueKeys.map(
+      (key, index) => `${key}${valuesParams[index]}`
+    );
 
     let parsedOptions = parseData(options);
-    let parsedKeys = parsedOptions.string
+    let parsedKeys = parsedOptions.string;
     let params = parseParams(parsedKeys, valuesParams.length);
     parsedKeys = parsedKeys.map((key, index) => `${key}${params[index]}`);
 
-    let queryString = `UPDATE ${this.tablename} SET ${parsedValueKeys.join(', ')} WHERE ${parsedKeys.join(' AND ')} ${returning}`;
-    return executeQuery(queryString, Array.prototype.concat(parsedValues.values, parsedOptions.values));
+    let queryString = `UPDATE ${this.tablename} SET ${parsedValueKeys.join(
+      ", "
+    )} WHERE ${parsedKeys.join(" AND ")} ${returning}`;
+    return executeQuery(
+      queryString,
+      Array.prototype.concat(parsedValues.values, parsedOptions.values)
+    );
   }
 
   /**
@@ -218,13 +280,15 @@ class Crud {
    * containing the results of the query or is rejected with the the error that occurred
    * during the query.
    */
-  delete(options, returning = 'RETURNING id') {
+  delete(options, returning = "RETURNING id") {
     let parsedOptions = parseData(options);
-    let parsedKeys = parsedOptions.string
+    let parsedKeys = parsedOptions.string;
     let params = parseParams(parsedKeys);
     parsedKeys = parsedKeys.map((key, index) => `${key}${params[index]}`);
 
-    let queryString = `DELETE FROM ${this.tablename} WHERE ${parsedKeys.join(' AND ')} ${returning}`;
+    let queryString = `DELETE FROM ${this.tablename} WHERE ${parsedKeys.join(
+      " AND "
+    )} ${returning}`;
     return executeQuery(queryString, parsedOptions.values);
   }
 
@@ -247,5 +311,7 @@ class Crud {
 module.exports = {
   Crud,
   getCollectionsByValueOrSize,
-  saveItemToDB
-}
+  saveItemToDB,
+  getCollectionsByConsole,
+  getAllConsoles,
+};

@@ -41,10 +41,13 @@ const RightButton = styled(StyledButton)`
 const Leaderboard = () => {
   const [userSearch, setUserSearch] = useState("");
   const [collectionsByValueOrSize, setCollectionsByValueOrSize] = useState([]);
+  // const [collectionsByConsole, setCollectionsByConsole] = useState([]);
+  const [consoles, setConsoles] = useState([]);
 
   useEffect(() => {
     // sort by value on page load
     getCollectionsByValueOrSize("sortByValue");
+    getAllConsoles();
   }, []);
 
   // form handlers
@@ -86,6 +89,61 @@ const Leaderboard = () => {
     }
   };
 
+  const getCollectionsByConsole = (e) => {
+    console.log("SELECT CHANGE: ", e.target.value);
+    axios
+      .get("/leaderboard/console", {
+        params: {
+          console: e.target.value,
+        },
+      })
+      .then((recordsByConsole) => {
+        setCollectionsByValueOrSize(() => recordsByConsole.data.rows);
+      })
+      .catch((err) => {
+        console.log("Error getting top collections by console :", err);
+      });
+  };
+
+  const getAllConsoles = () => {
+    axios
+      .get("/consoles")
+      .then((consoles) => {
+        console.log("CONSOLES: ", consoles.data.rows);
+        setConsoles(() => consoles.data.rows);
+      })
+      .catch((err) => {
+        console.log("Error getting consoles: ", err);
+      });
+  };
+
+  //style extensions
+  const LeaderboardGrid = styled(WrapGrid)`
+    grid-template-columns: 100px 100px 100px 100px 100px auto 75px 75px 75px 75px 75px 100px;
+    margin-top: 30px;
+    margin-bottom: 20px;
+  `;
+  const UserSearchForm = styled(Form)`
+    grid-column-start: 1;
+    display: flex;
+  `;
+  const LeftButton = styled(Button)`
+    grid-column-start: 7;
+    border-radius: 10px 0px 0px 10px;
+    margin: 0;
+    border: 1px solid;
+  `;
+  const MiddleButton = styled(Button)`
+    border-radius: 0px;
+    margin: 0;
+    border: 1px solid;
+  `;
+  const RightButton = styled(Button)`
+    border-radius: 0px 10px 10px 0px;
+    margin: 0;
+    border: 1px solid;
+  `;
+
   return (
     <div>
       <Wrapper>
@@ -110,6 +168,11 @@ const Leaderboard = () => {
           <MiddleButton id="sortBySony">Sony</MiddleButton>
           <MiddleButton id="sortByXbox">Xbox</MiddleButton>
           <RightButton id="sortByNintendo">Nintendo</RightButton>
+          <select onChange={getCollectionsByConsole}>
+            {consoles.map((console) => (
+              <option id={console.console}>{console.console}</option>
+            ))}
+          </select>
         </LeaderboardGrid>
         {collectionsByValueOrSize.map((collection, idx) => (
           <Banner
