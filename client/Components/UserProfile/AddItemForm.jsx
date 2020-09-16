@@ -3,7 +3,8 @@ import AddItemList from "./AddItemList.jsx";
 import NewItemSearchBar from "./NewItemSearchBar.jsx";
 import axios from "axios";
 
-const AddItemForm = ({ submitInfo }) => {
+
+const AddItemForm = (props) => {
   const [dateAcquired, setDateAcquired] = useState("");
   const [purchasedPrice, setPurchasedPrice] = useState(0);
   const [itemNotes, setItemNotes] = useState("");
@@ -122,7 +123,7 @@ const AddItemForm = ({ submitInfo }) => {
           </form>
         </div>
 
-        <button type="button">Cancel</button>
+        <button type="button" onClick={() => {props.exitModal()}}>Cancel</button>
       </div>
     </div>
   );
