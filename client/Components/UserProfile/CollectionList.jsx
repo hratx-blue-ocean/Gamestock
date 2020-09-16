@@ -1,13 +1,13 @@
 import React from "react";
 import Card from "./Card.jsx";
 import {
-  Input,
+  StyledInput,
   Wrapper,
   GlobalStyles,
   Title,
   WrapGrid,
-  Button,
-  Form,
+  StyledButton,
+  StyledForm,
 } from "../Core/coreStyles.jsx";
 
 const CollectionList = ({ collections, items, prices }) => {

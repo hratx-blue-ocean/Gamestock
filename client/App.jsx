@@ -5,8 +5,8 @@ import Homepage from "./Components/Homepage/Homepage.jsx";
 
 // ReactDOM.render(<Homepage />, document.getElementById("root"));
 import UserProfile from "./Components/UserProfile/UserProfile.jsx";
-import { GlobalStyles } from "./components/Core/coreStyles.jsx";
-import ExampleModal from "./components/Core/ExampleModal.jsx";
+import { GlobalStyles } from "./Components/Core/coreStyles.jsx";
+import ExampleModal from "./Components/Core/ExampleModal.jsx";
 
 export default function App() {
   return (

@@ -1,4 +1,4 @@
-import styled, { css } from "styled-components";
+import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 
 export const GlobalStyles = createGlobalStyle`
@@ -31,13 +31,6 @@ export const ModalInner = styled.div`
   margin-top: 30%;
 `;
 
-export const Freeze = styled.body`
-  width: ${({ modalState }) => (modalState ? "100%" : "auto")};
-  position: ${({ modalState }) => (modalState ? "fixed" : "auto")};
-  max-height: ${({ modalState }) => (modalState ? "100%" : "auto")};
-  overflow: ${({ modalState }) => (modalState ? "hidden" : "auto")};
-`;
-
 export const Wrapper = styled.div`
   margin: 0px auto;
   margin-top: 20px;
@@ -50,7 +43,7 @@ export const Wrapper = styled.div`
   max-width: 1200px;
 `;
 
-export const Button = styled.button`
+export const StyledButton = styled.button`
   font-family: "Press Start 2P", sans-serif;
   font-size: 10px;
   background: #54f3f7;
@@ -88,7 +81,7 @@ export const NegativeButton = styled.button`
   margin: auto;
 `;
 
-export const Input = styled.input`
+export const StyledInput = styled.input`
   min-width: 300px;
   padding: 3px 10px;
   color: #2d1c7b;
@@ -113,4 +106,4 @@ export const WrapGrid = styled.div`
   grid-template-columns: 100px 100px 100px 100px 100px auto 100px 100px 100px 100px 100px;
 `;
 
-export const Form = styled.form``;
+export const StyledForm = styled.form``;

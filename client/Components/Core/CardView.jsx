@@ -1,14 +1,16 @@
 import React from "react";
-import { Button, Wrapper } from "../Core/coreStyles.jsx";
+import { StyledButton, Wrapper } from "../Core/coreStyles.jsx";
 import styled from "styled-components";
 
-export const Thumbnail = styled.p`
+export const Thumbnail = styled.img`
   margin-left: 50px;
   margin: auto;
-  padding: 20px 0px;
+  padding: 5px 0px;
   &:hover {
     cursor: pointer;
   }
+  max-height: 50px;
+  max-width: 50px;
 `;
 
 export const Text = styled.p`
@@ -33,16 +35,16 @@ export const CardWrapper = styled(Wrapper)`
   box-sizing: border-box;
 `;
 
-export default function CardView() {
+export default function CardView({ item }) {
   return (
     <CardWrapper>
-      <Thumbnail>{<img src={item.thumbnail} />}</Thumbnail>
+      <Thumbnail src={item.thumbnail}></Thumbnail>
       <Text>Game Title</Text>
       <Text>Game Console</Text>
       <Text>Condition</Text>
       <Text>Price</Text>
-      <Button>Edit</Button>
-      <Button>Delete</Button>
+      <StyledButton>Edit</StyledButton>
+      <StyledButton>Delete</StyledButton>
     </CardWrapper>
   );
 }
