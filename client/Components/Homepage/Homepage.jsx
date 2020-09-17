@@ -3,7 +3,11 @@ import axios from "axios";
 import Banner from "../Core/Banner.jsx";
 import Leaderboard from "./Leaderboard.jsx";
 
-const Homepage = (props) => {
+const Homepage = ({
+  collectionOwnerName,
+  setCollectionOwnerName,
+  loggedIn,
+}) => {
   const [userID, setUserID] = useState(1);
   const [userCollection, setUserCollection] = useState({});
 
@@ -27,19 +31,25 @@ const Homepage = (props) => {
       });
   };
 
+  if (loggedIn.loggedIn) {
+    console.log("logged in");
+  }
+
   return (
     <div>
-      <Banner
-        avatar={userCollection.avatar}
-        username={userCollection.username}
-        collectionSize={userCollection.total_count}
-        collectionValue={userCollection.total_value}
-        collectionOwnerName={props.collectionOwnerName}
-        setCollectionOwnerName={props.setCollectionOwnerName}
-      />
+      {loggedIn.loggedIn && (
+        <Banner
+          avatar={userCollection.avatar}
+          username={userCollection.username}
+          collectionSize={userCollection.total_count}
+          collectionValue={userCollection.total_value}
+          collectionOwnerName={collectionOwnerName}
+          setCollectionOwnerName={setCollectionOwnerName}
+        />
+      )}
       <Leaderboard
-        collectionOwnerName={props.collectionOwnerName}
-        setCollectionOwnerName={props.setCollectionOwnerName}
+        collectionOwnerName={collectionOwnerName}
+        setCollectionOwnerName={setCollectionOwnerName}
       />
     </div>
   );

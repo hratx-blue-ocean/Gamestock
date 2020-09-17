@@ -1,3 +1,4 @@
+import React from 'react'
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 
@@ -185,3 +186,22 @@ export const Dropdown = styled.select`
     --accentBg: #bae1ff;
   }
 `;
+
+// export const RadioButtion = ({label, value, id, isSelected, changed })
+//   export const StyledRadio = styled.div`
+//   input [type="radio"] {
+//     display: none;
+//     &:checked + label:before{
+//       border-color: #EB29FD;
+//       animation: ripple 0.1s linear forwards;
+//     }
+//     &:checked + label:after{
+//       transform: scale(1);
+//     }
+
+//   }
+  `;
+
+
+
+
