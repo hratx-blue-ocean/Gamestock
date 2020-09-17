@@ -249,12 +249,14 @@ app.post(`/saveItems`, (req, res) => {
     thumbnail: req.body.thumbnail,
     front_view: req.body.front_view,
   };
+  console.log(itemData);
   saveItemToDB(itemData)
     .then((response) => {
       res.status(200).send(response);
       console.log(`Success saving item to database`);
     })
     .catch((err) => {
+      console.log("error sending items,", err);
       res.status(500).send(err);
       console.log(`Error saving item to database`);
     });

@@ -49,6 +49,7 @@ const CollectionList = ({
   priceSort,
   conditionSort,
   tradeSort,
+  userId,
 }) => {
   return (
     <div>
@@ -81,8 +82,8 @@ const CollectionList = ({
             </RightButton>
           </UserProfGrid>
           <Print />
-          <AddItem />
-          <Card collection={collection} currentCards={currentCards} />
+          <AddItem userId={userId} />
+          <Card collection={collection} />
         </Wrapper>
       )}
     </div>

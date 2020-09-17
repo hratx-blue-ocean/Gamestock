@@ -75,6 +75,7 @@ const UserProfile = (props) => {
 
   return (
     <div>
+<<<<<<< HEAD
       <CollectionList
         collection={collection}
         currentCards={currentCards}
@@ -88,6 +89,10 @@ const UserProfile = (props) => {
         cardsPerPage={cardsPerPage}
         handlePageClick={handlePageClick}
       />
+=======
+      <CollectionList collection={collection} userId={props.userId} />
+      <Paginator collection={collection} />
+>>>>>>> fix bug in header
     </div>
   );
 };

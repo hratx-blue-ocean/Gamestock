@@ -21,7 +21,7 @@ const BannerWrapper = styled(Wrapper)`
 `;
 
 const AvatarWrapper = styled.img`
-  margin-top: 3%;
+  margin-top: 8%;
   padding: 5px 0px;
   &:hover {
     cursor: pointer;
@@ -29,7 +29,7 @@ const AvatarWrapper = styled.img`
   border-radius: 50%;
   max-height: 50px;
   max-width: 50px;
-  margin-left: 56rem;
+  display: inline-block;
 `;
 
 const Logo = styled.img`
@@ -102,26 +102,36 @@ const Header = ({ loggedIn, setLoggedIn }) => {
             <Link to="/">
               <Thumbnail src="https://i.imgur.com/XYg49nh.jpg"></Thumbnail>
             </Link>
-            <Link to="/">
+            {/* <Link to="/"> */}
+            <div
+              style={{
+                display: "flex",
+                alignItem: "center",
+              }}
+            >
               <AvatarWrapper src={loggedIn.userAvatar}></AvatarWrapper>
-            </Link>
-            <Dropdown value="selection" onChange={(e) => handleChange(e)}>
-              {userOptions.map((option, index) => {
-                if (!index) {
-                  return (
-                    <option key={option.value} value={option.value} selected>
-                      {option.label}
-                    </option>
-                  );
-                } else {
-                  return (
-                    <option key={option.value} value={option.value}>
-                      {option.label}
-                    </option>
-                  );
-                }
-              })}
-              {/* <option key={userOptions[0].value} value={userOptions[0].value}>
+              {/* </Link> */}
+              <Dropdown value="selection" onChange={(e) => handleChange(e)}>
+                {userOptions.map((option, index) => {
+                  if (!index) {
+                    return (
+                      <option
+                        key={option.value}
+                        value={option.value}
+                        defaultValue
+                      >
+                        {option.label}
+                      </option>
+                    );
+                  } else {
+                    return (
+                      <option key={option.value} value={option.value}>
+                        {option.label}
+                      </option>
+                    );
+                  }
+                })}
+                {/* <option key={userOptions[0].value} value={userOptions[0].value}>
                 {userOptions[0].label}
               </option>
               <option key={userOptions[1].value} value={userOptions[1].value}>
@@ -130,7 +140,8 @@ const Header = ({ loggedIn, setLoggedIn }) => {
               <option key={userOptions[2].value} value={userOptions[2].value}>
                 {userOptions[1].label}
               </option> */}
-            </Dropdown>
+              </Dropdown>
+            </div>
           </>
         ) : (
           <>
