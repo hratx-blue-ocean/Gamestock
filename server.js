@@ -100,7 +100,22 @@ app.post("/signup", (req, res) => {
         res.status(200).send("Username already exists");
       } else {
         //if user does not exist, create one
-        return Users.create(req.body);
+        Users.create(req.body)
+          .then((response) => {
+            const token = jwt.sign(
+              username.username,
+              process.env.ACCESS_TOKEN_SECRET,
+              {
+                algorithm: "HS256",
+              }
+            );
+            res.cookie("token", token);
+            res.status(200).send(response);
+          })
+          .catch((err) => {
+            console.log("Error creating user", err);
+            res.status(500).send(err);
+          });
       }
     })
     .then((response) => {
@@ -367,6 +382,13 @@ app.get("/username/collectionValue", (req, res) => {
       res.status(500).send(err);
     });
 });
+//   //   });
+//   // });
+// });
+app.use(
+  "/resources/mario.jpg",
+  express.static(path.join(__dirname, "resources", "mario.jpg"))
+);
 
 // handles refresh requests from the userProfile page or any other endpoint
 app.get("/*", (req, res) => {
