@@ -38,20 +38,29 @@ const BannerWrapper = styled(Wrapper)`
   box-sizing: border-box;
 `;
 
-export default function Banner({
-  username,
-  collectionSize,
-  collectionValue,
-  avatar,
-}) {
+export default function Banner(props) {
+  const {
+    username,
+    collectionSize,
+    collectionValue,
+    avatar,
+    setCollectionOwnerName,
+  } = props;
+
   return (
     <BannerWrapper>
       <AvatarWrapper src={avatar}></AvatarWrapper>
       <Text>{username}</Text>
       <Text>{collectionSize}</Text>
       <Text>{collectionValue}</Text>
-      <StyledLink to={`/user/${username}`}>
-        <StyledButton>See Collection</StyledButton>
+      <StyledLink to={`/profile/${username}`}>
+        <StyledButton
+          onClick={() => {
+            setCollectionOwnerName(username);
+          }}
+        >
+          See Collection
+        </StyledButton>
       </StyledLink>
     </BannerWrapper>
   );

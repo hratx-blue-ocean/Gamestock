@@ -43,7 +43,7 @@ const SearchBy = styled.p`
   text-align: center;
 `;
 
-const Leaderboard = () => {
+const Leaderboard = (props) => {
   const [userSearch, setUserSearch] = useState("");
   const [collectionsByValueOrSize, setCollectionsByValueOrSize] = useState([]);
   // const [collectionsByConsole, setCollectionsByConsole] = useState([]);
@@ -162,6 +162,8 @@ const Leaderboard = () => {
             collectionValue={collection.total_value}
             avatar={collection.avatar}
             key={idx}
+            collectionOwnerName={props.collectionOwnerName}
+            setCollectionOwnerName={props.setCollectionOwnerName}
           />
         ))}
       </Wrapper>

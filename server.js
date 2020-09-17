@@ -302,7 +302,9 @@ app.get("/checkLoginStatus", tokenAuthorizer, (req, res) => {
 });
 
 // handles refresh requests from the userProfile page or any other endpoint *** BROKEN ***
-app.use("/*", express.static(path.join(__dirname, "public")));
+app.get("/*", (req, res) => {
+  res.redirect("/");
+});
 
 app.listen(port, () => {
   console.log("listening in on port ", port);

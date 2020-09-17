@@ -13,6 +13,11 @@ function App() {
     userName: "",
     userId: 0,
   });
+  const [collectionOwnerName, setCollectionOwnerName] = useState("");
+  useEffect(() => {
+    console.log("COLLECTION OWNER IS:", collectionOwnerName);
+  }, [collectionOwnerName]);
+
   useEffect(() => {
     if (!loggedIn.loggedIn) {
       axios
@@ -36,14 +41,18 @@ function App() {
 
   return (
     <>
-      <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
       <Router>
         <Switch>
           <Route exact path="/">
-            <Homepage />
+            <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+            <Homepage
+              colectionOwnerName={collectionOwnerName}
+              setCollectionOwnerName={setCollectionOwnerName}
+            />
           </Route>
-          <Route path="/user/:name">
-            <UserProfile />
+          <Route path="/profile/:name">
+            <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+            <UserProfile collectionOwnerName={collectionOwnerName} />
           </Route>
         </Switch>
       </Router>
