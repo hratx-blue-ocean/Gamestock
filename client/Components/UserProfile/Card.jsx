@@ -12,29 +12,28 @@ import {
   StyledForm,
 } from "../Core/coreStyles.jsx";
 
-const Card = ({ collections, items, prices }) => {
-  if (items.data) {
-    return (
-      <div>
-        {items.data.rows.map((item) => {
-          return (
-            <div key={item.id}>
-              <CardWrapper>
-                <Thumbnail src={item.thumbnail} />
-                <Text>{item.title}</Text>
-                <Text>{item.console}</Text>
-                <Text>Condition</Text>
-                <Text>Price</Text>
-                <StyledButton>Delete</StyledButton>
-              </CardWrapper>
-            </div>
-          );
-        })}
-      </div>
-    );
-  } else {
-    return <div></div>;
-  }
+const Card = ({ collection }) => {
+  return (
+    <div>
+      {/* {collection.rows.map((item) => {
+        return (
+          <div key={item.id}>
+            <CardWrapper>
+              <Thumbnail
+              // src={item.thumbnail}
+              />
+              <Text>{item.title}</Text>
+              <Text>{item.console}</Text>
+              <Text>{item.condition}</Text>
+              <Text>{item.starting_price}</Text>
+              <Text>{item.tradeable ? "Yes" : "No"}</Text>
+              <StyledButton>Delete</StyledButton>
+            </CardWrapper>
+          </div>
+        );
+      })} */}
+    </div>
+  );
 };
 
 export default Card;

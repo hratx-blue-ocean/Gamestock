@@ -3,7 +3,7 @@ import axios from "axios";
 import Banner from "../Core/Banner.jsx";
 import Leaderboard from "./Leaderboard.jsx";
 
-const Homepage = () => {
+const Homepage = (props) => {
   const [userID, setUserID] = useState(1);
   const [userCollection, setUserCollection] = useState({});
 
@@ -34,8 +34,13 @@ const Homepage = () => {
         username={userCollection.username}
         collectionSize={userCollection.total_count}
         collectionValue={userCollection.total_value}
+        collectionOwnerName={props.collectionOwnerName}
+        setCollectionOwnerName={props.setCollectionOwnerName}
       />
-      <Leaderboard />
+      <Leaderboard
+        collectionOwnerName={props.collectionOwnerName}
+        setCollectionOwnerName={props.setCollectionOwnerName}
+      />
     </div>
   );
 };

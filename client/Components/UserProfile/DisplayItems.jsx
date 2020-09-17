@@ -1,7 +1,7 @@
 import React from "react";
 import { Text } from "../Core/CardView.jsx";
 
-const DisplayItems = ({ items, prices }) => {
+const DisplayItems = () => {
   return (
     <div>
       <Text>Items in collection: Coming soon to a Blue Ocean Near You!</Text>

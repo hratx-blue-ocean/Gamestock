@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { StyledButton, Wrapper, Title } from "../Core/coreStyles.jsx";
 import styled from "styled-components";
 import SignupLogin from "../SignupLogin/SignupLogin.jsx";
+import { Link } from "react-router-dom";
 
 const BannerWrapper = styled(Wrapper)`
   margin-top: 10px;
@@ -29,14 +30,18 @@ const AvatarWrapper = styled.img`
 `;
 
 const Logo = styled.p`
-  height: 200px;
-  font-size: 40px;
+  font-size: 60px;
 `;
 
-const Thumbnail = styled.img`
-  height: 200px;
-  weight: 550px;
+const StyledLink = styled(Link)`
+  display: flex;
+  text-decoration: none;
+  color: #54f3f7;
+  margin-left: 50px;
+  margin-right: 200px;
 `;
+
+const Thumbnail = styled.img``;
 
 const Header = ({ loggedIn, setLoggedIn }) => {
   return (
@@ -44,7 +49,9 @@ const Header = ({ loggedIn, setLoggedIn }) => {
       {loggedIn.loggedIn ? (
         <>
           <BannerWrapper>
-            <Logo>Gamestock</Logo>
+            <StyledLink to={"/"}>
+              <Logo>Gamestock</Logo>
+            </StyledLink>
             <AvatarWrapper src="https://s3.amazonaws.com/uifaces/faces/twitter/timmillwood/128.jpg"></AvatarWrapper>
             <StyledButton>Username</StyledButton>
           </BannerWrapper>
@@ -52,7 +59,9 @@ const Header = ({ loggedIn, setLoggedIn }) => {
       ) : (
         <>
           <BannerWrapper>
-            <Logo src="https://i.imgur.com/xlbOHDd.jpg"></Logo>
+            <StyledLink to={`/`}>
+              <Logo>Gamestock</Logo>
+            </StyledLink>
             <SignupLogin setLoggedIn={setLoggedIn} />
           </BannerWrapper>
         </>

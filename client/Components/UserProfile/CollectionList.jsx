@@ -40,13 +40,13 @@ const RightButton = styled(StyledButton)`
   border: 1px solid;
 `;
 
-const CollectionList = ({ collections, items, prices }) => {
+const CollectionList = ({ collection }) => {
   return (
     <div>
       <Wrapper>
         <Title>User Collection</Title>
         {/* these first two things are displaying the number of items and their combined value */}
-        <DisplayItems items={items} prices={prices} />
+        <DisplayItems />
         <UserProfGrid>
           <GameSearchForm onSubmit={() => {}}>
             <StyledInput
@@ -72,7 +72,7 @@ const CollectionList = ({ collections, items, prices }) => {
           <RightButton id="sortByNintendo">Nintendo</RightButton>
         </UserProfGrid>
         <Print />
-        <Card collections={collections} items={items} prices={prices} />
+        <Card collection={collection} />
       </Wrapper>
     </div>
   );
