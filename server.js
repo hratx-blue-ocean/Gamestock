@@ -43,7 +43,6 @@ app.post("/login", (req, res) => {
     algorithm: "HS256",
   });
   let userInfo;
-  console.log("username", username);
 
   Users.get(username)
     .then((user) => {
@@ -52,7 +51,6 @@ app.post("/login", (req, res) => {
         console.log("Username at login not found");
         res.status(200).send("User not found. Sign up!");
       } else {
-        console.log("user: ", user);
         userInfo = user;
         //user exists, verify password
         return Users.compare(req.body.password, user.hashed_pw);
@@ -69,7 +67,6 @@ app.post("/login", (req, res) => {
         console.log("User can log in");
 
         //create auth cookie
-        console.log("token:", token);
         res.cookie("token", token);
         res.status(200).send(userInfo);
       }
@@ -83,7 +80,7 @@ app.post("/login", (req, res) => {
 app.post("/logout", (req, res) => {
   let token = req.cookies.token;
 
-  res.clearCookie(token);
+  res.clearCookie("token");
   res.redirect("/");
 });
 
@@ -92,8 +89,7 @@ app.post("/signup", (req, res) => {
   let username = {
     username: req.body.username,
   };
-  console.log(req.body);
-
+  console.log("USER NAME BODY:", req.body);
   //check if username exists
   Users.get(username)
     .then((user) => {
@@ -101,28 +97,17 @@ app.post("/signup", (req, res) => {
         res.status(200).send("Username already exists");
       } else {
         //if user does not exist, create one
-        Users.create(req.body)
-          .then((response) => {
-            res.status(200).send(response);
-          })
-          .catch((err) => {
-            console.log("Error creating user", err);
-            res.status(500).send(err);
-          });
+        return Users.create(req.body);
       }
     })
+    .then((response) => {
+      res.status(200).send(response);
+    })
     .catch((err) => {
-      console.log("Error in server reading username: ", err);
+      console.log("Error creating user", err);
       res.status(500).send(err);
     });
 });
-
-// app.get('/test', tokenAuthorizer, (req, res) => {
-//   const token = req.cookies
-//   console.log('THIS IS THE TOKEN:',token);
-
-//   res.send(token);
-// })
 
 // MAIN USER PROFILE ROUTE
 app.get("/userProfile/:username", (req, res) => {
