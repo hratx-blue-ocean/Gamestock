@@ -12,6 +12,7 @@ function App() {
     loggedIn: false,
     userName: "",
     userId: 0,
+    userAvatar: "",
   });
 
   const [collectionOwnerName, setCollectionOwnerName] = useState("");
@@ -24,13 +25,12 @@ function App() {
       axios
         .get("/checkLoginStatus")
         .then((result) => {
-          console.log(result.data);
           if (result.data.username && result.data.id) {
-            console.log("about to change stuffs!");
             setLoggedIn({
               loggedIn: true,
               userName: result.data.username,
               userId: result.data.id,
+              userAvatar: result.data.avatar,
             });
           }
         })
