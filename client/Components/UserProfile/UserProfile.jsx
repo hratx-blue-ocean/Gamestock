@@ -2,7 +2,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import AddItem from "./AddItem.jsx"; //add item to modal form
-import Middle from "./Middle.jsx";
+import CollectionList from "./CollectionList.jsx";
 import Paginator from "./Paginator.jsx";
 import { useParams } from "react-router-dom";
 
@@ -56,7 +56,7 @@ const UserProfile = (props) => {
     <div>
       <h2>UserProfile</h2>
       <AddItem />
-      <Middle collection={collection} />
+      <CollectionList collection={collection} />
       <Paginator />
     </div>
   );
