@@ -45,21 +45,8 @@ const getCollectionsByValueOrSize = (sortBy) => {
   return pool.query(SelectQuery);
 };
 
-// should save new items to the database
-const saveItemToDB = ({
-  title,
-  console,
-  is_console,
-  user_id,
-  condition,
-  comments,
-  starting_price,
-  date_of_purchase,
-  tradeable,
-  current_value,
-  thumbnail,
-  front_view,
-}) => {
+// save new items to the database
+const saveItemToDB = ({ title, console, is_console, user_id, condition, comments, starting_price, date_of_purchase, tradeable, current_value, thumbnail, front_view }) => {
   return pool.query(`WITH item_id_var AS (
     INSERT INTO items (title, console, is_console, thumbnail, front_view)
     VALUES ('${title}', '${console}', '${is_console}', '${thumbnail}', '${front_view}') ON CONFLICT (title, console) DO NOTHING
