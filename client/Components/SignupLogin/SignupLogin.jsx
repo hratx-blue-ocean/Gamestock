@@ -91,11 +91,19 @@ function SignupLogin(props) {
     const pass2 = document.getElementById("signupPass2").value;
     const username = document.getElementById("signupUsername").value;
     let body;
-    if (username)
+    let avatar = `${window.location.protocol}//${window.location.hostname}`;
+    if (window.location.port) {
+      avatar = `${avatar}:${window.location.port}`;
+    }
+    avatar = `${avatar}/resources/mario.jpg`;
+    if (username) {
       body = {
         username,
+        avatar,
         password: pass1,
       };
+      console.log(body);
+    }
     if (pass1 === pass2) {
       console.log(pass1, pass2);
       if (body) {
