@@ -91,6 +91,7 @@ const Leaderboard = (props) => {
         .then((recordsByValue) => {
           setCollectionsByValueOrSize(() => recordsByValue.data.rows);
         })
+        .then(() => (document.getElementById("usernameSearch").value = ""))
         .catch((err) => {
           console.log("Error getting top collections by value: ", err);
         });
@@ -100,6 +101,9 @@ const Leaderboard = (props) => {
         .get("/leaderboard/size")
         .then((recordsBySize) => {
           setCollectionsByValueOrSize(() => recordsBySize.data.rows);
+        })
+        .then(() => {
+          document.getElementById("usernameSearch").value = "";
         })
         .catch((err) => {
           console.log("Error getting top collections by size: ", err);
