@@ -25,6 +25,7 @@ const AddItemForm = (props) => {
   const [itemNotes, setItemNotes] = useState("");
   const [itemCondition, setItemCondition] = useState("New");
   const [isTradeable, setIsTradeable] = useState(false);
+  const [isConsole, setIsConsole] = useState(false);
 
   const [itemSelected, setItemSelected] = useState({});
   const [searchedItems, setSearchedItems] = useState([]);
@@ -158,6 +159,16 @@ const AddItemForm = (props) => {
                 checked={isTradeable}
               ></input>
             </div>
+            <div>
+              <label htmlFor="isConsole">This is a Console</label>
+              <input
+                onChange={(e) => setIsConsole(!isConsole)}
+                type="checkbox"
+                id="isConsole"
+                checked={isConsole}
+              ></input>
+            </div>
+
             <StyledButton
               onClick={() => submitInfo(submittedInfo)}
               type="button"
