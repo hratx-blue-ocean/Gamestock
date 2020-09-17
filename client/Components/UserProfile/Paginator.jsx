@@ -17,9 +17,8 @@ const Paginator = ({
       <ul className="pagination">
         {pageNumbers.map((page) => {
           return (
-            <li key={page}>
-              {" "}
-              <a href={handlePageClick}>{page}</a>{" "}
+            <li key={page} value={page} onClick={(e) => handlePageClick(e)}>
+              {page}
             </li>
           );
         })}

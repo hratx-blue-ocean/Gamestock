@@ -11,7 +11,7 @@ const UserProfile = (props) => {
 
   const [collection, setCollection] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [cardsPerPage, setCardsPerPage] = useState(10);
+  const [cardsPerPage] = useState(10);
 
   useEffect(() => {
     if (!collection.length) {
@@ -34,14 +34,19 @@ const UserProfile = (props) => {
   let indexOfFirstCard = indexOflastCard - cardsPerPage;
   let currentCards = collection.slice(indexOfFirstCard, indexOflastCard);
 
-  // loop through page #'s in pagination component
-  // create a tags with lings for page numbers attached to click events
-  // create function to change page and pass to pagination compoenent
+  const handlePageClick = (e) => {
+    // console.log(`page number pagination`, e.target.value);
+    setCurrentPage(e.target.value);
+  };
 
   return (
     <div>
       <CollectionList collection={collection} currentCards={currentCards} />
-      <Paginator collection={collection} cardsPerPage={cardsPerPage} />
+      <Paginator
+        collection={collection}
+        cardsPerPage={cardsPerPage}
+        handlePageClick={handlePageClick}
+      />
     </div>
   );
 };
