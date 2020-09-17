@@ -1,5 +1,3 @@
-
-
 import React, { useState } from "react";
 import AddItemForm from "./AddItemForm.jsx";
 import {
@@ -32,7 +30,7 @@ import styled from "styled-components";
 //add custom styles here between backticks
 const ModalWrapper = styled(Wrapper)``;
 
-export default function AddItem() {
+export default function AddItem(props) {
   const [modalState, setModalState] = useState(false);
 
   const toggleModalState = () => {
@@ -45,12 +43,16 @@ export default function AddItem() {
         <ModalInner onClick={(e) => e.stopPropagation()}>
           <ModalWrapper>
             <Title>Add Item</Title>
-            < AddItemForm exitModal={() => toggleModalState()}/>
+            <AddItemForm
+              userId={props.userId}
+              exitModal={() => toggleModalState()}
+            />
           </ModalWrapper>
         </ModalInner>
       </Modal>
-      <StyledButton onClick={() => toggleModalState()}>Add Item To Your Collection</StyledButton>
+      <StyledButton onClick={() => toggleModalState()}>
+        Add Item To Your Collection
+      </StyledButton>
     </div>
   );
 }
-

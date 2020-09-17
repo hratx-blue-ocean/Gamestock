@@ -35,7 +35,7 @@ const AddItemForm = (props) => {
     title: itemSelected["product-name"],
     console: itemSelected["console-name"],
     is_console: "false", //currently hardcoded as false
-    user_id: 7, //Need to ask auth team
+    user_id: props.userId,
     condition: itemCondition,
     comments: itemNotes,
     starting_price: purchasedPrice,
