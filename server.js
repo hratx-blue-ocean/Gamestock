@@ -7,6 +7,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const axios = require("axios");
+const schedule = require("node-schedule");
 const {
   getCollectionsByValueOrSize,
   saveItemToDB,
@@ -299,6 +300,41 @@ app.get("/checkLoginStatus", tokenAuthorizer, (req, res) => {
     .catch((err) => {
       res.status(500).send(err);
     });
+});
+
+//Function to update Item Price everyday
+var updateDaily = schedule.scheduleJob("* * */11  * * *", function () {
+  Items.getAll({}).then((data) => {
+    const names = data.rows.map((row) => {
+      return axios
+        .get(
+          `https://www.pricecharting.com/api/products?t=36330d87343dc3b342b42a4f6c58b13e443061c8&q=${row.title}_?limit=10`
+        )
+        .then((res) => {
+          return Prices.create(
+            {
+              current_value: res.data.products[0]["new-price"],
+              date: new Date().toUTCString(),
+              item_id: row.id,
+            },
+            "RETURNING item_id, current_value"
+          );
+        });
+    });
+    return Promise.all(names);
+  });
+  // .then((array) => {
+  //   const updateTable = array.map((item) => {
+  //     Items.update(
+  //       {
+  //         id: item.item_id,
+  //       },
+  //       {
+  //         current_price: item.current_value,
+  //       }
+  //     );
+  //   });
+  // });
 });
 
 // handles refresh requests from the userProfile page or any other endpoint *** BROKEN ***
