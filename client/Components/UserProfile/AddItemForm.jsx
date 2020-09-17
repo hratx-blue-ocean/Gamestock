@@ -123,9 +123,9 @@ const AddItemForm = (props) => {
         <div>
           <p>Item Stats:</p>
           <StyledForm>
+
             {/* date when item was bought */}
             <label htmlFor="dateAcquired">Date Acquired:</label>
-
             <StyledInput
               onChange={(e) => setDateAcquired(e.target.value)}
               type="date"
@@ -136,7 +136,6 @@ const AddItemForm = (props) => {
             <br></br>
 
             {/* price at purchase of item */}
-
             <label htmlFor="purchasedPrice">PurchasedPrice:</label>
             <StyledInput
               onChange={(e) => setPurchasedPrice(e.target.value)}
@@ -146,6 +145,7 @@ const AddItemForm = (props) => {
               step="0.01"
               value={purchasedPrice}
             ></StyledInput>
+
             <br></br>
 
             {/* notes for user comments */}
@@ -157,7 +157,9 @@ const AddItemForm = (props) => {
               id="comment"
               value={itemNotes}
             ></Textarea>
+
             <br></br>
+            
             <label htmlFor="ItemCondition">Item Condition:</label>
             <ConditionSelect
               id="ItemCondition"
