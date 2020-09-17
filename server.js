@@ -15,6 +15,9 @@ const {
   getAllConsoles,
   getCollectionByUser,
   getUserCollectionByName,
+  getDailyItemPrice,
+  getDailyCollectionValue,
+  getUserByUsername,
 } = require("./database/dbQueryHelpers");
 
 // ebay API
@@ -308,6 +311,17 @@ app.get("/checkLoginStatus", tokenAuthorizer, (req, res) => {
       res.status(500).send(err);
     });
 });
+// get prices by date by item for graph
+
+app.get("/prices/items", (req, res) => {
+  getDailyItemPrice(req.query.itemID)
+    .then((priceData) => {
+      res.status(200).send(priceData);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
+});
 
 //Function to update Item Price everyday
 // var updateDaily = schedule.scheduleJob("* * */11  * * *", function () {
@@ -330,19 +344,44 @@ app.get("/checkLoginStatus", tokenAuthorizer, (req, res) => {
 //     });
 //     return Promise.all(names);
 //   });
-//   // .then((array) => {
-//   //   const updateTable = array.map((item) => {
-//   //     Items.update(
-//   //       {
-//   //         id: item.item_id,
-//   //       },
-//   //       {
-//   //         current_price: item.current_value,
-//   //       }
-//   //     );
-//   //   });
-//   // });
+// .then((array) => {
+//   const updateTable = array.map((item) => {
+//     Items.update(
+//       {
+//         id: item.item_id,
+//       },
+//       {
+//         current_price: item.current_value,
+//       }
+//     );
+//   });
 // });
+// get value of user collection by date for graph
+
+app.get("/userCollectionValue", (req, res) => {
+  getDailyCollectionValue(req.query.username)
+    .then((collectionData) => {
+      res.status(200).send(collectionData);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
+});
+
+//get username from db & populate banner with information
+
+app.get("/username/collectionValue", (req, res) => {
+  getUserByUsername(req.query.username)
+    .then((userID) => {
+      return getCollectionByUser(userID.rows[0].id);
+    })
+    .then((userCollection) => {
+      res.status(200).send(userCollection);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
+});
 
 // handles refresh requests from the userProfile page or any other endpoint
 app.get("/*", (req, res) => {

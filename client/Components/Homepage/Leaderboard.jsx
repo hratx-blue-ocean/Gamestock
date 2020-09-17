@@ -62,6 +62,19 @@ const Leaderboard = (props) => {
   const handleUserSearchSubmit = (e) => {
     e.preventDefault();
     console.log(`${userSearch} SUBMITTED`);
+    axios
+      .get("/username/collectionValue", {
+        params: {
+          username: userSearch,
+        },
+      })
+      .then((userCollection) => {
+        setCollectionsByValueOrSize(() => userCollection.data.rows);
+      })
+      .then(() => (document.getElementById("usernameSearch").value = ""))
+      .catch((err) => {
+        console.log("Error searching for user: ", err);
+      });
   };
 
   // gets leaderboard, sorted either by value or size depending on which button is pressed
@@ -128,6 +141,7 @@ const Leaderboard = (props) => {
         <LeaderboardGrid>
           <UserSearchForm onSubmit={handleUserSearchSubmit}>
             <StyledInput
+              id="usernameSearch"
               placeholder="search users"
               type="text"
               value={userSearch}
