@@ -42,6 +42,7 @@ function App() {
   return (
     <>
       <Router>
+        <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
         <Switch>
           <Route exact path="/">
             <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />

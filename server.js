@@ -18,8 +18,8 @@ const {
 } = require("./database/dbQueryHelpers");
 
 // ebay API
-let { ebayKey } = require('./eBay.config');
-let eBay = require('ebay-node-api');
+let { ebayKey } = require("./eBay.config");
+let eBay = require("ebay-node-api");
 
 const jwt = require("jsonwebtoken");
 // const jwtExpirySeconds = 300;
@@ -203,26 +203,27 @@ app.get("/leaderboard/size", (req, res) => {
 
 // ebay api connection
 let ebay = new eBay({
-    clientID: ebayKey,
-    marketplaceId: "EBAY_US"
-})
+  clientID: ebayKey,
+  marketplaceId: "EBAY_US",
+});
 
 // ebay api call to get item details based on item name selected by client
 app.get(`/itemDetails/:item`, (req, res) => {
   let keywords = req.params.item;
-  ebay.findItemsByKeywords({
+  ebay
+    .findItemsByKeywords({
       keywords: keywords,
       limit: 1,
-      categoryId: '1249',
+      categoryId: "1249",
       pageNumber: 1,
-      entriesPerPage: 1
+      entriesPerPage: 1,
     })
-  .then((data) => {
+    .then((data) => {
       // send thumbnail image
       res.status(200).send(data[0].searchResult[0].item[0]);
-  })
-  .catch(err => console.log(err))
-})
+    })
+    .catch((err) => console.log(err));
+});
 
 // save item to the database
 app.post(`/saveItems`, (req, res) => {
@@ -238,7 +239,7 @@ app.post(`/saveItems`, (req, res) => {
     tradeable: req.body.tradeable,
     current_value: req.body.current_value,
     thumbnail: req.body.thumbnail,
-    front_view: req.body.front_view
+    front_view: req.body.front_view,
   };
   saveItemToDB(itemData)
     .then((response) => {
@@ -286,7 +287,6 @@ app.get("/collection/user", (req, res) => {
     });
 });
 
-<<<<<<< HEAD
 app.get("/checkLoginStatus", tokenAuthorizer, (req, res) => {
   console.log("checking worked!");
   Users.get({ username: req.user })
@@ -340,10 +340,6 @@ var updateDaily = schedule.scheduleJob("* * */11  * * *", function () {
 
 // handles refresh requests from the userProfile page or any other endpoint *** BROKEN ***
 app.get("/*", (req, res) => {
-=======
-// handles refresh requests from the userProfile page or any other endpoint
-app.get("/*", function (req, res) {
->>>>>>> Creates default route to redirect on refresh.
   res.redirect("/");
 });
 
