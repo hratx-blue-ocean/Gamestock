@@ -56,7 +56,10 @@ function App() {
             />
           </Route>
           <Route path="/profile/:name">
-            <UserProfile collectionOwnerName={collectionOwnerName} />
+            <UserProfile
+              collectionOwnerName={collectionOwnerName}
+              userId={loggedIn.userId}
+            />
           </Route>
         </Switch>
       </Router>

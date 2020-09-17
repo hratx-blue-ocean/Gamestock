@@ -48,6 +48,7 @@ const AddItemForm = (props) => {
   };
 
   function submitInfo(submittedInfo) {
+    console.log("Sumbmitted Info: ", submittedInfo);
     axios
       .post("/saveItems", submittedInfo)
       .then(function (response) {
@@ -84,8 +85,7 @@ const AddItemForm = (props) => {
           }}
         />
 
-        <img src={itemSelectedThumbnail} alt="THIS IS IMAGE OF THING">
-        </img>
+        <img src={itemSelectedThumbnail} alt="THIS IS IMAGE OF THING"></img>
         <br></br>
         <AddItemList
           items={searchedItems}
