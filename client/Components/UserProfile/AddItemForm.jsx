@@ -10,6 +10,7 @@ import {
   WrapGrid,
   StyledButton,
   StyledForm,
+  StyledSelect,
 } from "../Core/coreStyles.jsx";
 
 const Textarea = styled(StyledInput)`
@@ -18,10 +19,13 @@ const Textarea = styled(StyledInput)`
   heigth: 100px;
   padding: 25px;
 `;
+const ConditionSelect = styled(StyledSelect)`
+min-width: 50px;
+`;
 
 const AddItemForm = (props) => {
   const [dateAcquired, setDateAcquired] = useState("");
-  const [purchasedPrice, setPurchasedPrice] = useState(0);
+  const [purchasedPrice, setPurchasedPrice] = useState(0.00);
   const [itemNotes, setItemNotes] = useState("");
   const [itemCondition, setItemCondition] = useState("New");
   const [isTradeable, setIsTradeable] = useState(false);
@@ -35,7 +39,7 @@ const AddItemForm = (props) => {
   const submittedInfo = {
     title: itemSelected["product-name"],
     console: itemSelected["console-name"],
-    is_console: "false", //currently hardcoded as false
+    is_console: "false",
     user_id: props.userId,
     condition: itemCondition,
     comments: itemNotes,
@@ -138,7 +142,7 @@ const AddItemForm = (props) => {
             ></Textarea>
             <br></br>
             <label htmlFor="ItemCondition">Item Condition:</label>
-            <select
+            <ConditionSelect
               id="ItemCondition"
               value={itemCondition}
               onChange={(e) => setItemCondition(e.target.value)}
@@ -148,7 +152,7 @@ const AddItemForm = (props) => {
               <option value="C">C</option>
               <option value="D">D</option>
               <option value="F">F</option>
-            </select>
+            </ConditionSelect>
 
             <div>
               <label htmlFor="forTrade">tradeable</label>
@@ -159,6 +163,7 @@ const AddItemForm = (props) => {
                 checked={isTradeable}
               ></input>
             </div>
+            
             <div>
               <label htmlFor="isConsole">This is a Console</label>
               <input
