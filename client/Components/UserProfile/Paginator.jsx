@@ -1,7 +1,8 @@
 import React from "react";
 import ReactPaginate from "react-paginate";
 
-const Paginator = ({ handlePageClick, count }) => {
+const Paginator = ({ collection, handlePageClick }) => {
+  let count = collection.length;
   const pageCount = Math.ceil(count / 10);
   return (
     <ReactPaginate

@@ -42,41 +42,41 @@ const RightButton = styled(StyledButton)`
 `;
 
 const CollectionList = ({ collection }) => {
-  // console.log("WATCH THIS SHIT", JSON.stringify(collection[0].username));
   return (
     <div>
-      <Wrapper>
-        {/* <Title>{`${collection[0].username}'s Collection`}</Title> */}
-        {/* these first two things are displaying the number of items and their combined value */}
-        <DisplayItems />
-        <UserProfGrid>
-          <GameSearchForm onSubmit={() => {}}>
-            <StyledInput
-              placeholder="search games in collection"
-              type="text"
-              value=""
-              onChange={() => {}}
-            ></StyledInput>
-            <StyledButton>Search</StyledButton>
-          </GameSearchForm>
-          <LeftButton id="sortByTitle" onClick={() => {}}>
-            Title
-          </LeftButton>
-          <MiddleButton id="sortByPrice" onClick={() => {}}>
-            Price
-          </MiddleButton>
-          <MiddleButton id="sortByCondition" onClick={() => {}}>
-            Condition
-          </MiddleButton>
-          <MiddleButton id="sortByPC">PC</MiddleButton>
-          <MiddleButton id="sortBySony">Sony</MiddleButton>
-          <MiddleButton id="sortByXbox">Xbox</MiddleButton>
-          <RightButton id="sortByNintendo">Nintendo</RightButton>
-        </UserProfGrid>
-        <Print />
-        <AddItem />
-        <Card collection={collection} />
-      </Wrapper>
+      {collection[0] && (
+        <Wrapper>
+          <Title>{`${collection[0].username}'s Collection`}</Title>
+          <DisplayItems collection={collection} />
+          <UserProfGrid>
+            <GameSearchForm onSubmit={() => {}}>
+              <StyledInput
+                placeholder="search games in collection"
+                type="text"
+                value=""
+                onChange={() => {}}
+              ></StyledInput>
+              <StyledButton>Search</StyledButton>
+            </GameSearchForm>
+            <LeftButton id="sortByTitle" onClick={() => {}}>
+              Title
+            </LeftButton>
+            <MiddleButton id="sortByPrice" onClick={() => {}}>
+              Price
+            </MiddleButton>
+            <MiddleButton id="sortByCondition" onClick={() => {}}>
+              Condition
+            </MiddleButton>
+            <MiddleButton id="sortByPC">PC</MiddleButton>
+            <MiddleButton id="sortBySony">Sony</MiddleButton>
+            <MiddleButton id="sortByXbox">Xbox</MiddleButton>
+            <RightButton id="sortByNintendo">Nintendo</RightButton>
+          </UserProfGrid>
+          <Print />
+          <AddItem />
+          <Card collection={collection} />
+        </Wrapper>
+      )}
     </div>
   );
 };

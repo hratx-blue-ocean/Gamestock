@@ -1,7 +1,6 @@
 // parent component for user profile
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import AddItem from "./AddItem.jsx"; //add item to modal form
 import CollectionList from "./CollectionList.jsx";
 import Paginator from "./Paginator.jsx";
 import { useParams } from "react-router-dom";
@@ -37,7 +36,7 @@ const UserProfile = (props) => {
   return (
     <div>
       <CollectionList collection={collection} />
-      <Paginator />
+      <Paginator collection={collection} />
     </div>
   );
 };
