@@ -2,7 +2,22 @@ import React, { useState, useEffect } from "react";
 import AddItemList from "./AddItemList.jsx";
 import NewItemSearchBar from "./NewItemSearchBar.jsx";
 import axios from "axios";
+import styled from "styled-components";
+import {
+  StyledInput,
+  Wrapper,
+  Title,
+  WrapGrid,
+  StyledButton,
+  StyledForm,
+} from "../Core/coreStyles.jsx";
 
+const Textarea = styled(StyledInput)`
+  background-color: lightgray;
+  width: 400px;
+  heigth: 100px;
+  padding: 25px;
+`;
 
 const AddItemForm = (props) => {
   const [dateAcquired, setDateAcquired] = useState("");
@@ -10,7 +25,7 @@ const AddItemForm = (props) => {
   const [itemNotes, setItemNotes] = useState("");
   const [itemCondition, setItemCondition] = useState("New");
   const [isTradeable, setIsTradeable] = useState(false);
-
+  const [isConsole, setIsConsole] = useState(false);
 
   const [itemSelected, setItemSelected] = useState({});
   const [searchedItems, setSearchedItems] = useState([]);
@@ -21,7 +36,7 @@ const AddItemForm = (props) => {
     title: itemSelected["product-name"],
     console: itemSelected["console-name"],
     is_console: "false", //currently hardcoded as false
-    user_id: 7, //Need to ask auth team
+    user_id: props.userId,
     condition: itemCondition,
     comments: itemNotes,
     starting_price: purchasedPrice,
@@ -29,7 +44,7 @@ const AddItemForm = (props) => {
     tradeable: `${isTradeable}`,
     current_value: `${itemSelected["retail-cib-sell"]}`,
     thumbnail: itemSelectedThumbnail,
-    front_view: itemSelectedImage
+    front_view: itemSelectedImage,
   };
 
   function submitInfo(submittedInfo) {
@@ -43,19 +58,19 @@ const AddItemForm = (props) => {
       });
   }
 
-// galleryURL // thumbnail
-// pictureURLLarge // image
+  // galleryURL // thumbnail
+  // pictureURLLarge // image
 
   function getImage() {
-    axios.get(`/itemDetails/${itemSelected["product-name"]}`)
-    .then(function (response) {
-      setSelectedThumbnail(response.data.galleryURL[0]); //check response
-      setSelectedImage(response.data.pictureURLLarge[0])
-      console.log("large image response", response.data.pictureURLLarge[0]);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+    axios
+      .get(`/itemDetails/${itemSelected["product-name"]}`)
+      .then(function (response) {
+        setSelectedThumbnail(response.data.galleryURL[0]);
+        setSelectedImage(response.data.pictureURLLarge[0]);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   return (
@@ -68,11 +83,17 @@ const AddItemForm = (props) => {
             setSearchedItems(items);
           }}
         />
+
+        <img src={itemSelectedThumbnail} alt="THIS IS IMAGE OF THING">
+        </img>
         <br></br>
         <AddItemList
           items={searchedItems}
           select={(item) => {
             setItemSelected(item);
+          }}
+          getImage={() => {
+            getImage();
           }}
         />
 
@@ -80,41 +101,41 @@ const AddItemForm = (props) => {
           <p>Item in Inventory: </p> {itemSelected["console-name"] || ""}{" "}
           {itemSelected["product-name"] || ""}
           <p>Item Stats:</p>
-          <form>
+          <StyledForm>
             {/* date when item was bought */}
             <label htmlFor="dateAcquired">Date Acquired:</label>
 
-            <input
+            <StyledInput
               onChange={(e) => setDateAcquired(e.target.value)}
               type="date"
               id="start"
               value={dateAcquired}
-            ></input>
+            ></StyledInput>
 
             <br></br>
 
             {/* price at purchase of item */}
 
             <label htmlFor="purchasedPrice">PurchasedPrice:</label>
-            <input
+            <StyledInput
               onChange={(e) => setPurchasedPrice(e.target.value)}
               id="purchasedPrice"
               type="number"
               min="0.01"
               step="0.01"
               value={purchasedPrice}
-            />
+            ></StyledInput>
             <br></br>
 
             {/* notes for user comments */}
             <label htmlFor="comment">Item description:</label>
-            <textarea
+            <Textarea
               onChange={(e) => setItemNotes(e.target.value)}
               rows="4"
               cols="50"
               id="comment"
               value={itemNotes}
-            ></textarea>
+            ></Textarea>
             <br></br>
             <label htmlFor="ItemCondition">Item Condition:</label>
             <select
@@ -122,10 +143,11 @@ const AddItemForm = (props) => {
               value={itemCondition}
               onChange={(e) => setItemCondition(e.target.value)}
             >
-              <option value="New">New</option>
-              <option value="Used">Used</option>
-              <option value="Good">Good</option>
-              <option value="Fair">Fair</option>
+              <option value="A">A</option>
+              <option value="B">B</option>
+              <option value="C">C</option>
+              <option value="D">D</option>
+              <option value="F">F</option>
             </select>
 
             <div>
@@ -137,13 +159,33 @@ const AddItemForm = (props) => {
                 checked={isTradeable}
               ></input>
             </div>
-            <button onClick={() => submitInfo(submittedInfo)} type="button">
+            <div>
+              <label htmlFor="isConsole">This is a Console</label>
+              <input
+                onChange={(e) => setIsConsole(!isConsole)}
+                type="checkbox"
+                id="isConsole"
+                checked={isConsole}
+              ></input>
+            </div>
+
+            <StyledButton
+              onClick={() => submitInfo(submittedInfo)}
+              type="button"
+            >
               Submit
-            </button>
-          </form>
+            </StyledButton>
+          </StyledForm>
         </div>
-        <button type="button" onClick={() => {getImage()}}>Cancel</button>
-        {/* <button type="button" onClick={() => {props.exitModal()}}>Cancel</button> */}
+
+        <StyledButton
+          type="button"
+          onClick={() => {
+            props.exitModal();
+          }}
+        >
+          Cancel
+        </StyledButton>
       </div>
     </div>
   );

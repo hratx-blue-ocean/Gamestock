@@ -11,6 +11,9 @@ const AddItemList = (props) => {
             select={(item) => {
               props.select(item);
             }}
+            getImage={() => {
+              props.getImage();
+            }}
           />
         );
       })}

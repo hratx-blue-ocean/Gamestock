@@ -7,6 +7,7 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 const cookieParser = require("cookie-parser");
 const axios = require("axios");
+const schedule = require("node-schedule");
 const {
   getCollectionsByValueOrSize,
   saveItemToDB,
@@ -14,14 +15,16 @@ const {
   getAllConsoles,
   getCollectionByUser,
   getUserCollectionByName,
+  getDailyItemPrice,
+  getDailyCollectionValue,
+  getUserByUsername,
 } = require("./database/dbQueryHelpers");
 
 // ebay API
-let { ebayKey } = require('./eBay.config');
-let eBay = require('ebay-node-api');
+let { ebayKey } = require("./eBay.config");
+let eBay = require("ebay-node-api");
 
 const jwt = require("jsonwebtoken");
-// const jwtExpirySeconds = 300;
 const { Collections, Users, Items, Prices } = require("./models/index");
 const tokenAuthorizer = require("./authorization/authorize.js");
 const { runInContext } = require("vm");
@@ -78,6 +81,13 @@ app.post("/login", (req, res) => {
       console.log("Error. Could not log in user: ", err);
       res.status(500);
     });
+});
+
+app.post("/logout", (req, res) => {
+  let token = req.cookies.token;
+
+  res.clearCookie("token");
+  res.redirect("/");
 });
 
 app.post("/signup", (req, res) => {
@@ -202,26 +212,27 @@ app.get("/leaderboard/size", (req, res) => {
 
 // ebay api connection
 let ebay = new eBay({
-    clientID: ebayKey,
-    marketplaceId: "EBAY_US"
-})
+  clientID: ebayKey,
+  marketplaceId: "EBAY_US",
+});
 
 // ebay api call to get item details based on item name selected by client
 app.get(`/itemDetails/:item`, (req, res) => {
   let keywords = req.params.item;
-  ebay.findItemsByKeywords({
+  ebay
+    .findItemsByKeywords({
       keywords: keywords,
       limit: 1,
-      categoryId: '1249',
+      categoryId: "1249",
       pageNumber: 1,
-      entriesPerPage: 1
+      entriesPerPage: 1,
     })
-  .then((data) => {
+    .then((data) => {
       // send thumbnail image
       res.status(200).send(data[0].searchResult[0].item[0]);
-  })
-  .catch(err => console.log(err))
-})
+    })
+    .catch((err) => console.log(err));
+});
 
 // save item to the database
 app.post(`/saveItems`, (req, res) => {
@@ -237,7 +248,7 @@ app.post(`/saveItems`, (req, res) => {
     tradeable: req.body.tradeable,
     current_value: req.body.current_value,
     thumbnail: req.body.thumbnail,
-    front_view: req.body.front_view
+    front_view: req.body.front_view,
   };
   saveItemToDB(itemData)
     .then((response) => {
@@ -300,8 +311,79 @@ app.get("/checkLoginStatus", tokenAuthorizer, (req, res) => {
       res.status(500).send(err);
     });
 });
+// get prices by date by item for graph
 
-// handles refresh requests from the userProfile page or any other endpoint *** BROKEN ***
+app.get("/prices/items", (req, res) => {
+  getDailyItemPrice(req.query.itemID)
+    .then((priceData) => {
+      res.status(200).send(priceData);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
+});
+
+//Function to update Item Price everyday
+// var updateDaily = schedule.scheduleJob("* * */11  * * *", function () {
+//   Items.getAll({}).then((data) => {
+//     const names = data.rows.map((row) => {
+//       return axios
+//         .get(
+//           `https://www.pricecharting.com/api/products?t=36330d87343dc3b342b42a4f6c58b13e443061c8&q=${row.title}_?limit=10`
+//         )
+//         .then((res) => {
+//           return Prices.create(
+//             {
+//               current_value: res.data.products[0]["new-price"],
+//               date: new Date().toUTCString(),
+//               item_id: row.id,
+//             },
+//             "RETURNING item_id, current_value"
+//           );
+//         });
+//     });
+//     return Promise.all(names);
+//   });
+// .then((array) => {
+//   const updateTable = array.map((item) => {
+//     Items.update(
+//       {
+//         id: item.item_id,
+//       },
+//       {
+//         current_price: item.current_value,
+//       }
+//     );
+//   });
+// });
+// get value of user collection by date for graph
+
+app.get("/userCollectionValue", (req, res) => {
+  getDailyCollectionValue(req.query.username)
+    .then((collectionData) => {
+      res.status(200).send(collectionData);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
+});
+
+//get username from db & populate banner with information
+
+app.get("/username/collectionValue", (req, res) => {
+  getUserByUsername(req.query.username)
+    .then((userID) => {
+      return getCollectionByUser(userID.rows[0].id);
+    })
+    .then((userCollection) => {
+      res.status(200).send(userCollection);
+    })
+    .catch((err) => {
+      res.status(500).send(err);
+    });
+});
+
+// handles refresh requests from the userProfile page or any other endpoint
 app.get("/*", (req, res) => {
   res.redirect("/");
 });

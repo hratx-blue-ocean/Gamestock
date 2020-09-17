@@ -35,6 +35,7 @@ const UserProfile = (props) => {
 
   return (
     <div>
+
       <CollectionList collection={collection} />
       <Paginator collection={collection} />
     </div>
