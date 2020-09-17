@@ -23,6 +23,7 @@ const SingleListItem = styled(Wrapper)`
   margin-top: 0;
   line-height: 25px;
   padding: 0;
+  border-radius: 0px;
 `;
 
 const AddItemList = (props) => {
