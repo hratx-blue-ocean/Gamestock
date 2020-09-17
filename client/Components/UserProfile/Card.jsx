@@ -13,27 +13,36 @@ import {
 } from "../Core/coreStyles.jsx";
 
 const Card = ({ collection }) => {
-  return (
-    <div>
-      {/* {collection.rows.map((item) => {
-        return (
-          <div key={item.id}>
-            <CardWrapper>
-              <Thumbnail
-              // src={item.thumbnail}
-              />
-              <Text>{item.title}</Text>
-              <Text>{item.console}</Text>
-              <Text>{item.condition}</Text>
-              <Text>{item.starting_price}</Text>
-              <Text>{item.tradeable ? "Yes" : "No"}</Text>
-              <StyledButton>Delete</StyledButton>
-            </CardWrapper>
-          </div>
-        );
-      })} */}
-    </div>
-  );
+  console.log("CARD COLLECTION: ", collection);
+  if (collection.length) {
+    return (
+      <div>
+        {collection.map((item, idx) => {
+          return (
+            <div key={idx}>
+              <CardWrapper>
+                <Thumbnail
+                // src={item.thumbnail}
+                />
+                <Text>{item.title}</Text>
+                <Text>{item.console}</Text>
+                <Text>{item.condition}</Text>
+                <Text>{item.starting_price}</Text>
+                <Text>{item.tradeable ? "Yes" : "No"}</Text>
+                <StyledButton>Delete</StyledButton>
+              </CardWrapper>
+            </div>
+          );
+        })}
+      </div>
+    );
+  } else {
+    return (
+      <div>
+        <Text>Well, shit.</Text>
+      </div>
+    );
+  }
 };
 
 export default Card;

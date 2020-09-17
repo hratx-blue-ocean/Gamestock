@@ -40,6 +40,8 @@ function App() {
     }
   });
 
+  // console.log("USERNAME: ", loggedIn.userName);
+
   return (
     <>
       <Router>

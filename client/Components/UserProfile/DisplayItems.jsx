@@ -1,13 +1,16 @@
 import React from "react";
 import { Text } from "../Core/CardView.jsx";
 
-const DisplayItems = () => {
+const DisplayItems = ({ collection }) => {
+  // gets sum of what is being displayed
+  let sum = collection.reduce((total, b) => {
+    return total + Number(b.starting_price.slice(1));
+  }, 0);
+
   return (
     <div>
-      <Text>Items in collection: Coming soon to a Blue Ocean Near You!</Text>
-      <Text>
-        Total value of collection: Coming soon to a Blue Ocean Near You!
-      </Text>
+      <Text>Total items displayed: {collection.length}</Text>
+      <Text>Total value displayed: ${sum.toFixed(2)}</Text>
     </div>
   );
 };
