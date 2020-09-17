@@ -16,6 +16,10 @@ const {
   getUserCollectionByName,
 } = require("./database/dbQueryHelpers");
 
+// ebay API
+let { ebayKey } = require('./eBay.config');
+let eBay = require('ebay-node-api');
+
 const jwt = require("jsonwebtoken");
 // const jwtExpirySeconds = 300;
 const { Collections, Users, Items, Prices } = require("./models/index");
@@ -195,25 +199,29 @@ app.get("/leaderboard/size", (req, res) => {
       res.status(500).send(err);
     });
 });
-// IGDB API Get top 10 items by request by keyword
-// app.get(`/getItemDetails`, (req, res) => {
-//   let query = req.query.items;
-//   axios({
-//     url: `https://api-v3.igdb.com/games/?search=${query}&fields=name,platforms,cover,summary`,
-//     method: 'POST',
-//     headers: {
-//         'user-key': IGDBkey
-//     }
-//   })
-//     .then(response => {
-//         res.status(200).send(response.data);
-//         console.log(response.data)
-//     })
-//     .catch((err) => {
-//       console.log(`Error retrieving data from IGDB`);
-//       res.status(500);
-//     });
-// });
+
+// ebay api connection
+let ebay = new eBay({
+    clientID: ebayKey,
+    marketplaceId: "EBAY_US"
+})
+
+// ebay api call to get item details based on item name selected by client
+app.get(`/itemDetails/:item`, (req, res) => {
+  let keywords = req.params.item;
+  ebay.findItemsByKeywords({
+      keywords: keywords,
+      limit: 1,
+      categoryId: '1249',
+      pageNumber: 1,
+      entriesPerPage: 1
+    })
+  .then((data) => {
+      // send thumbnail image
+      res.status(200).send(data[0].searchResult[0].item[0]);
+  })
+  .catch(err => console.log(err))
+})
 
 // save item to the database
 app.post(`/saveItems`, (req, res) => {
@@ -228,6 +236,8 @@ app.post(`/saveItems`, (req, res) => {
     date_of_purchase: req.body.date_of_purchase,
     tradeable: req.body.tradeable,
     current_value: req.body.current_value,
+    thumbnail: req.body.thumbnail,
+    front_view: req.body.front_view
   };
   saveItemToDB(itemData)
     .then((response) => {

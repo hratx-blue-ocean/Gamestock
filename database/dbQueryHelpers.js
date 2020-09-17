@@ -57,12 +57,14 @@ const saveItemToDB = ({
   date_of_purchase,
   tradeable,
   current_value,
+  thumbnail,
+  front_view
 }) => {
   return pool.query(`WITH item_id_var AS (
       INSERT INTO items
-      (title, console, is_console)
+      (title, console, is_console, thumbnail, front_view)
       VALUES
-      ('${title}', '${console}', '${is_console}') ON CONFLICT (title, console) DO NOTHING
+      ('${title}', '${console}', '${is_console}', '${thumbnail}', '${front_view}') ON CONFLICT (title, console) DO NOTHING
     RETURNING id
 ),
     ins2 AS (

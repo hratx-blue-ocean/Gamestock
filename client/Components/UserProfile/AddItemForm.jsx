@@ -11,8 +11,11 @@ const AddItemForm = (props) => {
   const [itemCondition, setItemCondition] = useState("New");
   const [isTradeable, setIsTradeable] = useState(false);
 
+
   const [itemSelected, setItemSelected] = useState({});
   const [searchedItems, setSearchedItems] = useState([]);
+  const [itemSelectedThumbnail, setSelectedThumbnail] = useState("");
+  const [itemSelectedImage, setSelectedImage] = useState("");
 
   const submittedInfo = {
     title: itemSelected["product-name"],
@@ -25,6 +28,8 @@ const AddItemForm = (props) => {
     date_of_purchase: dateAcquired,
     tradeable: `${isTradeable}`,
     current_value: `${itemSelected["retail-cib-sell"]}`,
+    thumbnail: itemSelectedThumbnail,
+    front_view: itemSelectedImage
   };
 
   function submitInfo(submittedInfo) {
@@ -36,6 +41,21 @@ const AddItemForm = (props) => {
       .catch(function (error) {
         console.log(error);
       });
+  }
+
+// galleryURL // thumbnail
+// pictureURLLarge // image
+
+  function getImage() {
+    axios.get(`/itemDetails/${itemSelected["product-name"]}`)
+    .then(function (response) {
+      setSelectedThumbnail(response.data.galleryURL[0]); //check response
+      setSelectedImage(response.data.pictureURLLarge[0])
+      console.log("large image response", response.data.pictureURLLarge[0]);
+    })
+    .catch(function (error) {
+      console.log(error);
+    });
   }
 
   return (
@@ -122,8 +142,8 @@ const AddItemForm = (props) => {
             </button>
           </form>
         </div>
-
-        <button type="button" onClick={() => {props.exitModal()}}>Cancel</button>
+        <button type="button" onClick={() => {getImage()}}>Cancel</button>
+        {/* <button type="button" onClick={() => {props.exitModal()}}>Cancel</button> */}
       </div>
     </div>
   );
