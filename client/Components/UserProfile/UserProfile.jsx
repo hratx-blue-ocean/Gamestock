@@ -54,7 +54,7 @@ const UserProfile = (props) => {
 
   return (
     <div>
-      <h2>UserProfile!</h2>
+      <h2>UserProfile</h2>
       <AddItem />
       <Middle collection={collection} />
       <Paginator />
