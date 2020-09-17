@@ -9,6 +9,7 @@ import {
   Title,
   WrapGrid,
   StyledButton,
+  NegativeButton,
   StyledForm,
   StyledSelect,
 } from "../Core/coreStyles.jsx";
@@ -22,7 +23,6 @@ const Textarea = styled(StyledInput)`
 const ConditionSelect = styled(StyledSelect)`
   min-width: 50px;
 `;
-
 const GriddedItems = styled(WrapGrid)`
   grid-template-columns: 425px 375px;
 `;
@@ -31,6 +31,11 @@ const Thumbnail = styled(StyledForm)`
 `;
 
 const AddItemForm = (props) => {
+  const [itemSelected, setItemSelected] = useState({});
+  const [searchedItems, setSearchedItems] = useState([]);
+  const [itemSelectedThumbnail, setSelectedThumbnail] = useState("");
+  const [itemSelectedImage, setSelectedImage] = useState("");
+
   const [dateAcquired, setDateAcquired] = useState("");
   const [purchasedPrice, setPurchasedPrice] = useState(0.0);
   const [itemNotes, setItemNotes] = useState("");
@@ -38,10 +43,6 @@ const AddItemForm = (props) => {
   const [isTradeable, setIsTradeable] = useState(false);
   const [isConsole, setIsConsole] = useState(false);
 
-  const [itemSelected, setItemSelected] = useState({});
-  const [searchedItems, setSearchedItems] = useState([]);
-  const [itemSelectedThumbnail, setSelectedThumbnail] = useState("");
-  const [itemSelectedImage, setSelectedImage] = useState("");
 
   const submittedInfo = {
     title: itemSelected["product-name"],
@@ -70,9 +71,6 @@ const AddItemForm = (props) => {
       });
   }
 
-  // galleryURL // thumbnail
-  // pictureURLLarge // image
-
   function getImage() {
     axios
       .get(`/itemDetails/${itemSelected["product-name"]}`)
@@ -84,6 +82,18 @@ const AddItemForm = (props) => {
         console.log(error);
       });
   }
+  function clearForm() {
+    setItemSelected({});
+    setSearchedItems([]);
+    setSelectedThumbnail("");
+    setSelectedImage("");
+    setDateAcquired("");
+    setPurchasedPrice(0.0);
+    setItemNotes("");
+    setItemCondition("A");
+    setIsTradeable(false);
+    setIsConsole(false);
+  };
 
   return (
     <div>
@@ -189,14 +199,15 @@ const AddItemForm = (props) => {
             </StyledButton>
           </StyledForm>
         </div>
-        <StyledButton
+        <NegativeButton
           type="button"
           onClick={() => {
             props.exitModal();
+            clearForm();
           }}
         >
           Cancel
-        </StyledButton>
+        </NegativeButton>
       </div>
     </div>
   );
