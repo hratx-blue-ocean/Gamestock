@@ -102,10 +102,8 @@ function SignupLogin(props) {
         avatar,
         password: pass1,
       };
-      console.log(body);
     }
     if (pass1 === pass2) {
-      console.log(pass1, pass2);
       if (body) {
         axios
           .post("/signup", body, {
@@ -113,16 +111,18 @@ function SignupLogin(props) {
           })
           .then((result) => {
             //probably push this state back to app.jsx
-            console.log(result);
             if (typeof result.data === "string") {
               alertMessage("usernameTakenError");
             } else {
               let id = result.data.rows[0].id;
               let username = result.data.rows[0].username;
+              let avatar = result.data.rows[0].avatar;
+              console.log(result.data.rows[0]);
               setLoggedIn({
                 loggedIn: true,
                 userName: username,
                 userId: id,
+                userAvatar: avatar,
               });
             }
           })
@@ -139,7 +139,6 @@ function SignupLogin(props) {
 
   function logIn(e) {
     e.preventDefault();
-    console.log("LoginFIred");
     const username = document.getElementById("loginUsername").value;
     const password = document.getElementById("loginPass").value;
     if (username && password) {
@@ -147,7 +146,6 @@ function SignupLogin(props) {
         username,
         password,
       };
-      console.log("about to send request:", body);
       axios
         .post("/login", body, {
           "Content-Type": "application/json",
@@ -155,12 +153,12 @@ function SignupLogin(props) {
         .then((result) => {
           if (typeof result.data === "string") {
             alertMessage("usernameOrPassError");
-            console.log(result);
           } else {
-            console.log(result);
             let id = result.data.id;
             let username = result.data.username;
+            let avatar = result.data.avatar;
             setLoggedIn({
+              userAvatar: avatar,
               loggedIn: true,
               userName: username,
               userId: id,
@@ -171,9 +169,6 @@ function SignupLogin(props) {
           console.log(err);
           alertMessage("usernameOrPassError");
         });
-    } else {
-      console.log(username);
-      console.log(password);
     }
   }
 

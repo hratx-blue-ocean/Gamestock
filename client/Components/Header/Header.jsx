@@ -45,15 +45,22 @@ const Thumbnail = styled.img`
 `;
 
 const Header = ({ loggedIn, setLoggedIn }) => {
-  const [userOptions] = useState([
+  console.log(loggedIn.userName);
+  const [userOptions, setUserOptions] = useState([
+    {
+      label: "user",
+      value: 0,
+    },
     {
       label: "Go to",
       value: "default",
     },
     { label: "Log out", value: "logout" },
   ]);
+  console.log(userOptions);
 
   const handleChange = (event) => {
+    event.preventDefault();
     if (event.target.value === "logout") {
       axios
         .post("/logout")
@@ -62,15 +69,31 @@ const Header = ({ loggedIn, setLoggedIn }) => {
             loggedIn: false,
             userName: "",
             userId: 0,
+            userAvatar: "",
           });
         })
         .catch((err) => console.log(err));
-    } else {
-      event.preventDefault();
+    } else if (event.target.value === "userProfile") {
       //switch to user profile
     }
   };
-  console.log(`/profile/${loggedIn.userName}`);
+
+  useEffect(() => {
+    if (userOptions[0].value === 0 && loggedIn.loggedIn) {
+      setUserOptions([
+        {
+          label: loggedIn.userName,
+          value: loggedIn.userId,
+        },
+        {
+          label: "See my profile",
+          value: "userProfile",
+        },
+        { label: "Log out", value: "logout" },
+      ]);
+    }
+  });
+
   return (
     <>
       <BannerWrapper>
@@ -80,15 +103,33 @@ const Header = ({ loggedIn, setLoggedIn }) => {
               <Thumbnail src="https://i.imgur.com/XYg49nh.jpg"></Thumbnail>
             </Link>
             <Link to="/">
-              <AvatarWrapper src={avatar}></AvatarWrapper>
+              <AvatarWrapper src={loggedIn.userAvatar}></AvatarWrapper>
             </Link>
             <Dropdown value="selection" onChange={(e) => handleChange(e)}>
-              <option key={userOptions[0].value} value={userOptions[0].value}>
+              {userOptions.map((option, index) => {
+                if (!index) {
+                  return (
+                    <option key={option.value} value={option.value} selected>
+                      {option.label}
+                    </option>
+                  );
+                } else {
+                  return (
+                    <option key={option.value} value={option.value}>
+                      {option.label}
+                    </option>
+                  );
+                }
+              })}
+              {/* <option key={userOptions[0].value} value={userOptions[0].value}>
                 {userOptions[0].label}
               </option>
               <option key={userOptions[1].value} value={userOptions[1].value}>
                 {userOptions[1].label}
               </option>
+              <option key={userOptions[2].value} value={userOptions[2].value}>
+                {userOptions[1].label}
+              </option> */}
             </Dropdown>
           </>
         ) : (

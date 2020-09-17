@@ -36,9 +36,8 @@ const Homepage = ({
         },
       })
       .then((collection) => {
-        if (collection.data.rows[0]) {
-          setUserCollection(() => collection.data.rows[0]);
-        }
+        console.log("COLLECTION: ", collection);
+        setUserCollection(() => collection.data.rows[0]);
       })
       .catch((err) => {
         console.log("Error retrieving collection: ", err);

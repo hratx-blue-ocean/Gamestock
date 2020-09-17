@@ -81,8 +81,6 @@ app.post("/login", (req, res) => {
 });
 
 app.post("/logout", (req, res) => {
-  let token = req.cookies.token;
-
   res.clearCookie("token");
   res.redirect("/");
 });
@@ -102,6 +100,7 @@ app.post("/signup", (req, res) => {
         //if user does not exist, create one
         Users.create(req.body)
           .then((response) => {
+            console.log(response);
             const token = jwt.sign(
               username.username,
               process.env.ACCESS_TOKEN_SECRET,
@@ -297,13 +296,12 @@ app.get("/collection/user", (req, res) => {
 });
 
 app.get("/checkLoginStatus", tokenAuthorizer, (req, res) => {
-  console.log("checking worked!");
   Users.get({ username: req.user })
     .then((results) => {
-      console.log("got results, ", results);
       const user = {
         username: results.username,
         id: results.id,
+        avatar: results.avatar,
       };
       res.status(200).send(user);
     })

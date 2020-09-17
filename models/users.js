@@ -29,7 +29,11 @@ class Users extends Crud {
           hashed_pw,
         };
 
-        return super.create.call(this, newUser, "RETURNING id, username");
+        return super.create.call(
+          this,
+          newUser,
+          "RETURNING id, username, avatar"
+        );
       })
       .catch((err) => console.log("Unable to hash password: ", err));
   }
