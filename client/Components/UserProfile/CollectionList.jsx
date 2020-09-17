@@ -41,7 +41,7 @@ const RightButton = styled(StyledButton)`
   border: 1px solid;
 `;
 
-const CollectionList = ({ collection }) => {
+const CollectionList = ({ collection, currentCards }) => {
   return (
     <div>
       {collection[0] && (
@@ -74,7 +74,7 @@ const CollectionList = ({ collection }) => {
           </UserProfGrid>
           <Print />
           <AddItem />
-          <Card collection={collection} />
+          <Card collection={collection} currentCards={currentCards} />
         </Wrapper>
       )}
     </div>

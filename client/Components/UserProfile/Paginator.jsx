@@ -1,23 +1,30 @@
 import React from "react";
-import ReactPaginate from "react-paginate";
+// import ReactPaginate from "react-paginate"; ew packages!
 
-const Paginator = ({ collection, handlePageClick }) => {
-  let count = collection.length;
-  const pageCount = Math.ceil(count / 10);
+const Paginator = ({
+  collection,
+  cardsPerPage,
+  currentCards,
+  handlePageClick,
+}) => {
+  const pageNumbers = [];
+
+  for (let i = 1; i <= Math.ceil(collection.length / cardsPerPage); i++) {
+    pageNumbers.push(i);
+  }
   return (
-    <ReactPaginate
-      pageCount={pageCount}
-      pageRangeDisplayed={3}
-      marginPagesDisplayed={1}
-      onPageChange={handlePageClick}
-      previousLabel={"previous"}
-      nextLabel={"next"}
-      breakLabel={"..."}
-      breakClassName={"break-me"}
-      containerClassName={"pagination"}
-      subContainerClassName={"pages pagination"}
-      activeClassName={"active"}
-    />
+    <div>
+      <ul className="pagination">
+        {pageNumbers.map((page) => {
+          return (
+            <li key={page}>
+              {" "}
+              <a href={handlePageClick}>{page}</a>{" "}
+            </li>
+          );
+        })}
+      </ul>
+    </div>
   );
 };
 
