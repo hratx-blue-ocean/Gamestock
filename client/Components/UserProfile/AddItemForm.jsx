@@ -176,7 +176,7 @@ const AddItemForm = (props) => {
               <option value="F">F</option>
             </ConditionSelect>
 
-            <div>
+            {/* <div>
               <label htmlFor="forTrade">tradeable</label>
               <input
                 onChange={(e) => setIsTradeable(!isTradeable)}
@@ -184,7 +184,19 @@ const AddItemForm = (props) => {
                 id="forTrade"
                 checked={isTradeable}
               ></input>
-            </div>
+            </div> */}
+
+            <StyledRadio>
+              <input
+                onClick={(e) => setIsTradeable(!isTradeable)}
+                type="radio"
+                id="forTrade"
+                checked={isTradeable}
+                value={isTradeable}
+                onChange={() => {}}
+              ></input>
+              <label htmlFor="forTrade">Tradeable</label>
+            </StyledRadio>
 
             {/* <div>
               <label htmlFor="isConsole">This is a Console</label>
@@ -197,14 +209,15 @@ const AddItemForm = (props) => {
             </div> */}
 
             <StyledRadio>
-            <input
+              <input
                 onClick={(e) => setIsConsole(!isConsole)}
                 type="radio"
                 id="isConsole"
                 checked={isConsole}
                 value={isConsole}
+                onChange={() => {}}
               ></input>
-               <label htmlFor={isConsole}>This is a console</label>
+              <label htmlFor="isConsole">This is a console</label>
             </StyledRadio>
 
             <StyledButton
