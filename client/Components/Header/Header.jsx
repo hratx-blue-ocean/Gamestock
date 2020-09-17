@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { StyledButton, Wrapper, Dropdown } from "../Core/coreStyles.jsx";
+import { Wrapper, Dropdown } from "../Core/coreStyles.jsx";
 import styled from "styled-components";
 import SignupLogin from "../SignupLogin/SignupLogin.jsx";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import avatar from "../../Icons/pacman.svg";
+import avatar2 from "../../Icons/defaultAvatar.png";
 
 const BannerWrapper = styled(Wrapper)`
   margin-top: 10px;
@@ -19,8 +21,7 @@ const BannerWrapper = styled(Wrapper)`
 `;
 
 const AvatarWrapper = styled.img`
-  margin-left: 70%;
-  margin-top: 20px;
+  margin-top: 3%;
   padding: 5px 0px;
   &:hover {
     cursor: pointer;
@@ -28,17 +29,16 @@ const AvatarWrapper = styled.img`
   border-radius: 50%;
   max-height: 50px;
   max-width: 50px;
+  margin-left: 56rem;
 `;
 
 const Logo = styled.img`
-  grid-column-start: 1;
   height: 200px;
   weight: 550px;
   display: flex;
 `;
 
 const Thumbnail = styled.img`
-  grid-column-start: 1;
   height: 100px;
   weight: 550px;
   display: flex;
@@ -47,8 +47,8 @@ const Thumbnail = styled.img`
 const Header = ({ loggedIn, setLoggedIn }) => {
   const [userOptions] = useState([
     {
-      label: "See my profile",
-      value: "userProfile",
+      label: "Go to",
+      value: "default",
     },
     { label: "Log out", value: "logout" },
   ]);
@@ -58,7 +58,6 @@ const Header = ({ loggedIn, setLoggedIn }) => {
       axios
         .post("/logout")
         .then((res) => {
-          console.log(res);
           setLoggedIn({
             loggedIn: false,
             userName: "",
@@ -71,7 +70,7 @@ const Header = ({ loggedIn, setLoggedIn }) => {
       //switch to user profile
     }
   };
-
+  console.log(`/profile/${loggedIn.userName}`);
   return (
     <>
       <BannerWrapper>
@@ -80,7 +79,9 @@ const Header = ({ loggedIn, setLoggedIn }) => {
             <Link to="/">
               <Thumbnail src="https://i.imgur.com/XYg49nh.jpg"></Thumbnail>
             </Link>
-            <AvatarWrapper src="https://s3.amazonaws.com/uifaces/faces/twitter/timmillwood/128.jpg"></AvatarWrapper>
+            <Link to="/">
+              <AvatarWrapper src={avatar}></AvatarWrapper>
+            </Link>
             <Dropdown value="selection" onChange={(e) => handleChange(e)}>
               <option key={userOptions[0].value} value={userOptions[0].value}>
                 {userOptions[0].label}
@@ -92,7 +93,7 @@ const Header = ({ loggedIn, setLoggedIn }) => {
           </>
         ) : (
           <>
-            <Link to="/">
+            <Link to={`/profile/${loggedIn.userName}`}>
               <Logo src="https://i.imgur.com/xlbOHDd.jpg"></Logo>
             </Link>
             <SignupLogin setLoggedIn={setLoggedIn} />
