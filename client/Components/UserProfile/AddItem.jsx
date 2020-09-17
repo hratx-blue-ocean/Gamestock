@@ -43,7 +43,6 @@ export default function AddItem(props) {
 
   return (
     <div>
-    {console.log("this is Addditem", props)}
       <Modal modalState={modalState} onClick={() => toggleModalState()}>
         <ModalBody onClick={(e) => e.stopPropagation()}>
           <ModalWrapper>

@@ -234,7 +234,6 @@ const AddItemForm = (props) => {
         <NegativeButton
           type="button"
           onClick={() => {
-            console.log("THis is userId",props.userId);
             props.exitModal();
             clearForm();
           }}
