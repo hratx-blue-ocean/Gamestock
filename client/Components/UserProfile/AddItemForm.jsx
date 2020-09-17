@@ -221,7 +221,10 @@ const AddItemForm = (props) => {
             </StyledRadio>
 
             <StyledButton
-              onClick={() => submitInfo(submittedInfo)}
+              onClick={() => {
+                submitInfo(submittedInfo);
+                clearForm();
+              }}
               type="button"
             >
               Submit
@@ -231,6 +234,7 @@ const AddItemForm = (props) => {
         <NegativeButton
           type="button"
           onClick={() => {
+            console.log("THis is userId",props.userId);
             props.exitModal();
             clearForm();
           }}
