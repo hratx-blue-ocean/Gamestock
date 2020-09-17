@@ -75,9 +75,11 @@ const saveItemToDB = ({
 		RETURNING item_id
 		)
     INSERT INTO items_value_by_date
-      (item_id, current_value)
+      (item_id, date, current_value)
     VALUES
-      ((SELECT id FROM item_id_var), '${current_value}')`);
+      ((SELECT id FROM item_id_var), ${new Date().toUTCString()}, ${
+    Number(current_value) / 100
+  }')`);
 };
 
 // query for getting leaderboard sorted by console

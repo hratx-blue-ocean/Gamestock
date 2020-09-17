@@ -10,7 +10,7 @@ const Homepage = ({
   setCollectionOwnerName,
   loggedIn,
 }) => {
-  const [userID, setUserID] = useState(1);
+  const [userID, setUserID] = useState(121);
   const [userCollection, setUserCollection] = useState({});
   const [itemID, setItemID] = useState(7);
   const [priceData, setPriceData] = useState([]);
@@ -23,6 +23,9 @@ const Homepage = ({
   };
   useEffect(() => {
     // sort by value on page load
+    if (userID === 0 && loggedIn) {
+      setUserID(loggedIn.userId);
+    }
     getUserCollection(userID);
     getDailyPrices(itemID);
     getDailyCollectionPrice("Adeline.Koepp47");
