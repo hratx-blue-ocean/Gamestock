@@ -64,7 +64,7 @@ const saveItemToDB = ({
       INSERT INTO items
       (title, console, is_console, thumbnail, front_view)
       VALUES
-      ('${title}', '${console}', '${is_console}', '${thumbnail}', '${front_view}') ON CONFLICT (title, console) DO NOTHING
+      ($$${title}$$, '${console}', '${is_console}', '${thumbnail}', '${front_view}') ON CONFLICT (title, console) DO NOTHING
     RETURNING id
 ),
     ins2 AS (
@@ -77,9 +77,9 @@ const saveItemToDB = ({
     INSERT INTO items_value_by_date
       (item_id, date, current_value)
     VALUES
-      ((SELECT id FROM item_id_var), ${new Date().toUTCString()}, ${
+      ((SELECT id FROM item_id_var), '${new Date().toUTCString()}', ${
     Number(current_value) / 100
-  }')`);
+  })`);
 };
 
 // query for getting leaderboard sorted by console
