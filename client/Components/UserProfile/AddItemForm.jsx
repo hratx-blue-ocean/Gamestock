@@ -28,6 +28,9 @@ const GriddedItems = styled(WrapGrid)`
 `;
 const Thumbnail = styled(StyledForm)`
   grid-column-start: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
 `;
 
 const AddItemForm = (props) => {
@@ -42,7 +45,6 @@ const AddItemForm = (props) => {
   const [itemCondition, setItemCondition] = useState("New");
   const [isTradeable, setIsTradeable] = useState(false);
   const [isConsole, setIsConsole] = useState(false);
-
 
   const submittedInfo = {
     title: itemSelected["product-name"],
@@ -82,6 +84,7 @@ const AddItemForm = (props) => {
         console.log(error);
       });
   }
+
   function clearForm() {
     setItemSelected({});
     setSearchedItems([]);
@@ -93,7 +96,7 @@ const AddItemForm = (props) => {
     setItemCondition("A");
     setIsTradeable(false);
     setIsConsole(false);
-  };
+  }
 
   return (
     <div>
@@ -117,13 +120,12 @@ const AddItemForm = (props) => {
             }}
           />
           <Thumbnail>
-            <img src={itemSelectedThumbnail} alt="THIS IS IMAGE OF THING"></img>
+            <img src={itemSelectedThumbnail}></img>
           </Thumbnail>
         </GriddedItems>
         <div>
           <p>Item Stats:</p>
           <StyledForm>
-
             {/* date when item was bought */}
             <label htmlFor="dateAcquired">Date Acquired:</label>
             <StyledInput
@@ -159,7 +161,7 @@ const AddItemForm = (props) => {
             ></Textarea>
 
             <br></br>
-            
+
             <label htmlFor="ItemCondition">Item Condition:</label>
             <ConditionSelect
               id="ItemCondition"
