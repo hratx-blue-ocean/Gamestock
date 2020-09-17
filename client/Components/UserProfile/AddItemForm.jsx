@@ -26,7 +26,6 @@ const AddItemForm = (props) => {
   const [itemCondition, setItemCondition] = useState("New");
   const [isTradeable, setIsTradeable] = useState(false);
 
-
   const [itemSelected, setItemSelected] = useState({});
   const [searchedItems, setSearchedItems] = useState([]);
   const [itemSelectedThumbnail, setSelectedThumbnail] = useState("");
@@ -44,7 +43,7 @@ const AddItemForm = (props) => {
     tradeable: `${isTradeable}`,
     current_value: `${itemSelected["retail-cib-sell"]}`,
     thumbnail: itemSelectedThumbnail,
-    front_view: itemSelectedImage
+    front_view: itemSelectedImage,
   };
 
   function submitInfo(submittedInfo) {
@@ -58,19 +57,19 @@ const AddItemForm = (props) => {
       });
   }
 
-// galleryURL // thumbnail
-// pictureURLLarge // image
+  // galleryURL // thumbnail
+  // pictureURLLarge // image
 
   function getImage() {
-    axios.get(`/itemDetails/${itemSelected["product-name"]}`)
-    .then(function (response) {
-      setSelectedThumbnail(response.data.galleryURL[0]); //check response
-      setSelectedImage(response.data.pictureURLLarge[0])
-      console.log("large image response", response.data.pictureURLLarge[0]);
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+    axios
+      .get(`/itemDetails/${itemSelected["product-name"]}`)
+      .then(function (response) {
+        setSelectedThumbnail(response.data.galleryURL[0]);
+        setSelectedImage(response.data.pictureURLLarge[0]);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
   }
 
   return (
@@ -83,11 +82,17 @@ const AddItemForm = (props) => {
             setSearchedItems(items);
           }}
         />
+
+        <img src={itemSelectedThumbnail} alt="THIS IS IMAGE OF THING">
+        </img>
         <br></br>
         <AddItemList
           items={searchedItems}
           select={(item) => {
             setItemSelected(item);
+          }}
+          getImage={() => {
+            getImage();
           }}
         />
 
@@ -142,7 +147,6 @@ const AddItemForm = (props) => {
               <option value="C">C</option>
               <option value="D">D</option>
               <option value="F">F</option>
-
             </select>
 
             <div>
