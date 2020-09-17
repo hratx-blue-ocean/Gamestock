@@ -9,6 +9,7 @@ import {
   Title,
   WrapGrid,
   StyledButton,
+  StyledRadio,
   NegativeButton,
   StyledForm,
   StyledSelect,
@@ -185,7 +186,7 @@ const AddItemForm = (props) => {
               ></input>
             </div>
 
-            <div>
+            {/* <div>
               <label htmlFor="isConsole">This is a Console</label>
               <input
                 onChange={(e) => setIsConsole(!isConsole)}
@@ -193,7 +194,18 @@ const AddItemForm = (props) => {
                 id="isConsole"
                 checked={isConsole}
               ></input>
-            </div>
+            </div> */}
+
+            <StyledRadio>
+            <input
+                onClick={(e) => setIsConsole(!isConsole)}
+                type="radio"
+                id="isConsole"
+                checked={isConsole}
+                value={isConsole}
+              ></input>
+               <label htmlFor={isConsole}>This is a console</label>
+            </StyledRadio>
 
             <StyledButton
               onClick={() => submitInfo(submittedInfo)}

@@ -57,10 +57,14 @@ function App() {
             />
           </Route>
           <Route path="/profile/:name">
+<<<<<<< HEAD
             <UserProfile
               collectionOwnerName={collectionOwnerName}
               userId={loggedIn.userId}
             />
+=======
+            <UserProfile collectionOwnerName={collectionOwnerName} userId={loggedIn.userId}/>
+>>>>>>> added back userId prop
           </Route>
         </Switch>
       </Router>
