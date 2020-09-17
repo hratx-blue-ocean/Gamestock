@@ -20,18 +20,19 @@ const Textarea = styled(StyledInput)`
   padding: 25px;
 `;
 const ConditionSelect = styled(StyledSelect)`
-min-width: 50px;
+  min-width: 50px;
 `;
 
-// const AddItemList = styled(Wrapper)`
-//   border:1px solid #000;
-//   font-family:arial;
-//   height:100px;
-//   width:200px;`;
+const GriddedItems = styled(WrapGrid)`
+  grid-template-columns: 425px 375px;
+`;
+const Thumbnail = styled(StyledForm)`
+  grid-column-start: 2;
+`;
 
 const AddItemForm = (props) => {
   const [dateAcquired, setDateAcquired] = useState("");
-  const [purchasedPrice, setPurchasedPrice] = useState(0.00);
+  const [purchasedPrice, setPurchasedPrice] = useState(0.0);
   const [itemNotes, setItemNotes] = useState("");
   const [itemCondition, setItemCondition] = useState("New");
   const [isTradeable, setIsTradeable] = useState(false);
@@ -87,29 +88,29 @@ const AddItemForm = (props) => {
   return (
     <div>
       <div>
-        <h2>Add an item to your collection</h2>
-
         <NewItemSearchBar
           getSearchedItems={(items) => {
             setSearchedItems(items);
           }}
         />
-
-        <img src={itemSelectedThumbnail} alt="THIS IS IMAGE OF THING"></img>
+        <p>Item to Add: </p> {itemSelected["console-name"] || ""}{" "}
+        {itemSelected["product-name"] || ""}
         <br></br>
-        <AddItemList
-          items={searchedItems}
-          select={(item) => {
-            setItemSelected(item);
-          }}
-          getImage={() => {
-            getImage();
-          }}
-        />
-
+        <GriddedItems>
+          <AddItemList
+            items={searchedItems}
+            select={(item) => {
+              setItemSelected(item);
+            }}
+            getImage={() => {
+              getImage();
+            }}
+          />
+          <Thumbnail>
+            <img src={itemSelectedThumbnail} alt="THIS IS IMAGE OF THING"></img>
+          </Thumbnail>
+        </GriddedItems>
         <div>
-          <p>Item in Inventory: </p> {itemSelected["console-name"] || ""}{" "}
-          {itemSelected["product-name"] || ""}
           <p>Item Stats:</p>
           <StyledForm>
             {/* date when item was bought */}
@@ -169,7 +170,7 @@ const AddItemForm = (props) => {
                 checked={isTradeable}
               ></input>
             </div>
-            
+
             <div>
               <label htmlFor="isConsole">This is a Console</label>
               <input
@@ -188,7 +189,6 @@ const AddItemForm = (props) => {
             </StyledButton>
           </StyledForm>
         </div>
-
         <StyledButton
           type="button"
           onClick={() => {

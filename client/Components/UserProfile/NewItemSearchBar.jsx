@@ -35,21 +35,15 @@ const NewItemSearchBar = ({ getSearchedItems }) => {
 
   return (
     <div>
-      <span>Search Item:</span>
-      <div>
-        <StyledInput
-          type="text"
-          onChange={(e) => {
-            setInput(e.target.value);
-          }}
-        />
-        <StyledButton onClick={() => getItems(input)}>Search</StyledButton>
-      </div>
-      {/* {items.map((item, key) => {
-        <div>
-          {item.id}
-        </div>
-      })} */}
+      <br></br>
+      <StyledInput
+        type="text"
+        onChange={(e) => {
+          setInput(e.target.value);
+        }}
+      />
+      <StyledButton onClick={() => getItems(input)}>Search</StyledButton>
+      <br></br>
     </div>
   );
 };

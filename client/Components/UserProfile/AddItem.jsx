@@ -30,6 +30,10 @@ import styled from "styled-components";
 //add custom styles here between backticks
 const ModalWrapper = styled(Wrapper)``;
 
+const ModalBody= styled(ModalInner) `
+width: 800px;
+`;
+
 export default function AddItem(props) {
   const [modalState, setModalState] = useState(false);
 
@@ -40,15 +44,15 @@ export default function AddItem(props) {
   return (
     <div>
       <Modal modalState={modalState} onClick={() => toggleModalState()}>
-        <ModalInner onClick={(e) => e.stopPropagation()}>
+        <ModalBody onClick={(e) => e.stopPropagation()}>
           <ModalWrapper>
-            <Title>Add Item</Title>
+            <Title>Add Item To Your Collection</Title>
             <AddItemForm
               userId={props.userId}
               exitModal={() => toggleModalState()}
             />
           </ModalWrapper>
-        </ModalInner>
+        </ModalBody>
       </Modal>
       <StyledButton onClick={() => toggleModalState()}>
         Add Item To Your Collection

@@ -11,6 +11,7 @@ import {
 import styled from "styled-components";
 
 const UnorderedList = styled(Wrapper)`
+  grid-column-start: 1;
   list-style: none;
   max-height: 300px;
   width: 400px;
