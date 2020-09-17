@@ -99,7 +99,6 @@ const Homepage = ({
         collectionOwnerName={collectionOwnerName}
         setCollectionOwnerName={setCollectionOwnerName}
       />
-      <Leaderboard />
       <PriceGraph dates={priceData[0]} prices={priceData[1]} />
       <PriceGraph
         dates={userCollectionData[0]}
