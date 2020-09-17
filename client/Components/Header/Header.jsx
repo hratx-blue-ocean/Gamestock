@@ -95,7 +95,7 @@ const Header = ({ loggedIn, setLoggedIn }) => {
             <Link to="/">
               <Logo src="https://i.imgur.com/xlbOHDd.jpg"></Logo>
             </Link>
-            <SignupLogin setLogIn={setLoggedIn} />
+            <SignupLogin setLoggedIn={setLoggedIn} />
           </>
         )}
       </BannerWrapper>

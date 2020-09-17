@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react";
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 
@@ -187,21 +187,30 @@ export const Dropdown = styled.select`
   }
 `;
 
-// export const RadioButtion = ({label, value, id, isSelected, changed })
-//   export const StyledRadio = styled.div`
-//   input [type="radio"] {
-//     display: none;
-//     &:checked + label:before{
-//       border-color: #EB29FD;
-//       animation: ripple 0.1s linear forwards;
-//     }
-//     &:checked + label:after{
-//       transform: scale(1);
-//     }
+export const StyledRadio = styled.div`
+  input [type="radio"] {
+    display: none;
+    &:checked + label:before {
+      border-color: #eb29fd;
+      animation: ripple 0.1s linear forwards;
+    }
+    &:checked + label:after {
+      transform: scale(1);
+    }
+  }
+`;
 
-//   }
-  `;
-
-
-
-
+export const RadioButtion = ({ label, value, id, isSelected, changed }) => {
+  return (
+    <StyledRadio>
+      <input
+        type="radio"
+        id={id}
+        onChange={changed}
+        value={value}
+        checked={isSelected}
+      />
+      <label htmlFor={id}>{label}</label>
+    </StyledRadio>
+  );
+};
