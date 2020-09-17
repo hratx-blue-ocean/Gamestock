@@ -9,7 +9,7 @@ import { GlobalStyles } from "./Components/Core/coreStyles.jsx";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState({
-    loggedIn: true,
+    loggedIn: false,
     userName: "",
     userId: 0,
   });
