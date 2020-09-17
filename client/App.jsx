@@ -49,6 +49,8 @@ function App() {
             <Homepage
               colectionOwnerName={collectionOwnerName}
               setCollectionOwnerName={setCollectionOwnerName}
+              loggedIn={loggedIn}
+              setLoggedIn={setLoggedIn}
             />
           </Route>
           <Route path="/profile/:name">

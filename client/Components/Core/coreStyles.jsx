@@ -1,3 +1,4 @@
+import React from 'react'
 import styled from "styled-components";
 import { createGlobalStyle } from "styled-components";
 
@@ -151,6 +152,7 @@ export const WrapGrid = styled.div`
 
 export const StyledForm = styled.form``;
 
+<<<<<<< HEAD
 export const Dropdown = styled.select`
   font-family: "Press Start 2P", sans-serif;
   font-size: 10px;
@@ -185,3 +187,24 @@ export const Dropdown = styled.select`
     --accentBg: #bae1ff;
   }
 `;
+=======
+
+// export const RadioButtion = ({label, value, id, isSelected, changed })
+//   export const StyledRadio = styled.div`
+//   input [type="radio"] {
+//     display: none;
+//     &:checked + label:before{
+//       border-color: #EB29FD;
+//       animation: ripple 0.1s linear forwards;
+//     }
+//     &:checked + label:after{
+//       transform: scale(1);
+//     }
+
+//   }
+  `;
+
+
+
+
+>>>>>>> 7c050f1... conditionally renders user info on homepage
