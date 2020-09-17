@@ -23,6 +23,12 @@ const ConditionSelect = styled(StyledSelect)`
 min-width: 50px;
 `;
 
+// const AddItemList = styled(Wrapper)`
+//   border:1px solid #000;
+//   font-family:arial;
+//   height:100px;
+//   width:200px;`;
+
 const AddItemForm = (props) => {
   const [dateAcquired, setDateAcquired] = useState("");
   const [purchasedPrice, setPurchasedPrice] = useState(0.00);
