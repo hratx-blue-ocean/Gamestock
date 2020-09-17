@@ -22,7 +22,6 @@ let { ebayKey } = require("./eBay.config");
 let eBay = require("ebay-node-api");
 
 const jwt = require("jsonwebtoken");
-// const jwtExpirySeconds = 300;
 const { Collections, Users, Items, Prices } = require("./models/index");
 const tokenAuthorizer = require("./authorization/authorize.js");
 const { runInContext } = require("vm");
@@ -79,6 +78,13 @@ app.post("/login", (req, res) => {
       console.log("Error. Could not log in user: ", err);
       res.status(500);
     });
+});
+
+app.post("/logout", (req, res) => {
+  let token = req.cookies.token;
+
+  res.clearCookie(token);
+  res.redirect("/");
 });
 
 app.post("/signup", (req, res) => {

@@ -44,15 +44,7 @@ const Thumbnail = styled.img`
   display: flex;
 `;
 
-const Header = ({
-  loggedIn,
-  setLoggedIn,
-  userName,
-  setUserName,
-  userId,
-  setUserId,
-}) => {
-  const [showMenu, setShowMenu] = useState(false);
+const Header = ({ loggedIn, setLoggedIn }) => {
   const [userOptions] = useState([
     {
       label: "See my profile",
@@ -65,9 +57,13 @@ const Header = ({
     if (event.target.value === "logout") {
       axios
         .post("/logout")
-        .then(() => {
-          /**/
-          setLoggedIn(false);
+        .then((res) => {
+          console.log(res);
+          setLoggedIn({
+            loggedIn: false,
+            userName: "",
+            userId: 0,
+          });
         })
         .catch((err) => console.log(err));
     } else {
@@ -79,7 +75,7 @@ const Header = ({
   return (
     <>
       <BannerWrapper>
-        {loggedIn ? (
+        {loggedIn.loggedIn ? (
           <>
             <Link to="/">
               <Thumbnail src="https://i.imgur.com/XYg49nh.jpg"></Thumbnail>
@@ -99,11 +95,7 @@ const Header = ({
             <Link to="/">
               <Logo src="https://i.imgur.com/xlbOHDd.jpg"></Logo>
             </Link>
-            <SignupLogin
-              setLogIn={setLoggedIn}
-              setUserId={setUserId}
-              setUserName={setUserName}
-            />
+            <SignupLogin setLogIn={setLoggedIn} />
           </>
         )}
       </BannerWrapper>

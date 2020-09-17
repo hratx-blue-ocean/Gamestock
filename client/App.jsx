@@ -9,10 +9,11 @@ import { GlobalStyles } from "./Components/Core/coreStyles.jsx";
 
 function App() {
   const [loggedIn, setLoggedIn] = useState({
-    loggedIn: false,
+    loggedIn: true,
     userName: "",
     userId: 0,
   });
+
   const [collectionOwnerName, setCollectionOwnerName] = useState("");
   useEffect(() => {
     console.log("COLLECTION OWNER IS:", collectionOwnerName);
@@ -45,15 +46,13 @@ function App() {
         <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
         <Switch>
           <Route exact path="/">
-            <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
             <Homepage
               colectionOwnerName={collectionOwnerName}
               setCollectionOwnerName={setCollectionOwnerName}
             />
           </Route>
           <Route path="/profile/:name">
-            <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
-            <UserProfile collectionOwnerName={collectionOwnerName} userId={loggedIn.userId} />
+            <UserProfile collectionOwnerName={collectionOwnerName} />
           </Route>
         </Switch>
       </Router>
