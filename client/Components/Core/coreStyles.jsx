@@ -187,30 +187,30 @@ export const Dropdown = styled.select`
   }
 `;
 
-export const StyledRadio = styled.div`
-  input [type="radio"] {
-    display: none;
-    &:checked + label:before {
-      border-color: #eb29fd;
-      animation: ripple 0.1s linear forwards;
-    }
-    &:checked + label:after {
-      transform: scale(1);
-    }
-  }
-`;
+// export const StyledRadio = styled.div`
+//   input [type="radio"] {
+//     display: none;
+//     &:checked + label:before {
+//       border-color: #eb29fd;
+//       animation: ripple 0.1s linear forwards;
+//     }
+//     &:checked + label:after {
+//       transform: scale(1);
+//     }
+//   }
+// `;
 
-export const RadioButtion = ({ label, value, id, isSelected, changed }) => {
-  return (
-    <StyledRadio>
-      <input
-        type="radio"
-        id={id}
-        onChange={changed}
-        value={value}
-        checked={isSelected}
-      />
-      <label htmlFor={id}>{label}</label>
-    </StyledRadio>
-  );
-};
+// export const RadioButtion = ({ label, value, id, isSelected, changed }) => {
+//   return (
+//     <StyledRadio>
+//       <input
+//         type="radio"
+//         id={id}
+//         onChange={changed}
+//         value={value}
+//         checked={isSelected}
+//       />
+//       <label htmlFor={id}>{label}</label>
+//     </StyledRadio>
+//   );
+// };
