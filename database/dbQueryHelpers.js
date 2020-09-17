@@ -58,7 +58,7 @@ const saveItemToDB = ({
   tradeable,
   current_value,
   thumbnail,
-  front_view
+  front_view,
 }) => {
   return pool.query(`WITH item_id_var AS (
       INSERT INTO items
@@ -110,7 +110,7 @@ const getAllConsoles = () => {
 
 const getUserCollectionByName = (username) => {
   return pool.query(
-    `SELECT items_in_collection.user_id, items.title, items.id, items.console, items_in_collection.condition, items_in_collection.starting_price, items_in_collection.tradeable
+    `SELECT users.username, items_in_collection.user_id, items.title, items.id, items.console, items_in_collection.condition, items_in_collection.starting_price, items_in_collection.tradeable
 FROM items_in_collection
 INNER JOIN items
 ON items_in_collection.item_id = items.id

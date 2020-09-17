@@ -2,6 +2,7 @@ import React from "react";
 import Card from "./Card.jsx";
 import Print from "./Print.jsx";
 import DisplayItems from "./DisplayItems.jsx";
+import AddItem from "./AddItem.jsx";
 import styled from "styled-components";
 import {
   StyledInput,
@@ -41,10 +42,11 @@ const RightButton = styled(StyledButton)`
 `;
 
 const CollectionList = ({ collection }) => {
+  // console.log("WATCH THIS SHIT", JSON.stringify(collection[0].username));
   return (
     <div>
       <Wrapper>
-        <Title>User Collection</Title>
+        {/* <Title>{`${collection[0].username}'s Collection`}</Title> */}
         {/* these first two things are displaying the number of items and their combined value */}
         <DisplayItems />
         <UserProfGrid>
@@ -72,6 +74,7 @@ const CollectionList = ({ collection }) => {
           <RightButton id="sortByNintendo">Nintendo</RightButton>
         </UserProfGrid>
         <Print />
+        <AddItem />
         <Card collection={collection} />
       </Wrapper>
     </div>
