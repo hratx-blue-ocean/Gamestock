@@ -25,6 +25,10 @@ const SingleListItem = styled(Wrapper)`
   line-height: 25px;
   padding: 0;
   border-radius: 0px;
+  &:hover {
+    cursor: pointer;
+    background: #2d1c7b;
+  };
 `;
 
 const AddItemList = (props) => {
