@@ -83,7 +83,7 @@ app.post("/login", (req, res) => {
 app.post("/logout", (req, res) => {
   let token = req.cookies.token;
 
-  res.clearCookie(token);
+  res.clearCookie("token");
   res.redirect("/");
 });
 
@@ -310,41 +310,41 @@ app.get("/checkLoginStatus", tokenAuthorizer, (req, res) => {
 });
 
 //Function to update Item Price everyday
-var updateDaily = schedule.scheduleJob("* * */11  * * *", function () {
-  Items.getAll({}).then((data) => {
-    const names = data.rows.map((row) => {
-      return axios
-        .get(
-          `https://www.pricecharting.com/api/products?t=36330d87343dc3b342b42a4f6c58b13e443061c8&q=${row.title}_?limit=10`
-        )
-        .then((res) => {
-          return Prices.create(
-            {
-              current_value: res.data.products[0]["new-price"],
-              date: new Date().toUTCString(),
-              item_id: row.id,
-            },
-            "RETURNING item_id, current_value"
-          );
-        });
-    });
-    return Promise.all(names);
-  });
-  // .then((array) => {
-  //   const updateTable = array.map((item) => {
-  //     Items.update(
-  //       {
-  //         id: item.item_id,
-  //       },
-  //       {
-  //         current_price: item.current_value,
-  //       }
-  //     );
-  //   });
-  // });
-});
+// var updateDaily = schedule.scheduleJob("* * */11  * * *", function () {
+//   Items.getAll({}).then((data) => {
+//     const names = data.rows.map((row) => {
+//       return axios
+//         .get(
+//           `https://www.pricecharting.com/api/products?t=36330d87343dc3b342b42a4f6c58b13e443061c8&q=${row.title}_?limit=10`
+//         )
+//         .then((res) => {
+//           return Prices.create(
+//             {
+//               current_value: res.data.products[0]["new-price"],
+//               date: new Date().toUTCString(),
+//               item_id: row.id,
+//             },
+//             "RETURNING item_id, current_value"
+//           );
+//         });
+//     });
+//     return Promise.all(names);
+//   });
+//   // .then((array) => {
+//   //   const updateTable = array.map((item) => {
+//   //     Items.update(
+//   //       {
+//   //         id: item.item_id,
+//   //       },
+//   //       {
+//   //         current_price: item.current_value,
+//   //       }
+//   //     );
+//   //   });
+//   // });
+// });
 
-// handles refresh requests from the userProfile page or any other endpoint *** BROKEN ***
+// handles refresh requests from the userProfile page or any other endpoint
 app.get("/*", (req, res) => {
   res.redirect("/");
 });
