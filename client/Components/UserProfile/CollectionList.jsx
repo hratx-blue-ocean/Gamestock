@@ -10,8 +10,8 @@ import axios from "axios";
 import { CardWrapper, Text, Thumbnail } from "../Core/CardView.jsx";
 import {
   StyledInput,
+  StyledSelect,
   Wrapper,
-  GlobalStyles,
   Title,
   WrapGrid,
   StyledButton,
@@ -45,6 +45,10 @@ const RightButton = styled(StyledButton)`
   border: 1px solid;
 `;
 
+const UserProfSelect = styled(StyledSelect)`
+  grid-column-start: 12;
+`;
+
 const CollectionList = ({
   collection,
   setCollection,
@@ -56,6 +60,9 @@ const CollectionList = ({
   sortByPrice,
   sortByCondition,
   sortByTradeable,
+  getCollectionByConsole,
+  getAllConsoles,
+  consoles,
 }) => {
   const [userCollectionData, setUserCollectionData] = useState([]);
 
@@ -65,6 +72,7 @@ const CollectionList = ({
     if (collection[0]) {
       getDailyCollectionPrice(collection[0].username);
     }
+    getAllConsoles();
   }, [collection]);
 
   const getDailyCollectionPrice = (username) => {
@@ -101,7 +109,7 @@ const CollectionList = ({
             prices={userCollectionData[1]}
           />
           <UserProfGrid>
-            <GameSearchForm onSubmit={() => {}}>
+            {/* <GameSearchForm onSubmit={() => {}}>
               <StyledInput
                 placeholder="search games in collection"
                 type="text"
@@ -109,7 +117,7 @@ const CollectionList = ({
                 onChange={() => {}}
               ></StyledInput>
               <StyledButton>Search</StyledButton>
-            </GameSearchForm>
+            </GameSearchForm> */}
             {/* <Text>Sort by: </Text> */}
             <LeftButton
               id="sortByTitle"
@@ -141,6 +149,17 @@ const CollectionList = ({
             >
               Tradeable
             </RightButton>
+            <UserProfSelect
+              onChange={(e) => getCollectionByConsole(e)}
+              defaultValue="select console"
+            >
+              <option disabled>select console</option>
+              {consoles.map((console, idx) => (
+                <option key={idx} id={console.console}>
+                  {console.console}
+                </option>
+              ))}
+            </UserProfSelect>
           </UserProfGrid>
           <Print />
           <AddItem
