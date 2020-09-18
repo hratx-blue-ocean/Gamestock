@@ -400,4 +400,5 @@ module.exports = {
   getDailyItemPrice,
   getDailyCollectionValue,
   getUserByUsername,
+  executeQuery,
 };

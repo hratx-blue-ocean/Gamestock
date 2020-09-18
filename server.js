@@ -17,7 +17,6 @@ const {
   getUserCollectionByName,
   getDailyItemPrice,
   getDailyCollectionValue,
-  getUserByUsername,
 } = require("./database/dbQueryHelpers");
 
 // ebay API
@@ -363,9 +362,9 @@ app.get("/userCollectionValue", (req, res) => {
 //get username from db & populate banner with information
 
 app.get("/username/collectionValue", (req, res) => {
-  getUserByUsername(req.query.username)
+  Users.get({ username: req.query.username })
     .then((userID) => {
-      return getCollectionByUser(userID.rows[0].id);
+      return getCollectionByUser(userID.id);
     })
     .then((userCollection) => {
       res.status(200).send(userCollection);

@@ -77,7 +77,11 @@ const Header = ({ loggedIn, setLoggedIn }) => {
   };
 
   useEffect(() => {
-    if (userOptions[0].value === 0 && loggedIn.loggedIn) {
+    const lockBod = document.getElementsByTagName("body")[0];
+    if (lockBod.classList.contains("freeze")) {
+      lockBod.classList.remove("freeze");
+    }
+    if (loggedIn.loggedIn) {
       setUserOptions([
         {
           label: loggedIn.userName,
@@ -90,7 +94,7 @@ const Header = ({ loggedIn, setLoggedIn }) => {
         { label: "Log out", value: "logout" },
       ]);
     }
-  });
+  }, [loggedIn.userId]);
 
   return (
     <>
