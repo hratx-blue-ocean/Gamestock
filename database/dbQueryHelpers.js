@@ -113,7 +113,7 @@ const getAllConsoles = () => {
 //user profile query to order default view by title-alpha-asc
 const getUserCollectionByName = (username) => {
   return pool.query(
-    `SELECT users.username, items_in_collection.user_id, items.title, items.id, items.console, items_in_collection.condition, items_in_collection.starting_price, items_in_collection.tradeable
+    `SELECT users.username, items_in_collection.user_id, items.title, items.id, items.console, items_in_collection.condition, items_in_collection.starting_price, items_in_collection.tradeable, items_in_collection.date_of_purchase, items_in_collection.comments
 FROM items_in_collection
 INNER JOIN items
 ON items_in_collection.item_id = items.id
