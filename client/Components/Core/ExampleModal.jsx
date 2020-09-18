@@ -51,7 +51,7 @@ export default function ExampleModal() {
           </ModalWrapper>
         </ModalInner>
       </Modal>
-      <Button onClick={() => freeze(modalState)}>Open Modal</Button>
+      <StyledButton onClick={() => freeze(modalState)}>Open Modal</StyledButton>
     </div>
   );
 }
