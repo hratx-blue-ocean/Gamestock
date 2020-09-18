@@ -95,6 +95,10 @@ const CollectionList = ({
         <Wrapper>
           <Title>{`${collection[0].username}'s Collection`}</Title>
           <DisplayItems collection={collection} />
+          <PriceGraph
+            dates={userCollectionData[0]}
+            prices={userCollectionData[1]}
+          />
           <UserProfGrid>
             <GameSearchForm onSubmit={() => {}}>
               <StyledInput
@@ -122,10 +126,6 @@ const CollectionList = ({
           <Print />
           <AddItem userId={userId} />
           <Card collection={collection} currentCards={currentCards} />
-          <PriceGraph
-            dates={userCollectionData[0]}
-            prices={userCollectionData[1]}
-          />
           <Paginator
             collection={collection}
             cardsPerPage={cardsPerPage}
