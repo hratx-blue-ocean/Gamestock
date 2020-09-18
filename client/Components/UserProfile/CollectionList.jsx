@@ -4,6 +4,7 @@ import Print from "./Print.jsx";
 import DisplayItems from "./DisplayItems.jsx";
 import AddItem from "./AddItem.jsx";
 import styled from "styled-components";
+import { CardWrapper, Text, Thumbnail } from "../Core/CardView.jsx";
 import {
   StyledInput,
   Wrapper,
@@ -16,7 +17,7 @@ import {
 
 //style extensions
 const UserProfGrid = styled(WrapGrid)`
-  grid-template-columns: 100px 100px 100px 5px 5px auto 75px 75px 115px 75px 75px 75px 100px;
+  grid-template-columns: 100px 100px 100px 5px 5px auto 75px 75px 115px 120px;
   margin-top: 30px;
   margin-bottom: 20px;
 `;
@@ -41,7 +42,14 @@ const RightButton = styled(StyledButton)`
   border: 1px solid;
 `;
 
-const CollectionList = ({ collection }) => {
+const CollectionList = ({
+  collection,
+  currentCards,
+  titleSort,
+  priceSort,
+  conditionSort,
+  tradeSort,
+}) => {
   return (
     <div>
       {collection[0] && (
@@ -58,23 +66,23 @@ const CollectionList = ({ collection }) => {
               ></StyledInput>
               <StyledButton>Search</StyledButton>
             </GameSearchForm>
-            <LeftButton id="sortByTitle" onClick={() => {}}>
+            {/* <Text>Sort by: </Text> */}
+            <LeftButton id="sortByTitle" onClick={titleSort}>
               Title
             </LeftButton>
-            <MiddleButton id="sortByPrice" onClick={() => {}}>
+            <MiddleButton id="sortByPrice" onClick={() => priceSort()}>
               Price
             </MiddleButton>
-            <MiddleButton id="sortByCondition" onClick={() => {}}>
+            <MiddleButton id="sortByCondition" onClick={() => conditionSort()}>
               Condition
             </MiddleButton>
-            <MiddleButton id="sortByPC">PC</MiddleButton>
-            <MiddleButton id="sortBySony">Sony</MiddleButton>
-            <MiddleButton id="sortByXbox">Xbox</MiddleButton>
-            <RightButton id="sortByNintendo">Nintendo</RightButton>
+            <RightButton id="sortByTrade" onClick={() => tradeSort()}>
+              Tradeable
+            </RightButton>
           </UserProfGrid>
           <Print />
           <AddItem />
-          <Card collection={collection} />
+          <Card collection={collection} currentCards={currentCards} />
         </Wrapper>
       )}
     </div>

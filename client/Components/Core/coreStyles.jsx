@@ -173,7 +173,7 @@ export const Dropdown = styled.select`
   background-position: right 20px center, right bottom, right bottom,
     right bottom;
 
-  margin-right: 15px;
+  margin: auto;
   &:hover {
     color: #54f3f7;
     cursor: pointer;

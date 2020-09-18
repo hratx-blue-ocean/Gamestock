@@ -8,17 +8,12 @@ import { useParams } from "react-router-dom";
 const UserProfile = (props) => {
   // uses route parameter
   let { name } = useParams();
-  console.log("THIS VAR IS ONLY USABLE BY REACT-ROUTER: ", name);
-
-  console.log(
-    "THIS ONE SHOULD MATCH BROWSER ROUTER: ",
-    props.collectionOwnerName
-  );
 
   const [collection, setCollection] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [cardsPerPage] = useState(10);
 
   useEffect(() => {
-    console.log("!!!!!!!!!!!!!!");
     if (!collection.length) {
       axios
         .get(`/userProfile/${props.collectionOwnerName}`)
@@ -27,19 +22,74 @@ const UserProfile = (props) => {
           setCollection(data.data.rows);
         })
         .catch((err) => {
-          console.log("Failure to get colleciton info on front end");
-          console.error(err);
+          console.error("Failure to get colleciton info on front end", err);
         });
     }
   }, []);
 
+  // console.log("COLLECTION ACCESS? ", collection);
+
+  // get currentposts
+  let indexOflastCard = currentPage * cardsPerPage;
+  let indexOfFirstCard = indexOflastCard - cardsPerPage;
+  let currentCards = collection.slice(indexOfFirstCard, indexOflastCard);
+
+  const handlePageClick = (e) => {
+    setCurrentPage(e.target.value);
+  };
+
+  // sort by title
+  const titleSort = () => {
+    if (collection.length) {
+      console.log(
+        "TITLE SORT CLICKED: ",
+        collection.sort((a, b) => a.title - b.title)
+      );
+      // return collection.sort((a, b) => a.title - b.title);
+    }
+  };
+
+  // sort by price
+  const priceSort = () => {
+    if (collection.length) {
+      console.log("PRICE SORT CLICKED");
+      return collection.sort((a, b) => a.starting_price - b.starting_price);
+    }
+  };
+
+  // sort by condition
+  const conditionSort = () => {
+    if (collection.length) {
+      console.log("CONDITION SORT CLICKED");
+      return collection.sort((a, b) => a.condition - b.condition);
+    }
+  };
+
+  // sort by trade status
+  const tradeSort = () => {
+    if (collection.length) {
+      console.log("TRADE SORT CLICKED");
+      return collection.sort((a, b) => a.tradeable - b.tradeable);
+    }
+  };
+
   return (
     <div>
-
-      <CollectionList collection={collection} />
-      <Paginator collection={collection} />
+      <CollectionList
+        collection={collection}
+        currentCards={currentCards}
+        titleSort={titleSort}
+        priceSort={priceSort}
+        conditionSort={conditionSort}
+        tradeSort={tradeSort}
+      />
+      <Paginator
+        collection={collection}
+        cardsPerPage={cardsPerPage}
+        handlePageClick={handlePageClick}
+      />
     </div>
   );
 };
-//
+
 export default UserProfile;
