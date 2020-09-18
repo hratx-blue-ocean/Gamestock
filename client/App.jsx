@@ -45,7 +45,11 @@ function App() {
   return (
     <>
       <Router>
-        <Header loggedIn={loggedIn} setLoggedIn={setLoggedIn} />
+        <Header
+          loggedIn={loggedIn}
+          setCollectionOwnerName={setCollectionOwnerName}
+          setLoggedIn={setLoggedIn}
+        />
         <Switch>
           <Route exact path="/">
             <Homepage

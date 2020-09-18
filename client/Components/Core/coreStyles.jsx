@@ -153,8 +153,8 @@ export const WrapGrid = styled.div`
 export const StyledForm = styled.form``;
 
 export const CenteredDiv = styled.div`
-  display: "flex";
-  align-item: "center";
+  display: flex;
+  align-items: center;
 `;
 
 export const Dropdown = styled.select`

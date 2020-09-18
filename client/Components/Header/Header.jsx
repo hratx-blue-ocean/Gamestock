@@ -21,8 +21,6 @@ const BannerWrapper = styled(Wrapper)`
 `;
 
 const AvatarWrapper = styled.img`
-  margin-top: 8%;
-  padding: 5px 0px;
   &:hover {
     cursor: pointer;
   }
@@ -32,10 +30,19 @@ const AvatarWrapper = styled.img`
   display: inline-block;
 `;
 
+const HiddenLink = styled(Link)`
+  display: none;
+`;
+
+const LogoWrapper = styled.div`
+  height: 60px;
+  width: 300px;
+  overflow: hidden;
+`;
+
 const Logo = styled.img`
-  height: 200px;
-  weight: 550px;
-  display: flex;
+  width: 100%;
+  object-position: 0px -120px;
 `;
 
 const Thumbnail = styled.img`
@@ -44,7 +51,7 @@ const Thumbnail = styled.img`
   display: flex;
 `;
 
-const Header = ({ loggedIn, setLoggedIn }) => {
+const Header = ({ setCollectionOwnerName, loggedIn, setLoggedIn }) => {
   const [userOptions, setUserOptions] = useState([
     {
       label: "user",
@@ -72,6 +79,7 @@ const Header = ({ loggedIn, setLoggedIn }) => {
         })
         .catch((err) => console.log(err));
     } else if (event.target.value === "userProfile") {
+      document.getElementById("toUserProfile").click();
       //switch to user profile
     }
   };
@@ -101,10 +109,19 @@ const Header = ({ loggedIn, setLoggedIn }) => {
         {loggedIn.loggedIn ? (
           <>
             <Link to="/">
-              <Thumbnail src="https://mygamestocks.com/resources/logo.png"></Thumbnail>
+              <LogoWrapper>
+                <Logo src="https://mygamestocks.com/resources/logo.png"></Logo>
+              </LogoWrapper>
             </Link>
             <CenteredDiv>
-              <AvatarWrapper src={loggedIn.userAvatar}></AvatarWrapper>
+              <Link to={`/profile/${loggedIn.userName}`}>
+                <AvatarWrapper
+                  onClick={() => {
+                    setCollectionOwnerName(loggedIn.userName);
+                  }}
+                  src={loggedIn.userAvatar}
+                ></AvatarWrapper>
+              </Link>
               <Dropdown value="selection" onChange={(e) => handleChange(e)}>
                 {userOptions.map((option, index) => {
                   if (!index) {
@@ -126,12 +143,21 @@ const Header = ({ loggedIn, setLoggedIn }) => {
                   }
                 })}
               </Dropdown>
+              <HiddenLink
+                to={`/profile/${loggedIn.userName}`}
+                id="toUserProfile"
+                onClick={() => {
+                  setCollectionOwnerName(loggedIn.userName);
+                }}
+              />
             </CenteredDiv>
           </>
         ) : (
           <>
             <Link to={`/profile/${loggedIn.userName}`}>
-              <Logo src="https://mygamestocks.com/resources/logo.png"></Logo>
+              <LogoWrapper>
+                <Logo src="https://mygamestocks.com/resources/logo.png"></Logo>
+              </LogoWrapper>
             </Link>
             <SignupLogin setLoggedIn={setLoggedIn} />
           </>
