@@ -1,13 +1,5 @@
 import React from "react";
-import {
-  StyledButton,
-  Modal,
-  ModalInner,
-  Wrapper,
-  Title,
-  StyledForm,
-  StyledInput,
-} from "../Core/coreStyles.jsx";
+import { Wrapper } from "../Core/coreStyles.jsx";
 import styled from "styled-components";
 
 const UnorderedList = styled(Wrapper)`
@@ -40,7 +32,6 @@ const AddItemList = (props) => {
             key={idx}
             onClick={() => {
               props.select(itemObj);
-              // props.getImage();
             }}
           >
             {itemObj["console-name"]} {itemObj["product-name"]}
