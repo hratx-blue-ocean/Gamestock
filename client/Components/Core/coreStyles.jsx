@@ -187,16 +187,28 @@ export const Dropdown = styled.select`
   }
 `;
 
-// export const RadioButtion = ({label, value, id, isSelected, changed })
-//   export const StyledRadio = styled.div`
-//   input [type="radio"] {
-//     display: none;
-//     &:checked + label:before{
-//       border-color: #EB29FD;
-//       animation: ripple 0.1s linear forwards;
-//     }
-//     &:checked + label:after{
-//       transform: scale(1);
-//     }
+export const StyledRadio = styled.div`
+  margin: 10px;
+`;
 
-//   }
+// as long as you pass down the required props this will work
+// requires a custom onChange function that looks like this:
+
+// customRadioChangeHandler = (e) => {
+//   setCustomRadioVar(e.target.value)
+// }
+
+export default function RadioButton({ label, value, id, isSelected, changed }) {
+  return (
+    <StyledRadio>
+      <input
+        type="radio"
+        id={id}
+        onChange={changed}
+        value={value}
+        checked={isSelected}
+      />
+      <label htmlFor={id}>{label}</label>
+    </StyledRadio>
+  );
+}

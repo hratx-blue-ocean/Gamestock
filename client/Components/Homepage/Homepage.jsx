@@ -3,6 +3,7 @@ import axios from "axios";
 import Banner from "../Core/Banner.jsx";
 import Leaderboard from "./Leaderboard.jsx";
 import PriceGraph from "../PriceGraph/PriceGraph.jsx";
+import RadioButton from "../Core/coreStyles.jsx";
 
 const Homepage = ({
   collectionOwnerName,
@@ -14,7 +15,12 @@ const Homepage = ({
   const [itemID, setItemID] = useState(7);
   const [priceData, setPriceData] = useState([]);
   const [userCollectionData, setUserCollectionData] = useState([]);
+  const [customRadioVar, setCustomRadioVar] = useState(false);
 
+  //radio button handler
+  const customRadioChangeHandler = (e) => {
+    setCustomRadioVar(e.target.value);
+  };
   useEffect(() => {
     // sort by value on page load
     getUserCollection(userID);
@@ -38,7 +44,7 @@ const Homepage = ({
   };
 
   if (loggedIn.loggedIn) {
-    console.log("logged in");
+    console.log("logged in", loggedIn);
   }
   const getDailyPrices = (userID) => {
     axios
@@ -95,6 +101,20 @@ const Homepage = ({
           setCollectionOwnerName={setCollectionOwnerName}
         />
       )}
+      <RadioButton
+        changed={customRadioChangeHandler}
+        id="1"
+        isSelected={customRadioVar === "yes"}
+        label="yes"
+        value="yes"
+      />
+      <RadioButton
+        changed={customRadioChangeHandler}
+        id="2"
+        isSelected={customRadioVar === "no"}
+        label="no"
+        value="no"
+      />
       <Leaderboard
         collectionOwnerName={collectionOwnerName}
         setCollectionOwnerName={setCollectionOwnerName}
