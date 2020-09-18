@@ -77,7 +77,7 @@ const Header = ({ loggedIn, setLoggedIn }) => {
   };
 
   useEffect(() => {
-    if (userOptions[0].value === 0 && loggedIn.loggedIn) {
+    if (loggedIn.loggedIn) {
       setUserOptions([
         {
           label: loggedIn.userName,

@@ -40,7 +40,7 @@ const Homepage = ({
       })
       .then((collection) => {
         console.log("COLLECTION: ", collection);
-        setUserCollection(() => collection.data.rows[0]);
+        setUserCollection(() => collection.data.rows[0] || {});
       })
       .catch((err) => {
         console.log("Error retrieving collection: ", err);
@@ -68,12 +68,12 @@ const Homepage = ({
 
   return (
     <div>
-      {userCollection && userCollection.avatar && (
+      {loggedIn.userId && (
         <Banner
-          avatar={userCollection.avatar}
-          username={userCollection.username}
-          collectionSize={userCollection.total_count}
-          collectionValue={userCollection.total_value}
+          avatar={loggedIn.userAvatar}
+          username={loggedIn.userName}
+          collectionSize={userCollection.total_count || "0"}
+          collectionValue={userCollection.total_value || "$0.00"}
           collectionOwnerName={collectionOwnerName}
           setCollectionOwnerName={setCollectionOwnerName}
         />

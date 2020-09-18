@@ -19,7 +19,7 @@ const UserProfile = (props) => {
         .get(`/userProfile/${props.collectionOwnerName}`)
         .then((data) => {
           console.log("THIS IS DATA :", data);
-          setCollection(data.data.rows);
+          setCollection(data.data.rows || []);
         })
         .catch((err) => {
           console.error("Failure to get colleciton info on front end", err);
