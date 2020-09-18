@@ -5,9 +5,9 @@ import DisplayItems from "./DisplayItems.jsx";
 import AddItem from "./AddItem.jsx";
 import styled from "styled-components";
 import Paginator from "./Paginator.jsx";
-import { CardWrapper, Text, Thumbnail } from "../Core/CardView.jsx";
 import PriceGraph from "../PriceGraph/PriceGraph.jsx";
 import axios from "axios";
+import { CardWrapper, Text, Thumbnail } from "../Core/CardView.jsx";
 import {
   StyledInput,
   Wrapper,

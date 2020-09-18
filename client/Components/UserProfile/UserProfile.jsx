@@ -2,7 +2,6 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
 import CollectionList from "./CollectionList.jsx";
-import Paginator from "./Paginator.jsx";
 import { useParams } from "react-router-dom";
 
 const UserProfile = (props) => {
@@ -13,7 +12,20 @@ const UserProfile = (props) => {
   const [currentPage, setCurrentPage] = useState(1);
   const [cardsPerPage] = useState(10);
 
+  const getInfo = () => {
+    axios
+      .get(`/userProfile/${props.collectionOwnerName}`)
+      .then((data) => {
+        console.log("THIS IS DATA :", data);
+        setCollection(data.data.rows);
+      })
+      .catch((err) => {
+        console.error("Failure to get colleciton info on front end", err);
+      });
+  };
+
   useEffect(() => {
+<<<<<<< HEAD
     if (!collection.length) {
       axios
         .get(`/userProfile/${props.collectionOwnerName}`)
@@ -25,11 +37,11 @@ const UserProfile = (props) => {
           console.error("Failure to get colleciton info on front end", err);
         });
     }
+=======
+    getInfo();
+>>>>>>> clean up useEffect
   }, []);
 
-  // console.log("COLLECTION ACCESS? ", collection);
-
-  // get currentposts
   let indexOflastCard = currentPage * cardsPerPage;
   let indexOfFirstCard = indexOflastCard - cardsPerPage;
   let currentCards = collection.slice(indexOfFirstCard, indexOflastCard);
