@@ -42,7 +42,7 @@ const LinkButton = styled(StyledButton)`
   border: 0px solid #23143e;
   padding: 0px;
   box-shaddow: none;
-  line-height: 224px;
+  line-height: 60px;
   &:hover {
     background: none;
     color: #df77fd;
