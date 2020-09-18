@@ -101,7 +101,7 @@ const Header = ({ loggedIn, setLoggedIn }) => {
         {loggedIn.loggedIn ? (
           <>
             <Link to="/">
-              <Thumbnail src="https://mygamestocks.com/resources/smallLogo.png"></Thumbnail>
+              <Thumbnail src="https://mygamestocks.com/resources/logo.png"></Thumbnail>
             </Link>
             <CenteredDiv>
               <AvatarWrapper src={loggedIn.userAvatar}></AvatarWrapper>
