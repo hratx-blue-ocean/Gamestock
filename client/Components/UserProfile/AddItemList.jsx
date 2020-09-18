@@ -40,7 +40,7 @@ const AddItemList = (props) => {
             key={idx}
             onClick={() => {
               props.select(itemObj);
-              props.getImage();
+              // props.getImage();
             }}
           >
             {itemObj["console-name"]} {itemObj["product-name"]}

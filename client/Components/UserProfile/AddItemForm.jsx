@@ -33,7 +33,7 @@ const Thumbnail = styled(StyledForm)`
 `;
 
 const AddItemForm = (props) => {
-  const [itemSelected, setItemSelected] = useState({});
+  const [itemSelected, setItemSelected] = useState({ "product-name": "games" });
   const [searchedItems, setSearchedItems] = useState([]);
   const [itemSelectedThumbnail, setSelectedThumbnail] = useState("");
   const [itemSelectedImage, setSelectedImage] = useState("");
@@ -61,16 +61,24 @@ const AddItemForm = (props) => {
   };
 
   function submitInfo(submittedInfo) {
-    console.log("Sumbmitted Info: ", submittedInfo);
-    axios
-      .post("/saveItems", submittedInfo)
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    if (submittedInfo.title == "games") {
+      return;
+    } else if (submittedInfo["date_of_purchase"] == "" ) {
+      return;
+    } else {
+      axios
+        .post("/saveItems", submittedInfo)
+        .then(function (response) {
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
   }
+
+  useEffect(() => {
+    getImage();
+  }, [itemSelected]);
 
   function getImage() {
     axios
@@ -85,7 +93,7 @@ const AddItemForm = (props) => {
   }
 
   function clearForm() {
-    setItemSelected({});
+    setItemSelected({ "product-name": "games" });
     setSearchedItems([]);
     setSelectedThumbnail("");
     setSelectedImage("");
@@ -114,9 +122,9 @@ const AddItemForm = (props) => {
             select={(item) => {
               setItemSelected(item);
             }}
-            getImage={() => {
-              getImage();
-            }}
+            // getImage={() => {
+            //   getImage();
+            // }}
           />
           <Thumbnail>
             <img src={itemSelectedThumbnail}></img>
