@@ -10,7 +10,7 @@ const UserProfile = (props) => {
 
   const [collection, setCollection] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
-  const [cardsPerPage] = useState(10);
+  const [cardsPerPage] = useState(15);
 
   const getInfo = () => {
     axios
