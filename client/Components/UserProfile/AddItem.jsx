@@ -15,6 +15,7 @@ const ModalWrapper = styled(Wrapper)``;
 
 const ModalBody = styled(ModalInner)`
   width: 800px;
+  margin-top: 50px;
 `;
 
 const ItemGrid = styled(AddItemGrid)`
