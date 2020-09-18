@@ -21,15 +21,16 @@ const {
 } = require("./database/dbQueryHelpers");
 
 // ebay API
-let { ebayKey } = require("./eBay.config");
-let eBay = require("ebay-node-api");
+// let { ebayKey } = require("./eBay.config");
+// let eBay = require("ebay-node-api");
+const fetch = require('node-fetch');
 
 const jwt = require("jsonwebtoken");
 const { Collections, Users, Items, Prices } = require("./models/index");
 const tokenAuthorizer = require("./authorization/authorize.js");
 const { runInContext } = require("vm");
 const app = express();
-const port = 7711;
+const port = 3001;
 
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -203,29 +204,41 @@ app.get("/leaderboard/size", (req, res) => {
     });
 });
 
-// ebay api connection
-let ebay = new eBay({
-  clientID: ebayKey,
-  marketplaceId: "EBAY_US",
-});
+// // ebay api connection
+// let ebay = new eBay({
+//   clientID: ebayKey,
+//   marketplaceId: "EBAY_US",
+// });
 
-// ebay api call to get item details based on item name selected by client
-app.get(`/itemDetails/:item`, (req, res) => {
-  let keywords = req.params.item;
-  ebay
-    .findItemsByKeywords({
-      keywords: keywords,
-      limit: 1,
-      categoryId: "1249",
-      pageNumber: 1,
-      entriesPerPage: 1,
-    })
-    .then((data) => {
-      // send thumbnail image
-      res.status(200).send(data[0].searchResult[0].item[0]);
+app.get(`/itemDetails`, (req, res) => {
+  // let keywords = req.params.item;
+  fetch(`https://api.rawg.io/api/games?search=Zelda`)
+      .then((response) => {
+        return response.json();
+      })
+      .then((data) => {
+        console.log(data.results[0].background_image)
     })
     .catch((err) => console.log(err));
-});
+})
+
+// // ebay api call to get item details based on item name selected by client
+// app.get(`/itemDetails/:item`, (req, res) => {
+//   let keywords = req.params.item;
+//   ebay
+//     .findItemsByKeywords({
+//       keywords: keywords,
+//       limit: 1,
+//       categoryId: "1249",
+//       pageNumber: 1,
+//       entriesPerPage: 1,
+//     })
+//     .then((data) => {
+//       // send thumbnail image
+//       res.status(200).send(data[0].searchResult[0].item[0]);
+//     })
+//     .catch((err) => console.log(err));
+// });
 
 // save item to the database
 app.post(`/saveItems`, (req, res) => {
