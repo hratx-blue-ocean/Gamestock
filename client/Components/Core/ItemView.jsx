@@ -38,14 +38,6 @@ export default function ItemView({ item }) {
     comments: "we need this",
   });
 
-  // useEffect(() => {
-  //   // sort by value on page load
-  //   getDailyPrices(item.id); //item.userID
-  // }, []);
-
-  //let combined = itemCollectionData.date_of_purchase.concat(item.dates);
-  //console.log("COMBINED", combined);
-
   const toggleModalState = () => {
     setModalState(!modalState);
   };
