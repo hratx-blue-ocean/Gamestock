@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import {
   StyledButton,
   Modal,
@@ -29,16 +30,21 @@ const MoveLeft = styled.div`
 
 export default function ItemView({ item }) {
   const [modalState, setModalState] = useState(false);
+  const [priceData, setPriceData] = useState([]);
   const [itemCollectionData, setItemCollectionData] = useState({
-    title: "Spider-Man Miles Morales",
-    console_type: "PS5",
-    condition: "new",
-    DOP: "08/21/2020",
-    starting_price: 59.99,
+    dates: [],
+    prices: [],
     current_price: 59.99,
-    tradeable: "yes",
     comments: "we need this",
   });
+
+  // useEffect(() => {
+  //   // sort by value on page load
+  //   getDailyPrices(item.id); //item.userID
+  // }, []);
+
+  //let combined = itemCollectionData.date_of_purchase.concat(item.dates);
+  //console.log("COMBINED", combined);
 
   const toggleModalState = () => {
     setModalState(!modalState);
@@ -55,16 +61,34 @@ export default function ItemView({ item }) {
     }
   };
 
-  let {
-    title,
-    console_type,
-    condition,
-    DOP,
-    starting_price,
-    current_price,
-    tradeable,
-    comments,
-  } = itemCollectionData;
+  const getDailyPrices = (itemID) => {
+    axios
+      .get("/prices/items", {
+        params: {
+          itemID: itemID,
+        },
+      })
+      .then((priceData) => {
+        const pricesAndDates = [[], []];
+        priceData.data.rows.forEach((date) => {
+          pricesAndDates[0].push(date.date.slice(0, 10));
+          pricesAndDates[1].push(parseFloat(date.total_value.slice(1)));
+        });
+        setItemCollectionData({
+          dates: [item.date_of_purchase.slice(0, 10)].concat(pricesAndDates[0]),
+          prices: [parseFloat(item.starting_price.slice(1))].concat(
+            pricesAndDates[1]
+          ),
+          current_price: pricesAndDates[1][pricesAndDates[1].length - 1],
+        });
+        console.log(itemCollectionData);
+      })
+      .catch((err) => {
+        console.log("Error getting price data: ", err);
+      });
+  };
+
+  let { date_of_purchase, current_price, comments } = itemCollectionData;
 
   return (
     <div>
@@ -72,21 +96,35 @@ export default function ItemView({ item }) {
         <ModalInner onClick={(e) => e.stopPropagation()}>
           <ModalWrapper>
             <Title>{item.title}</Title>
-            <PriceGraph dates={DOP} prices={starting_price} />
+            <PriceGraph
+              dates={itemCollectionData.dates}
+              prices={itemCollectionData.prices}
+            />
             <Centered>{/* <StyledImg>{item.thumbnail}</StyledImg> */}</Centered>
             <MoveLeft>
               <p>Console: {item.console}</p>
               <p>Condition: {item.condition}</p>
-              <p>Date of Purchase: {DOP}</p>
-              <p>Starting Price: ${item.starting_price}</p>
+              <p>Date of Purchase: {item.date_of_purchase.slice(0, 10)}</p>
+              <p>Starting Price: {item.starting_price}</p>
               <p>Current Price: ${current_price}</p>
-              <p>Tradeable? {item.tradeable === "yes" ? "yes" : "no"}</p>
-              <p>Comments: {comments}</p>
+              <p>Tradeable? {item.tradeable === "Tradeable" ? "Yes" : "No"}</p>
+              <p>Comments: {item.comments}</p>
             </MoveLeft>
+            <Centered>
+              <StyledButton>Delete Item From Collection</StyledButton>
+            </Centered>
           </ModalWrapper>
         </ModalInner>
       </Modal>
-      <StyledButton onClick={() => freeze(modalState)}>View Item</StyledButton>
+      <StyledButton
+        onClick={() => {
+          getDailyPrices(item.id);
+          console.log("CLICKED", item.id);
+          freeze(modalState);
+        }}
+      >
+        View Item
+      </StyledButton>
     </div>
   );
 }

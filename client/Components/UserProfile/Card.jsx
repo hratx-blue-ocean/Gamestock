@@ -14,7 +14,7 @@ import {
 import ItemView from "../Core/ItemView.jsx";
 
 const Card = ({ collection, currentCards }) => {
-  console.log("CARD COLLECTION: ", collection);
+  //console.log("CARD COLLECTION: ", collection);
   if (collection.length) {
     return (
       <div>

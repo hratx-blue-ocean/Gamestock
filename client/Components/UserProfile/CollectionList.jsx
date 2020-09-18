@@ -60,7 +60,7 @@ const CollectionList = ({
 
   useEffect(() => {
     // sort by value on page load
-    console.log("collection: ", collection);
+    // console.log("collection: ", collection);
     if (collection[0]) {
       getDailyCollectionPrice(collection[0].username);
     }
@@ -74,7 +74,7 @@ const CollectionList = ({
         },
       })
       .then((userCollectionPrices) => {
-        console.log(userCollectionPrices);
+        //console.log(userCollectionPrices);
         const pricesAndDates = [[], []];
         userCollectionPrices.data.rows.map((collection) => {
           pricesAndDates[0].push(collection.date.slice(0, 10));

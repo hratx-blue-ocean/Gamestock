@@ -2,7 +2,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Banner from "../Core/Banner.jsx";
 import Leaderboard from "./Leaderboard.jsx";
-import PriceGraph from "../PriceGraph/PriceGraph.jsx";
 
 const Homepage = ({
   collectionOwnerName,
@@ -12,13 +11,8 @@ const Homepage = ({
 }) => {
   const [userCollection, setUserCollection] = useState({});
   const [itemID, setItemID] = useState(7);
-  const [priceData, setPriceData] = useState([]);
-  const [userCollectionData, setUserCollectionData] = useState([]);
 
-  useEffect(() => {
-    // sort by value on page load
-    getDailyPrices(itemID); //
-  }, []);
+  const [userCollectionData, setUserCollectionData] = useState([]);
 
   useEffect(() => {
     // populates data for user banner for logged in user
@@ -40,25 +34,6 @@ const Homepage = ({
         console.log("Error retrieving collection: ", err);
       });
   };
-  const getDailyPrices = (userID) => {
-    axios
-      .get("/prices/items", {
-        params: {
-          itemID: itemID,
-        },
-      })
-      .then((priceData) => {
-        const pricesAndDates = [[], []];
-        priceData.data.rows.forEach((date) => {
-          pricesAndDates[0].push(date.date.slice(0, 10));
-          pricesAndDates[1].push(parseFloat(date.total_value.slice(1)));
-        });
-        setPriceData(() => pricesAndDates);
-      })
-      .catch((err) => {
-        console.log("Error getting price data: ", err);
-      });
-  };
 
   return (
     <div>
@@ -76,7 +51,6 @@ const Homepage = ({
         collectionOwnerName={collectionOwnerName}
         setCollectionOwnerName={setCollectionOwnerName}
       />
-      <PriceGraph dates={priceData[0]} prices={priceData[1]} />
     </div>
   );
 };
