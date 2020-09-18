@@ -90,7 +90,7 @@ const Header = ({ loggedIn, setLoggedIn }) => {
         { label: "Log out", value: "logout" },
       ]);
     }
-  });
+  }, [loggedIn.userId]);
 
   return (
     <>
