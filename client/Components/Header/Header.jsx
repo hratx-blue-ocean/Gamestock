@@ -95,14 +95,13 @@ const Header = ({ loggedIn, setLoggedIn }) => {
       ]);
     }
   }, [loggedIn.userId]);
-
   return (
     <>
       <BannerWrapper>
         {loggedIn.loggedIn ? (
           <>
             <Link to="/">
-              <Thumbnail src="https://i.imgur.com/XYg49nh.jpg"></Thumbnail>
+              <Thumbnail src="https://mygamestocks.com/resources/smallLogo.png"></Thumbnail>
             </Link>
             <CenteredDiv>
               <AvatarWrapper src={loggedIn.userAvatar}></AvatarWrapper>
@@ -132,7 +131,7 @@ const Header = ({ loggedIn, setLoggedIn }) => {
         ) : (
           <>
             <Link to={`/profile/${loggedIn.userName}`}>
-              <Logo src="https://i.imgur.com/xlbOHDd.jpg"></Logo>
+              <Logo src="https://mygamestocks.com/resources/logo.png"></Logo>
             </Link>
             <SignupLogin setLoggedIn={setLoggedIn} />
           </>

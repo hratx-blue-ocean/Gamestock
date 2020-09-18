@@ -381,6 +381,16 @@ app.use(
   express.static(path.join(__dirname, "resources", "mario.jpg"))
 );
 
+app.use(
+  "/resources/logo.png",
+  express.static(path.join(__dirname, "resources", "logo.png"))
+);
+
+app.use(
+  "/resources/smallLogo.png",
+  express.static(path.join(__dirname, "resources", "smallLogo.png"))
+);
+
 // handles refresh requests from the userProfile page or any other endpoint
 app.get("/*", (req, res) => {
   res.redirect("/");
