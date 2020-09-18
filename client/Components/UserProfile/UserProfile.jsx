@@ -85,6 +85,7 @@ const UserProfile = (props) => {
         collection={collection}
         cardsPerPage={cardsPerPage}
         handlePageClick={handlePageClick}
+        userId={props.userId}
       />
     </div>
   );
