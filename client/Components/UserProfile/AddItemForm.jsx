@@ -11,13 +11,19 @@ import {
   NegativeButton,
   StyledForm,
   StyledSelect,
+  CenteredDiv,
 } from "../Core/coreStyles.jsx";
+
+const SelectedItemText = styled(CenteredDiv)`
+  color: #eb29fd;
+  margin: 0px;
+`;
 
 const Textarea = styled(StyledInput)`
   background-color: lightgray;
   width: 400px;
-  heigth: 100px;
-  padding: 25px;
+  height: 50px;
+  padding: 15px;
 `;
 const ConditionSelect = styled(StyledSelect)`
   min-width: 50px;
@@ -121,8 +127,12 @@ const AddItemForm = (props) => {
             setSearchedItems(items);
           }}
         />
-        <p>Item to Add: </p> {itemSelected["console-name"] || ""}{" "}
-        {itemSelected["product-name"] || ""}
+        <SelectedItemText>
+        <span>Item to Add:</span>
+          {itemSelected["console-name"] || ""}{" "}
+          {itemSelected["product-name"] || ""}
+        </SelectedItemText>
+        
         <br></br>
         <GriddedItems>
           <AddItemList
@@ -136,7 +146,6 @@ const AddItemForm = (props) => {
           </Thumbnail>
         </GriddedItems>
         <div>
-          <p>Item Stats:</p>
           <StyledForm>
             {/* date when item was bought */}
             <label htmlFor="dateAcquired">Date Acquired:</label>
