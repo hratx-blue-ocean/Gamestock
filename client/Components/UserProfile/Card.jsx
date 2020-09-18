@@ -28,7 +28,7 @@ const Card = ({ collection, currentCards }) => {
                 <Text>{item.console}</Text>
                 <Text>{item.condition}</Text>
                 <Text>{item.starting_price}</Text>
-                <Text>{item.tradeable ? "Tradeable" : "No Trade"}</Text>
+                <Text>{item.tradeable ? "Tradeable" : ""}</Text>
                 <StyledButton>Delete</StyledButton>
               </CardWrapper>
             </div>

@@ -82,9 +82,6 @@ const UserProfile = (props) => {
         priceSort={priceSort}
         conditionSort={conditionSort}
         tradeSort={tradeSort}
-        userId={props.userId}
-      />
-      <Paginator
         collection={collection}
         cardsPerPage={cardsPerPage}
         handlePageClick={handlePageClick}
