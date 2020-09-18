@@ -98,26 +98,20 @@ app.post("/signup", (req, res) => {
         res.status(200).send("Username already exists");
       } else {
         //if user does not exist, create one
-        Users.create(req.body)
-          .then((response) => {
-            console.log(response);
-            const token = jwt.sign(
-              username.username,
-              process.env.ACCESS_TOKEN_SECRET,
-              {
-                algorithm: "HS256",
-              }
-            );
-            res.cookie("token", token);
-            res.status(200).send(response);
-          })
-          .catch((err) => {
-            console.log("Error creating user", err);
-            res.status(500).send(err);
-          });
+        return Users.create(req.body);
       }
+      throw new Error();
     })
     .then((response) => {
+      console.log(response);
+      const token = jwt.sign(
+        username.username,
+        process.env.ACCESS_TOKEN_SECRET,
+        {
+          algorithm: "HS256",
+        }
+      );
+      res.cookie("token", token);
       res.status(200).send(response);
     })
     .catch((err) => {
@@ -249,14 +243,12 @@ app.post(`/saveItems`, (req, res) => {
     thumbnail: req.body.thumbnail,
     front_view: req.body.front_view,
   };
-  console.log(itemData);
   saveItemToDB(itemData)
     .then((response) => {
       res.status(200).send(response);
       console.log(`Success saving item to database`);
     })
     .catch((err) => {
-      console.log("error sending items,", err);
       res.status(500).send(err);
       console.log(`Error saving item to database`);
     });

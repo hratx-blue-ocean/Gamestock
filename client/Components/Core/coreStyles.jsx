@@ -152,6 +152,11 @@ export const WrapGrid = styled.div`
 
 export const StyledForm = styled.form``;
 
+export const CenteredDiv = styled.div`
+  display: "flex";
+  align-item: "center";
+`;
+
 export const Dropdown = styled.select`
   font-family: "Press Start 2P", sans-serif;
   font-size: 10px;
