@@ -1,10 +1,12 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import Card from "./Card.jsx";
 import Print from "./Print.jsx";
 import DisplayItems from "./DisplayItems.jsx";
 import AddItem from "./AddItem.jsx";
 import styled from "styled-components";
 import { CardWrapper, Text, Thumbnail } from "../Core/CardView.jsx";
+import PriceGraph from "../PriceGraph/PriceGraph.jsx";
+import axios from "axios";
 import {
   StyledInput,
   Wrapper,
@@ -51,6 +53,39 @@ const CollectionList = ({
   tradeSort,
   userId,
 }) => {
+  const [userCollectionData, setUserCollectionData] = useState([]);
+
+  useEffect(() => {
+    // sort by value on page load
+    console.log("collection: ", collection);
+    if (collection[0]) {
+      getDailyCollectionPrice(collection[0].username);
+    }
+  }, [collection]);
+
+  const getDailyCollectionPrice = (username) => {
+    axios
+      .get("/userCollectionValue", {
+        params: {
+          username: username,
+        },
+      })
+      .then((userCollectionPrices) => {
+        console.log(userCollectionPrices);
+        const pricesAndDates = [[], []];
+        userCollectionPrices.data.rows.map((collection) => {
+          pricesAndDates[0].push(collection.date.slice(0, 10));
+          pricesAndDates[1].push(
+            parseFloat(collection.total_value.slice(1).replace(/,/g, ""))
+          );
+        });
+        setUserCollectionData(() => pricesAndDates);
+      })
+      .catch((err) => {
+        console.log("Error getting user collection data: ", err);
+      });
+  };
+
   return (
     <div>
       {collection[0] && (
@@ -84,6 +119,10 @@ const CollectionList = ({
           <Print />
           <AddItem userId={userId} />
           <Card collection={collection} currentCards={currentCards} />
+          <PriceGraph
+            dates={userCollectionData[0]}
+            prices={userCollectionData[1]}
+          />
         </Wrapper>
       )}
     </div>

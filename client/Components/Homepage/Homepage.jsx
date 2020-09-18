@@ -24,7 +24,6 @@ const Homepage = ({
   useEffect(() => {
     // sort by value on page load
     getDailyPrices(itemID); //
-    getDailyCollectionPrice("Adeline.Koepp47");
   }, []);
 
   useEffect(() => {
@@ -33,7 +32,6 @@ const Homepage = ({
   }, [userId]);
 
   const getUserCollection = (input) => {
-    console.log(input);
     axios
       .get("/collection/user", {
         params: {
@@ -68,29 +66,6 @@ const Homepage = ({
       });
   };
 
-  const getDailyCollectionPrice = (username) => {
-    axios
-      .get("/userCollectionValue", {
-        params: {
-          username: "Adeline.Koepp47",
-        },
-      })
-      .then((userCollectionPrices) => {
-        console.log(userCollectionPrices);
-        const pricesAndDates = [[], []];
-        userCollectionPrices.data.rows.map((collection) => {
-          pricesAndDates[0].push(collection.date.slice(0, 10));
-          pricesAndDates[1].push(
-            parseFloat(collection.total_value.slice(1).replace(/,/g, ""))
-          );
-        });
-        setUserCollectionData(() => pricesAndDates);
-      })
-      .catch((err) => {
-        console.log("Error getting user collection data: ", err);
-      });
-  };
-
   return (
     <div>
       {userCollection && userCollection.avatar && (
@@ -122,10 +97,6 @@ const Homepage = ({
         setCollectionOwnerName={setCollectionOwnerName}
       />
       <PriceGraph dates={priceData[0]} prices={priceData[1]} />
-      <PriceGraph
-        dates={userCollectionData[0]}
-        prices={userCollectionData[1]}
-      />
     </div>
   );
 };
