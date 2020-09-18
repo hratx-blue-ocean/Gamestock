@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Wrapper, Dropdown } from "../Core/coreStyles.jsx";
+import { Wrapper, Dropdown, CenteredDiv } from "../Core/coreStyles.jsx";
 import styled from "styled-components";
 import SignupLogin from "../SignupLogin/SignupLogin.jsx";
 import { Link } from "react-router-dom";
@@ -45,7 +45,6 @@ const Thumbnail = styled.img`
 `;
 
 const Header = ({ loggedIn, setLoggedIn }) => {
-  console.log(loggedIn.userName);
   const [userOptions, setUserOptions] = useState([
     {
       label: "user",
@@ -57,7 +56,6 @@ const Header = ({ loggedIn, setLoggedIn }) => {
     },
     { label: "Log out", value: "logout" },
   ]);
-  console.log(userOptions);
 
   const handleChange = (event) => {
     event.preventDefault();
@@ -102,15 +100,8 @@ const Header = ({ loggedIn, setLoggedIn }) => {
             <Link to="/">
               <Thumbnail src="https://i.imgur.com/XYg49nh.jpg"></Thumbnail>
             </Link>
-            {/* <Link to="/"> */}
-            <div
-              style={{
-                display: "flex",
-                alignItem: "center",
-              }}
-            >
+            <CenteredDiv>
               <AvatarWrapper src={loggedIn.userAvatar}></AvatarWrapper>
-              {/* </Link> */}
               <Dropdown value="selection" onChange={(e) => handleChange(e)}>
                 {userOptions.map((option, index) => {
                   if (!index) {
@@ -131,17 +122,8 @@ const Header = ({ loggedIn, setLoggedIn }) => {
                     );
                   }
                 })}
-                {/* <option key={userOptions[0].value} value={userOptions[0].value}>
-                {userOptions[0].label}
-              </option>
-              <option key={userOptions[1].value} value={userOptions[1].value}>
-                {userOptions[1].label}
-              </option>
-              <option key={userOptions[2].value} value={userOptions[2].value}>
-                {userOptions[1].label}
-              </option> */}
               </Dropdown>
-            </div>
+            </CenteredDiv>
           </>
         ) : (
           <>
