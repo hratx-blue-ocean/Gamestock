@@ -31,7 +31,6 @@ const Card = ({ collection, currentCards }) => {
                 <Text>{item.starting_price}</Text>
                 <Text>{item.tradeable ? "Tradeable" : ""}</Text>
                 <ItemView item={item} />
-                <StyledButton>Delete</StyledButton>
               </CardWrapper>
             </div>
           );

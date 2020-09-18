@@ -1,5 +1,20 @@
 import React from "react";
-// import ReactPaginate from "react-paginate"; ew packages!
+import { CardWrapper, Text, Thumbnail } from "../Core/CardView.jsx";
+import {
+  StyledInput,
+  Wrapper,
+  GlobalStyles,
+  Title,
+  WrapGrid,
+  StyledButton,
+  StyledForm,
+} from "../Core/coreStyles.jsx";
+import styled from "styled-components";
+
+const AndrewWrapper = styled(Wrapper)`
+  display: flex;
+  justify-content: center;
+`;
 
 const Paginator = ({
   collection,
@@ -12,17 +27,22 @@ const Paginator = ({
   for (let i = 1; i <= Math.ceil(collection.length / cardsPerPage); i++) {
     pageNumbers.push(i);
   }
+
   return (
     <div>
-      <ul className="pagination">
-        {pageNumbers.map((page) => {
-          return (
-            <li key={page} value={page} onClick={(e) => handlePageClick(e)}>
-              {page}
-            </li>
-          );
-        })}
-      </ul>
+      <AndrewWrapper>
+        <ul className="pagination">
+          {pageNumbers.map((page) => {
+            return (
+              <StyledButton key={page}>
+                <li value={page} onClick={(e) => handlePageClick(e)}>
+                  {page}
+                </li>
+              </StyledButton>
+            );
+          })}
+        </ul>
+      </AndrewWrapper>
     </div>
   );
 };

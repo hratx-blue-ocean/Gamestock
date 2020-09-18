@@ -17,6 +17,9 @@ const {
   getUserCollectionByName,
   getDailyItemPrice,
   getDailyCollectionValue,
+  getUserCollectionByPrice,
+  getUserCollectionByCondition,
+  getUserCollectionByTradeable,
 } = require("./database/dbQueryHelpers");
 
 // ebay API
@@ -120,8 +123,7 @@ app.post("/signup", (req, res) => {
 });
 
 // MAIN USER PROFILE ROUTE
-app.get("/userProfile/:username", (req, res) => {
-  console.log("WREQ DAT PARAMS: ", req.params);
+app.get("/userProfile/name/:username", (req, res) => {
   getUserCollectionByName(req.params.username)
     .then((response) => res.send(response))
     .catch((err) => {
@@ -130,35 +132,45 @@ app.get("/userProfile/:username", (req, res) => {
     });
 });
 
-// user profile route
-// app.get("/userProfile/items", (req, res) => {
-//   Items.getAll()
-//     .then((response) => res.send(response))
-//     .catch((err) => {
-//       console.error(err);
-//       res.sendStatus(500);
-//     });
-// });
+// USER PROFILE ROUTE TO SORT BY TITLE ALPHA
+app.get("/userProfile/title/:username", (req, res) => {
+  getUserCollectionByName(req.params.username)
+    .then((response) => res.send(response))
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send(err);
+    });
+});
 
-// user profile route
-// app.get("/userProfile/prices", (req, res) => {
-//   Prices.getAll()
-//     .then((response) => res.send(response))
-//     .catch((err) => {
-//       console.error(err);
-//       res.sendStatus(500);
-//     });
-// });
+// USER PROFILE ROUTE TO SORT BY PRICE
+app.get("/userProfile/price/:username", (req, res) => {
+  getUserCollectionByPrice(req.params.username)
+    .then((response) => res.send(response))
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send(err);
+    });
+});
 
-// user profile route
-// app.get("/userProfile/collectionItems", (req, res) => {
-//   Collections.getAll()
-//     .then((response) => res.send(response))
-//     .catch((err) => {
-//       console.error(err);
-//       res.sendStatus(500);
-//     });
-// });
+// USER PROFILE ROUTE TO SORT BY CONDITION
+app.get("/userProfile/condition/:username", (req, res) => {
+  getUserCollectionByCondition(req.params.username)
+    .then((response) => res.send(response))
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send(err);
+    });
+});
+
+// USER PROFILE ROUTE TO SORT BY TRADEABLE
+app.get("/userProfile/tradeable/:username", (req, res) => {
+  getUserCollectionByTradeable(req.params.username)
+    .then((response) => res.send(response))
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send(err);
+    });
+});
 
 // API route to get item price
 app.get("/getItemPrice", (req, res) => {
