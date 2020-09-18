@@ -172,6 +172,16 @@ app.get("/userProfile/tradeable/:username", (req, res) => {
     });
 });
 
+// USER PROFILE ROUTE TO SORT BY CONSOLE
+app.get("/userProfile/console/:username", (req, res) => {
+  sortUserCollectionByConsole(req.params.username, req.params.console)
+    .then((response) => res.send(response))
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send(err);
+    });
+});
+
 // API route to get item price
 app.get("/getItemPrice", (req, res) => {
   const itemName = req.query.items;
