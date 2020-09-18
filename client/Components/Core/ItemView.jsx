@@ -33,11 +33,11 @@ export default function ItemView({ item }) {
     title: "Spider-Man Miles Morales",
     console_type: "PS5",
     condition: "new",
-    DOP: "8/1/2020",
+    DOP: "08/21/2020",
     starting_price: 59.99,
-    current_price: 699.0,
+    current_price: 59.99,
     tradeable: "yes",
-    comments: "best game ever",
+    comments: "we need this",
   });
 
   const toggleModalState = () => {
@@ -71,21 +71,21 @@ export default function ItemView({ item }) {
       <Modal modalState={modalState} onClick={() => freeze(modalState)}>
         <ModalInner onClick={(e) => e.stopPropagation()}>
           <ModalWrapper>
-            <Title>{title}</Title>
+            <Title>{item.title}</Title>
+            <PriceGraph dates={DOP} prices={starting_price} />
             <Centered>{/* <StyledImg>{item.thumbnail}</StyledImg> */}</Centered>
             <MoveLeft>
-              <p>Console: {console_type}</p>
-              <p>Condition: {condition}</p>
+              <p>Console: {item.console}</p>
+              <p>Condition: {item.condition}</p>
               <p>Date of Purchase: {DOP}</p>
-              <p>Starting Price: ${starting_price}</p>
+              <p>Starting Price: ${item.starting_price}</p>
               <p>Current Price: ${current_price}</p>
-              <p>Tradeable? {tradeable}</p>
+              <p>Tradeable? {item.tradeable === "yes" ? "yes" : "no"}</p>
               <p>Comments: {comments}</p>
             </MoveLeft>
           </ModalWrapper>
         </ModalInner>
       </Modal>
-      <PriceGraph />
       <StyledButton onClick={() => freeze(modalState)}>View Item</StyledButton>
     </div>
   );
