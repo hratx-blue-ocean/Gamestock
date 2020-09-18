@@ -12,12 +12,12 @@ import {
   StyledForm,
 } from "../Core/coreStyles.jsx";
 
-const Card = ({ collection }) => {
+const Card = ({ collection, currentCards }) => {
   console.log("CARD COLLECTION: ", collection);
   if (collection.length) {
     return (
       <div>
-        {collection.map((item, idx) => {
+        {currentCards.map((item, idx) => {
           return (
             <div key={idx}>
               <CardWrapper>
@@ -28,7 +28,7 @@ const Card = ({ collection }) => {
                 <Text>{item.console}</Text>
                 <Text>{item.condition}</Text>
                 <Text>{item.starting_price}</Text>
-                <Text>{item.tradeable ? "Yes" : "No"}</Text>
+                <Text>{item.tradeable ? "Tradeable" : "No Trade"}</Text>
                 <StyledButton>Delete</StyledButton>
               </CardWrapper>
             </div>
@@ -39,7 +39,7 @@ const Card = ({ collection }) => {
   } else {
     return (
       <div>
-        <Text>Well, shit.</Text>
+        <Text>ERROR</Text>
       </div>
     );
   }
