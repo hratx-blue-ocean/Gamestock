@@ -48,13 +48,13 @@ const RightButton = styled(StyledButton)`
 const CollectionList = ({
   collection,
   currentCards,
-  titleSort,
-  priceSort,
-  conditionSort,
-  tradeSort,
   userId,
   cardsPerPage,
   handlePageClick,
+  sortByTitle,
+  sortByPrice,
+  sortByCondition,
+  sortByTradeable,
 }) => {
   const [userCollectionData, setUserCollectionData] = useState([]);
 
@@ -110,16 +110,34 @@ const CollectionList = ({
               <StyledButton>Search</StyledButton>
             </GameSearchForm>
             {/* <Text>Sort by: </Text> */}
-            <LeftButton id="sortByTitle" onClick={titleSort}>
+            <LeftButton
+              id="sortByTitle"
+              onClick={() => {
+                sortByTitle();
+              }}
+            >
               Title
             </LeftButton>
-            <MiddleButton id="sortByPrice" onClick={() => priceSort()}>
+            <MiddleButton
+              id="sortByPrice"
+              onClick={() => {
+                sortByPrice();
+              }}
+            >
               Price
             </MiddleButton>
-            <MiddleButton id="sortByCondition" onClick={() => conditionSort()}>
+            <MiddleButton
+              id="sortByCondition"
+              onClick={() => sortByCondition()}
+            >
               Condition
             </MiddleButton>
-            <RightButton id="sortByTrade" onClick={() => tradeSort()}>
+            <RightButton
+              id="sortByTrade"
+              onClick={() => {
+                sortByTradeable();
+              }}
+            >
               Tradeable
             </RightButton>
           </UserProfGrid>

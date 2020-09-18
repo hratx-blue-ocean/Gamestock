@@ -14,32 +14,62 @@ const UserProfile = (props) => {
 
   const getInfo = () => {
     axios
-      .get(`/userProfile/${props.collectionOwnerName}`)
+      .get(`/userProfile/name/${props.collectionOwnerName}`)
       .then((data) => {
         console.log("THIS IS DATA :", data);
         setCollection(data.data.rows);
       })
       .catch((err) => {
-        console.error("Failure to get colleciton info on front end", err);
+        console.error("Failure to get collection info on front end", err);
+      });
+  };
+
+  const sortByTitle = () => {
+    axios
+      .get(`/userProfile/title/${props.collectionOwnerName}`)
+      .then((data) => {
+        setCollection(data.data.rows);
+      })
+      .catch((err) => {
+        console.error("Failure to get title sort info on front end", err);
+      });
+  };
+
+  const sortByPrice = () => {
+    axios
+      .get(`/userProfile/price/${props.collectionOwnerName}`)
+      .then((data) => {
+        setCollection(data.data.rows);
+      })
+      .catch((err) => {
+        console.error("Failure to get collection info on front end", err);
+      });
+  };
+
+  const sortByCondition = () => {
+    axios
+      .get(`/userProfile/condition/${props.collectionOwnerName}`)
+      .then((data) => {
+        setCollection(data.data.rows);
+      })
+      .catch((err) => {
+        console.error("Failure to get collection info on front end", err);
+      });
+  };
+
+  const sortByTradeable = () => {
+    axios
+      .get(`/userProfile/tradeable/${props.collectionOwnerName}`)
+      .then((data) => {
+        setCollection(data.data.rows);
+      })
+      .catch((err) => {
+        console.error("Failure to get collection info on front end", err);
       });
   };
 
   useEffect(() => {
-<<<<<<< HEAD
-    if (!collection.length) {
-      axios
-        .get(`/userProfile/${props.collectionOwnerName}`)
-        .then((data) => {
-          console.log("THIS IS DATA :", data);
-          setCollection(data.data.rows || []);
-        })
-        .catch((err) => {
-          console.error("Failure to get colleciton info on front end", err);
-        });
-    }
-=======
     getInfo();
->>>>>>> clean up useEffect
   }, []);
 
   let indexOflastCard = currentPage * cardsPerPage;
@@ -50,51 +80,15 @@ const UserProfile = (props) => {
     setCurrentPage(e.target.value);
   };
 
-  // sort by title
-  const titleSort = () => {
-    if (collection.length) {
-      console.log(
-        "TITLE SORT CLICKED: ",
-        collection.sort((a, b) => a.title - b.title)
-      );
-      // return collection.sort((a, b) => a.title - b.title);
-    }
-  };
-
-  // sort by price
-  const priceSort = () => {
-    if (collection.length) {
-      console.log("PRICE SORT CLICKED");
-      return collection.sort((a, b) => a.starting_price - b.starting_price);
-    }
-  };
-
-  // sort by condition
-  const conditionSort = () => {
-    if (collection.length) {
-      console.log("CONDITION SORT CLICKED");
-      return collection.sort((a, b) => a.condition - b.condition);
-    }
-  };
-
-  // sort by trade status
-  const tradeSort = () => {
-    if (collection.length) {
-      console.log("TRADE SORT CLICKED");
-      return collection.sort((a, b) => a.tradeable - b.tradeable);
-    }
-  };
-
   return (
     <div>
       <CollectionList
+        sortByTitle={sortByTitle}
+        sortByPrice={sortByPrice}
+        sortByCondition={sortByCondition}
+        sortByTradeable={sortByTradeable}
         collection={collection}
         currentCards={currentCards}
-        titleSort={titleSort}
-        priceSort={priceSort}
-        conditionSort={conditionSort}
-        tradeSort={tradeSort}
-        collection={collection}
         cardsPerPage={cardsPerPage}
         handlePageClick={handlePageClick}
         userId={props.userId}
