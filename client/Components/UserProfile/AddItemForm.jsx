@@ -41,7 +41,7 @@ const AddItemForm = (props) => {
   const [dateAcquired, setDateAcquired] = useState("");
   const [purchasedPrice, setPurchasedPrice] = useState(0.0);
   const [itemNotes, setItemNotes] = useState("");
-  const [itemCondition, setItemCondition] = useState("New");
+  const [itemCondition, setItemCondition] = useState("A");
   const [isTradeable, setIsTradeable] = useState(false);
   const [isConsole, setIsConsole] = useState(false);
 
@@ -122,9 +122,6 @@ const AddItemForm = (props) => {
             select={(item) => {
               setItemSelected(item);
             }}
-            // getImage={() => {
-            //   getImage();
-            // }}
           />
           <Thumbnail>
             <img src={itemSelectedThumbnail}></img>
