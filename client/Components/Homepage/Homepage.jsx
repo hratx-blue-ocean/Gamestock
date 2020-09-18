@@ -9,8 +9,8 @@ const Homepage = ({
   collectionOwnerName,
   setCollectionOwnerName,
   loggedIn,
+  userId,
 }) => {
-  const [userID, setUserID] = useState(121);
   const [userCollection, setUserCollection] = useState({});
   const [itemID, setItemID] = useState(7);
   const [priceData, setPriceData] = useState([]);
@@ -23,19 +23,21 @@ const Homepage = ({
   };
   useEffect(() => {
     // sort by value on page load
-    if (userID === 0 && loggedIn) {
-      setUserID(loggedIn.userId);
-    }
-    getUserCollection(userID);
-    getDailyPrices(itemID);
+    getDailyPrices(itemID); //
     getDailyCollectionPrice("Adeline.Koepp47");
   }, []);
 
-  const getUserCollection = (userID) => {
+  useEffect(() => {
+    // populates data for user banner for logged in user
+    getUserCollection(userId);
+  }, [userId]);
+
+  const getUserCollection = (input) => {
+    console.log(input);
     axios
       .get("/collection/user", {
         params: {
-          userID: userID,
+          userID: input,
         },
       })
       .then((collection) => {
@@ -46,10 +48,6 @@ const Homepage = ({
         console.log("Error retrieving collection: ", err);
       });
   };
-
-  if (loggedIn.loggedIn) {
-    console.log("logged in", loggedIn);
-  }
   const getDailyPrices = (userID) => {
     axios
       .get("/prices/items", {
@@ -95,7 +93,7 @@ const Homepage = ({
 
   return (
     <div>
-      {loggedIn.loggedIn && (
+      {userCollection && userCollection.avatar && (
         <Banner
           avatar={userCollection.avatar}
           username={userCollection.username}

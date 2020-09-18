@@ -53,6 +53,7 @@ function App() {
               setCollectionOwnerName={setCollectionOwnerName}
               loggedIn={loggedIn}
               setLoggedIn={setLoggedIn}
+              userId={loggedIn.userId}
             />
           </Route>
           <Route path="/profile/:name">
