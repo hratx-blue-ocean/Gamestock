@@ -5,11 +5,12 @@ import axios from "axios";
 import styled from "styled-components";
 import {
   StyledInput,
-  Wrapper,
-  Title,
   WrapGrid,
   StyledButton,
+  StyledRadio,
+  NegativeButton,
   StyledForm,
+  StyledSelect,
 } from "../Core/coreStyles.jsx";
 
 const Textarea = styled(StyledInput)`
@@ -18,24 +19,36 @@ const Textarea = styled(StyledInput)`
   heigth: 100px;
   padding: 25px;
 `;
+const ConditionSelect = styled(StyledSelect)`
+  min-width: 50px;
+`;
+const GriddedItems = styled(WrapGrid)`
+  grid-template-columns: 425px 375px;
+`;
+const Thumbnail = styled(StyledForm)`
+  grid-column-start: 2;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
 
 const AddItemForm = (props) => {
+  const [itemSelected, setItemSelected] = useState({ "product-name": "games" });
+  const [searchedItems, setSearchedItems] = useState([]);
+  const [itemSelectedThumbnail, setSelectedThumbnail] = useState("");
+  const [itemSelectedImage, setSelectedImage] = useState("");
+
   const [dateAcquired, setDateAcquired] = useState("");
-  const [purchasedPrice, setPurchasedPrice] = useState(0);
+  const [purchasedPrice, setPurchasedPrice] = useState(0.0);
   const [itemNotes, setItemNotes] = useState("");
   const [itemCondition, setItemCondition] = useState("New");
   const [isTradeable, setIsTradeable] = useState(false);
   const [isConsole, setIsConsole] = useState(false);
 
-  const [itemSelected, setItemSelected] = useState({});
-  const [searchedItems, setSearchedItems] = useState([]);
-  const [itemSelectedThumbnail, setSelectedThumbnail] = useState("");
-  const [itemSelectedImage, setSelectedImage] = useState("");
-
   const submittedInfo = {
     title: itemSelected["product-name"],
     console: itemSelected["console-name"],
-    is_console: "false", //currently hardcoded as false
+    is_console: "false",
     user_id: props.userId,
     condition: itemCondition,
     comments: itemNotes,
@@ -48,19 +61,24 @@ const AddItemForm = (props) => {
   };
 
   function submitInfo(submittedInfo) {
-    console.log("Sumbmitted Info: ", submittedInfo);
-    axios
-      .post("/saveItems", submittedInfo)
-      .then(function (response) {
-        console.log(response);
-      })
-      .catch(function (error) {
-        console.log(error);
-      });
+    if (submittedInfo.title == "games") {
+      return;
+    } else if (submittedInfo["date_of_purchase"] == "" ) {
+      return;
+    } else {
+      axios
+        .post("/saveItems", submittedInfo)
+        .then(function (response) {
+        })
+        .catch(function (error) {
+          console.log(error);
+        });
+    }
   }
 
-  // galleryURL // thumbnail
-  // pictureURLLarge // image
+  useEffect(() => {
+    getImage();
+  }, [itemSelected]);
 
   function getImage() {
     axios
@@ -74,37 +92,49 @@ const AddItemForm = (props) => {
       });
   }
 
+  function clearForm() {
+    setItemSelected({ "product-name": "games" });
+    setSearchedItems([]);
+    setSelectedThumbnail("");
+    setSelectedImage("");
+    setDateAcquired("");
+    setPurchasedPrice(0.0);
+    setItemNotes("");
+    setItemCondition("A");
+    setIsTradeable(false);
+    setIsConsole(false);
+  }
+
   return (
     <div>
       <div>
-        <h2>Add an item to your collection</h2>
-
         <NewItemSearchBar
           getSearchedItems={(items) => {
             setSearchedItems(items);
           }}
         />
-
-        <img src={itemSelectedThumbnail} alt="THIS IS IMAGE OF THING"></img>
+        <p>Item to Add: </p> {itemSelected["console-name"] || ""}{" "}
+        {itemSelected["product-name"] || ""}
         <br></br>
-        <AddItemList
-          items={searchedItems}
-          select={(item) => {
-            setItemSelected(item);
-          }}
-          getImage={() => {
-            getImage();
-          }}
-        />
-
+        <GriddedItems>
+          <AddItemList
+            items={searchedItems}
+            select={(item) => {
+              setItemSelected(item);
+            }}
+            // getImage={() => {
+            //   getImage();
+            // }}
+          />
+          <Thumbnail>
+            <img src={itemSelectedThumbnail}></img>
+          </Thumbnail>
+        </GriddedItems>
         <div>
-          <p>Item in Inventory: </p> {itemSelected["console-name"] || ""}{" "}
-          {itemSelected["product-name"] || ""}
           <p>Item Stats:</p>
           <StyledForm>
             {/* date when item was bought */}
             <label htmlFor="dateAcquired">Date Acquired:</label>
-
             <StyledInput
               onChange={(e) => setDateAcquired(e.target.value)}
               type="date"
@@ -115,7 +145,6 @@ const AddItemForm = (props) => {
             <br></br>
 
             {/* price at purchase of item */}
-
             <label htmlFor="purchasedPrice">PurchasedPrice:</label>
             <StyledInput
               onChange={(e) => setPurchasedPrice(e.target.value)}
@@ -125,6 +154,7 @@ const AddItemForm = (props) => {
               step="0.01"
               value={purchasedPrice}
             ></StyledInput>
+
             <br></br>
 
             {/* notes for user comments */}
@@ -136,9 +166,11 @@ const AddItemForm = (props) => {
               id="comment"
               value={itemNotes}
             ></Textarea>
+
             <br></br>
+
             <label htmlFor="ItemCondition">Item Condition:</label>
-            <select
+            <ConditionSelect
               id="ItemCondition"
               value={itemCondition}
               onChange={(e) => setItemCondition(e.target.value)}
@@ -148,44 +180,52 @@ const AddItemForm = (props) => {
               <option value="C">C</option>
               <option value="D">D</option>
               <option value="F">F</option>
-            </select>
+            </ConditionSelect>
 
-            <div>
-              <label htmlFor="forTrade">tradeable</label>
+            <StyledRadio>
               <input
-                onChange={(e) => setIsTradeable(!isTradeable)}
-                type="checkbox"
+                onClick={(e) => setIsTradeable(!isTradeable)}
+                type="radio"
                 id="forTrade"
                 checked={isTradeable}
+                value={isTradeable}
+                onChange={() => {}}
               ></input>
-            </div>
-            <div>
-              <label htmlFor="isConsole">This is a Console</label>
+              <label htmlFor="forTrade">Tradeable</label>
+            </StyledRadio>
+
+            <StyledRadio>
               <input
-                onChange={(e) => setIsConsole(!isConsole)}
-                type="checkbox"
+                onClick={(e) => setIsConsole(!isConsole)}
+                type="radio"
                 id="isConsole"
                 checked={isConsole}
+                value={isConsole}
+                onChange={() => {}}
               ></input>
-            </div>
+              <label htmlFor="isConsole">This is a console</label>
+            </StyledRadio>
 
             <StyledButton
-              onClick={() => submitInfo(submittedInfo)}
+              onClick={() => {
+                submitInfo(submittedInfo);
+                clearForm();
+              }}
               type="button"
             >
               Submit
             </StyledButton>
           </StyledForm>
         </div>
-
-        <StyledButton
+        <NegativeButton
           type="button"
           onClick={() => {
             props.exitModal();
+            clearForm();
           }}
         >
           Cancel
-        </StyledButton>
+        </NegativeButton>
       </div>
     </div>
   );
