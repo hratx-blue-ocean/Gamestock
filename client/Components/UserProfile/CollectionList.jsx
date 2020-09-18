@@ -83,7 +83,7 @@ const CollectionList = ({
           </UserProfGrid>
           <Print />
           <AddItem userId={userId} />
-          <Card collection={collection} />
+          <Card collection={collection} currentCards={currentCards} />
         </Wrapper>
       )}
     </div>
