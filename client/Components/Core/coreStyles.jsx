@@ -217,3 +217,8 @@ export default function RadioButton({ label, value, id, isSelected, changed }) {
     </StyledRadio>
   );
 }
+
+export const Centered = styled.div`
+  display: flex;
+  justify-content: center;
+`;

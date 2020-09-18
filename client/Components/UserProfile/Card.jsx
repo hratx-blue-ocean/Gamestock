@@ -11,6 +11,7 @@ import {
   StyledButton,
   StyledForm,
 } from "../Core/coreStyles.jsx";
+import ItemView from "../Core/ItemView.jsx";
 
 const Card = ({ collection, currentCards }) => {
   console.log("CARD COLLECTION: ", collection);
@@ -29,6 +30,7 @@ const Card = ({ collection, currentCards }) => {
                 <Text>{item.condition}</Text>
                 <Text>{item.starting_price}</Text>
                 <Text>{item.tradeable ? "Tradeable" : ""}</Text>
+                <ItemView item={item} />
                 <StyledButton>Delete</StyledButton>
               </CardWrapper>
             </div>
