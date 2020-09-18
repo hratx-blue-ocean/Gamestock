@@ -77,6 +77,10 @@ const Header = ({ loggedIn, setLoggedIn }) => {
   };
 
   useEffect(() => {
+    const lockBod = document.getElementsByTagName("body")[0];
+    if (lockBod.classList.contains("freeze")) {
+      lockBod.classList.remove("freeze");
+    }
     if (loggedIn.loggedIn) {
       setUserOptions([
         {
