@@ -4,6 +4,7 @@ import Print from "./Print.jsx";
 import DisplayItems from "./DisplayItems.jsx";
 import AddItem from "./AddItem.jsx";
 import styled from "styled-components";
+import Paginator from "./Paginator.jsx";
 import { CardWrapper, Text, Thumbnail } from "../Core/CardView.jsx";
 import PriceGraph from "../PriceGraph/PriceGraph.jsx";
 import axios from "axios";
@@ -52,6 +53,8 @@ const CollectionList = ({
   conditionSort,
   tradeSort,
   userId,
+  cardsPerPage,
+  handlePageClick,
 }) => {
   const [userCollectionData, setUserCollectionData] = useState([]);
 
@@ -122,6 +125,11 @@ const CollectionList = ({
           <PriceGraph
             dates={userCollectionData[0]}
             prices={userCollectionData[1]}
+          />
+          <Paginator
+            collection={collection}
+            cardsPerPage={cardsPerPage}
+            handlePageClick={handlePageClick}
           />
         </Wrapper>
       )}
