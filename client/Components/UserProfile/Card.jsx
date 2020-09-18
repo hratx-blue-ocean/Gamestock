@@ -30,11 +30,7 @@ const Card = ({ collection, currentCards }) => {
                 <Text>{item.condition}</Text>
                 <Text>{item.starting_price}</Text>
                 <Text>{item.tradeable ? "Tradeable" : ""}</Text>
-<<<<<<< HEAD
                 <ItemView item={item} />
-                <StyledButton>Delete</StyledButton>
-=======
->>>>>>> implement full filtering on user profile collection
               </CardWrapper>
             </div>
           );
