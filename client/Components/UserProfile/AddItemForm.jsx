@@ -5,8 +5,6 @@ import axios from "axios";
 import styled from "styled-components";
 import {
   StyledInput,
-  Wrapper,
-  Title,
   WrapGrid,
   StyledButton,
   StyledRadio,
@@ -176,16 +174,6 @@ const AddItemForm = (props) => {
               <option value="F">F</option>
             </ConditionSelect>
 
-            {/* <div>
-              <label htmlFor="forTrade">tradeable</label>
-              <input
-                onChange={(e) => setIsTradeable(!isTradeable)}
-                type="checkbox"
-                id="forTrade"
-                checked={isTradeable}
-              ></input>
-            </div> */}
-
             <StyledRadio>
               <input
                 onClick={(e) => setIsTradeable(!isTradeable)}
@@ -197,16 +185,6 @@ const AddItemForm = (props) => {
               ></input>
               <label htmlFor="forTrade">Tradeable</label>
             </StyledRadio>
-
-            {/* <div>
-              <label htmlFor="isConsole">This is a Console</label>
-              <input
-                onChange={(e) => setIsConsole(!isConsole)}
-                type="checkbox"
-                id="isConsole"
-                checked={isConsole}
-              ></input>
-            </div> */}
 
             <StyledRadio>
               <input

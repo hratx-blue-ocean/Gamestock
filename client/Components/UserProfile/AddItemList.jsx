@@ -28,7 +28,7 @@ const SingleListItem = styled(Wrapper)`
   &:hover {
     cursor: pointer;
     background: #2d1c7b;
-  };
+  }
 `;
 
 const AddItemList = (props) => {
