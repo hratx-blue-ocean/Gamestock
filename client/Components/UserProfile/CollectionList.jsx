@@ -4,6 +4,7 @@ import Print from "./Print.jsx";
 import DisplayItems from "./DisplayItems.jsx";
 import AddItem from "./AddItem.jsx";
 import styled from "styled-components";
+import Paginator from "./Paginator.jsx";
 import { CardWrapper, Text, Thumbnail } from "../Core/CardView.jsx";
 import {
   StyledInput,
@@ -49,6 +50,8 @@ const CollectionList = ({
   priceSort,
   conditionSort,
   tradeSort,
+  cardsPerPage,
+  handlePageClick,
 }) => {
   return (
     <div>
@@ -83,6 +86,11 @@ const CollectionList = ({
           <Print />
           <AddItem />
           <Card collection={collection} currentCards={currentCards} />
+          <Paginator
+            collection={collection}
+            cardsPerPage={cardsPerPage}
+            handlePageClick={handlePageClick}
+          />
         </Wrapper>
       )}
     </div>
