@@ -72,7 +72,7 @@ const CollectionList = ({
   sortByCondition,
   sortByTradeable,
   getCollectionByConsole,
-  getAllConsoles,
+  getUserConsoles,
   consoles,
   collectionOwnerName,
 }) => {
@@ -84,7 +84,7 @@ const CollectionList = ({
     if (collection[0]) {
       getDailyCollectionPrice(collection[0].username);
     }
-    getAllConsoles();
+    getUserConsoles();
   }, [collection]);
 
   const getDailyCollectionPrice = (username) => {
@@ -114,13 +114,11 @@ const CollectionList = ({
     <div>
       <Wrapper>
         <Title>{`${collectionOwnerName}'s Collection`}</Title>
-        {!collection[0] && (
-          <AddItem
-            userId={loggedIn.userId}
-            collection={collection}
-            setCollection={setCollection}
-          />
-        )}
+        <AddItem
+          userId={loggedIn.userId}
+          collection={collection}
+          setCollection={setCollection}
+        />
         {collection[0] && (
           <>
             <DisplayItems collection={collection} />

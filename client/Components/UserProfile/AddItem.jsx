@@ -51,9 +51,11 @@ export default function AddItem(props) {
         <StyledButton onClick={() => toggleModalState()}>
           Add Item To Your Collection
         </StyledButton>
-        <StyledButton onClick={() => window.print()} type="button">
-          Print Collection
-        </StyledButton>
+        {props.collection.length && (
+          <StyledButton onClick={() => window.print()} type="button">
+            Print Collection
+          </StyledButton>
+        )}
       </ItemGrid>
       {/* <StyledButton onClick={() => toggleModalState()}>
         Add Item To Your Collection
