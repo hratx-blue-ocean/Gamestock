@@ -114,6 +114,13 @@ const CollectionList = ({
     <div>
       <Wrapper>
         <Title>{`${collectionOwnerName}'s Collection`}</Title>
+        {!collection[0] && (
+          <AddItem
+            userId={loggedIn.userId}
+            collection={collection}
+            setCollection={setCollection}
+          />
+        )}
         {collection[0] && (
           <>
             <DisplayItems collection={collection} />
