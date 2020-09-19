@@ -88,6 +88,7 @@ const UserProfile = (props) => {
         sortByCondition={sortByCondition}
         sortByTradeable={sortByTradeable}
         collection={collection}
+        setCollection={setCollection}
         currentCards={currentCards}
         cardsPerPage={cardsPerPage}
         handlePageClick={handlePageClick}

@@ -23,9 +23,9 @@ class Collections extends Crud {
       this,
       `WITH item_id_var AS (
         INSERT INTO items
-          (title, console, is_console, thumbnail, front_view, current_value)
+          (title, console, is_console, thumbnail, front_view, current_price)
         VALUES
-          ($1, $2, $3, $4, $5, $12) ON CONFLICT (title, console) DO NOTHING
+          ($1, $2, $3, $4, $5, $12) ON CONFLICT (title, console) DO UPDATE SET current_price = $12
         RETURNING id
       ),
       ins2 AS (

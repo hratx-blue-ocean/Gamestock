@@ -29,7 +29,10 @@ export default function AddItem(props) {
           <ModalWrapper>
             <Title>Add Item To Your Collection</Title>
             <AddItemForm
+              toggleModalState={toggleModalState}
               userId={props.userId}
+              setCollection={props.setCollection}
+              collection={props.collection}
               exitModal={() => toggleModalState()}
             />
           </ModalWrapper>

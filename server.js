@@ -251,7 +251,7 @@ app.post(`/saveItems`, (req, res) => {
       res.status(200).send(response);
     })
     .catch((err) => {
-      console.log(`Error saving item to database`);
+      console.log(`Error saving item to database`, err);
       res.status(500).send(err);
     });
 });
