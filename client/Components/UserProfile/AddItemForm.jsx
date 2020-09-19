@@ -61,6 +61,7 @@ const AddItemForm = (props) => {
   };
 
   function submitInfo(submittedInfo) {
+    submittedInfo.current_value = Number(submittedInfo.current_value) / 100;
     if (submittedInfo.title == "games") {
       return;
     } else if (submittedInfo["date_of_purchase"] == "") {

@@ -329,39 +329,49 @@ app.get("/prices/items", (req, res) => {
     });
 });
 
-//Function to update Item Price everyday
-// var updateDaily = schedule.scheduleJob("* * */11  * * *", function () {
-//   Items.getAll({}).then((data) => {
-//     const names = data.rows.map((row) => {
-//       return axios
-//         .get(
-//           `https://www.pricecharting.com/api/products?t=36330d87343dc3b342b42a4f6c58b13e443061c8&q=${row.title}_?limit=10`
-//         )
-//         .then((res) => {
-//           return Prices.create(
-//             {
-//               current_value: res.data.products[0]["new-price"],
-//               date: new Date().toUTCString(),
-//               item_id: row.id,
-//             },
-//             "RETURNING item_id, current_value"
-//           );
-//         });
-//     });
-//     return Promise.all(names);
-//   });
-// .then((array) => {
-//   const updateTable = array.map((item) => {
-//     Items.update(
-//       {
-//         id: item.item_id,
-//       },
-//       {
-//         current_price: item.current_value,
-//       }
-//     );
-//   });
-// });
+// Function to update Item Price everyday
+var updateDaily = schedule.scheduleJob("* * */12  * * *", function () {
+  Items.getAll()
+    .then((data) => {
+      const names = data.rows.map((row) => {
+        return axios
+          .get(
+            `https://www.pricecharting.com/api/products?t=36330d87343dc3b342b42a4f6c58b13e443061c8&q=${row.title}_?limit=10`
+          )
+          .then((res) => {
+            res.data.products[0]["new-price"] =
+              Number(res.data.products[0]["new-price"]) / 100;
+            console.log(
+              "This is the new price:",
+              res.data.products[0]["new-price"]
+            );
+            return Prices.create(
+              {
+                current_value: res.data.products[0]["new-price"],
+                date: new Date().toUTCString(),
+                item_id: row.id,
+              },
+              "RETURNING item_id, current_value"
+            );
+          });
+      });
+      return Promise.all(names);
+    })
+    .then((array) => {
+      array.forEach((item) => {
+        Items.update(
+          {
+            id: item.rows[0].item_id,
+          },
+          {
+            current_price: item.rows[0].current_value,
+          }
+        );
+      });
+    })
+    .catch((err) => console.log(err));
+});
+
 // get value of user collection by date for graph
 
 app.get("/userCollectionValue", (req, res) => {
