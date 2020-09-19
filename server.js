@@ -192,7 +192,10 @@ app.get("/getItemPrice", (req, res) => {
 
 //get leaderboard by collection value
 app.get("/leaderboard/value", (req, res) => {
-  getCollectionsByValueOrSize("total_value DESC, total_count")
+  getCollectionsByValueOrSize(
+    "SUM(items.current_price) DESC, COUNT(items_in_collection.item_id) DESC",
+    "total_value DESC, rank, total_count"
+  )
     .then((records) => {
       res.status(200).send(records);
     })
@@ -204,7 +207,10 @@ app.get("/leaderboard/value", (req, res) => {
 
 // get leaderboard by collection size
 app.get("/leaderboard/size", (req, res) => {
-  getCollectionsByValueOrSize("total_count DESC, total_value")
+  getCollectionsByValueOrSize(
+    "COUNT(items_in_collection.item_id) DESC, SUM(items.current_price) DESC",
+    "total_count DESC, rank, total_value"
+  )
     .then((records) => {
       res.status(200).send(records);
     })
@@ -269,6 +275,7 @@ app.post(`/saveItems`, (req, res) => {
 app.get("/leaderboard/console", (req, res) => {
   getCollectionsByConsole(req.query.console)
     .then((records) => {
+      console.log(records);
       res.status(200).send(records);
     })
     .catch((err) => {
@@ -379,6 +386,7 @@ app.get("/username/collectionValue", (req, res) => {
       return getCollectionByUser(userID.id);
     })
     .then((userCollection) => {
+      console.log(userCollection);
       res.status(200).send(userCollection);
     })
     .catch((err) => {
