@@ -101,7 +101,6 @@ app.post("/signup", (req, res) => {
   //check if username exists
   Users.get(username)
     .then((user) => {
-      console.log(user);
       if (user) {
         res.status(200).send("Username already exists");
       } else {
