@@ -180,7 +180,6 @@ app.get("/userProfile/tradeable/:username", (req, res) => {
 
 // USER PROFILE ROUTE TO SORT BY CONSOLE
 app.get("/userProfile/console/:username", (req, res) => {
-  console.log("WRECK: ", req.query.console);
   sortUserCollectionByConsole(req.params.username, req.query.console)
     .then((response) => res.send(response))
     .catch((err) => {
