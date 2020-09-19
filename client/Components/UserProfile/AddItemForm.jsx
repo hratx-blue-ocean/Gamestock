@@ -233,8 +233,9 @@ const AddItemForm = (props) => {
             <Textarea
               onChange={(e) => setItemNotes(e.target.value)}
               maxlength="150"
+              wrap="hard"
               rows="4"
-              cols="35"
+              cols="24"
               id="comment"
               value={itemNotes}
             ></Textarea>
