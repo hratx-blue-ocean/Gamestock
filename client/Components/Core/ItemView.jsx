@@ -61,7 +61,6 @@ export default function ItemView({ item }) {
         },
       })
       .then((priceData) => {
-        console.log("PRICE DATA: ", priceData);
         const pricesAndDates = [[], []];
         priceData.data.rows.forEach((date) => {
           pricesAndDates[0].push(date.date.slice(0, 10));
