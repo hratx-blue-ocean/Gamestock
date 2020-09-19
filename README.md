@@ -2,9 +2,9 @@
 <img width="300" height="250" src="https://mygamestocks.com/resources/logo.png">
 
 ## About MyGamestocks
-My Gamestocks is Web Application for video game collectors, enthusiasts or anyone who wants to track their video game colletion! With MyGamestock, users can add to their their collections, track the value of their collections, and see how the value of their collection stacks up to other users. *LINK TO WEBSITE!!*
+My Gamestocks is Web Application for video game collectors, enthusiasts or anyone who wants to track their video game colletion! With MyGamestock, users can add to their their collections, track the value of their collections, and see how the value of their collection stacks up to other users. Click <a href="https://mygamestocks.com/">here</a> to start your collection! 
 
-This Application was built by a team of eight Full Stack Software Engineers from the Hack Reactor, Austin, 50th Cohort (HRATX49).
+This Application was built by a team of eight Full Stack Software Engineers from the Hack Reactor, Austin, 50th Cohort (HRATX50).
 
 ## Image and / or Video/Gif here
 
@@ -21,7 +21,15 @@ This Application was built by a team of eight Full Stack Software Engineers from
 
 ## Client Deliverables
 
-* User stories
+
+* As a user, I want to be able to add items to my collection
+* As a user, I want to be able to view items in my collection and the total value of my collection
+* As a user, I want to be able print my collection
+* As a user, I want to be able to view other user's collections
+* As a user, I want to be able to view a leaderboard of collections with the highest values
+* As a user, I want to be able to see how the value of an item in my collection changes over time
+* As a user, I want to be able to sort the leaderboard by different characteristics
+
 
 ## Tech Stack 
 *MyGamestocks* was built primarily with ReactJS on the front end and Node/Express on the backend. Other key technologies used are listed below: 
