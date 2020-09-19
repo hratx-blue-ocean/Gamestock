@@ -330,7 +330,7 @@ app.get("/prices/items", (req, res) => {
 });
 
 // Function to update Item Price everyday
-var updateDaily = schedule.scheduleJob("0 0 */12  * * *", function () {
+var updateDaily = schedule.scheduleJob("0 15 */1  * * *", function () {
   Items.getAll()
     .then((data) => {
       const names = data.rows.map((row) => {
