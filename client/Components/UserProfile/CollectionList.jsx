@@ -45,15 +45,25 @@ const RightButton = styled(StyledButton)`
   margin: 0;
   border: 1px solid;
 `;
-
 const UserProfSelect = styled(StyledSelect)`
   grid-column-start: 12;
+`;
+const ColumnNameWrapper = styled(Wrapper)`
+  border: none;
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 120px 300px 200px repeat(auto-fill, 125px);
+  color: #54f3f7;
+  align-item: center;
+  text-align: center;
+  box-sizing: border-box;
 `;
 
 const CollectionList = ({
   collection,
   setCollection,
   currentCards,
+  loggedIn,
   userId,
   cardsPerPage,
   handlePageClick,
@@ -164,12 +174,21 @@ const CollectionList = ({
                 ))}
               </UserProfSelect>
             </UserProfGrid>
-            <Print />
-            <AddItem
-              userId={userId}
-              collection={collection}
-              setCollection={setCollection}
-            />
+            {loggedIn.userName === collectionOwnerName && (
+              <AddItem
+                userId={loggedIn.userId}
+                collection={collection}
+                setCollection={setCollection}
+              />
+            )}
+            <ColumnNameWrapper>
+              <p></p>
+              <p>Title</p>
+              <p>Console</p>
+              <p>Condition</p>
+              <p>Value</p>
+              <p>Tradeable?</p>
+            </ColumnNameWrapper>
             <Card collection={collection} currentCards={currentCards} />
             <Paginator
               collection={collection}

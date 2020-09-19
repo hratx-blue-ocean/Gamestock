@@ -57,13 +57,12 @@ function App() {
               setCollectionOwnerName={setCollectionOwnerName}
               loggedIn={loggedIn}
               setLoggedIn={setLoggedIn}
-              userId={loggedIn.userId}
             />
           </Route>
           <Route path="/profile/:name">
             <UserProfile
               collectionOwnerName={collectionOwnerName}
-              userId={loggedIn.userId}
+              loggedIn={loggedIn}
             />
           </Route>
         </Switch>
