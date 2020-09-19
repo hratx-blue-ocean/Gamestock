@@ -20,6 +20,7 @@ const {
   getUserCollectionByCondition,
   getUserCollectionByTradeable,
   sortUserCollectionByConsole,
+  getAllConsolesByUser,
 } = require("./database/dbQueryHelpers");
 
 // ebay API
@@ -183,6 +184,19 @@ app.get("/userProfile/console/:username", (req, res) => {
     .then((response) => res.send(response))
     .catch((err) => {
       console.error(err);
+      res.status(500).send(err);
+    });
+});
+
+// USER PROFILE ROUTE TO SORT BY CONSOLE
+app.get("/consoles/userProfile/:username", (req, res) => {
+  // console.log("TYPE OF: ", Number(req.params.userId));
+  getAllConsolesByUser(req.params.username)
+    .then((consoles) => {
+      res.status(200).send(consoles);
+    })
+    .catch((err) => {
+      console.log(err);
       res.status(500).send(err);
     });
 });

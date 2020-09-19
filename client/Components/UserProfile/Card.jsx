@@ -25,13 +25,11 @@ const Card = ({ collection, currentCards }) => {
           return (
             <div key={idx}>
               <CardWrapper>
-                <Thumbnail
-                // src={item.thumbnail}
-                />
+                <Thumbnail src={item.thumbnail} />
                 <CardText>{item.title}</CardText>
                 <CardText>{item.console}</CardText>
                 <CardText>{item.condition}</CardText>
-                <CardText>{item.starting_price}</CardText>
+                <CardText>{item.current_price}</CardText>
                 <CardText>{item.tradeable ? "Tradeable" : ""}</CardText>
                 <ItemView item={item} />
               </CardWrapper>

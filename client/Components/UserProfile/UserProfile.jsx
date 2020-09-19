@@ -69,11 +69,12 @@ const UserProfile = (props) => {
       });
   };
 
-  const getAllConsoles = () => {
+  const getUserConsoles = () => {
     axios
-      .get("/consoles")
+      .get(`/consoles/userProfile/${props.collectionOwnerName}`)
       .then((consoles) => {
         setConsoles(() => consoles.data.rows);
+        console.log("CONSOLES: ", consoles);
       })
       .catch((err) => {
         console.log("Error getting consoles: ", err);
@@ -122,7 +123,7 @@ const UserProfile = (props) => {
         handlePageClick={handlePageClick}
         collectionOwnerName={props.collectionOwnerName}
         userId={props.userId}
-        getAllConsoles={getAllConsoles}
+        getUserConsoles={getUserConsoles}
         getCollectionByConsole={getCollectionByConsole}
         consoles={consoles}
         loggedIn={props.loggedIn}
