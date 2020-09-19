@@ -10,7 +10,6 @@ const axios = require("axios");
 const schedule = require("node-schedule");
 const {
   getCollectionsByValueOrSize,
-  saveItemToDB,
   getCollectionsByConsole,
   getAllConsoles,
   getCollectionByUser,
@@ -193,7 +192,7 @@ app.get("/getItemPrice", (req, res) => {
   const itemName = req.query.items;
   axios
     .get(
-      `https://www.pricecharting.com/api/products?t=36330d87343dc3b342b42a4f6c58b13e443061c8&q=${itemName}_?limit=10`
+      `https://www.pricecharting.com/api/products?t=36330d87343dc3b342b42a4f6c58b13e443061c8&q=${itemName}`
     )
     .then((response) => {
       res.send(response.data.products);
