@@ -88,11 +88,11 @@ const UserProfile = (props) => {
           console: e.target.value,
         },
       })
-      .then((recordsByConsole) => {
-        setCollection(recordsByConsole.data.rows);
+      .then((consoleRecords) => {
+        setCollection(consoleRecords.data.rows);
       })
       .catch((err) => {
-        console.log("Error getting top collections by console: ", err);
+        console.log("Front end console retrieval failure: ", err);
       });
   };
 
@@ -120,6 +120,7 @@ const UserProfile = (props) => {
         currentCards={currentCards}
         cardsPerPage={cardsPerPage}
         handlePageClick={handlePageClick}
+        collectionOwnerName={props.collectionOwnerName}
         userId={props.userId}
         getAllConsoles={getAllConsoles}
         getCollectionByConsole={getCollectionByConsole}

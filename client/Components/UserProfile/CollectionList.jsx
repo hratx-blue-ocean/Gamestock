@@ -63,6 +63,7 @@ const CollectionList = ({
   getCollectionByConsole,
   getAllConsoles,
   consoles,
+  collectionOwnerName,
 }) => {
   const [userCollectionData, setUserCollectionData] = useState([]);
 
@@ -100,16 +101,17 @@ const CollectionList = ({
 
   return (
     <div>
-      {collection[0] && (
-        <Wrapper>
-          <Title>{`${collection[0].username}'s Collection`}</Title>
-          <DisplayItems collection={collection} />
-          <PriceGraph
-            dates={userCollectionData[0]}
-            prices={userCollectionData[1]}
-          />
-          <UserProfGrid>
-            {/* <GameSearchForm onSubmit={() => {}}>
+      <Wrapper>
+        <Title>{`${collectionOwnerName}'s Collection`}</Title>
+        {collection[0] && (
+          <>
+            <DisplayItems collection={collection} />
+            <PriceGraph
+              dates={userCollectionData[0]}
+              prices={userCollectionData[1]}
+            />
+            <UserProfGrid>
+              {/* <GameSearchForm onSubmit={() => {}}>
               <StyledInput
                 placeholder="search games in collection"
                 type="text"
@@ -118,63 +120,64 @@ const CollectionList = ({
               ></StyledInput>
               <StyledButton>Search</StyledButton>
             </GameSearchForm> */}
-            {/* <Text>Sort by: </Text> */}
-            <LeftButton
-              id="sortByTitle"
-              onClick={() => {
-                sortByTitle();
-              }}
-            >
-              Title
-            </LeftButton>
-            <MiddleButton
-              id="sortByPrice"
-              onClick={() => {
-                sortByPrice();
-              }}
-            >
-              Price
-            </MiddleButton>
-            <MiddleButton
-              id="sortByCondition"
-              onClick={() => sortByCondition()}
-            >
-              Condition
-            </MiddleButton>
-            <RightButton
-              id="sortByTrade"
-              onClick={() => {
-                sortByTradeable();
-              }}
-            >
-              Tradeable
-            </RightButton>
-            <UserProfSelect
-              onChange={(e) => getCollectionByConsole(e)}
-              defaultValue="select console"
-            >
-              <option disabled>select console</option>
-              {consoles.map((console, idx) => (
-                <option key={idx} id={console.console}>
-                  {console.console}
-                </option>
-              ))}
-            </UserProfSelect>
-          </UserProfGrid>
-          <Print />
-          <AddItem
-            userId={userId}
-            collection={collection}
-            setCollection={setCollection}
-          />
-          <Card collection={collection} currentCards={currentCards} />
-          <Paginator
-            collection={collection}
-            cardsPerPage={cardsPerPage}
-            handlePageClick={handlePageClick}
-          />
-        </Wrapper>
-      )}
+              {/* <Text>Sort by: </Text> */}
+              <LeftButton
+                id="sortByTitle"
+                onClick={() => {
+                  sortByTitle();
+                }}
+              >
+                Title
+              </LeftButton>
+              <MiddleButton
+                id="sortByPrice"
+                onClick={() => {
+                  sortByPrice();
+                }}
+              >
+                Price
+              </MiddleButton>
+              <MiddleButton
+                id="sortByCondition"
+                onClick={() => sortByCondition()}
+              >
+                Condition
+              </MiddleButton>
+              <RightButton
+                id="sortByTrade"
+                onClick={() => {
+                  sortByTradeable();
+                }}
+              >
+                Tradeable
+              </RightButton>
+              <UserProfSelect
+                onChange={(e) => getCollectionByConsole(e)}
+                defaultValue="select console"
+              >
+                <option disabled>select console</option>
+                {consoles.map((console, idx) => (
+                  <option key={idx} id={console.console}>
+                    {console.console}
+                  </option>
+                ))}
+              </UserProfSelect>
+            </UserProfGrid>
+            <Print />
+            <AddItem
+              userId={userId}
+              collection={collection}
+              setCollection={setCollection}
+            />
+            <Card collection={collection} currentCards={currentCards} />
+            <Paginator
+              collection={collection}
+              cardsPerPage={cardsPerPage}
+              handlePageClick={handlePageClick}
+            />
+          </>
+        )}
+      </Wrapper>
     </div>
   );
 };

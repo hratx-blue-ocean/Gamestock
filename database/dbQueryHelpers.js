@@ -98,19 +98,6 @@ ORDER BY items_in_collection.condition DESC`
   );
 };
 
-//user profile query to order collection by condition ASC
-const sortUserCollectionByConsole = (username, console) => {
-  return pool.query(
-    `SELECT users.username, items_in_collection.user_id, items.title, items.id, items.console, items_in_collection.condition, items_in_collection.starting_price, items_in_collection.tradeable
-FROM items_in_collection
-INNER JOIN items
-ON items_in_collection.item_id = items.id AND items.console='${console}'
-INNER JOIN users
-ON items_in_collection.user_id = users.id AND users.username='${username}'
-ORDER BY items.console DESC`
-  );
-};
-
 //user profile query to order collection by tradeable DESC
 const getUserCollectionByTradeable = (username) => {
   return pool.query(
@@ -121,6 +108,19 @@ ON items_in_collection.item_id = items.id
 INNER JOIN users
 ON items_in_collection.user_id = users.id AND users.username='${username}'
 ORDER BY items_in_collection.tradeable DESC, items.title ASC`
+  );
+};
+
+//user profile query to order collection by condition ASC
+const sortUserCollectionByConsole = (username, console) => {
+  return pool.query(
+    `SELECT users.username, items_in_collection.user_id, items.title, items.id, items.console, items_in_collection.condition, items_in_collection.starting_price, items_in_collection.tradeable
+FROM items_in_collection
+INNER JOIN items
+ON items_in_collection.item_id = items.id AND items.console='${console}'
+INNER JOIN users
+ON items_in_collection.user_id = users.id AND users.username='${username}'
+ORDER BY items.title ASC`
   );
 };
 
