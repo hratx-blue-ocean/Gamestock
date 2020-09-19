@@ -42,6 +42,17 @@ const SearchBy = styled.p`
   margin: 0;
   text-align: center;
 `;
+const TitleWrapper = styled(Wrapper)`
+  border: none;
+  margin-top: 10px;
+  display: grid;
+  grid-template-columns: 50px repeat(auto-fill, 215px);
+  background: #1e1e1e;
+  color: #54f3f7;
+  align-items: center;
+  text-align: center;
+  box-sizing: border-box;
+`;
 
 const Leaderboard = (props) => {
   const [userSearch, setUserSearch] = useState("");
@@ -175,6 +186,13 @@ const Leaderboard = (props) => {
             ))}
           </LeaderboardSelect>
         </LeaderboardGrid>
+        <TitleWrapper>
+          <p></p>
+          <p></p>
+          <p>Gamer Tag</p>
+          <p>Collection Size</p>
+          <p>Collection Value</p>
+        </TitleWrapper>
         {collectionsByValueOrSize.map((collection, idx) => (
           <Banner
             rank={collection.rank}

@@ -13,6 +13,10 @@ import {
 } from "../Core/coreStyles.jsx";
 import ItemView from "../Core/ItemView.jsx";
 
+const CardText = styled(Text)`
+  font-size: 10px;
+`;
+
 const Card = ({ collection, currentCards }) => {
   if (collection.length) {
     return (
@@ -24,11 +28,11 @@ const Card = ({ collection, currentCards }) => {
                 <Thumbnail
                 // src={item.thumbnail}
                 />
-                <Text>{item.title}</Text>
-                <Text>{item.console}</Text>
-                <Text>{item.condition}</Text>
-                <Text>{item.starting_price}</Text>
-                <Text>{item.tradeable ? "Tradeable" : ""}</Text>
+                <CardText>{item.title}</CardText>
+                <CardText>{item.console}</CardText>
+                <CardText>{item.condition}</CardText>
+                <CardText>{item.starting_price}</CardText>
+                <CardText>{item.tradeable ? "Tradeable" : ""}</CardText>
                 <ItemView item={item} />
               </CardWrapper>
             </div>
