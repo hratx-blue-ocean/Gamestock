@@ -96,7 +96,12 @@ export default function ItemView({ item }) {
             <MoveLeft>
               <p>Console: {item.console}</p>
               <p>Condition: {item.condition}</p>
-              <p>Date of Purchase: {item.date_of_purchase.slice(0, 10)}</p>
+              <p>
+                Date of Purchase:{" "}
+                {item.date_of_purchase
+                  ? item.date_of_purchase.slice(0, 10)
+                  : ""}
+              </p>
               <p>Starting Price: {item.starting_price}</p>
               <p>Current Price: ${current_price}</p>
               <p>Tradeable? {item.tradeable === "Tradeable" ? "Yes" : "No"}</p>
@@ -110,9 +115,11 @@ export default function ItemView({ item }) {
       </Modal>
       <StyledButton
         onClick={() => {
-          getDailyPrices(item.id);
-          console.log("CLICKED", item.id);
-          freeze(modalState);
+          if (item.id) {
+            getDailyPrices(item.id);
+            console.log("CLICKED", item.id);
+            freeze(modalState);
+          }
         }}
       >
         View Item
