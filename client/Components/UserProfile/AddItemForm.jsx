@@ -8,22 +8,59 @@ import {
   WrapGrid,
   StyledButton,
   StyledRadio,
+  StyledLabel,
+  StyledTextarea,
   NegativeButton,
   StyledForm,
   StyledSelect,
   CenteredDiv,
+  Wrapper,
 } from "../Core/coreStyles.jsx";
+
+const FormTable = styled(StyledForm)`
+  display: table;
+`;
+
+const RowTable = styled(CenteredDiv)`
+  dislay: table-row;
+`;
+const CellInputs = styled(StyledInput)`
+  min-width: 150px;
+  display: table-cell;
+`;
+
+const CellLabel = styled(StyledLabel)`
+  display: table-cell;
+`;
 
 const SelectedItemText = styled(CenteredDiv)`
   color: #eb29fd;
   margin: 0px;
 `;
 
-const Textarea = styled(StyledInput)`
-  background-color: lightgray;
-  width: 400px;
-  height: 50px;
-  padding: 15px;
+const Textarea = styled(StyledTextarea)`
+  display: table-cell;
+  border: none;
+  background-color: transparent;
+  outline: none;
+  resize: none;
+`;
+
+const TextareaWrap = styled(Wrapper)`
+  margin: 0px auto;
+  margin-top: 0px;
+  padding: 0px;
+  background: lightgray;
+  color: #5a2dad;
+  border-radius: 10px;
+  border: 2px solid #eb29fd;
+  box-sizing: border-box;
+  max-width: 1200px;
+`;
+
+const PriceInput = styled(StyledInput)`
+  min-width: 150px;
+  text-align: right;
 `;
 const ConditionSelect = styled(StyledSelect)`
   min-width: 50px;
@@ -36,6 +73,18 @@ const Thumbnail = styled(StyledForm)`
   display: flex;
   align-items: center;
   justify-content: center;
+`;
+
+const SubmitLeftButton = styled(StyledButton)`
+  border-radius: 10px 0px 0px 10px;
+  margin: 0;
+  border: 2px solid #2d1c7b;
+`;
+
+const CancelRightButton = styled(NegativeButton)`
+  border-radius: 0px 10px 10px 0px;
+  margin: 0;
+  border: 1px solid;
 `;
 
 const AddItemForm = (props) => {
@@ -149,56 +198,68 @@ const AddItemForm = (props) => {
             <img src={itemSelectedThumbnail}></img>
           </Thumbnail>
         </GriddedItems>
+
         <div>
-          <StyledForm>
+          <FormTable>
             {/* date when item was bought */}
-            <label htmlFor="dateAcquired">Date Acquired:</label>
-            <StyledInput
-              onChange={(e) => setDateAcquired(e.target.value)}
-              type="date"
-              id="start"
-              value={dateAcquired}
-            ></StyledInput>
+
+            <RowTable>
+              <CellLabel htmlFor="dateAcquired">Date Acquired:</CellLabel>
+              <CellInputs
+                onChange={(e) => setDateAcquired(e.target.value)}
+                type="date"
+                id="start"
+                value={dateAcquired}
+              ></CellInputs>
+            </RowTable>
 
             <br></br>
 
             {/* price at purchase of item */}
-            <label htmlFor="purchasedPrice">PurchasedPrice:</label>
-            <StyledInput
-              onChange={(e) => setPurchasedPrice(e.target.value)}
-              id="purchasedPrice"
-              type="number"
-              min="0.01"
-              step="0.01"
-              value={purchasedPrice}
-            ></StyledInput>
+            <RowTable>
+              <CellLabel htmlFor="purchasedPrice">PurchasedPrice:</CellLabel>
+              <PriceInput
+                onChange={(e) => setPurchasedPrice(e.target.value)}
+                id="purchasedPrice"
+                type="number"
+                min="0.01"
+                step="0.01"
+                value={purchasedPrice}
+              ></PriceInput>
+            </RowTable>
 
             <br></br>
 
             {/* notes for user comments */}
-            <label htmlFor="comment">Item description:</label>
-            <Textarea
-              onChange={(e) => setItemNotes(e.target.value)}
-              rows="4"
-              cols="50"
-              id="comment"
-              value={itemNotes}
-            ></Textarea>
+            <RowTable>
+              <CellLabel htmlFor="comment">Item description:</CellLabel>
+              <TextareaWrap>
+                <Textarea
+                  onChange={(e) => setItemNotes(e.target.value)}
+                  maxlength="150"
+                  rows="4"
+                  cols="25"
+                  id="comment"
+                  value={itemNotes}
+                ></Textarea>
+              </TextareaWrap>
+            </RowTable>
 
             <br></br>
-
-            <label htmlFor="ItemCondition">Item Condition:</label>
-            <ConditionSelect
-              id="ItemCondition"
-              value={itemCondition}
-              onChange={(e) => setItemCondition(e.target.value)}
-            >
-              <option value="A">A</option>
-              <option value="B">B</option>
-              <option value="C">C</option>
-              <option value="D">D</option>
-              <option value="F">F</option>
-            </ConditionSelect>
+            <RowTable>
+              <CellLabel htmlFor="ItemCondition">Item Condition:</CellLabel>
+              <ConditionSelect
+                id="ItemCondition"
+                value={itemCondition}
+                onChange={(e) => setItemCondition(e.target.value)}
+              >
+                <option value="A">A</option>
+                <option value="B">B</option>
+                <option value="C">C</option>
+                <option value="D">D</option>
+                <option value="F">F</option>
+              </ConditionSelect>
+            </RowTable>
 
             <StyledRadio>
               <input
@@ -223,26 +284,27 @@ const AddItemForm = (props) => {
               ></input>
               <label htmlFor="isConsole">This is a console</label>
             </StyledRadio>
-
-            <StyledButton
-              onClick={() => {
-                submitInfo(submittedInfo);
-              }}
-              type="button"
-            >
-              Submit
-            </StyledButton>
-          </StyledForm>
+            <div>
+              <SubmitLeftButton
+                onClick={() => {
+                  submitInfo(submittedInfo);
+                }}
+                type="button"
+              >
+                Submit
+              </SubmitLeftButton>
+              <CancelRightButton
+                type="button"
+                onClick={() => {
+                  props.exitModal();
+                  clearForm();
+                }}
+              >
+                Cancel
+              </CancelRightButton>
+            </div>
+          </FormTable>
         </div>
-        <NegativeButton
-          type="button"
-          onClick={() => {
-            props.exitModal();
-            clearForm();
-          }}
-        >
-          Cancel
-        </NegativeButton>
       </div>
     </div>
   );
