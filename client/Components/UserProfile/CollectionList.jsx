@@ -47,6 +47,7 @@ const RightButton = styled(StyledButton)`
 
 const CollectionList = ({
   collection,
+  setCollection,
   currentCards,
   userId,
   cardsPerPage,
@@ -67,6 +68,7 @@ const CollectionList = ({
   }, [collection]);
 
   const getDailyCollectionPrice = (username) => {
+    console.log("Username after firing;", username);
     axios
       .get("/userCollectionValue", {
         params: {
@@ -142,7 +144,11 @@ const CollectionList = ({
             </RightButton>
           </UserProfGrid>
           <Print />
-          <AddItem userId={userId} />
+          <AddItem
+            userId={userId}
+            collection={collection}
+            setCollection={setCollection}
+          />
           <Card collection={collection} currentCards={currentCards} />
           <Paginator
             collection={collection}
