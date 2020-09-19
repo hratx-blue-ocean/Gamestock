@@ -69,9 +69,9 @@ const AddItemForm = (props) => {
   function submitInfo(submittedInfo) {
     submittedInfo.current_value = Number(submittedInfo.current_value) / 100;
     if (submittedInfo.title == "games") {
-      return;
+      return; //tell user request failed
     } else if (submittedInfo["date_of_purchase"] == "") {
-      return;
+      return; //tell user request failed
     } else {
       axios
         .post("/saveItems", submittedInfo)
@@ -82,13 +82,17 @@ const AddItemForm = (props) => {
           newCollection.push(submittedInfo);
           props.setCollection(newCollection);
           // }
-          props.toggleModalState();
+          clearForm();
+          props.exitModal();
         })
-        .catch(function (error) {
-          console.log(error);
+        .catch((error) => {
+          console.log(error); //tell user request failed
         });
     }
   }
+  //add conditionals
+  //if conditionals, don't reset state
+  //tell users why request failed
 
   useEffect(() => {
     getImage();
@@ -128,11 +132,11 @@ const AddItemForm = (props) => {
           }}
         />
         <SelectedItemText>
-        <span>Item to Add:</span>
+          <span>Item to Add:</span>
           {itemSelected["console-name"] || ""}{" "}
           {itemSelected["product-name"] || ""}
         </SelectedItemText>
-        
+
         <br></br>
         <GriddedItems>
           <AddItemList
@@ -223,7 +227,6 @@ const AddItemForm = (props) => {
             <StyledButton
               onClick={() => {
                 submitInfo(submittedInfo);
-                clearForm();
               }}
               type="button"
             >
