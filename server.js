@@ -96,6 +96,7 @@ app.post("/signup", (req, res) => {
   //check if username exists
   Users.get(username)
     .then((user) => {
+      console.log(user);
       if (user) {
         res.status(200).send("Username already exists");
       } else {
@@ -260,7 +261,7 @@ app.post(`/saveItems`, (req, res) => {
     thumbnail: req.body.thumbnail,
     front_view: req.body.front_view,
   };
-  saveItemToDB(itemData)
+  Collections.save(itemData)
     .then((response) => {
       res.status(200).send(response);
       console.log(`Success saving item to database`);
