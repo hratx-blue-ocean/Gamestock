@@ -13,6 +13,7 @@ import {
   StyledSelect,
   Wrapper,
   Title,
+  GlobalStyles,
   WrapGrid,
   StyledButton,
   StyledForm,
