@@ -17,20 +17,8 @@ import {
   Wrapper,
 } from "../Core/coreStyles.jsx";
 
-const FormTable = styled(StyledForm)`
-  display: table;
-`;
-
-const RowTable = styled(CenteredDiv)`
-  dislay: table-row;
-`;
 const CellInputs = styled(StyledInput)`
   min-width: 150px;
-  display: table-cell;
-`;
-
-const CellLabel = styled(StyledLabel)`
-  display: table-cell;
 `;
 
 const SelectedItemText = styled(CenteredDiv)`
@@ -200,24 +188,24 @@ const AddItemForm = (props) => {
         </GriddedItems>
 
         <div>
-          <FormTable>
+          <StyledForm>
             {/* date when item was bought */}
 
-            <RowTable>
-              <CellLabel htmlFor="dateAcquired">Date Acquired:</CellLabel>
+            
+              <StyledLabel htmlFor="dateAcquired">Date Acquired:</StyledLabel>
               <CellInputs
                 onChange={(e) => setDateAcquired(e.target.value)}
                 type="date"
                 id="start"
                 value={dateAcquired}
               ></CellInputs>
-            </RowTable>
+            
 
             <br></br>
 
             {/* price at purchase of item */}
-            <RowTable>
-              <CellLabel htmlFor="purchasedPrice">PurchasedPrice:</CellLabel>
+            
+              <StyledLabel htmlFor="purchasedPrice">PurchasedPrice:</StyledLabel>
               <PriceInput
                 onChange={(e) => setPurchasedPrice(e.target.value)}
                 id="purchasedPrice"
@@ -226,13 +214,13 @@ const AddItemForm = (props) => {
                 step="0.01"
                 value={purchasedPrice}
               ></PriceInput>
-            </RowTable>
+            
 
             <br></br>
 
             {/* notes for user comments */}
-            <RowTable>
-              <CellLabel htmlFor="comment">Item description:</CellLabel>
+            
+              <StyledLabel htmlFor="comment">Item description:</StyledLabel>
               <TextareaWrap>
                 <Textarea
                   onChange={(e) => setItemNotes(e.target.value)}
@@ -243,11 +231,11 @@ const AddItemForm = (props) => {
                   value={itemNotes}
                 ></Textarea>
               </TextareaWrap>
-            </RowTable>
+            
 
             <br></br>
-            <RowTable>
-              <CellLabel htmlFor="ItemCondition">Item Condition:</CellLabel>
+            
+              <StyledLabel htmlFor="ItemCondition">Item Condition:</StyledLabel>
               <ConditionSelect
                 id="ItemCondition"
                 value={itemCondition}
@@ -259,7 +247,7 @@ const AddItemForm = (props) => {
                 <option value="D">D</option>
                 <option value="F">F</option>
               </ConditionSelect>
-            </RowTable>
+            
 
             <StyledRadio>
               <input
@@ -303,7 +291,7 @@ const AddItemForm = (props) => {
                 Cancel
               </CancelRightButton>
             </div>
-          </FormTable>
+          </StyledForm>
         </div>
       </div>
     </div>
