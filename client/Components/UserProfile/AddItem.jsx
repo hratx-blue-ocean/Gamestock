@@ -23,16 +23,6 @@ const ItemGrid = styled(AddItemGrid)`
   margin-top: 30px;
   margin-bottom: 20px;
 `;
-const LeftButton = styled(StyledButton)`
-  border-radius: 10px 0px 0px 10px;
-  margin: 0;
-  border: 1px solid;
-`;
-const RightButton = styled(StyledButton)`
-  border-radius: 0px 10px 10px 0px;
-  margin: 0;
-  border: 1px solid;
-`;
 
 export default function AddItem(props) {
   const [modalState, setModalState] = useState(false);
@@ -55,12 +45,12 @@ export default function AddItem(props) {
         </ModalBody>
       </Modal>
       <ItemGrid>
-        <LeftButton onClick={() => toggleModalState()}>
+        <StyledButton onClick={() => toggleModalState()}>
           Add Item To Your Collection
-        </LeftButton>
-        <RightButton onClick={() => window.print()} type="button">
+        </StyledButton>
+        <StyledButton onClick={() => window.print()} type="button">
           Print Collection
-        </RightButton>
+        </StyledButton>
       </ItemGrid>
       {/* <StyledButton onClick={() => toggleModalState()}>
         Add Item To Your Collection

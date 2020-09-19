@@ -20,6 +20,7 @@ const {
   getUserCollectionByPrice,
   getUserCollectionByCondition,
   getUserCollectionByTradeable,
+  sortUserCollectionByConsole,
 } = require("./database/dbQueryHelpers");
 
 // ebay API
@@ -174,7 +175,8 @@ app.get("/userProfile/tradeable/:username", (req, res) => {
 
 // USER PROFILE ROUTE TO SORT BY CONSOLE
 app.get("/userProfile/console/:username", (req, res) => {
-  sortUserCollectionByConsole(req.params.username, req.params.console)
+  console.log("WRECK: ", req.query.console);
+  sortUserCollectionByConsole(req.params.username, req.query.console)
     .then((response) => res.send(response))
     .catch((err) => {
       console.error(err);
