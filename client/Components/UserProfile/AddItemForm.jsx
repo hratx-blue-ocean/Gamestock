@@ -69,9 +69,6 @@ const AddItemForm = (props) => {
       axios
         .post("/saveItems", submittedInfo)
         .then(function (response) {
-          console.log("response back from after adding things is:", response);
-          console.log("collection is now:", props.collection);
-          console.log(props.collection[0].user_id, props.userId);
           if (props.collection[0].user_id === props.userId) {
             let newCollection = props.collection.map((item) => item);
             submittedInfo.starting_price = `$${submittedInfo.starting_price}`;
