@@ -68,7 +68,6 @@ const CollectionList = ({
   }, [collection]);
 
   const getDailyCollectionPrice = (username) => {
-    console.log("Username after firing;", username);
     axios
       .get("/userCollectionValue", {
         params: {
