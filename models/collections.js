@@ -39,7 +39,7 @@ class Collections extends Crud {
       VALUES (
         (SELECT id FROM item_id_var),
         '${new Date().toUTCString()}',
-        ${Number(current_value) / 100}
+        $12
       )`,
       [
         title,
