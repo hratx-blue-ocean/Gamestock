@@ -235,7 +235,7 @@ const AddItemForm = (props) => {
               maxlength="150"
               wrap="hard"
               rows="4"
-              cols="24"
+              cols="23"
               id="comment"
               value={itemNotes}
             ></Textarea>
