@@ -141,9 +141,6 @@ const AddItemForm = (props) => {
         });
     }
   }
-  //add conditionals
-  //if conditionals, don't reset state
-  //tell users why request failed
 
   useEffect(() => {
     getImage();
