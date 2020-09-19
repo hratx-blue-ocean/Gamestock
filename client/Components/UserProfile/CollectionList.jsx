@@ -110,98 +110,112 @@ const CollectionList = ({
       });
   };
 
+  const renderCollection = () => {
+    let addItem = (
+      <AddItem
+        userId={loggedIn.userId}
+        collection={collection}
+        setCollection={setCollection}
+      />
+    );
+    let collectionTop = (
+      <>
+        <DisplayItems collection={collection} />
+        <PriceGraph
+          dates={userCollectionData[0]}
+          prices={userCollectionData[1]}
+        />
+        <UserProfGrid>
+          {/* <GameSearchForm onSubmit={() => {}}>
+    <StyledInput
+      placeholder="search games in collection"
+      type="text"
+      value=""
+      onChange={() => {}}
+    ></StyledInput>
+    <StyledButton>Search</StyledButton>
+  </GameSearchForm> */}
+          {/* <Text>Sort by: </Text> */}
+          <LeftButton
+            id="sortByTitle"
+            onClick={() => {
+              sortByTitle();
+            }}
+          >
+            Title
+          </LeftButton>
+          <MiddleButton
+            id="sortByPrice"
+            onClick={() => {
+              sortByPrice();
+            }}
+          >
+            Price
+          </MiddleButton>
+          <MiddleButton id="sortByCondition" onClick={() => sortByCondition()}>
+            Condition
+          </MiddleButton>
+          <RightButton
+            id="sortByTrade"
+            onClick={() => {
+              sortByTradeable();
+            }}
+          >
+            Tradeable
+          </RightButton>
+          <UserProfSelect
+            onChange={(e) => getCollectionByConsole(e)}
+            defaultValue="select console"
+          >
+            <option disabled>select console</option>
+            {consoles.map((console, idx) => (
+              <option key={idx} id={console.console}>
+                {console.console}
+              </option>
+            ))}
+          </UserProfSelect>
+        </UserProfGrid>
+      </>
+    );
+    let collectionBottom = (
+      <>
+        <ColumnNameWrapper>
+          <p></p>
+          <p>Title</p>
+          <p>Console</p>
+          <p>Condition</p>
+          <p>Value</p>
+          <p>Tradeable?</p>
+        </ColumnNameWrapper>
+        <Card collection={collection} currentCards={currentCards} />
+        <Paginator
+          collection={collection}
+          cardsPerPage={cardsPerPage}
+          handlePageClick={handlePageClick}
+        />
+      </>
+    );
+    if (!collection[0]) {
+      collectionTop = <></>;
+      collectionBottom = <></>;
+    } else if (loggedIn.userName !== collectionOwnerName) {
+      addItem = <></>;
+    }
+
+    return (
+      <>
+        {addItem}
+        {collectionTop}
+        {collectionBottom}
+      </>
+    );
+  };
+
   return (
     <div>
       <Wrapper>
         <Title>{`${collectionOwnerName}'s Collection`}</Title>
-        <AddItem
-          userId={loggedIn.userId}
-          collection={collection}
-          setCollection={setCollection}
-        />
-        {collection[0] && (
-          <>
-            <DisplayItems collection={collection} />
-            <PriceGraph
-              dates={userCollectionData[0]}
-              prices={userCollectionData[1]}
-            />
-            <UserProfGrid>
-              {/* <GameSearchForm onSubmit={() => {}}>
-              <StyledInput
-                placeholder="search games in collection"
-                type="text"
-                value=""
-                onChange={() => {}}
-              ></StyledInput>
-              <StyledButton>Search</StyledButton>
-            </GameSearchForm> */}
-              {/* <Text>Sort by: </Text> */}
-              <LeftButton
-                id="sortByTitle"
-                onClick={() => {
-                  sortByTitle();
-                }}
-              >
-                Title
-              </LeftButton>
-              <MiddleButton
-                id="sortByPrice"
-                onClick={() => {
-                  sortByPrice();
-                }}
-              >
-                Price
-              </MiddleButton>
-              <MiddleButton
-                id="sortByCondition"
-                onClick={() => sortByCondition()}
-              >
-                Condition
-              </MiddleButton>
-              <RightButton
-                id="sortByTrade"
-                onClick={() => {
-                  sortByTradeable();
-                }}
-              >
-                Tradeable
-              </RightButton>
-              <UserProfSelect
-                onChange={(e) => getCollectionByConsole(e)}
-                defaultValue="select console"
-              >
-                <option disabled>select console</option>
-                {consoles.map((console, idx) => (
-                  <option key={idx} id={console.console}>
-                    {console.console}
-                  </option>
-                ))}
-              </UserProfSelect>
-            </UserProfGrid>
-            {loggedIn.userName === collectionOwnerName && (
-              <AddItem
-                userId={loggedIn.userId}
-                collection={collection}
-                setCollection={setCollection}
-              />
-            )}
-            <ColumnNameWrapper>
-              <p></p>
-              <p>Title</p>
-              <p>Console</p>
-              <p>Condition</p>
-              <p>Value</p>
-              <p>Tradeable?</p>
-            </ColumnNameWrapper>
-            <Card collection={collection} currentCards={currentCards} />
-            <Paginator
-              collection={collection}
-              cardsPerPage={cardsPerPage}
-              handlePageClick={handlePageClick}
-            />
-          </>
-        )}
+        {renderCollection()}
       </Wrapper>
     </div>
   );
