@@ -38,43 +38,6 @@ const getCollectionsByValueOrSize = (rankBy, sortBy) => {
   return pool.query(selectQueryLeaderboard);
 };
 
-// should save new items to the database
-const saveItemToDB = ({
-  title,
-  console,
-  is_console,
-  user_id,
-  condition,
-  comments,
-  starting_price,
-  date_of_purchase,
-  tradeable,
-  current_value,
-  thumbnail,
-  front_view,
-}) => {
-  return pool.query(`WITH item_id_var AS (
-      INSERT INTO items
-      (title, console, is_console, thumbnail, front_view)
-      VALUES
-      ($$${title}$$, '${console}', '${is_console}', '${thumbnail}', '${front_view}') ON CONFLICT (title, console) DO NOTHING
-    RETURNING id
-),
-    ins2 AS (
-		INSERT INTO items_in_collection
-      (item_id, user_id, condition, comments, starting_price, date_of_purchase, tradeable)
-    VALUES
-      ((SELECT id FROM item_id_var), ${user_id}, '${condition}', '${comments}', '${starting_price}', '${date_of_purchase}', '${tradeable}')
-		RETURNING item_id
-		)
-    INSERT INTO items_value_by_date
-      (item_id, date, current_value)
-    VALUES
-      ((SELECT id FROM item_id_var), '${new Date().toUTCString()}', ${
-    Number(current_value) / 100
-  })`);
-};
-
 // query for getting leaderboard sorted by console
 const getCollectionsByConsole = (console) => {
   const selectQueryConsoles = `SELECT ROW_NUMBER() OVER (ORDER BY SUM(items.current_price) DESC) AS rank, users.username, users.avatar, COUNT(items_in_collection.item_id) as total_count, SUM(items.current_price) as total_value
@@ -416,7 +379,6 @@ class Crud {
 module.exports = {
   Crud,
   getCollectionsByValueOrSize,
-  saveItemToDB,
   getCollectionsByConsole,
   getAllConsoles,
   getCollectionByUser,
