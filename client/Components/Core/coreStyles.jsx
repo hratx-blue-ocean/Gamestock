@@ -38,7 +38,7 @@ export const Modal = styled.div`
   pointer-events: ${({ modalState }) => (modalState ? "auto" : "none")};
   transition: ${({ modalState }) =>
     modalState ? "opacity 0.4s ease-in-out" : "none"};
-  position: absolute;
+  position: fixed;
   left: 0;
   right: 0;
   top: 0;
