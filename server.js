@@ -23,8 +23,13 @@ const {
 } = require("./database/dbQueryHelpers");
 
 // ebay API
-let { ebayKey } = require("./eBay.config");
-let eBay = require("ebay-node-api");
+const { ebayKey } = require("./eBay.config");
+const eBay = require("ebay-node-api");
+// ebay api connection
+const ebay = new eBay({
+  clientID: ebayKey,
+  marketplaceId: "EBAY_US",
+});
 
 const jwt = require("jsonwebtoken");
 const { Collections, Users, Items, Prices } = require("./models/index");
@@ -221,12 +226,6 @@ app.get("/leaderboard/size", (req, res) => {
     });
 });
 
-// ebay api connection
-let ebay = new eBay({
-  clientID: ebayKey,
-  marketplaceId: "EBAY_US",
-});
-
 // ebay api call to get item details based on item name selected by client
 app.get(`/itemDetails/:item`, (req, res) => {
   let keywords = req.params.item;
@@ -247,28 +246,14 @@ app.get(`/itemDetails/:item`, (req, res) => {
 
 // save item to the database
 app.post(`/saveItems`, (req, res) => {
-  let itemData = {
-    title: req.body.title,
-    console: req.body.console,
-    is_console: req.body.is_console,
-    user_id: req.body.user_id,
-    condition: req.body.condition,
-    comments: req.body.comments,
-    starting_price: req.body.starting_price,
-    date_of_purchase: req.body.date_of_purchase,
-    tradeable: req.body.tradeable,
-    current_value: req.body.current_value,
-    thumbnail: req.body.thumbnail,
-    front_view: req.body.front_view,
-  };
-  Collections.save(itemData)
+  Collections.save(req.body)
     .then((response) => {
-      res.status(200).send(response);
       console.log(`Success saving item to database`);
+      res.status(200).send(response);
     })
     .catch((err) => {
-      res.status(500).send(err);
       console.log(`Error saving item to database`);
+      res.status(500).send(err);
     });
 });
 
