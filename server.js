@@ -390,9 +390,7 @@ app.get("/username/collectionValue", (req, res) => {
       res.status(500).send(err);
     });
 });
-//   //   });
-//   // });
-// });
+
 app.use(
   "/resources/mario.jpg",
   express.static(path.join(__dirname, "resources", "mario.jpg"))
