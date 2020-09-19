@@ -36,21 +36,28 @@ const Homepage = ({
 
   return (
     <div>
-      {loggedIn.userId && (
-        <Banner
-          avatar={loggedIn.userAvatar}
-          username={loggedIn.userName}
-          collectionSize={userCollection.total_count || "0"}
-          collectionValue={userCollection.total_value || "$0.00"}
-          rank={userCollection.rank}
+      {loggedIn.userId ? (
+        <>
+          <Banner
+            avatar={loggedIn.userAvatar}
+            username={loggedIn.userName}
+            collectionSize={userCollection.total_count || "0"}
+            collectionValue={userCollection.total_value || "$0.00"}
+            rank={userCollection.rank}
+            collectionOwnerName={collectionOwnerName}
+            setCollectionOwnerName={setCollectionOwnerName}
+          />
+          <Leaderboard
+            collectionOwnerName={collectionOwnerName}
+            setCollectionOwnerName={setCollectionOwnerName}
+          />
+        </>
+      ) : (
+        <Leaderboard
           collectionOwnerName={collectionOwnerName}
           setCollectionOwnerName={setCollectionOwnerName}
         />
       )}
-      <Leaderboard
-        collectionOwnerName={collectionOwnerName}
-        setCollectionOwnerName={setCollectionOwnerName}
-      />
     </div>
   );
 };
