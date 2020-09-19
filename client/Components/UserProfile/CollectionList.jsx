@@ -110,7 +110,6 @@ const CollectionList = ({
       });
   };
 
-  console.log(loggedIn.userame, collectionOwnerName);
   return (
     <div>
       <Wrapper>
