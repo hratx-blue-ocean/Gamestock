@@ -38,6 +38,7 @@ const InputsContainer = styled(WrapGrid)`
 const ColumnContainer = styled(CenteredDiv)`
   flex-direction: column;
   grid-column-start: 2;
+  margin-bottom: 10px;
 `;
 
 const TextColumnContainer = styled(CenteredDiv)`
@@ -69,6 +70,7 @@ const ConditionSelect = styled(StyledSelect)`
 `;
 const GriddedItems = styled(WrapGrid)`
   grid-template-columns: 425px 350px;
+  margin-bottom: 15px;
 `;
 const Thumbnail = styled(StyledForm)`
   grid-column-start: 2;
