@@ -125,6 +125,7 @@ const UserProfile = (props) => {
         getAllConsoles={getAllConsoles}
         getCollectionByConsole={getCollectionByConsole}
         consoles={consoles}
+        loggedIn={props.loggedIn}
       />
     </div>
   );

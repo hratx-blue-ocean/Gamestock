@@ -54,6 +54,7 @@ const CollectionList = ({
   collection,
   setCollection,
   currentCards,
+  loggedIn,
   userId,
   cardsPerPage,
   handlePageClick,
@@ -100,6 +101,7 @@ const CollectionList = ({
       });
   };
 
+  console.log(loggedIn.userame, collectionOwnerName);
   return (
     <div>
       <Wrapper>
@@ -165,11 +167,13 @@ const CollectionList = ({
               </UserProfSelect>
             </UserProfGrid>
             <Print />
-            <AddItem
-              userId={userId}
-              collection={collection}
-              setCollection={setCollection}
-            />
+            {loggedIn.userName === collectionOwnerName && (
+              <AddItem
+                userId={userId}
+                collection={collection}
+                setCollection={setCollection}
+              />
+            )}
             <Card collection={collection} currentCards={currentCards} />
             <Paginator
               collection={collection}

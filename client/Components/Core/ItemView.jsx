@@ -104,7 +104,7 @@ export default function ItemView({ item }) {
               </p>
               <p>Starting Price: {item.starting_price}</p>
               <p>Current Price: ${current_price}</p>
-              <p>Tradeable? {item.tradeable === "Tradeable" ? "Yes" : "No"}</p>
+              <p>Tradeable? {item.tradeable ? "Yes" : "No"}</p>
               <p>Comments: {item.comments}</p>
             </MoveLeft>
             <Centered>

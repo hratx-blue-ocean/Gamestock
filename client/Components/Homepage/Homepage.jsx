@@ -7,7 +7,6 @@ const Homepage = ({
   collectionOwnerName,
   setCollectionOwnerName,
   loggedIn,
-  userId,
 }) => {
   const [userCollection, setUserCollection] = useState({});
   const [itemID, setItemID] = useState(7);
@@ -16,8 +15,8 @@ const Homepage = ({
 
   useEffect(() => {
     // populates data for user banner for logged in user
-    getUserCollection(userId);
-  }, [userId]);
+    getUserCollection(loggedIn.userId);
+  }, [loggedIn.userId]);
 
   const getUserCollection = (input) => {
     axios

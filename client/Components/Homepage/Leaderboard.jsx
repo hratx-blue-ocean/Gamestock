@@ -167,6 +167,7 @@ const Leaderboard = (props) => {
             defaultValue="select console"
           >
             <option disabled>select console</option>
+            <option>none</option>
             {consoles.map((console, idx) => (
               <option key={idx} id={console.console}>
                 {console.console}
