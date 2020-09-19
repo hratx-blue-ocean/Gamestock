@@ -154,7 +154,7 @@ const Header = ({ setCollectionOwnerName, loggedIn, setLoggedIn }) => {
           </>
         ) : (
           <>
-            <Link to={`/profile/${loggedIn.userName}`}>
+            <Link to="/">
               <LogoWrapper>
                 <Logo src="https://mygamestocks.com/resources/logo.png"></Logo>
               </LogoWrapper>
