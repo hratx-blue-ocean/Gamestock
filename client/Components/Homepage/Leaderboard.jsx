@@ -125,18 +125,20 @@ const Leaderboard = (props) => {
 
   const getCollectionsByConsole = (e) => {
     console.log("SELECT CHANGE: ", e.target.value);
-    axios
-      .get("/leaderboard/console", {
-        params: {
-          console: e.target.value,
-        },
-      })
-      .then((recordsByConsole) => {
-        setCollectionsByValueOrSize(() => recordsByConsole.data.rows);
-      })
-      .catch((err) => {
-        console.log("Error getting top collections by console :", err);
-      });
+    if (e.target.value !== "select console") {
+      axios
+        .get("/leaderboard/console", {
+          params: {
+            console: e.target.value,
+          },
+        })
+        .then((recordsByConsole) => {
+          setCollectionsByValueOrSize(() => recordsByConsole.data.rows);
+        })
+        .catch((err) => {
+          console.log("Error getting top collections by console :", err);
+        });
+    }
   };
 
   const getAllConsoles = () => {
@@ -177,8 +179,7 @@ const Leaderboard = (props) => {
             onChange={getCollectionsByConsole}
             defaultValue="select console"
           >
-            <option disabled>select console</option>
-            <option>none</option>
+            <option>select console</option>
             {consoles.map((console, idx) => (
               <option key={idx} id={console.console}>
                 {console.console}
