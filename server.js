@@ -330,7 +330,7 @@ app.get("/prices/items", (req, res) => {
 });
 
 // Function to update Item Price everyday
-var updateDaily = schedule.scheduleJob("* * */12  * * *", function () {
+var updateDaily = schedule.scheduleJob("0 0 */12  * * *", function () {
   Items.getAll()
     .then((data) => {
       const names = data.rows.map((row) => {
@@ -341,10 +341,6 @@ var updateDaily = schedule.scheduleJob("* * */12  * * *", function () {
           .then((res) => {
             res.data.products[0]["new-price"] =
               Number(res.data.products[0]["new-price"]) / 100;
-            console.log(
-              "This is the new price:",
-              res.data.products[0]["new-price"]
-            );
             return Prices.create(
               {
                 current_value: res.data.products[0]["new-price"],
