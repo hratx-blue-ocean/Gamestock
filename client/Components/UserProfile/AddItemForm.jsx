@@ -26,6 +26,10 @@ const SelectedItemText = styled(CenteredDiv)`
   margin: 0px;
 `;
 
+const FormStyled = styled(StyledForm)`
+text-align: center;
+`
+
 const Textarea = styled(StyledTextarea)`
   display: table-cell;
   border: none;
@@ -161,140 +165,125 @@ const AddItemForm = (props) => {
   }
 
   return (
-    <div>
-      <div>
-        <NewItemSearchBar
-          getSearchedItems={(items) => {
-            setSearchedItems(items);
+    <CenteredDiv>
+      <NewItemSearchBar
+        getSearchedItems={(items) => {
+          setSearchedItems(items);
+        }}
+      />
+      <SelectedItemText>
+        <span>Item to Add:</span>
+        {itemSelected["console-name"] || ""}{" "}
+        {itemSelected["product-name"] || ""}
+      </SelectedItemText>
+
+      <GriddedItems>
+        <AddItemList
+          items={searchedItems}
+          select={(item) => {
+            setItemSelected(item);
           }}
         />
-        <SelectedItemText>
-          <span>Item to Add:</span>
-          {itemSelected["console-name"] || ""}{" "}
-          {itemSelected["product-name"] || ""}
-        </SelectedItemText>
+        <Thumbnail>
+          <img src={itemSelectedThumbnail}></img>
+        </Thumbnail>
+      </GriddedItems>
 
-        <br></br>
-        <GriddedItems>
-          <AddItemList
-            items={searchedItems}
-            select={(item) => {
-              setItemSelected(item);
+      <FormStyled>
+        {/* date when item was bought */}
+
+        <StyledLabel htmlFor="dateAcquired">Date Acquired:</StyledLabel>
+        <CellInputs
+          onChange={(e) => setDateAcquired(e.target.value)}
+          type="date"
+          id="start"
+          value={dateAcquired}
+        ></CellInputs>
+
+        {/* price at purchase of item */}
+
+        <StyledLabel htmlFor="purchasedPrice">PurchasedPrice:</StyledLabel>
+        <PriceInput
+          onChange={(e) => setPurchasedPrice(e.target.value)}
+          id="purchasedPrice"
+          type="number"
+          min="0.01"
+          step="0.01"
+          value={purchasedPrice}
+        ></PriceInput>
+
+        {/* notes for user comments */}
+
+        <StyledLabel htmlFor="comment">Item description:</StyledLabel>
+        <TextareaWrap>
+          <Textarea
+            onChange={(e) => setItemNotes(e.target.value)}
+            maxlength="150"
+            rows="4"
+            cols="25"
+            id="comment"
+            value={itemNotes}
+          ></Textarea>
+        </TextareaWrap>
+
+        <StyledLabel htmlFor="ItemCondition">Item Condition:</StyledLabel>
+        <ConditionSelect
+          id="ItemCondition"
+          value={itemCondition}
+          onChange={(e) => setItemCondition(e.target.value)}
+        >
+          <option value="A">A</option>
+          <option value="B">B</option>
+          <option value="C">C</option>
+          <option value="D">D</option>
+          <option value="F">F</option>
+        </ConditionSelect>
+
+        <CenteredDiv>
+          <StyledRadio>
+            <input
+              onClick={(e) => setIsTradeable(!isTradeable)}
+              type="radio"
+              id="forTrade"
+              checked={isTradeable}
+              value={isTradeable}
+              onChange={() => {}}
+            ></input>
+            <label htmlFor="forTrade">Tradeable</label>
+          </StyledRadio>
+
+          <StyledRadio>
+            <input
+              onClick={(e) => setIsConsole(!isConsole)}
+              type="radio"
+              id="isConsole"
+              checked={isConsole}
+              value={isConsole}
+              onChange={() => {}}
+            ></input>
+            <label htmlFor="isConsole">This is a console</label>
+          </StyledRadio>
+
+          <SubmitLeftButton
+            onClick={() => {
+              submitInfo(submittedInfo);
             }}
-          />
-          <Thumbnail>
-            <img src={itemSelectedThumbnail}></img>
-          </Thumbnail>
-        </GriddedItems>
-
-        <div>
-          <StyledForm>
-            {/* date when item was bought */}
-
-            
-              <StyledLabel htmlFor="dateAcquired">Date Acquired:</StyledLabel>
-              <CellInputs
-                onChange={(e) => setDateAcquired(e.target.value)}
-                type="date"
-                id="start"
-                value={dateAcquired}
-              ></CellInputs>
-            
-
-            <br></br>
-
-            {/* price at purchase of item */}
-            
-              <StyledLabel htmlFor="purchasedPrice">PurchasedPrice:</StyledLabel>
-              <PriceInput
-                onChange={(e) => setPurchasedPrice(e.target.value)}
-                id="purchasedPrice"
-                type="number"
-                min="0.01"
-                step="0.01"
-                value={purchasedPrice}
-              ></PriceInput>
-            
-
-            <br></br>
-
-            {/* notes for user comments */}
-            
-              <StyledLabel htmlFor="comment">Item description:</StyledLabel>
-              <TextareaWrap>
-                <Textarea
-                  onChange={(e) => setItemNotes(e.target.value)}
-                  maxlength="150"
-                  rows="4"
-                  cols="25"
-                  id="comment"
-                  value={itemNotes}
-                ></Textarea>
-              </TextareaWrap>
-            
-
-            <br></br>
-            
-              <StyledLabel htmlFor="ItemCondition">Item Condition:</StyledLabel>
-              <ConditionSelect
-                id="ItemCondition"
-                value={itemCondition}
-                onChange={(e) => setItemCondition(e.target.value)}
-              >
-                <option value="A">A</option>
-                <option value="B">B</option>
-                <option value="C">C</option>
-                <option value="D">D</option>
-                <option value="F">F</option>
-              </ConditionSelect>
-            
-
-            <StyledRadio>
-              <input
-                onClick={(e) => setIsTradeable(!isTradeable)}
-                type="radio"
-                id="forTrade"
-                checked={isTradeable}
-                value={isTradeable}
-                onChange={() => {}}
-              ></input>
-              <label htmlFor="forTrade">Tradeable</label>
-            </StyledRadio>
-
-            <StyledRadio>
-              <input
-                onClick={(e) => setIsConsole(!isConsole)}
-                type="radio"
-                id="isConsole"
-                checked={isConsole}
-                value={isConsole}
-                onChange={() => {}}
-              ></input>
-              <label htmlFor="isConsole">This is a console</label>
-            </StyledRadio>
-            <div>
-              <SubmitLeftButton
-                onClick={() => {
-                  submitInfo(submittedInfo);
-                }}
-                type="button"
-              >
-                Submit
-              </SubmitLeftButton>
-              <CancelRightButton
-                type="button"
-                onClick={() => {
-                  props.exitModal();
-                  clearForm();
-                }}
-              >
-                Cancel
-              </CancelRightButton>
-            </div>
-          </StyledForm>
-        </div>
-      </div>
-    </div>
+            type="button"
+          >
+            Submit
+          </SubmitLeftButton>
+          <CancelRightButton
+            type="button"
+            onClick={() => {
+              props.exitModal();
+              clearForm();
+            }}
+          >
+            Cancel
+          </CancelRightButton>
+        </CenteredDiv>
+      </FormStyled>
+    </CenteredDiv>
   );
 };
 
