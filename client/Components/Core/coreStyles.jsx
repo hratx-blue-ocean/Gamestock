@@ -150,6 +150,11 @@ export const WrapGrid = styled.div`
   grid-template-columns: 100px 100px 100px 100px 100px auto 100px 100px 100px 100px 100px;
 `;
 
+export const AddItemGrid = styled.div`
+  display: grid;
+  grid-template-columns: 300px 300px;
+`;
+
 export const StyledForm = styled.form``;
 
 export const CenteredDiv = styled.div`

@@ -11,6 +11,7 @@ const UserProfile = (props) => {
   const [collection, setCollection] = useState([]);
   const [currentPage, setCurrentPage] = useState(1);
   const [cardsPerPage] = useState(15);
+  const [consoles, setConsoles] = useState([]);
 
   const getInfo = () => {
     axios
@@ -68,6 +69,33 @@ const UserProfile = (props) => {
       });
   };
 
+  const getAllConsoles = () => {
+    axios
+      .get("/consoles")
+      .then((consoles) => {
+        setConsoles(() => consoles.data.rows);
+      })
+      .catch((err) => {
+        console.log("Error getting consoles: ", err);
+      });
+  };
+
+  const getCollectionByConsole = (e) => {
+    console.log("SELECT CHANGE: ", e.target.value);
+    axios
+      .get(`/userProfile/console/${props.collectionOwnerName}`, {
+        params: {
+          console: e.target.value,
+        },
+      })
+      .then((consoleRecords) => {
+        setCollection(consoleRecords.data.rows);
+      })
+      .catch((err) => {
+        console.log("Front end console retrieval failure: ", err);
+      });
+  };
+
   useEffect(() => {
     getInfo();
   }, []);
@@ -92,7 +120,11 @@ const UserProfile = (props) => {
         currentCards={currentCards}
         cardsPerPage={cardsPerPage}
         handlePageClick={handlePageClick}
+        collectionOwnerName={props.collectionOwnerName}
         userId={props.userId}
+        getAllConsoles={getAllConsoles}
+        getCollectionByConsole={getCollectionByConsole}
+        consoles={consoles}
       />
     </div>
   );

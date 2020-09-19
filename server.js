@@ -20,6 +20,7 @@ const {
   getUserCollectionByPrice,
   getUserCollectionByCondition,
   getUserCollectionByTradeable,
+  sortUserCollectionByConsole,
 } = require("./database/dbQueryHelpers");
 
 // ebay API
@@ -170,6 +171,16 @@ app.get("/userProfile/condition/:username", (req, res) => {
 // USER PROFILE ROUTE TO SORT BY TRADEABLE
 app.get("/userProfile/tradeable/:username", (req, res) => {
   getUserCollectionByTradeable(req.params.username)
+    .then((response) => res.send(response))
+    .catch((err) => {
+      console.error(err);
+      res.status(500).send(err);
+    });
+});
+
+// USER PROFILE ROUTE TO SORT BY CONSOLE
+app.get("/userProfile/console/:username", (req, res) => {
+  sortUserCollectionByConsole(req.params.username, req.query.console)
     .then((response) => res.send(response))
     .catch((err) => {
       console.error(err);
@@ -378,9 +389,7 @@ app.get("/username/collectionValue", (req, res) => {
       res.status(500).send(err);
     });
 });
-//   //   });
-//   // });
-// });
+
 app.use(
   "/resources/mario.jpg",
   express.static(path.join(__dirname, "resources", "mario.jpg"))
