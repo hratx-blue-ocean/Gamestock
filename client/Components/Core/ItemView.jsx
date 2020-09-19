@@ -107,9 +107,6 @@ export default function ItemView({ item }) {
               <p>Tradeable? {item.tradeable ? "Yes" : "No"}</p>
               <p>Comments: {item.comments}</p>
             </MoveLeft>
-            <Centered>
-              <StyledButton>Delete Item From Collection</StyledButton>
-            </Centered>
           </ModalWrapper>
         </ModalInner>
       </Modal>
