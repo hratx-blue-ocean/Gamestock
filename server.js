@@ -336,7 +336,7 @@ var updateDaily = schedule.scheduleJob("0 20 */1  * * *", function () {
       const names = data.rows.map((row) => {
         return axios
           .get(
-            `https://www.pricecharting.com/api/products?t=36330d87343dc3b342b42a4f6c58b13e443061c8&q=${row.title}_?limit=10`
+            `https://www.pricecharting.com/api/products?t=36330d87343dc3b342b42a4f6c58b13e443061c8&q=${row.title}`
           )
           .then((res) => {
             res.data.products[0]["new-price"] =
