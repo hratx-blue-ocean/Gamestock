@@ -45,11 +45,11 @@ This Application was built by a team of eight Full Stack Software Engineers from
     <td class="subheading">Backend</td>
     <td><a href="http://nodejs.org">Node</a></td> 
     <td><a href="http://expressjs.com">Express</a></td>
-    <td><a href="https://www.mongodb.com/">MongoDB</a></td>
+    <td><a href="https://www.postgresql.org/">Postgres</a></td>
   </tr>
   <tr>
       <td class="subheading">Dev Tools</td>
-      <td><a href="https://webpack.js.org/">MongoDB</a></td>
+      <td><a href="https://webpack.js.org/">Webpack</a></td>
       <td><a href="https://babeljs.io/">Babel</a></td>
     </tr>
   <tr>
@@ -73,8 +73,6 @@ $ npm run start
 $ npm run build
 Go to localhost:7711/
 ```
-## Technical Challenges/Research
-Some unexpected challenges encountered while building this app:
 
 ### Workflow
 Our team managed workflow and responsibilities by utilizing Agile methodology. Trello was used to to keep track of tickets. With git feature branch workflow, our team ensured that the master branch always contained working code. Developers created feature branches off the development branch, then merged into development upon completion of that feature after approval of the pull request.
