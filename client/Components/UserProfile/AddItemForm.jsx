@@ -61,7 +61,6 @@ const AddItemForm = (props) => {
   };
 
   function submitInfo(submittedInfo) {
-    console.log("Submitted Info current_value", submittedInfo.current_value);
     submittedInfo.current_value = Number(submittedInfo.current_value) / 100;
     if (submittedInfo.title == "games") {
       return;
