@@ -177,7 +177,7 @@ const CollectionList = ({
             </UserProfGrid>
             {loggedIn.userName === collectionOwnerName && (
               <AddItem
-                userId={userId}
+                userId={loggedIn.userId}
                 collection={collection}
                 setCollection={setCollection}
               />
