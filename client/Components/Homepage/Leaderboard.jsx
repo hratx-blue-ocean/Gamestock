@@ -89,6 +89,7 @@ const Leaderboard = (props) => {
       axios
         .get("/leaderboard/value")
         .then((recordsByValue) => {
+          console.log("records by value: ", recordsByValue);
           setCollectionsByValueOrSize(() => recordsByValue.data.rows);
         })
         .then(() => (document.getElementById("usernameSearch").value = ""))
@@ -175,6 +176,7 @@ const Leaderboard = (props) => {
         </LeaderboardGrid>
         {collectionsByValueOrSize.map((collection, idx) => (
           <Banner
+            rank={collection.rank}
             username={collection.username}
             collectionSize={collection.total_count}
             collectionValue={collection.total_value}

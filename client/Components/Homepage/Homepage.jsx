@@ -43,6 +43,7 @@ const Homepage = ({
           username={loggedIn.userName}
           collectionSize={userCollection.total_count || "0"}
           collectionValue={userCollection.total_value || "$0.00"}
+          rank={userCollection.rank}
           collectionOwnerName={collectionOwnerName}
           setCollectionOwnerName={setCollectionOwnerName}
         />

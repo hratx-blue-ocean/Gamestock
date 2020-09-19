@@ -29,7 +29,7 @@ const StyledLink = styled(Link)`
 const BannerWrapper = styled(Wrapper)`
   margin-top: 10px;
   display: grid;
-  grid-template-columns: repeat(auto-fill, 230px);
+  grid-template-columns: 50px repeat(auto-fill, 215px);
   background: #2d1c7b;
   color: #54f3f7;
   border-radius: 10px;
@@ -40,6 +40,7 @@ const BannerWrapper = styled(Wrapper)`
 
 export default function Banner(props) {
   const {
+    rank,
     username,
     collectionSize,
     collectionValue,
@@ -49,6 +50,7 @@ export default function Banner(props) {
 
   return (
     <BannerWrapper>
+      <Text>{rank}</Text>
       <AvatarWrapper src={avatar}></AvatarWrapper>
       <Text>{username}</Text>
       <Text>{collectionSize}</Text>
