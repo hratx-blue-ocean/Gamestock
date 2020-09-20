@@ -7,10 +7,12 @@ const StyledSearchBar = styled(StyledInput)`
   background-color: lightgray;
   min-width: 300px;
   padding: 5px 10px;
+  margin-bottom: 5px;
 `;
 
 const SearchButton = styled(StyledButton)`
 padding: 8px 10px;
+margin-bottom: 5px;
 `;
 
 const NewItemSearchBar = ({ getSearchedItems }) => {
