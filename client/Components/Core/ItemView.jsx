@@ -73,7 +73,6 @@ export default function ItemView({ item }) {
           ),
           current_price: pricesAndDates[1][pricesAndDates[1].length - 1],
         });
-        console.log(itemCollectionData);
       })
       .catch((err) => {
         console.log("Error getting price data: ", err);
