@@ -95,7 +95,7 @@ function SignupLogin(props) {
     if (window.location.port) {
       avatar = `${avatar}:${window.location.port}`;
     }
-    avatar = `${avatar}/resources/mario.jpg`;
+    avatar = `${avatar}/resources/avatar/mario.jpg`;
     if (username) {
       body = {
         username,

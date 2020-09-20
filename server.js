@@ -409,20 +409,7 @@ app.get("/username/collectionValue", (req, res) => {
     });
 });
 
-app.use(
-  "/resources/mario.jpg",
-  express.static(path.join(__dirname, "resources", "mario.jpg"))
-);
-
-app.use(
-  "/resources/logo.png",
-  express.static(path.join(__dirname, "resources", "logo.png"))
-);
-
-app.use(
-  "/resources/smallLogo.png",
-  express.static(path.join(__dirname, "resources", "smallLogo.png"))
-);
+app.use("/resources/", express.static(path.join(__dirname, "resources")));
 
 // handles refresh requests from the userProfile page or any other endpoint
 app.get("/*", (req, res) => {

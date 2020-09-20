@@ -157,6 +157,12 @@ export const AddItemGrid = styled.div`
 
 export const StyledForm = styled.form``;
 
+export const StyledLabel = styled.label``;
+
+export const StyledTextarea = styled.textarea``;
+
+export const BlankDiv = styled.div``;
+
 export const CenteredDiv = styled.div`
   display: flex;
   align-items: center;

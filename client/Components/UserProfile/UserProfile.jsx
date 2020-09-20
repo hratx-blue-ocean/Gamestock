@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import CollectionList from "./CollectionList.jsx";
 import { useParams } from "react-router-dom";
+import { Wrapper } from "../Core/coreStyles.jsx";
 
 const UserProfile = (props) => {
   // uses route parameter
@@ -111,6 +112,9 @@ const UserProfile = (props) => {
 
   return (
     <div>
+      <Wrapper>
+        <div>Hello World</div>
+      </Wrapper>
       <CollectionList
         sortByTitle={sortByTitle}
         sortByPrice={sortByPrice}

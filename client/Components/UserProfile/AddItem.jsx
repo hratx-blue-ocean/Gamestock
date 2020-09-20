@@ -15,6 +15,7 @@ const ModalWrapper = styled(Wrapper)``;
 
 const ModalBody = styled(ModalInner)`
   width: 800px;
+  margin-top: 50px;
 `;
 
 const ItemGrid = styled(AddItemGrid)`
@@ -31,9 +32,20 @@ export default function AddItem(props) {
     setModalState(!modalState);
   };
 
+  const freeze = (modalState) => {
+    const page = document.getElementsByTagName("body")[0];
+    if (!modalState) {
+      page.classList.add("freeze");
+      toggleModalState();
+    } else {
+      page.classList.remove("freeze");
+      toggleModalState();
+    }
+  }
+
   return (
     <div>
-      <Modal modalState={modalState} onClick={() => toggleModalState()}>
+      <Modal modalState={modalState} onClick={() => freeze(modalState)}>
         <ModalBody onClick={(e) => e.stopPropagation()}>
           <ModalWrapper>
             <Title>Add Item To Your Collection</Title>
@@ -42,13 +54,13 @@ export default function AddItem(props) {
               userId={props.userId}
               setCollection={props.setCollection}
               collection={props.collection}
-              exitModal={() => toggleModalState()}
+              exitModal={() => freeze(modalState)}
             />
           </ModalWrapper>
         </ModalBody>
       </Modal>
       <ItemGrid>
-        <StyledButton onClick={() => toggleModalState()}>
+        <StyledButton onClick={() => freeze(modalState)}>
           Add Item To Your Collection
         </StyledButton>
         {props.collection.length && (
@@ -57,9 +69,6 @@ export default function AddItem(props) {
           </StyledButton>
         )}
       </ItemGrid>
-      {/* <StyledButton onClick={() => toggleModalState()}>
-        Add Item To Your Collection
-      </StyledButton> */}
     </div>
   );
 }
