@@ -14,6 +14,7 @@ import {
   Wrapper,
   Title,
   CenteredDiv,
+  Centered,
   GlobalStyles,
   AvatarWrapper,
   WrapGrid,
@@ -84,6 +85,9 @@ const LinkButton = styled(StyledButton)`
     background: none;
     color: #322d7b;
   }
+`;
+const GraphCenter = styled(Centered)`
+  width: 100%;
 `;
 
 const CollectionList = ({
@@ -162,10 +166,12 @@ const CollectionList = ({
     let collectionTop = (
       <>
         <DisplayItems collection={collection} />
-        <PriceGraph
-          dates={userCollectionData[0]}
-          prices={userCollectionData[1]}
-        />
+        <GraphCenter>
+          <PriceGraph
+            dates={userCollectionData[0]}
+            prices={userCollectionData[1]}
+          />
+        </GraphCenter>
         <UserProfGrid>
           {/* <GameSearchForm onSubmit={() => {}}>
     <StyledInput
