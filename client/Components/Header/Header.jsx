@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from "react";
-import { Wrapper, Dropdown, CenteredDiv } from "../Core/coreStyles.jsx";
+import {
+  Wrapper,
+  Dropdown,
+  CenteredDiv,
+  AvatarWrapper,
+} from "../Core/coreStyles.jsx";
 import styled from "styled-components";
 import SignupLogin from "../SignupLogin/SignupLogin.jsx";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import avatar from "../../Icons/pacman.svg";
-import avatar2 from "../../Icons/defaultAvatar.png";
 
 const BannerWrapper = styled(Wrapper)`
   margin-top: 10px;
@@ -18,16 +21,6 @@ const BannerWrapper = styled(Wrapper)`
   justify-content: space-between;
   align-item: center;
   box-sizing: border-box;
-`;
-
-const AvatarWrapper = styled.img`
-  &:hover {
-    cursor: pointer;
-  }
-  border-radius: 50%;
-  max-height: 50px;
-  max-width: 50px;
-  display: inline-block;
 `;
 
 const HiddenLink = styled(Link)`

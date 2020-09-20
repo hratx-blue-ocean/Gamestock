@@ -13,7 +13,9 @@ import {
   StyledSelect,
   Wrapper,
   Title,
+  CenteredDiv,
   GlobalStyles,
+  AvatarWrapper,
   WrapGrid,
   StyledButton,
   StyledForm,
@@ -25,7 +27,7 @@ const UserProfGrid = styled(WrapGrid)`
   margin-top: 30px;
   margin-bottom: 20px;
 `;
-const GameSearchForm = styled(StyledForm)`
+const ProfileForm = styled(StyledForm)`
   grid-column-start: 1;
   display: flex;
 `;
@@ -57,6 +59,31 @@ const ColumnNameWrapper = styled(Wrapper)`
   align-item: center;
   text-align: center;
   box-sizing: border-box;
+`;
+const ProfInfo = styled.h3`
+  margin-block-end: 0em;
+`;
+const ProfInfoWrapper = styled(CenteredDiv)`
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+`;
+const ProfWrapper = styled(CenteredDiv)`
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+`;
+const LinkButton = styled(StyledButton)`
+  background: none;
+  color: #df77fd;
+  border: 0px solid #23143e;
+  padding: 0px;
+  box-shaddow: none;
+  line-height: 1;
+  &:hover {
+    background: none;
+    color: #322d7b;
+  }
 `;
 
 const CollectionList = ({
@@ -117,6 +144,20 @@ const CollectionList = ({
         collection={collection}
         setCollection={setCollection}
       />
+    );
+    let profileInfo = (
+      <ProfWrapper>
+        <ProfInfoWrapper>
+          <ProfInfo>Username: {loggedIn.userName}</ProfInfo>
+          <LinkButton>change password</LinkButton>
+        </ProfInfoWrapper>
+        <ProfInfoWrapper>
+          <ProfInfo>
+            Avatar: <AvatarWrapper src={loggedIn.userAvatar}></AvatarWrapper>
+          </ProfInfo>
+          <LinkButton>change Avatar</LinkButton>
+        </ProfInfoWrapper>
+      </ProfWrapper>
     );
     let collectionTop = (
       <>
@@ -200,10 +241,13 @@ const CollectionList = ({
       collectionBottom = <></>;
     } else if (loggedIn.userName !== collectionOwnerName) {
       addItem = <></>;
+      profileInfo = <></>;
     }
 
     return (
       <>
+        {profileInfo}
+        <Title>{`${collectionOwnerName}'s Collection`}</Title>
         {addItem}
         {collectionTop}
         {collectionBottom}
@@ -213,10 +257,7 @@ const CollectionList = ({
 
   return (
     <div>
-      <Wrapper>
-        <Title>{`${collectionOwnerName}'s Collection`}</Title>
-        {renderCollection()}
-      </Wrapper>
+      <Wrapper>{renderCollection()}</Wrapper>
     </div>
   );
 };
