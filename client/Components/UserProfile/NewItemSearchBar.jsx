@@ -29,15 +29,8 @@ const NewItemSearchBar = ({ getSearchedItems }) => {
           items: item,
         },
       })
-      // .then((res) => {
-      //   // console.log(res)
-      //   return res;
-      // })
       .then((res) => {
         setItems(res.data);
-        //   return res;
-        // })
-        // .then((res) => {
         getSearchedItems(res.data);
       })
       .catch((err) => {

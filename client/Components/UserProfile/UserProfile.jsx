@@ -100,7 +100,7 @@ const UserProfile = (props) => {
 
   useEffect(() => {
     getInfo();
-  }, []);
+  }, [props.collectionOwnerName]);
 
   let indexOflastCard = currentPage * cardsPerPage;
   let indexOfFirstCard = indexOflastCard - cardsPerPage;
