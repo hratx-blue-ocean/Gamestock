@@ -11,8 +11,8 @@ const StyledSearchBar = styled(StyledInput)`
 `;
 
 const SearchButton = styled(StyledButton)`
-padding: 8px 10px;
-margin-bottom: 5px;
+  padding: 8px 10px;
+  margin-bottom: 5px;
 `;
 
 const NewItemSearchBar = ({ getSearchedItems }) => {
@@ -30,14 +30,7 @@ const NewItemSearchBar = ({ getSearchedItems }) => {
         },
       })
       .then((res) => {
-        // console.log(res)
-        return res;
-      })
-      .then((res) => {
         setItems(res.data);
-        return res;
-      })
-      .then((res) => {
         getSearchedItems(res.data);
       })
       .catch((err) => {

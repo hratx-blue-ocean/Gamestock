@@ -110,7 +110,7 @@ const Header = ({ setCollectionOwnerName, loggedIn, setLoggedIn }) => {
           <>
             <Link to="/">
               <LogoWrapper>
-                <Logo src="https://mygamestocks.com/resources/logo.png"></Logo>
+                <Logo src="https://mygamestocks.com/resources/nobgLogo.png"></Logo>
               </LogoWrapper>
             </Link>
             <CenteredDiv>
@@ -156,7 +156,7 @@ const Header = ({ setCollectionOwnerName, loggedIn, setLoggedIn }) => {
           <>
             <Link to="/">
               <LogoWrapper>
-                <Logo src="https://mygamestocks.com/resources/logo.png"></Logo>
+                <Logo src="https://mygamestocks.com/resources/nobgLogo.png"></Logo>
               </LogoWrapper>
             </Link>
             <SignupLogin setLoggedIn={setLoggedIn} />

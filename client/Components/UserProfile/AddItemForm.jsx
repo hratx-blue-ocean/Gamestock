@@ -96,6 +96,7 @@ const CancelRightButton = styled(NegativeButton)`
 `;
 
 const AddItemForm = (props) => {
+  let mounted = false;
   const [itemSelected, setItemSelected] = useState({ "product-name": "games" });
   const [searchedItems, setSearchedItems] = useState([]);
   const [itemSelectedThumbnail, setSelectedThumbnail] = useState("");
@@ -135,7 +136,9 @@ const AddItemForm = (props) => {
         .then(function (response) {
           // if (props.collection[0].user_id === props.userId) {
           let newCollection = props.collection.map((item) => item);
-          submittedInfo["starting_price"] = `$${submittedInfo["starting_price"]}`;
+          submittedInfo[
+            "starting_price"
+          ] = `$${submittedInfo["starting_price"]}`;
           submittedInfo["current_price"] = `$${submittedInfo["current_value"]}`;
           newCollection.push(submittedInfo);
           props.setCollection(newCollection);
@@ -150,15 +153,20 @@ const AddItemForm = (props) => {
   }
 
   useEffect(() => {
+    mounted = true;
+
     getImage();
+    return () => (mounted = false);
   }, [itemSelected]);
 
   function getImage() {
     axios
       .get(`/itemDetails/${itemSelected["product-name"]}`)
       .then(function (response) {
-        setSelectedThumbnail(response.data.galleryURL[0]);
-        setSelectedImage(response.data.pictureURLLarge[0]);
+        if (mounted) {
+          setSelectedThumbnail(response.data.galleryURL[0]);
+          setSelectedImage(response.data.pictureURLLarge[0]);
+        }
       })
       .catch(function (error) {
         console.log(error);
