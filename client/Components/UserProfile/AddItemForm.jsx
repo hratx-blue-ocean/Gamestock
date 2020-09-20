@@ -17,6 +17,10 @@ import {
   CenteredDiv,
 } from "../Core/coreStyles.jsx";
 
+const AddItemFormDiv = styled(CenteredDiv)`
+  flex-direction: column;
+`;
+
 const FormInputs = styled(StyledInput)`
   min-width: 150px;
 `;
@@ -120,7 +124,7 @@ const AddItemForm = (props) => {
   };
 
   function submitInfo(submittedInfo) {
-    submittedInfo.current_value = Number(submittedInfo.current_value) / 100;
+    submittedInfo.current_value = Number(submittedInfo["current_value"]) / 100;
     if (submittedInfo.title == "games") {
       return; //tell user request failed
     } else if (submittedInfo["date_of_purchase"] == "") {
@@ -131,7 +135,8 @@ const AddItemForm = (props) => {
         .then(function (response) {
           // if (props.collection[0].user_id === props.userId) {
           let newCollection = props.collection.map((item) => item);
-          submittedInfo.starting_price = `$${submittedInfo.starting_price}`;
+          submittedInfo["starting_price"] = `$${submittedInfo["starting_price"]}`;
+          submittedInfo["current_price"] = `$${submittedInfo["current_value"]}`;
           newCollection.push(submittedInfo);
           props.setCollection(newCollection);
           // }
@@ -173,8 +178,18 @@ const AddItemForm = (props) => {
     setIsConsole(false);
   }
 
+  function itemSelectedName() {
+    const consoleName = itemSelected["console-name"]
+      ? itemSelected["console-name"]
+      : "";
+    const itemName = itemSelected["product-name"]
+      ? itemSelected["product-name"]
+      : "";
+    return `${consoleName} ${itemName}`;
+  }
+
   return (
-    <CenteredDiv>
+    <AddItemFormDiv>
       <NewItemSearchBar
         getSearchedItems={(items) => {
           setSearchedItems(items);
@@ -190,8 +205,7 @@ const AddItemForm = (props) => {
         <div>
           <SelectedItemText>
             <span>Selected:</span>
-            {itemSelected["console-name"] || ""}{" "}
-            {itemSelected["product-name"] || ""}
+            {itemSelectedName()}
           </SelectedItemText>
           <Thumbnail>
             <img src={itemSelectedThumbnail}></img>
@@ -298,7 +312,7 @@ const AddItemForm = (props) => {
           Cancel
         </CancelRightButton>
       </FormStyled>
-    </CenteredDiv>
+    </AddItemFormDiv>
   );
 };
 
