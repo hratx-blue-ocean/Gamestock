@@ -28,6 +28,10 @@ const MoveLeft = styled.div`
   margin-left: 50px;
 `;
 
+const GraphCenter = styled(Centered)`
+  width: 100%;
+`;
+
 export default function ItemView({ item }) {
   const [modalState, setModalState] = useState(false);
   const [priceData, setPriceData] = useState([]);
@@ -73,7 +77,6 @@ export default function ItemView({ item }) {
           ),
           current_price: pricesAndDates[1][pricesAndDates[1].length - 1],
         });
-        console.log(itemCollectionData);
       })
       .catch((err) => {
         console.log("Error getting price data: ", err);
@@ -88,10 +91,12 @@ export default function ItemView({ item }) {
         <ModalInner onClick={(e) => e.stopPropagation()}>
           <ModalWrapper>
             <Title>{item.title}</Title>
-            <PriceGraph
-              dates={itemCollectionData.dates}
-              prices={itemCollectionData.prices}
-            />
+            <GraphCenter>
+              <PriceGraph
+                dates={itemCollectionData.dates}
+                prices={itemCollectionData.prices}
+              />
+            </GraphCenter>
             <Centered>{/* <StyledImg>{item.thumbnail}</StyledImg> */}</Centered>
             <MoveLeft>
               <p>Console: {item.console}</p>

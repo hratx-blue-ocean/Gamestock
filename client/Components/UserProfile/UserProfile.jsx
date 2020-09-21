@@ -112,9 +112,6 @@ const UserProfile = (props) => {
 
   return (
     <div>
-      <Wrapper>
-        <div>Hello World</div>
-      </Wrapper>
       <CollectionList
         sortByTitle={sortByTitle}
         sortByPrice={sortByPrice}

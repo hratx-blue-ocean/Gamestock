@@ -168,6 +168,16 @@ export const CenteredDiv = styled.div`
   align-items: center;
 `;
 
+export const AvatarWrapper = styled.img`
+  &:hover {
+    cursor: pointer;
+  }
+  border-radius: 50%;
+  max-height: 50px;
+  max-width: 50px;
+  display: inline-block;
+`;
+
 export const Dropdown = styled.select`
   font-family: "Press Start 2P", sans-serif;
   font-size: 10px;
