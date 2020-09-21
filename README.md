@@ -8,7 +8,7 @@ This Application was built by a team of eight Full Stack Software Engineers from
 
 ## Demo
 
-![Gamestock_Login](https://user-images.githubusercontent.com/65248215/93822567-09b47680-fc26-11ea-94cd-49f5d5009e6a.gif)
+![Gamestock Main](https://user-images.githubusercontent.com/65248215/93824199-a841d700-fc28-11ea-8927-676ddcd09fa1.gif)
 
 
 ## Dev Team
