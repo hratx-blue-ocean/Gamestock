@@ -72,6 +72,8 @@ Install the dependencies and devDependencies and start the server.
 
 ```sh
 $ cd Gamestock
+Generate an eBay API access token and save the token in a file called eBay.config.js
+Generate a jws token and save it in the .env file
 $ npm run start
 $ npm run build
 Go to localhost:7711/
