@@ -41,7 +41,7 @@ export default function AddItem(props) {
       page.classList.remove("freeze");
       toggleModalState();
     }
-  }
+  };
 
   return (
     <div>
@@ -50,6 +50,7 @@ export default function AddItem(props) {
           <ModalWrapper>
             <Title>Add Item To Your Collection</Title>
             <AddItemForm
+              getInfo={props.getInfo}
               toggleModalState={toggleModalState}
               userId={props.userId}
               setCollection={props.setCollection}

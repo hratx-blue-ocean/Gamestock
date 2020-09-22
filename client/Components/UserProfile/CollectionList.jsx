@@ -96,6 +96,7 @@ const CollectionList = ({
   currentCards,
   loggedIn,
   userId,
+  getInfo,
   cardsPerPage,
   handlePageClick,
   sortByTitle,
@@ -147,6 +148,7 @@ const CollectionList = ({
         userId={loggedIn.userId}
         collection={collection}
         setCollection={setCollection}
+        getInfo={getInfo}
       />
     );
     let profileInfo = (
