@@ -128,6 +128,7 @@ const UserProfile = (props) => {
         getCollectionByConsole={getCollectionByConsole}
         consoles={consoles}
         loggedIn={props.loggedIn}
+        getInfo={getInfo}
       />
     </div>
   );

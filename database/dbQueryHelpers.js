@@ -94,7 +94,7 @@ INNER JOIN items
 ON items_in_collection.item_id = items.id
 INNER JOIN users
 ON items_in_collection.user_id = users.id AND users.username='${username}'
-ORDER BY items_in_collection.condition DESC`
+ORDER BY items_in_collection.condition`
   );
 };
 

@@ -206,7 +206,9 @@ app.get("/getItemPrice", (req, res) => {
   const itemName = req.query.items;
   axios
     .get(
-      `https://www.pricecharting.com/api/products?t=36330d87343dc3b342b42a4f6c58b13e443061c8&q=${itemName}`
+      `https://www.pricecharting.com/api/products?t=36330d87343dc3b342b42a4f6c58b13e443061c8&q=${encodeURI(
+        itemName
+      )}`
     )
     .then((response) => {
       res.send(response.data.products);
@@ -349,7 +351,9 @@ var updateDaily = schedule.scheduleJob("0 0 */12  * * *", function () {
       const names = data.rows.map((row) => {
         return axios
           .get(
-            `https://www.pricecharting.com/api/products?t=36330d87343dc3b342b42a4f6c58b13e443061c8&q=${row.title}`
+            `https://www.pricecharting.com/api/products?t=36330d87343dc3b342b42a4f6c58b13e443061c8&q=${encodeURI(
+              row.title
+            )}`
           )
           .then((res) => {
             res.data.products[0]["new-price"] =
