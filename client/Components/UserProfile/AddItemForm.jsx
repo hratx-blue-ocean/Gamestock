@@ -133,16 +133,7 @@ const AddItemForm = (props) => {
     } else {
       axios
         .post("/saveItems", submittedInfo)
-        .then(function (response) {
-          // if (props.collection[0].user_id === props.userId) {
-          // let newCollection = props.collection.map((item) => item);
-          // submittedInfo[
-          //   "starting_price"
-          // ] = `$${submittedInfo["starting_price"]}`;
-          // submittedInfo["current_price"] = `$${submittedInfo["current_value"]}`;
-          // newCollection.push(submittedInfo);
-          // props.setCollection(newCollection);
-          // }
+        .then(() => {
           clearForm();
           props.exitModal();
           props.getInfo();
