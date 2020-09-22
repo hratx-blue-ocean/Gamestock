@@ -2,7 +2,7 @@
 <img width="300" height="250" src="https://mygamestocks.com/resources/logo.png">
 
 ## About MyGamestocks
-My Gamestocks is Web Application for video game collectors, enthusiasts or anyone who wants to track their video game collection. With MyGamestock, users can add to their their collections, track the value of their collections, and see how the value of their collection stacks up to other users. Click <a href="https://mygamestocks.com/">HERE</a> to start your collection! 
+MyGamestocks is Web Application for video game collectors, enthusiasts or anyone who wants to track their video game collection. With MyGamestock, users can add to their their collections, track the value of their collections, and see how the value of their collection stacks up to other users. Click <a href="https://mygamestocks.com/">HERE</a> to start your collection! 
 
 This Application was built by a team of eight Full Stack Software Engineers from the Hack Reactor, Austin, 50th Cohort (HRATX50).
 
@@ -15,7 +15,7 @@ This Application was built by a team of eight Full Stack Software Engineers from
 
   * [Mariella Arias]: 
   * [Andrew Binkard]: 
-  * [Danielle Blom]: UX Design Lead
+  * [Danielle Blom]: UX Design Lead - Created wireframes, researched/implemented eBay API routes, and funtionality to save items to the database
   * [Steven Brotherton]: Architect Lead
   * [Mike Champagne]: Project Manager
   * [Rahul Chauhan]: 
