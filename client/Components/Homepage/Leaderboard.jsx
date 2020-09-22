@@ -74,19 +74,23 @@ const Leaderboard = (props) => {
     e.preventDefault();
     console.log(`${userSearch} SUBMITTED`);
     document.getElementById("consoleSelectLeaderboard").selectedIndex = 0;
-    axios
-      .get("/username/collectionValue", {
-        params: {
-          username: userSearch,
-        },
-      })
-      .then((userCollection) => {
-        setCollectionsByValueOrSize(() => userCollection.data.rows);
-      })
-      .then(() => (document.getElementById("usernameSearch").value = ""))
-      .catch((err) => {
-        console.log("Error searching for user: ", err);
-      });
+    if (userSearch === "") {
+      getCollectionsByValueOrSize("sortByValue");
+    } else {
+      axios
+        .get("/username/collectionValue", {
+          params: {
+            username: userSearch,
+          },
+        })
+        .then((userCollection) => {
+          setCollectionsByValueOrSize(() => userCollection.data.rows);
+        })
+        .then(() => setUserSearch(""))
+        .catch((err) => {
+          console.log("Error searching for user: ", err);
+        });
+    }
   };
 
   // gets leaderboard, sorted either by value or size depending on which button is pressed
