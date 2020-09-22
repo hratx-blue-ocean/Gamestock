@@ -17,7 +17,7 @@ const PriceGraph = ({ dates, prices }) => {
               {
                 label: `Price`,
                 fill: false,
-                lineTension: 0.5,
+                lineTension: 0,
                 backgroundColor: "#EB29FD",
                 borderColor: "#54F3F7",
                 borderWidth: 2,
@@ -25,14 +25,19 @@ const PriceGraph = ({ dates, prices }) => {
               },
             ],
           }}
-          // width={0}
-          // height={0}
           gridLines={{
             display: false,
           }}
           options={{
             responsive: true,
             maintainAspectRatio: true,
+            scaleLabel: function (label) {
+              const price = label.value
+                .toFixed(2)
+                .toString()
+                .replace(/\B(?=(\d{3})+(?!\d))/g, ",");
+              return `$`;
+            },
             scales: {
               xAxes: [
                 {
@@ -43,7 +48,19 @@ const PriceGraph = ({ dates, prices }) => {
               yAxes: [
                 {
                   gridLines: { color: "#EB29FD" },
-                  ticks: { fontColor: "#54F3F7" },
+                  ticks: {
+                    // Include a dollar sign in the ticks
+                    callback: function (value, index, values) {
+                      return (
+                        "$" +
+                        value
+                          .toFixed(2)
+                          .toString()
+                          .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+                      );
+                    },
+                    fontColor: "#54F3F7",
+                  },
                 },
               ],
               ticks: { fontColor: "#54F3F7" },

@@ -125,7 +125,9 @@ const Leaderboard = (props) => {
 
   const getCollectionsByConsole = (e) => {
     console.log("SELECT CHANGE: ", e.target.value);
-    if (e.target.value !== "select console") {
+    if (e.target.value === "select console") {
+      getCollectionsByValueOrSize("sortByValue");
+    } else {
       axios
         .get("/leaderboard/console", {
           params: {
@@ -139,6 +141,12 @@ const Leaderboard = (props) => {
           console.log("Error getting top collections by console :", err);
         });
     }
+  };
+
+  const clearSearch = (e) => {
+    e.preventDefault();
+    document.getElementById("usernameSearch").value = "";
+    setUserSearch("");
   };
 
   const getAllConsoles = () => {
@@ -166,6 +174,9 @@ const Leaderboard = (props) => {
               onChange={handleUserSearchChange}
             ></StyledInput>
             <StyledButton>Search</StyledButton>
+            <StyledButton id="clearSearch" onClick={clearSearch}>
+              Clear
+            </StyledButton>
           </UserSearchForm>
           <SearchBy>Sort By: </SearchBy>
           <LeftButton id="sortByValue" onClick={getCollectionsByValueOrSize}>
