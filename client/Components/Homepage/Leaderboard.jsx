@@ -73,6 +73,7 @@ const Leaderboard = (props) => {
   const handleUserSearchSubmit = (e) => {
     e.preventDefault();
     console.log(`${userSearch} SUBMITTED`);
+    document.getElementById("consoleSelectLeaderboard").selectedIndex = 0;
     axios
       .get("/username/collectionValue", {
         params: {
@@ -103,7 +104,10 @@ const Leaderboard = (props) => {
           console.log("records by value: ", recordsByValue);
           setCollectionsByValueOrSize(() => recordsByValue.data.rows);
         })
-        .then(() => (document.getElementById("usernameSearch").value = ""))
+        .then(() => {
+          document.getElementById("usernameSearch").value = "";
+          document.getElementById("consoleSelectLeaderboard").selectedIndex = 0;
+        })
         .catch((err) => {
           console.log("Error getting top collections by value: ", err);
         });
@@ -116,6 +120,7 @@ const Leaderboard = (props) => {
         })
         .then(() => {
           document.getElementById("usernameSearch").value = "";
+          document.getElementById("consoleSelectLeaderboard").selectedIndex = 0;
         })
         .catch((err) => {
           console.log("Error getting top collections by size: ", err);
@@ -147,6 +152,7 @@ const Leaderboard = (props) => {
     e.preventDefault();
     document.getElementById("usernameSearch").value = "";
     setUserSearch("");
+    getCollectionsByValueOrSize("sortByValue");
   };
 
   const getAllConsoles = () => {
@@ -185,12 +191,12 @@ const Leaderboard = (props) => {
           <RightButton id="sortBySize" onClick={getCollectionsByValueOrSize}>
             Size
           </RightButton>
-
           <LeaderboardSelect
             onChange={getCollectionsByConsole}
             defaultValue="select console"
+            id="consoleSelectLeaderboard"
           >
-            <option>select console</option>
+            <option id="default">select console</option>
             {consoles.map((console, idx) => (
               <option key={idx} id={console.console}>
                 {console.console}
