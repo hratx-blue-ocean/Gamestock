@@ -3,7 +3,6 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import CollectionList from "./CollectionList.jsx";
 import Paginator from "./Paginator.jsx";
-import Message from './Message.jsx'
 import { useParams } from "react-router-dom";
 
 const UserProfile = (props) => {

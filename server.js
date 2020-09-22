@@ -315,7 +315,6 @@ app.get("/prices/items", (req, res) => {
 });
 
 //Function to update Item Price everyday
-<<<<<<< HEAD
 // var updateDaily = schedule.scheduleJob("* * */11  * * *", function () {
 //   Items.getAll({}).then((data) => {
 //     const names = data.rows.map((row) => {
@@ -357,25 +356,6 @@ app.get("/userCollectionValue", (req, res) => {
     })
     .catch((err) => {
       res.status(500).send(err);
-=======
-var updateDaily = schedule.scheduleJob("* * */11  * * *", function () {
-  Items.getAll({}).then((data) => {
-    const names = data.rows.map((row) => {
-      return axios
-        .get(
-          `https://www.pricecharting.com/api/products?t=${process.env.PRICE_KEY}&q=${row.title}_?limit=10`
-        )
-        .then((res) => {
-          return Prices.create(
-            {
-              current_value: res.data.products[0]["new-price"],
-              date: new Date().toUTCString(),
-              item_id: row.id,
-            },
-            "RETURNING item_id, current_value"
-          );
-        });
->>>>>>> Add a Message Component
     });
 });
 
