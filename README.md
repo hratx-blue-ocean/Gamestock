@@ -6,9 +6,14 @@ MyGamestocks is Web Application for video game collectors, enthusiasts or anyone
 
 This Application was built by a team of eight Full Stack Software Engineers from the Hack Reactor, Austin, 50th Cohort (HRATX50).
 
-## Demo
-![Gamestock](https://user-images.githubusercontent.com/65248215/93927366-5f4c5a00-fcde-11ea-89b5-96897ebb3507.gif)
+## Demo 1
+![Gamestock](https://github.com/hratx-blue-ocean/Gamestock/blob/master/Demo1.gif)
 
+## Demo 2
+![Gamestock](https://github.com/hratx-blue-ocean/Gamestock/blob/master/Demo2.gif)
+
+## Demo 3
+![Gamestock](https://github.com/hratx-blue-ocean/Gamestock/blob/master/Demo3.gif)
 
 
 ## Dev Team
