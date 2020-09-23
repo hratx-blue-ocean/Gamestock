@@ -89,7 +89,7 @@ Go to localhost:7711/
 ```
 
 ### Workflow
-Our team managed workflow and responsibilities by utilizing Agile methodology. Trello was used to to keep track of tickets. With git feature branch workflow, our team ensured that the master branch always contained working code. Developers created feature branches off the development branch, then merged into development upon completion of that feature after approval of the pull request.
+Our team managed workflow and responsibilities by utilizing Agile methodology. Trello was used to to keep track of tickets. With an adapted gitflow, our team ensured that the master branch always contained working code. Developers created feature branches off the development branch, then merged into development upon completion of that feature after approval of the pull request.
 
 [//]: # (These are reference links used in the body of this note and get stripped out when the markdown processor does its job. There is no need to format nicely because it shouldn't be seen. Thanks SO - http://stackoverflow.com/questions/4823468/store-comments-in-markdown-syntax)
 
