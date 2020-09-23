@@ -14,7 +14,7 @@ This Application was built by a team of eight Full Stack Software Engineers from
 ## Dev Team
 
   * [Mariella Arias]: 
-  * [Andrew Binkard]: 
+  * [Andrew Binkard]: Built the user profile component, implemented RESTful API routes and database queries to dynamically sort collection data, implemented pagination of results, and conditionally rendered items to the user profile based on login state.
   * [Danielle Blom]: UX Design Lead - Created wireframes, researched/implemented eBay API routes, and funtionality to save items to the database
   * [Steven Brotherton]: Architect Lead
   * [Mike Champagne]: Project Manager
