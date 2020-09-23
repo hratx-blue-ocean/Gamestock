@@ -30,7 +30,7 @@ export const CardWrapper = styled(Wrapper)`
   color: #54f3f7;
   border-radius: 10px;
   border: 2px solid #eb29fd;
-  align-item: center;
+  align-items: center;
   box-sizing: border-box;
 `;
 
