@@ -14,7 +14,7 @@ This Application was built by a team of eight Full Stack Software Engineers from
 ## Dev Team
 
   * [Mariella Arias]: 
-  * [Andrew Binkard]: Built the user profile component, implemented RESTful API routes and database queries to dynamically sort collection data, implemented pagination of results, and conditionally rendered items to the user profile based on login state.
+  * [Andrew Binkard]: Tasked with developing and implementing the user profile component of this web app, used React functional components exclusively and managed state with hooks to dynamically render individual item records, utilized styled components for a consistent all-around look and visual user experience, created a user-friendly front-end interface to allow for efficient interaction with users’ collections, implemented RESTful API routes through a Node.js/Express server and PostgreSQL queries to allow for fast, consistent, sorting to support the above front-end functionality, and implemented pagination natively with JavaScript without the use of an external dependency in order to keep the app lightweight
   * [Danielle Blom]: UX Design Lead - Created wireframes, researched/implemented eBay API routes, and funtionality to save items to the database
   * [Steven Brotherton]: Architect Lead
   * [Mike Champagne]: Project Manager
