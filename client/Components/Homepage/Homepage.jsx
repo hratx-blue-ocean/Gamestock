@@ -2,6 +2,18 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import Banner from "../Core/Banner.jsx";
 import Leaderboard from "./Leaderboard.jsx";
+import { Wrapper } from "../Core/coreStyles.jsx";
+import styled from "styled-components";
+
+const Intro = styled(Wrapper)`
+  display: flex;
+  justify-content: center;
+  text-align: center;
+`;
+const IntroText = styled.p`
+  padding: 2px;
+  line-height: 1.6;
+`;
 
 const Homepage = ({
   collectionOwnerName,
@@ -53,10 +65,19 @@ const Homepage = ({
           />
         </>
       ) : (
-        <Leaderboard
-          collectionOwnerName={collectionOwnerName}
-          setCollectionOwnerName={setCollectionOwnerName}
-        />
+        <>
+          <Intro>
+            <IntroText>
+              Welcome to MyGameStocks! A stock tracker for your vintage video
+              games. To get started, set up a user account and start adding
+              games to your profile!
+            </IntroText>
+          </Intro>
+          <Leaderboard
+            collectionOwnerName={collectionOwnerName}
+            setCollectionOwnerName={setCollectionOwnerName}
+          />
+        </>
       )}
     </div>
   );

@@ -14,7 +14,7 @@ import {
 
 //style extensions
 const LeaderboardGrid = styled(WrapGrid)`
-  grid-template-columns: 100px 100px 100px 100px 100px auto 120px 20px 75px 75px 20px 200px;
+  grid-template-columns: 100px 100px 100px 100px 100px auto 20px 120px 75px 75px 150px 200px;
   margin-top: 30px;
   margin-bottom: 20px;
   align-items: center;
@@ -23,14 +23,14 @@ const UserSearchForm = styled(StyledForm)`
   grid-column-start: 1;
   display: flex;
 `;
+const LeaderboardSelect = styled(StyledSelect)`
+  grid-column-start: 12;
+`;
 const LeftButton = styled(StyledButton)`
   grid-column-start: 9;
   border-radius: 10px 0px 0px 10px;
   margin: 0;
   border: 1px solid;
-`;
-const LeaderboardSelect = styled(StyledSelect)`
-  grid-column-start: 12;
 `;
 const RightButton = styled(StyledButton)`
   border-radius: 0px 10px 10px 0px;
@@ -38,7 +38,12 @@ const RightButton = styled(StyledButton)`
   border: 1px solid;
 `;
 const SearchBy = styled.p`
-  grid-column-start: 7;
+  grid-column-start: 8;
+  margin: 0;
+  text-align: center;
+`;
+const FilterBy = styled.p`
+  grid-column-start: 11;
   margin: 0;
   text-align: center;
 `;
@@ -195,6 +200,7 @@ const Leaderboard = (props) => {
           <RightButton id="sortBySize" onClick={getCollectionsByValueOrSize}>
             Size
           </RightButton>
+          <FilterBy>Filter By:</FilterBy>
           <LeaderboardSelect
             onChange={getCollectionsByConsole}
             defaultValue="select console"
