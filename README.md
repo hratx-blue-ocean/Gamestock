@@ -29,7 +29,7 @@ This Application was built by a team of eight Full Stack Software Engineers from
   * [Mike Champagne]: Project Manager
   * [Rahul Chauhan]: 
   * [Belle Nguyen]: Created a user form inside modal to add items to collection. Collaborated with backend team to fetch game data from external api and send user info to MongoDB database. Assisted in UX design for user form and implemented design using Styled-Components. 
-  * [Ryan Walker]: 
+  * [Ryan Walker]: Tasked with developing and implementing the leaderboard component and price tracking / charting functionality. Worked with the architecture lead to design and build an efficient and scalable database schema in PostgreSQL. Built out the leaderboard component utilizing React functional components with hooks to display the top overall users of the application across various metrics (e.g. top collections by value, size, and by specific consoles). Utilized Chart.js to design a price charting component in order to track the value of individual games, consoles, and entire portfolios over time. Developed a RESTful API and postgreSQL queries to ensure accurate calculation and presentation of item and portfolio value over time.
 
 ## Client Deliverables
 
