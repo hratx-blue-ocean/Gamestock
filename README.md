@@ -33,6 +33,7 @@ This Application was built by a team of eight Full Stack Software Engineers from
 
 ## Client Deliverables
 
+* As a user, I want to be able to securely create an account
 * As a user, I want to be able to add items to my collection
 * As a user, I want to be able to view items in my collection and the total value of my collection
 * As a user, I want to be able print my collection
@@ -82,7 +83,7 @@ Install the dependencies and devDependencies and start the server.
 ```sh
 $ cd Gamestock
 Generate an eBay API access token and save the token in a file called eBay.config.js
-Generate a jws token and save it in the .env file
+Generate a secret for jws token and save it in the .env file
 $ npm run start
 $ npm run build
 Go to localhost:7711/
