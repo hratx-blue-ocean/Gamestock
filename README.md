@@ -28,7 +28,7 @@ This Application was built by a team of eight Full Stack Software Engineers from
   * [Steven Brotherton]: Architect Lead - Compared and ultimately decided on the tech stack and git workflow used on this project. Created SOPs for team consistency and partnered with Mariella Arias on building out the authoriation of the site implementing Bcrypt and JSON Web Tokens to ensure user permissions without bulking up the database with extra salt or session cookie columns. Organized a class and subclass system of database query implementation to seperate concerns and enhance code readability. Had a hand in each component as system architect working to eliminate any connection issues or bugs. Finally, deployed the site to https://mygamestocks.com.
   * [Mike Champagne]: Project Manager
   * [Rahul Chauhan]: 
-  * [Belle Nguyen]: 
+  * [Belle Nguyen]: Created a user form inside modal to add items to collection. Collaborated with backend team to fetch game data from external api and send user info to MongoDB database. Assisted in UX design for user form and implemented design using Styled-Components. 
   * [Ryan Walker]: 
 
 ## Client Deliverables
